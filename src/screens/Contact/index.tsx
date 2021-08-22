@@ -5,14 +5,14 @@ import styled from 'styled-components/native';
 // import { Container } from './styles';
 
 const Container = styled.View`
-  background-color: #F01;
+  background-color: #121;
   height: 100%;
 `;
 
-export default function Search(){
+export default function Contact(){
   return(
     <Container>
-      <Text> Search </Text>
+      <Text> Contact </Text>
     </Container>
   )
 }

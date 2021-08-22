@@ -1,6 +1,8 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ThemeProvider } from 'styled-components/native';
+import { StatusBar } from 'expo-status-bar';
+import { Modalize } from 'react-native-modalize';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
 import logo from './src/assets/Splash/logo.png';
@@ -15,9 +17,14 @@ import {
   BoxContent,
   Title,
   Description,
-  SplashButton
+  SplashButton,
+  SignWrapper,
+  Content,
+  EnterButton,
+  RegisterButton
 } from './styles';
-import { StatusBar } from 'expo-status-bar';
+
+import StateInput from './src/components/StateInput';
 
 const slides = [
   {
@@ -52,7 +59,13 @@ const colors = {
 }
 
 export default function App(){
-  const [showHome, setShowHome] = useState(false);
+  const modalizeRef = useRef<Modalize>(null);
+
+  const onOpen = () => {
+    modalizeRef.current?.open();
+  }
+
+  const [showHome, setShowHome] = useState(true);
 
   function SplashScreen({item} : { item: any }){
     return(
@@ -76,7 +89,7 @@ export default function App(){
       <ThemeProvider theme={colors}>
         <Main/>
       </ThemeProvider>
-    );
+    )
   } else {
     return (
       <React.Fragment>
@@ -91,10 +104,38 @@ export default function App(){
             width: 30
           }}
           renderNextButton={ () => <SplashButton>Próximo</SplashButton> }
-          renderDoneButton={ () => <SplashButton>Acessar</SplashButton> }
-          onDone={() => setShowHome(true)}
-          />
-        </React.Fragment>
+          renderDoneButton={ () => <SplashButton onPress={onOpen}>Acessar</SplashButton> }
+        />
+
+        <Modalize
+          ref={modalizeRef}
+          snapPoint={850}
+        >
+          <SignWrapper>
+            <BoxContent>
+              <Title>Entrar no Blyd</Title>
+              <Description>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et </Description>
+            </BoxContent>
+
+            <Content>
+              <StateInput
+                placeholder="E-mail ou nome de usuário"
+              />
+              <StateInput
+                placeholder="Senha"
+                password={true}
+              />
+              <EnterButton
+                text="Entrar"
+                onPress={ () => setShowHome(true) }
+              />
+              <RegisterButton
+                text="Solicitar Registro"
+              />
+            </Content>
+          </SignWrapper>
+        </Modalize>
+      </React.Fragment>
     );
   }
 }

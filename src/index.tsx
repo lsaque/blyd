@@ -5,14 +5,14 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
 import SignIn from './screens/SignIn';
+import Home from './screens/Home';
+import Search from './screens/Search';
+import Activity from './screens/Activity';
+import Setting from './screens/Setting';
+import Localization from './screens/Localization';
+import Contact from './screens/Contact';
+import Advice from './screens/Advice';
 
-import HomeScreen from './screens/Home';
-import SearchScreen from './screens/Search';
-import LocalizationScreen from './screens/Localization';
-import ActivityScreen from './screens/Activity';
-import SettingScreen from './screens/Setting';
-
-const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 function BottomTab(){
@@ -23,11 +23,11 @@ function BottomTab(){
       shifting={true}
       activeColor='#000'
       barStyle={{ backgroundColor: 'white'}}
-      labeled={true}
+      labeled={false}
     >
       <Tab.Screen 
         name="HomeTab" 
-        component={ HomeScreen }
+        component={ Home }
         options={{
           tabBarLabel: 'Inicio',
           tabBarIcon: ({ color, focused }) => (
@@ -42,7 +42,7 @@ function BottomTab(){
 
       <Tab.Screen 
         name="Search" 
-        component={ SearchScreen } 
+        component={ Search } 
         options={{
           tabBarLabel: 'Procurar',
           tabBarIcon: ({ color, focused }) => (
@@ -57,7 +57,7 @@ function BottomTab(){
 
       <Tab.Screen 
         name="Localization" 
-        component={ LocalizationScreen } 
+        component={ Localization } 
         options={{
           tabBarLabel: 'Localização',
           tabBarIcon: ({ color, focused }) => (
@@ -72,7 +72,7 @@ function BottomTab(){
  
       <Tab.Screen 
         name="Activity" 
-        component={ ActivityScreen } 
+        component={ Activity } 
         options={{
           tabBarLabel: 'Atividade',
           tabBarIcon: ({ color, focused }) => (
@@ -87,7 +87,7 @@ function BottomTab(){
 
       <Tab.Screen 
         name="Setting" 
-        component={ SettingScreen } 
+        component={ Setting } 
         options={{
           tabBarLabel: 'Configuração',
           tabBarIcon: ({ color, focused }) => (
@@ -99,21 +99,23 @@ function BottomTab(){
           ),
         }}
       />
-
     </Tab.Navigator>
-    
   )
 }
 
+const Stack = createStackNavigator();
+
 export default function Main() {
-
-  // const {Navigator, Screen} = Stack;
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }} >
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Home" component={BottomTab} />
+        <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="Contact" component={Contact} />
+        <Stack.Screen name="Advice" component={Advice} />
+        
+        {/* <Stack.Screen name="Setting" component={Setting} /> */}
       </Stack.Navigator> 
     </NavigationContainer>
   )
