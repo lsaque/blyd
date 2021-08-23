@@ -1,66 +1,54 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Feather } from '@expo/vector-icons';
-import { Image } from 'react-native';
-import { MaterialCommunityIcons, SimpleLineIcons } from '@expo/vector-icons';
 
-const Container = styled.TouchableOpacity`
-  margin-top: 20px;
+const Card = styled.TouchableOpacity`
   /* background-color: #D6FFE1; */
+  height: 150px;
+  width: 165px;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Content = styled.View`
+  align-items: center;
+`;
+
+const Badge = styled.Text`
+  background-color: #00000030;
+  color: white;
+  width: 80px;
+  height: 25px;
+  text-align: center;
   border-radius: 20px;
-  padding: 20px 25px;
+  font-size: 15px;
+  margin-bottom: 5px;
 `;
 
-const Wrapper = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const Left = styled.View`
-  width: 60px;
-  height: 60px;
-  background-color: #ffffff73;
-  border-radius: 15px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Center = styled.View`
-  max-width: 170px;
-  justify-content: center;
-`;
-
-const TextCenter=  styled.Text`
-  color: #4A4A4A;
+const Title = styled.Text`
   font-size: 18px;
-  font-weight: bold;
+  width: 120px;
+  text-align: center;
 `;
 
+export default ({badge, text, onPress, backgroundColor}: any) => {
 
-const Right = styled.View`
-  justify-content: center;
-  align-items: center;
-`;
-
-
-export default ({iconName, text, onPress, backgroundColor}: any) => {
-  return (
-    <Container onPress={onPress} style={backgroundColor}>
-      <Wrapper>
-
-        <Left>
-          <MaterialCommunityIcons name={iconName} size={34} color="black" />
-        </Left>
-
-        <Center>
-          <TextCenter>{text}</TextCenter>
-        </Center>
-
-        <Right>
-          <SimpleLineIcons name="arrow-right" size={28} color="black" />
-        </Right>
-
-      </Wrapper>
-    </Container>
-  );
+  if(badge){
+    return(
+      <Card onPress={onPress} style={backgroundColor}>
+        <Content>
+          <Badge>Pessoal</Badge>
+          <Title>{text}</Title>
+        </Content>
+      </Card>
+    )
+  } else {
+    return (
+      <Card onPress={onPress} style={backgroundColor}>
+        <Content>
+          <Title>{text}</Title>
+        </Content>
+      </Card>
+    )
+  }
 }
