@@ -61,7 +61,6 @@ export const SplashButton = styled.Text`
 // Modalize
 
 export const SignWrapper = styled.View`
-  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,20 +68,12 @@ export const SignWrapper = styled.View`
 
 export const Content = styled.View`
   width: 90%;
-  /* border: 1px solid red; */
-  /* background: orange; */
 `;
 
 export const ButtonArea = styled.View`
-  /* border: 1px solid green; */
-  /* height: 100px; */
   width: 100%;
 `;
 
-export const EnterButton = styled(FilledButton)`
+export const EnterButton = styled(FilledButton)``;
 
-`;
-
-export const RegisterButton = styled(OutlinedButton)`
-  /* border: 3px solid green; */
-`;
+export const RegisterButton = styled(OutlinedButton)``;

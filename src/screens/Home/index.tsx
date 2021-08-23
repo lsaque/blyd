@@ -1,8 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Animated, Text } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
-import { Ionicons, MaterialIcons  } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+
+import Background from '../../assets/Home/background.png';
+import NewsImage from '../../assets/Home/newsImage.png';
+
+import IconButtonText from "../../components/IconButtonText";
+import NewsCard from "../../components/NewsCard";
+import HomeCard from "../../components/HomeCard";
 
 import { 
   Container, 
@@ -14,24 +19,12 @@ import {
   Bot
  } from "./styles";
 
-import Background from '../../assets/Home/background.png';
-import FilledButton from "../../components/FilledButton";
-import StateInput from "../../components/StateInput";
-import IconButtonText from "../../components/IconButtonText";
-import NewsCard from "../../components/NewsCard";
-
-import NewsImage from '../../assets/Home/newsImage.png';
-import PageCard from "../../components/PageCard";
-
-
-
 function Home({navigation} : any){
   return (
     <React.Fragment>
       <StatusBar
         style='light'
         translucent={false}
-        // backgroundColor="#cabdfc"
         animated={true}
       />
 
@@ -59,19 +52,19 @@ function Home({navigation} : any){
 
         <Content>
           <PageTitle>Funções disponíveis</PageTitle>
-          <PageCard
+          <HomeCard
             text="Ir a um local específico"
             onPress={() => navigation.navigate('Localization')}
             iconName="map-marker"
             backgroundColor={{backgroundColor: '#D6FFE1'}}
           />
-          <PageCard
+          <HomeCard
             text="Contactar alguém ou um setor"
             onPress={() => navigation.navigate('Contact')}
             iconName="phone"
             backgroundColor={{backgroundColor: '#CFE9FF'}}
           />
-          <PageCard
+          <HomeCard
             text="Marcar ou agendar aviso temporário"
             onPress={() => navigation.navigate('Advice')}
             iconName="pin"
@@ -83,8 +76,5 @@ function Home({navigation} : any){
     </React.Fragment>
   )
 }
-export default Home;
-function setState(arg0: { dark: boolean; }) {
-  throw new Error("Function not implemented.");
-}
 
+export default Home;
