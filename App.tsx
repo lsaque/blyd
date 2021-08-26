@@ -5,8 +5,12 @@ import { StatusBar } from 'expo-status-bar';
 import { Modalize } from 'react-native-modalize';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
-import logo from './src/assets/Splash/logo.png';
 import Main from './src';
+
+import logo from './src/assets/Splash/logo.png';
+
+import StateInput from './src/components/StateInput';
+import Button from './src/components/Button';
 
 import { 
   BoxImage,
@@ -24,7 +28,6 @@ import {
   RegisterButton
 } from './styles';
 
-import StateInput from './src/components/StateInput';
 
 const slides = [
   {
@@ -67,7 +70,7 @@ export default function App(){
 
   const [showHome, setShowHome] = useState(true);
 
-  function SplashScreen({item} : { item: any }){
+  function SplashScreen({item} : any){
     return(
       <BackgroundImage source={item.bgImage} resizeMode="cover">
         <Wrapper>
@@ -103,13 +106,25 @@ export default function App(){
             backgroundColor: colors.primary,
             width: 30
           }}
-          renderNextButton={ () => <SplashButton>Próximo</SplashButton> }
-          renderDoneButton={ () => <SplashButton onPress={onOpen}>Acessar</SplashButton> }
+          renderNextButton={ () => (
+            <SplashButton>Próximo</SplashButton>
+            // <Button 
+            //   filled 
+            //   text="Próximo"
+            // />
+          )}
+          
+          renderDoneButton={ () => (
+            <SplashButton onPress={onOpen}>Acessar</SplashButton>
+          )}
         />
 
         <Modalize
           ref={modalizeRef}
-          snapPoint={850}
+          snapPoint={500}
+          // modalHeight={500}
+          keyboardAvoidingBehavior={'padding'}
+          avoidKeyboardLikeIOS={true}
         >
           <SignWrapper>
             <BoxContent>

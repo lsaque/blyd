@@ -12,6 +12,7 @@ import Setting from './screens/Setting';
 import Localization from './screens/Localization';
 import Contact from './screens/Contact';
 import Advice from './screens/Advice';
+import LiveLocalization from './screens/LiveLocalization';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -56,8 +57,8 @@ function BottomTab(){
       />
 
       <Tab.Screen 
-        name="Localization" 
-        component={ Localization } 
+        name="LiveLocalization" 
+        component={ LiveLocalization } 
         options={{
           tabBarLabel: 'Localização',
           tabBarIcon: ({ color, focused }) => (
@@ -112,6 +113,7 @@ export default function Main() {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Home" component={BottomTab} />
         <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="Localization" component={Localization} />
         <Stack.Screen name="Contact" component={Contact} />
         <Stack.Screen name="Advice" component={Advice} />
         
