@@ -13,6 +13,7 @@ import {
   Container,
   ImagePage,
   Title,
+  Strong,
   Content,
   Wrapper,
   Row
@@ -42,9 +43,11 @@ export default function Localization({navigation}:any){
       <Modalize 
         ref={modalizeRef}
         adjustToContentHeight={false}
-        alwaysOpen={450}
+        alwaysOpen={460}
+        HeaderComponent={
+          <Title>Informe o <Strong>Aviso</Strong> 🔮</Title>
+        }
       >
-        <Title>Informe o tipo de aviso 🔮</Title>
         <Content>
           <Wrapper>
             <Row>
@@ -68,6 +71,18 @@ export default function Localization({navigation}:any){
               />
               <PageCard
                 text="Objeto"
+                backgroundColor={{backgroundColor: '#DCD2FF'}}
+                // onPress={}
+              />
+            </Row>
+            <Row>
+              <PageCard
+                text="Obstrução"
+                backgroundColor={{backgroundColor: '#DCD2FF'}}
+                // onPress={}
+              />
+              <PageCard
+                text="Ajuda"
                 backgroundColor={{backgroundColor: '#DCD2FF'}}
                 // onPress={}
               />

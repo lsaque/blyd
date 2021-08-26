@@ -13,6 +13,7 @@ import {
   Container,
   ImagePage,
   Title,
+  Strong,
   Content,
   Wrapper,
   Row
@@ -43,8 +44,10 @@ export default function Localization({navigation}:any){
         ref={modalizeRef}
         adjustToContentHeight={false}
         alwaysOpen={450}
+        HeaderComponent={
+          <Title>Informe o <Strong>Local</Strong> 🌎</Title>
+        }
       >
-        <Title>Informe o local 🌎</Title>
         <Content>
           <Wrapper>
             <Row>
@@ -67,7 +70,7 @@ export default function Localization({navigation}:any){
                 // onPress={}
               />
               <PageCard
-                text="Departamento"
+                text="Setor"
                 backgroundColor={{backgroundColor: '#D6FFE1'}}
                 // onPress={}
               />

@@ -6,9 +6,7 @@ import { Modalize } from 'react-native-modalize';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
 import Main from './src';
-
 import logo from './src/assets/Splash/logo.png';
-
 import StateInput from './src/components/StateInput';
 import Button from './src/components/Button';
 
@@ -122,7 +120,6 @@ export default function App(){
         <Modalize
           ref={modalizeRef}
           snapPoint={500}
-          // modalHeight={500}
           keyboardAvoidingBehavior={'padding'}
           avoidKeyboardLikeIOS={true}
         >

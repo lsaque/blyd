@@ -13,6 +13,7 @@ import {
   Container,
   ImagePage,
   Title,
+  Strong,
   Content,
   Wrapper,
   Row
@@ -28,7 +29,7 @@ export default function Localization({navigation}:any){
         <Container>
           <Navigation
             onPress={() => navigation.goBack('history')}
-            title="Encontrar"
+            title="Contactar"
             titleStrong="Alguém"
           />
 
@@ -43,14 +44,16 @@ export default function Localization({navigation}:any){
         ref={modalizeRef}
         adjustToContentHeight={false}
         alwaysOpen={450}
+        HeaderComponent={
+          <Title>Informe o <Strong>Contato</Strong> 👨‍🦯</Title>
+        }
       >
-        <Title>Informe o contato 👨‍🦯</Title>
         <Content>
           <Wrapper>
             <Row>
               <PageCard
                 badge={true}
-                text="Setor de trabalho"
+                text="Estação de trabalho"
                 backgroundColor={{backgroundColor: '#CFE9FF'}}
                 // onPress={}
               />
@@ -62,7 +65,7 @@ export default function Localization({navigation}:any){
             </Row>
             <Row>
               <PageCard
-                text="Departamento"
+                text="Setor"
                 backgroundColor={{backgroundColor: '#CFE9FF'}}
                 // onPress={}
               />
@@ -74,7 +77,7 @@ export default function Localization({navigation}:any){
             </Row>
             <Row>
               <PageCard
-                text="Administração"
+                text="RH"
                 backgroundColor={{backgroundColor: '#CFE9FF'}}
                 // onPress={}
               />

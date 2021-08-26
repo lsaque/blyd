@@ -7,7 +7,7 @@ export const Container = styled.View`
 export const ImagePage = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 40px;
 `;
 
 // Modalize
@@ -17,6 +17,10 @@ export const Title = styled.Text`
   color: #707070;
   font-size: 20px;
   margin-top: 25px;
+`;
+
+export const Strong = styled.Text`
+  font-weight: bold;
 `;
 
 export const Content = styled.ScrollView`
@@ -31,7 +35,7 @@ export const Wrapper = styled.View`
 export const Row = styled.View`
   margin-bottom:20px;
   flex-direction: row;
-  width:100%;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
 `;

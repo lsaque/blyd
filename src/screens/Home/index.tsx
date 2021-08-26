@@ -53,19 +53,19 @@ function Home({navigation} : any){
         <Content>
           <PageTitle>Funções disponíveis</PageTitle>
           <HomeCard
-            text="Ir a um local específico"
+            text="Ir a um local específico."
             onPress={() => navigation.navigate('Localization')}
             iconName="map-marker"
             backgroundColor={{backgroundColor: '#D6FFE1'}}
           />
           <HomeCard
-            text="Contactar alguém ou um setor"
+            text="Contactar alguém ou um setor."
             onPress={() => navigation.navigate('Contact')}
             iconName="phone"
             backgroundColor={{backgroundColor: '#CFE9FF'}}
           />
           <HomeCard
-            text="Marcar ou agendar aviso temporário"
+            text="Marcar ou agendar aviso temporário."
             onPress={() => navigation.navigate('Advice')}
             iconName="pin"
             backgroundColor={{backgroundColor: '#DCD2FF'}}
