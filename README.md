@@ -2,7 +2,7 @@
 
 > Blyd is an application to improve the process of locating the visually impaired, maximizing their independence.
 
-![Project](https://raw.githubusercontent.com/lsaque/coinverter/master/.github/logo.png)
+![Project](https://raw.githubusercontent.com/lsaque/blyd/main/frontend/.github/blyd-background.png)
 
 ## Prototype
 
