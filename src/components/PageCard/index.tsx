@@ -33,22 +33,14 @@ const Title = styled.Text`
 
 export default ({badge, text, onPress, backgroundColor}: any) => {
 
-  if(badge){
-    return(
-      <Card onPress={onPress} style={backgroundColor}>
-        <Content>
-          <Badge>Pessoal</Badge>
-          <Title>{text}</Title>
-        </Content>
-      </Card>
-    )
-  } else {
-    return (
-      <Card onPress={onPress} style={backgroundColor}>
-        <Content>
-          <Title>{text}</Title>
-        </Content>
-      </Card>
-    )
-  }
+  let badgeComponent = (<Badge>Pessoal</Badge>);
+
+  return(
+    <Card onPress={onPress} style={backgroundColor}>
+      <Content>
+        {badge ? badgeComponent : null}
+        <Title>{text}</Title>
+      </Content>
+    </Card>
+  )
 }

@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Feather } from '@expo/vector-icons';
-import { Image } from 'react-native';
 import { MaterialCommunityIcons, SimpleLineIcons } from '@expo/vector-icons';
 
 const Container = styled.TouchableOpacity`
   margin-top: 20px;
-  /* background-color: #D6FFE1; */
   border-radius: 20px;
   padding: 20px 25px;
 `;
@@ -26,16 +23,15 @@ const Left = styled.View`
 `;
 
 const Center = styled.View`
-  max-width: 170px;
+  max-width: 169.2px;
   justify-content: center;
 `;
 
 const TextCenter=  styled.Text`
   color: #4A4A4A;
   font-size: 18px;
-  font-weight: bold;
+  /* font-weight: bold; */
 `;
-
 
 const Right = styled.View`
   justify-content: center;
