@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Text } from 'react-native';
+import { Modalize } from 'react-native-modalize';
 import styled from 'styled-components/native';
 
 const Card = styled.TouchableOpacity`

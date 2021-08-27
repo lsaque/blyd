@@ -21,7 +21,12 @@ import {
 
 export default function Localization({navigation}:any){
 
-  const modalizeRef = useRef<Modalize>(null);
+  const categoryModalizeRef = useRef<Modalize>(null);
+  const itemModalize = useRef<Modalize>(null);
+
+  const openModal = () => {
+    itemModalize.current?.open();
+  }
 
   return(
     <React.Fragment>
@@ -41,7 +46,7 @@ export default function Localization({navigation}:any){
       </BackgroundImage>
 
       <Modalize 
-        ref={modalizeRef}
+        ref={categoryModalizeRef}
         adjustToContentHeight={false}
         alwaysOpen={450}
         HeaderComponent={
@@ -55,12 +60,11 @@ export default function Localization({navigation}:any){
                 badge={true}
                 text="Estação de trabalho"
                 backgroundColor={{backgroundColor: '#D6FFE1'}}
-                // onPress={}
               />
               <PageCard
                 text="Escritório"
                 backgroundColor={{backgroundColor: '#D6FFE1'}}
-                // onPress={}
+                onPress={openModal}
               />
             </Row>
             <Row>
@@ -90,6 +94,46 @@ export default function Localization({navigation}:any){
           </Wrapper>
         </Content>
       </Modalize>
+
+      <Modalize 
+        ref={itemModalize}
+        adjustToContentHeight={false}
+        snapPoint={450}
+        HeaderComponent={
+          <Title>Informe o <Strong>Ambiente</Strong>🌎</Title>
+        }
+      >
+        <Content>
+          <Wrapper>
+            <Row>
+              <PageCard
+                text="Escritório Andressa"
+                backgroundColor={{backgroundColor: '#D6FFE1'}}
+                // onPress={}
+              />
+              <PageCard
+                text="Escritório 2B"
+                backgroundColor={{backgroundColor: '#D6FFE1'}}
+                onPress={() => navigation.navigate('LiveLocalization')}
+              />
+            </Row>
+            <Row>
+              <PageCard
+                text="Escritório Reunião"
+                backgroundColor={{backgroundColor: '#D6FFE1'}}
+                // onPress={}
+              />
+              <PageCard
+                text="Escritório Wanessa"
+                backgroundColor={{backgroundColor: '#D6FFE1'}}
+                // onPress={}
+              />
+            </Row>
+          </Wrapper>
+        </Content>
+      </Modalize>
+
+      
     </React.Fragment>
   )
 }

@@ -59,7 +59,7 @@ export default function LiveLocalization({navigation} : any){
           <Row>
             <InformationTrip
               destiny="Escritório - 2B"
-              // onPress={}
+              onPress={() => navigation.navigate('Advice')}
             />
           </Row>
 

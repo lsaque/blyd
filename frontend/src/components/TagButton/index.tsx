@@ -8,7 +8,7 @@ const Container = styled.View`
 `;
 
 const Tag = styled.TouchableOpacity`
-  background-color: #0000007a;
+  background-color: #ffffff53;
   height: 30px;
   padding: 5px 10px;
   border-radius: 15px;
