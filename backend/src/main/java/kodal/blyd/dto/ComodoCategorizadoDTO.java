@@ -2,18 +2,18 @@ package kodal.blyd.dto;
 
 import java.util.List;
 
-public class ComodosTipoDTO {
+public class ComodoCategorizadoDTO {
 	
 	private String tipo;
 	private List<ComodoDTO> comodos;
 	
 	
-	public ComodosTipoDTO(String tipo, List<ComodoDTO> comodos) {
+	public ComodoCategorizadoDTO(String tipo, List<ComodoDTO> comodos) {
 		this.tipo = tipo;
 		this.comodos = comodos;
 	}
 	
-	public ComodosTipoDTO() {}
+	public ComodoCategorizadoDTO() {}
 
 	public String getTipo() {
 		return tipo;

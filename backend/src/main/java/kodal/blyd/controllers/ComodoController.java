@@ -2,6 +2,8 @@ package kodal.blyd.controllers;
 
 import java.util.List;
 
+import kodal.blyd.dto.ComodoCategorizadoDTO;
+import kodal.blyd.script.ComodosCategorizadoScript;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,11 @@ public class ComodoController {
 	public ResponseEntity<List<ComodoDTO>> findAll() {
 		List<ComodoDTO> listaComodoDTO = service.findAll();
 		return ResponseEntity.ok(listaComodoDTO);
+	}
+
+	@GetMapping(value = "/categorizados")
+	public ResponseEntity<List<ComodoCategorizadoDTO>> getComodoCategorizadoDTO() {
+		return ResponseEntity.ok(new ComodosCategorizadoScript().categorizarComodos(service.findAll()));
 	}
 
 }
