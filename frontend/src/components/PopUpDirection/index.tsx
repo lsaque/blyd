@@ -19,14 +19,12 @@ const Wrapper = styled.View`
 `;
 
 const Left = styled.View`
-  /* border: 1px solid red; */
   align-items: center;
   width: 50px;
   height: 100%;
   justify-content: center;
 `;
 const Center = styled.View`
-  /* border: 1px solid red; */
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -35,7 +33,6 @@ const Center = styled.View`
 const TextCenter = styled.Text`
   font-size: 18px;
   width: 195px;
-  /* border: 1px solid red; */
   color: #4A4A4A;
 `;
 
@@ -43,14 +40,11 @@ const Strong = styled.Text`
   font-weight: bold;
 `
 
-const Right = styled.View`
-  /* padding: 0 20px; */
-`;
+const Right = styled.View``;
 
 const Button = styled.TouchableOpacity`
   width: 50px;
   height: 100%;
-  /* border: 1px solid red; */
   align-items: center;
   justify-content: center;
 `;
