@@ -5,7 +5,7 @@ INSERT INTO t_mapa(nome, descricao, link_imagem, m2, andar_id) VALUES ('Mapa 1 A
 INSERT INTO t_cargo(nome) VALUES ('Diretor');
 INSERT INTO t_usuario(nome, email, celular, senha, pcd, cargo_id) VALUES ('Davi Quental', 'quentaldavi@gmail.com', '11934762698','senha1', 0, 1); 
 INSERT INTO t_ponto(x, y, mapa_id) VALUES (0, 0, 1); 
-INSERT INTO t_aviso(nome, descricao, raio, dia, mes, ano, hora, minuto, usuario_id, ponto_id, andar_id) VALUES ('Escada', 'Trocando a lampada', 2, 25, 8, 2021, 15, 20, 1, 1, 1);
+INSERT INTO t_aviso(nome, descricao, transitavel, dia, mes, ano, hora, minuto, usuario_id, ponto_id, andar_id) VALUES ('Escada', 'Trocando a lampada', 1, 25, 8, 2021, 15, 20, 1, 1, 1);
 
 
 INSERT INTO t_ponto(x, y, mapa_id) VALUES (41, 3, 1); 
