@@ -16,7 +16,7 @@ import {
   ButtonInformation, 
   Content,
   PageTitle,
-  Top, 
+  Top,
   Bot
  } from "./styles";
 
@@ -39,32 +39,39 @@ function Home({navigation} : any){
 
           <Bot>
             <WelcomeText>Bem-vindo, {"\n"}Isaque!</WelcomeText>
+
             <IconButtonText
               text="Deseja ir para onde?"
               icon={<Ionicons name="mic" size={22} color="#4A4A4A" />}
+              onPress={() => navigation.navigate('Search')}
             />
+
             <NewsCard
               image={NewsImage}
               text="Conheça os novos locais da empresa!"
               onPress={() => navigation.navigate('Search')}
             />
+            
           </Bot>
         </HomeImage>
 
         <Content>
           <PageTitle>Funções disponíveis</PageTitle>
+
           <HomeCard
             text="Ir a um local específico."
             onPress={() => navigation.navigate('Localization')}
             iconName="map-marker"
             backgroundColor={{backgroundColor: '#D6FFE1'}}
           />
+
           <HomeCard
             text="Contactar alguém ou um setor."
             onPress={() => navigation.navigate('Contact')}
             iconName="phone"
             backgroundColor={{backgroundColor: '#CFE9FF'}}
           />
+
           <HomeCard
             text="Marcar ou agendar aviso temporário."
             onPress={() => navigation.navigate('Advice')}

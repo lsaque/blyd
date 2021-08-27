@@ -1,18 +1,39 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+import { BackgroundImage } from '../../../styles';
 
-// import { Container } from './styles';
+import background from '../../assets/Search/background.png';
 
-const Container = styled.View`
-  background-color: #F01;
-  height: 100%;
-`;
+import SearchNavigation from '../../components/SearchNavigation';
+import SearchTopics from '../../components/SearchTopics';
 
-export default function Search(){
+import { 
+  Container,
+  Wrapper
+  // Left,
+  // InputArea,
+  // ButtonSearch,
+  // Input,
+} from './styles';
+
+export default function Search({navigation} : any){
   return(
     <Container>
-      <Text> Search </Text>
+      <BackgroundImage source={background} resizeMode="cover" style={{
+        padding: 20,
+        width: Dimensions.get('screen').width,
+        height: Dimensions.get('screen').height,
+        // height: 100,
+      }}>
+        <SearchNavigation
+          onPress={() => navigation.goBack('history')}
+        />
+
+        <SearchTopics
+          title="Locais Recentes"
+        />
+
+      </BackgroundImage>
     </Container>
   )
 }

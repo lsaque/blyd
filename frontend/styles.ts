@@ -4,6 +4,7 @@ import OutlinedButton from './src/components/OutlinedButton';
 
 export const BackgroundImage = styled.ImageBackground`
   height: 100%;
+  width: 100%;
 `;
 
 export const Wrapper = styled.View`
