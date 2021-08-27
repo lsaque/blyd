@@ -12,7 +12,8 @@ import HomeCard from "../../components/HomeCard";
 import { 
   Container, 
   HomeImage, 
-  WelcomeText, 
+  WelcomeText,
+  ButtonInformation, 
   Content,
   PageTitle,
   Top, 
