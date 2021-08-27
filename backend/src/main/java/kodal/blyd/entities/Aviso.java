@@ -18,7 +18,7 @@ public class Aviso {
 	public long id;
 	
 	private String nome, descricao;
-	private double raio;
+	private boolean transitavel;
 	private int dia, mes, ano, hora, minuto;
 	
 	@ManyToOne
@@ -35,12 +35,12 @@ public class Aviso {
 	
 	public Aviso() {}
 
-	public Aviso(long id, String nome, String descricao, double raio, int dia, int mes, int ano, int hora, int minuto,
+	public Aviso(long id, String nome, String descricao, boolean transitavel, int dia, int mes, int ano, int hora, int minuto,
 			Usuario usuario, Ponto ponto, Andar andar) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.raio = raio;
+		this.transitavel = transitavel;
 		this.dia = dia;
 		this.mes = mes;
 		this.ano = ano;
@@ -75,12 +75,12 @@ public class Aviso {
 		this.descricao = descricao;
 	}
 
-	public double getRaio() {
-		return raio;
+	public boolean isTransitavel() {
+		return transitavel;
 	}
 
-	public void setRaio(double raio) {
-		this.raio = raio;
+	public void setTransitavel(boolean transitavel) {
+		this.transitavel = transitavel;
 	}
 
 	public int getDia() {

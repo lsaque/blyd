@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kodal.blyd.dto.UsuarioDTO;
 import kodal.blyd.dto.UsuarioLoginDTO;
-import kodal.blyd.dto.UsuarioSignupDTO;
+import kodal.blyd.dto.UsuarioSignUpDTO;
 import kodal.blyd.script.LoginScript;
 import kodal.blyd.services.UsuarioService;
 
@@ -37,14 +37,14 @@ public class UsuarioController {
 	}
 	
 	@GetMapping(value = "signup/{nome}/{email}/{celular}/{senha}/{pcd}")
-	public ResponseEntity<UsuarioSignupDTO> signup(
+	public ResponseEntity<UsuarioSignUpDTO> signup(
 			@PathVariable String nome, 
 			@PathVariable String email, 
 			@PathVariable String celular,
 			@PathVariable String senha,
 			@PathVariable boolean pcd)
 	{
-		UsuarioSignupDTO signup = new UsuarioSignupDTO();
+		UsuarioSignUpDTO signup = new UsuarioSignUpDTO();
 		return ResponseEntity.ok(signup);
 	}
 	

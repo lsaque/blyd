@@ -2,14 +2,14 @@ package kodal.blyd.dto;
 
 import java.io.Serializable;
 
-public class UsuarioSignupDTO implements Serializable{
+public class UsuarioSignUpDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	private boolean status;
 	private boolean mensagem;
 	
-	public UsuarioSignupDTO() {}
+	public UsuarioSignUpDTO() {}
 
 	public boolean isStatus() {
 		return status;
