@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { Image } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { Image, FlatList, LogBox } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { BackgroundImage } from '../../../styles';
 
@@ -16,10 +16,23 @@ import {
   Strong,
   Content,
   Wrapper,
-  Row
 } from '../../assets/Styles/PageTemplate/styles';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/requests';
+import { comodo, comodoCategorizado } from '../../types/comodo';
 
 export default function Localization({navigation}:any){
+
+  const [ comodoCategorizadoData, setComodoCategorizadoData ] = useState<comodoCategorizado[]>();
+  const [ selectedComodo, setSelectedComodo ] = useState<comodo[]>();
+
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    axios.get(`${BASE_URL}/comodos/categorizados`).then((response) => {
+      const data = response.data as comodoCategorizado[];
+      setComodoCategorizadoData(data);
+    })
+  }, []);
 
   const categoryModalizeRef = useRef<Modalize>(null);
   const itemModalize = useRef<Modalize>(null);
@@ -55,42 +68,22 @@ export default function Localization({navigation}:any){
       >
         <Content>
           <Wrapper>
-            <Row>
-              <PageCard
-                badge={true}
-                text="Estação de trabalho"
+            <FlatList 
+              data={comodoCategorizadoData}
+              numColumns={2}
+              horizontal={false}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <PageCard
+                key={item.id}
+                text={item.tipo} 
                 backgroundColor={{backgroundColor: '#D6FFE1'}}
-              />
-              <PageCard
-                text="Escritório"
-                backgroundColor={{backgroundColor: '#D6FFE1'}}
-                onPress={openModal}
-              />
-            </Row>
-            <Row>
-              <PageCard
-                text="Banheiro"
-                backgroundColor={{backgroundColor: '#D6FFE1'}}
-                // onPress={}
-              />
-              <PageCard
-                text="Setor"
-                backgroundColor={{backgroundColor: '#D6FFE1'}}
-                // onPress={}
-              />
-            </Row>
-            <Row>
-              <PageCard
-                text="Refeitório"
-                backgroundColor={{backgroundColor: '#D6FFE1'}}
-                // onPress={}
-              />
-              <PageCard
-                text="Sala de Reunião"
-                backgroundColor={{backgroundColor: '#D6FFE1'}}
-                // onPress={}
-              />
-            </Row>
+                onPress={() => {
+                  openModal()
+                  setSelectedComodo(item.comodos)
+                }}
+              />)}
+            />
           </Wrapper>
         </Content>
       </Modalize>
@@ -105,35 +98,21 @@ export default function Localization({navigation}:any){
       >
         <Content>
           <Wrapper>
-            <Row>
-              <PageCard
-                text="Escritório Andressa"
-                backgroundColor={{backgroundColor: '#D6FFE1'}}
-                // onPress={}
+            <FlatList 
+                data={selectedComodo}
+                numColumns={2}
+                horizontal={false}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <PageCard 
+                  key={item.id}
+                  text={item.nome} 
+                  backgroundColor={{backgroundColor: '#D6FFE1'}}
+                />)}
               />
-              <PageCard
-                text="Escritório 2B"
-                backgroundColor={{backgroundColor: '#D6FFE1'}}
-                onPress={() => navigation.navigate('LiveLocalization')}
-              />
-            </Row>
-            <Row>
-              <PageCard
-                text="Escritório Reunião"
-                backgroundColor={{backgroundColor: '#D6FFE1'}}
-                // onPress={}
-              />
-              <PageCard
-                text="Escritório Wanessa"
-                backgroundColor={{backgroundColor: '#D6FFE1'}}
-                // onPress={}
-              />
-            </Row>
           </Wrapper>
         </Content>
       </Modalize>
-
-      
     </React.Fragment>
   )
 }
