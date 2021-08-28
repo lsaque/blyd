@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { BackgroundImage } from '../../../styles';
 import { Modalize } from 'react-native-modalize';
 
@@ -12,14 +12,14 @@ import AdviceNotification from '../../components/AdviceNotification';
 import {
   Container,
   Content,
-  Title,
-  Strong,
   Row
 } from './styles';
 
-export default function LiveLocalization({navigation} : any){
+export default function LiveLocalization({navigation, route} : any){
 
   const modalizeRef = useRef<Modalize>(null);
+
+  // const { comodo } = route.params; 
 
   return(
     <BackgroundImage source={Background} resizeMode="cover">
@@ -49,8 +49,7 @@ export default function LiveLocalization({navigation} : any){
             <Button
               filled
               text="Cancelar"
-              backgroundColor="#F1EEEE"
-              // onPress={() => { modalizeRef.current?.close()}}
+              backgroundColor="#F1EEEE" // onPress={() => { modalizeRef.current?.close()}}
             />
           </Row>
         }
@@ -58,7 +57,8 @@ export default function LiveLocalization({navigation} : any){
         <Content>
           <Row>
             <InformationTrip
-              destiny="Escritório - 2B"
+              // destiny={comodo.nome || ""}
+              destiny={"Sem rota"}
               onPress={() => navigation.navigate('Advice')}
             />
           </Row>

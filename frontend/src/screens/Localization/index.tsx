@@ -27,7 +27,7 @@ export default function Localization({navigation}:any){
   const [ selectedComodo, setSelectedComodo ] = useState<comodo[]>();
 
   useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
     axios.get(`${BASE_URL}/comodos/categorizados`).then((response) => {
       const data = response.data as comodoCategorizado[];
       setComodoCategorizadoData(data);
@@ -108,6 +108,9 @@ export default function Localization({navigation}:any){
                   key={item.id}
                   text={item.nome} 
                   backgroundColor={{backgroundColor: '#D6FFE1'}}
+                  onPress={() => {
+                    navigation.navigate('LiveLocalization', {comodo: item});
+                  }}
                 />)}
               />
           </Wrapper>
