@@ -11,7 +11,7 @@ public class AvisoDTO implements Serializable{
 	public long id;
 	
 	private String nome, descricao;
-	private double raio;
+	private boolean transitavel;
 	private int dia, mes, ano, hora, minuto;
 	private UsuarioDTO usuario;
 	private PontoDTO ponto;
@@ -19,12 +19,12 @@ public class AvisoDTO implements Serializable{
 	
 	public AvisoDTO() {}
 
-	public AvisoDTO(long id, String nome, String descricao, double raio, int dia, int mes, int ano, int hora,
+	public AvisoDTO(long id, String nome, String descricao, boolean transitavel, int dia, int mes, int ano, int hora,
 			int minuto, UsuarioDTO usuario, PontoDTO ponto, AndarDTO andar) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.raio = raio;
+		this.transitavel = transitavel;
 		this.dia = dia;
 		this.mes = mes;
 		this.ano = ano;
@@ -39,7 +39,7 @@ public class AvisoDTO implements Serializable{
 		id = aviso.getId();
 		nome = aviso.getNome();
 		descricao = aviso.getDescricao();
-		raio = aviso.getRaio();
+		transitavel = aviso.isTransitavel();
 		dia = aviso.getDia();
 		mes = aviso.getMes();
 		ano = aviso.getAno();
@@ -138,11 +138,11 @@ public class AvisoDTO implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public double getRaio() {
-		return raio;
+	public boolean isTransitavel() {
+		return transitavel;
 	}
 
-	public void setRaio(double raio) {
-		this.raio = raio;
+	public void setTransitavel(boolean transitavel) {
+		this.transitavel = transitavel;
 	}
 }

@@ -13,7 +13,6 @@ import {
   Container, 
   HomeImage, 
   WelcomeText,
-  ButtonInformation, 
   Content,
   PageTitle,
   Top,
@@ -66,7 +65,7 @@ function Home({navigation} : any){
           />
 
           <HomeCard
-            text="Contactar alguém ou um setor."
+            text="Contactar alguém."
             onPress={() => navigation.navigate('Contact')}
             iconName="phone"
             backgroundColor={{backgroundColor: '#CFE9FF'}}
