@@ -28,7 +28,9 @@ export const Content = styled.ScrollView`
 `
 
 export const Wrapper = styled.View`
-  justify-content: center;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
 `;
 

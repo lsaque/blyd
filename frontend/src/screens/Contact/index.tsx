@@ -50,43 +50,37 @@ export default function Localization({navigation}:any){
       >
         <Content>
           <Wrapper>
-            <Row>
-              <PageCard
-                badge={true}
-                text="Estação de trabalho"
-                backgroundColor={{backgroundColor: '#CFE9FF'}}
-                // onPress={}
-              />
-              <PageCard
-                text="Pessoa"
-                backgroundColor={{backgroundColor: '#CFE9FF'}}
-                // onPress={}
-              />
-            </Row>
-            <Row>
-              <PageCard
-                text="Setor"
-                backgroundColor={{backgroundColor: '#CFE9FF'}}
-                // onPress={}
-              />
-              <PageCard
-                text="Andar"
-                backgroundColor={{backgroundColor: '#CFE9FF'}}
-                // onPress={}
-              />
-            </Row>
-            <Row>
-              <PageCard
-                text="RH"
-                backgroundColor={{backgroundColor: '#CFE9FF'}}
-                // onPress={}
-              />
-              <PageCard
-                text="Ajuda"
-                backgroundColor={{backgroundColor: '#CFE9FF'}}
-                // onPress={}
-              />
-            </Row>
+            <PageCard
+              badge={true}
+              text="Estação de trabalho"
+              backgroundColor={{backgroundColor: '#CFE9FF'}}
+              // onPress={}
+            />
+            <PageCard
+              text="Pessoa"
+              backgroundColor={{backgroundColor: '#CFE9FF'}}
+              // onPress={}
+            />
+            <PageCard
+              text="Setor"
+              backgroundColor={{backgroundColor: '#CFE9FF'}}
+              // onPress={}
+            />
+            <PageCard
+              text="Andar"
+              backgroundColor={{backgroundColor: '#CFE9FF'}}
+              // onPress={}
+            />
+            <PageCard
+              text="RH"
+              backgroundColor={{backgroundColor: '#CFE9FF'}}
+              // onPress={}
+            />
+            <PageCard
+              text="Ajuda"
+              backgroundColor={{backgroundColor: '#CFE9FF'}}
+              // onPress={}
+            />
           </Wrapper>
         </Content>
       </Modalize>

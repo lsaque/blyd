@@ -12,11 +12,13 @@ import iconPage from '../../assets/Localization/iconPage.png'
 import { 
   Container,
   ImagePage,
+  Row,
   Title,
   Strong,
   Content,
   Wrapper,
 } from '../../assets/Styles/PageTemplate/styles';
+
 import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';
 import { comodo, comodoCategorizado } from '../../types/comodo';
@@ -27,7 +29,6 @@ export default function Localization({navigation}:any){
   const [ selectedComodo, setSelectedComodo ] = useState<comodo[]>();
 
   useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
     axios.get(`${BASE_URL}/comodos/categorizados`).then((response) => {
       const data = response.data as comodoCategorizado[];
       setComodoCategorizadoData(data);
@@ -68,22 +69,17 @@ export default function Localization({navigation}:any){
       >
         <Content>
           <Wrapper>
-            <FlatList 
-              data={comodoCategorizadoData}
-              numColumns={2}
-              horizontal={false}
-              showsVerticalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <PageCard
-                key={item.id}
-                text={item.tipo} 
+            {comodoCategorizadoData?.map(comodo => (
+              <PageCard
+                key={comodo.id}
+                text={comodo.tipo}
                 backgroundColor={{backgroundColor: '#D6FFE1'}}
                 onPress={() => {
                   openModal()
-                  setSelectedComodo(item.comodos)
+                  setSelectedComodo(comodo.comodos)
                 }}
-              />)}
-            />
+              />
+            ))}
           </Wrapper>
         </Content>
       </Modalize>
@@ -98,21 +94,16 @@ export default function Localization({navigation}:any){
       >
         <Content>
           <Wrapper>
-            <FlatList 
-                data={selectedComodo}
-                numColumns={2}
-                horizontal={false}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item }) => (
-                  <PageCard 
-                  key={item.id}
-                  text={item.nome} 
-                  backgroundColor={{backgroundColor: '#D6FFE1'}}
-                  onPress={() => {
-                    navigation.navigate('LiveLocalization', {comodo: item});
-                  }}
-                />)}
+
+            {selectedComodo?.map(comodo => (
+              <PageCard 
+                key={comodo.id}
+                text={comodo.nome} 
+                backgroundColor={{backgroundColor: '#D6FFE1'}}
+                onPress={() => navigation.navigate('LiveLocalization', {comodo: comodo})}
               />
+            ))}
+            
           </Wrapper>
         </Content>
       </Modalize>

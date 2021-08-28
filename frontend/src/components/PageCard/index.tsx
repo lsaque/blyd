@@ -10,6 +10,7 @@ const Card = styled.TouchableOpacity`
   border-radius: 30px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 22px;
 `;
 
 const Content = styled.View`
