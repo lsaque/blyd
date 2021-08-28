@@ -14,12 +14,11 @@ import java.util.List;
 @RequestMapping(value = "/pop-up-direction")
 public class PopUpDirectionController {
 
-    @GetMapping(value = "/rota1")
-    public ResponseEntity<List<PopUpDirectionDTO>> rota1() {
-        PopUpDirectionDTO pop1 = new PopUpDirectionDTO("long-arrow-up", "Siga em frente por mais", "4 passos");
+    public List<PopUpDirectionDTO> rota1() {
+        PopUpDirectionDTO pop1 = new PopUpDirectionDTO("long-arrow-up", "Siga em frente por mais", "3 passos");
         PopUpDirectionDTO pop2 = new PopUpDirectionDTO("long-arrow-left", "Vire a esquerda e ande por mais", "2 passos");
-        PopUpDirectionDTO pop3 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "6 passos");
-        PopUpDirectionDTO pop4 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "10 passos");
+        PopUpDirectionDTO pop3 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "7 passos");
+        PopUpDirectionDTO pop4 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "13 passos");
         PopUpDirectionDTO pop5 = new PopUpDirectionDTO("long-arrow-left", "Vire a esquerda e ande por mais", "2 passos");
         List<PopUpDirectionDTO> popUps = new ArrayList<>();
         popUps.add(pop1);
@@ -27,18 +26,22 @@ public class PopUpDirectionController {
         popUps.add(pop3);
         popUps.add(pop4);
         popUps.add(pop5);
-        return ResponseEntity.ok(popUps);
+        return popUps;
     }
 
-    @GetMapping(value = "/rota2")
-    public ResponseEntity<List<PopUpDirectionDTO>> rota2() {
+    public List<PopUpDirectionDTO> rota2(){
         PopUpDirectionDTO pop1 = new PopUpDirectionDTO("long-arrow-up", "Siga em frente por mais", "2 passos");
-        PopUpDirectionDTO pop2 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "11 passos");
-        PopUpDirectionDTO pop3 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "2 passos");
+        PopUpDirectionDTO pop2 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "23 passos");
+        PopUpDirectionDTO pop3 = new PopUpDirectionDTO("long-arrow-left", "Vire a esquerda e ande por mais", "8 passos");
+        PopUpDirectionDTO pop4 = new PopUpDirectionDTO("long-arrow-left", "Vire a esquerda e ande por mais", "11 passos");
+        PopUpDirectionDTO pop5 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "2 passos");
         List<PopUpDirectionDTO> popUps = new ArrayList<>();
         popUps.add(pop1);
         popUps.add(pop2);
         popUps.add(pop3);
-        return ResponseEntity.ok(popUps);
+        popUps.add(pop4);
+        popUps.add(pop5);
+        return popUps;
     }
+
 }
