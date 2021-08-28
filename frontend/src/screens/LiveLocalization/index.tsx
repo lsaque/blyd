@@ -59,7 +59,7 @@ export default function LiveLocalization({navigation, route} : any){
             <InformationTrip
               // destiny={comodo.nome || ""}
               destiny={"Sem rota"}
-              onPress={() => navigation.navigate('Advice')}
+              onPress={() => navigation.navigate('MarkAdvice')}
             />
           </Row>
 
