@@ -10,10 +10,12 @@ public class ComodosCategorizadoScript {
 
 	public List<ComodoCategorizadoDTO> categorizarComodos(List<ComodoDTO> listaComodos) {
         List<ComodoCategorizadoDTO> listaCategorizada = new ArrayList<>();
+        int id = 1;
 
         for (ComodoDTO comodo : listaComodos) {
             if(listaCategorizada.size() == 0) {
-                listaCategorizada.add(criarComodoCategorizadoDTO((comodo)));
+                listaCategorizada.add(criarComodoCategorizadoDTO(id, comodo));
+                id++;
             } else {
                 boolean adicionar = false;
                 for (ComodoCategorizadoDTO comodoCategorizado : listaCategorizada) {
@@ -23,16 +25,19 @@ public class ComodosCategorizadoScript {
                         break;
                     }
                 }
-                if(!adicionar) listaCategorizada.add(criarComodoCategorizadoDTO(comodo));
+                if(!adicionar) {
+                    listaCategorizada.add(criarComodoCategorizadoDTO(id, comodo));
+                    id++;
+                }
             }
         }
 
         return listaCategorizada;
     }
 
-    private ComodoCategorizadoDTO criarComodoCategorizadoDTO(ComodoDTO comodo){
+    private ComodoCategorizadoDTO criarComodoCategorizadoDTO(int id, ComodoDTO comodo){
 	    List<ComodoDTO> comodos = new ArrayList<>();
 	    comodos.add(comodo);
-	    return new ComodoCategorizadoDTO(comodo.getTipo(), comodos);
+	    return new ComodoCategorizadoDTO(id, comodo.getTipo(), comodos);
     }
 }
