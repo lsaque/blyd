@@ -33,6 +33,10 @@ export default function Search({navigation} : any){
         <SearchTopics
           title="Locais Recentes"
         />
+        
+        <SearchTopics
+          title="Setores"
+        />
 
       </BackgroundImage>
     </Container>
