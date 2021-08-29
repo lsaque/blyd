@@ -7,9 +7,9 @@ const Container = styled.TouchableOpacity`
   margin-top: 20px;
   border-radius: 20px;
   padding: 20px 25px;
-  background-color: #F3F3F3;
+  background-color: #f4f9fa;
   width: 100%;
-  border-color: #DCDCDC;
+  border-color: #8fabaf5a;
   border-width: 1px;
 `;
 
