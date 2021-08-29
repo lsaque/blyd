@@ -1,6 +1,7 @@
 package kodal.blyd.controllers;
 
 import kodal.blyd.dto.RotaDTO;
+import kodal.blyd.services.AvisoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,9 @@ public class RotaController {
     @Autowired
     private PopUpDirectionController popUpController;
 
+    @Autowired
+    private AvisoService avisoService;
+
     @GetMapping(value = "/1")
     public ResponseEntity<RotaDTO> gerarRota1() {
         RotaDTO rota = new RotaDTO();
@@ -26,7 +30,7 @@ public class RotaController {
     public ResponseEntity<RotaDTO> gerarRota2() {
         RotaDTO rota = new RotaDTO();
         rota.setPopUps(popUpController.rota2());
-        rota.setAvisos(null);
+        rota.setAvisos(avisoService.findAll());
         return ResponseEntity.ok(rota);
     }
 }

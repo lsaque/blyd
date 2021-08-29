@@ -24,4 +24,8 @@ public class AvisoController {
 		return ResponseEntity.ok(listaAvisoDTO);
 	}
 
+	public List<AvisoDTO> findAllList() {
+		return service.findAll();
+	}
+
 }
