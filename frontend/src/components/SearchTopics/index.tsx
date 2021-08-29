@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import TagButton from '../TagButton';
 
 const Container = styled.View`
-  /* height: 100%; */
+  margin-bottom: 25px;
 `;
 
 const Title = styled.Text`
@@ -16,7 +16,6 @@ const Title = styled.Text`
 const ListTag = styled.Text`
   justify-content: space-between;
   align-items: center;
-  height: 100%;
 `;
 
 export default ({title} : any) => {

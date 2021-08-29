@@ -139,7 +139,10 @@ export default function App(){
               />
               <EnterButton
                 text="Entrar"
-                onPress={ () => setShowHome(true) }
+                onPress={ () => {
+                  setShowHome(true);
+                  // alert('E-mail errado');
+                }}
               />
               <RegisterButton
                 text="Solicitar Registro"
