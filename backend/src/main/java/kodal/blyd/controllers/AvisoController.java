@@ -7,6 +7,7 @@ import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.entities.Aviso;
 import kodal.blyd.entities.Ponto;
 import kodal.blyd.entities.Usuario;
+import kodal.blyd.script.MarcarAvisoScript;
 import kodal.blyd.services.PontoService;
 import kodal.blyd.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,25 +47,7 @@ public class AvisoController {
 			@PathVariable boolean transitavel,
 			@PathVariable long idUsuario
 	){
-
-		StatusDTO status  = new StatusDTO();
-		status.setStatus(false);
-
-		Usuario usuario = usuarioService.procurarId(idUsuario);
-		Ponto ponto = pontoService.procurarId(1);
-
-		if(usuario != null) {
-			if(ponto != null) {
-
-				avisoService.marcarAviso(new Aviso(descricao, local, tempoDuracao, transitavel, usuario, ponto));
-				status.setStatus(true);
-				status.setMensagem("Aviso foi marcado com sucesso.");
-
-			} else status.setMensagem("Ponto nao encontrado");
-		} else status.setMensagem("Usuario nao encontrado");
-
-
-		return ResponseEntity.ok(status);
+		return ResponseEntity.ok(new MarcarAvisoScript(usuarioService, pontoService, avisoService).marcarAviso(descricao, local, tempoDuracao, transitavel, idUsuario));
 	}
 
 	public List<AvisoDTO> findAllList() {
