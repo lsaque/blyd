@@ -2,6 +2,7 @@ package kodal.blyd.controllers;
 
 import kodal.blyd.dto.RotaDTO;
 import kodal.blyd.services.AvisoService;
+import kodal.blyd.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,9 @@ public class RotaController {
 
     @Autowired
     private AvisoService avisoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping(value = "/1")
     public ResponseEntity<RotaDTO> gerarRota1() {

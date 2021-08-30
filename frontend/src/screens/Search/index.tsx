@@ -26,16 +26,11 @@ export default function Search({navigation} : any){
         // height: 100,
       }}>
         <SearchNavigation
-          text="Deseja ir para onde?"
           onPress={() => navigation.goBack('history')}
         />
 
         <SearchTopics
           title="Locais Recentes"
-        />
-        
-        <SearchTopics
-          title="Setores"
         />
 
       </BackgroundImage>

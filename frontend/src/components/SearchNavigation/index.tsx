@@ -27,14 +27,14 @@ const Input = styled.TextInput`
   font-size: 16px;
 `;
 
-export default ({onPress, text} : any) => {
+export default ({onPress} : any) => {
   return(
     <InputArea style={{elevation: 20}}>
       <ButtonSearch onPress={onPress}>
         <SimpleLineIcons name="arrow-left" size={20} color="black" />
       </ButtonSearch>
 
-      <Input placeholder={text}/>
+      <Input placeholder="Deseja ir para onde?"/>
 
       <ButtonSearch>
         <MaterialIcons name="keyboard-voice" size={25} color="black" />

@@ -3,6 +3,7 @@ package kodal.blyd.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import kodal.blyd.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,13 +23,14 @@ public class UsuarioService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Boolean procurarEmail(String email) {
-		return repository.procurarEmail(email);
-	}
+	public Boolean procurarEmail(String email) { return repository.procurarEmail(email); }
 	
 	@Transactional(readOnly = true)
 	public String requisitarSenha(String email) {
 		return repository.requisitarSenha(email);
 	}
+
+	@Transactional(readOnly = true)
+	public Usuario procurarId(long id) { return repository.procurarId(id); }
 	
 }

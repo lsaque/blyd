@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import SearchNavigation from '../../../components/SearchNavigation';
 
 export const Container = styled.KeyboardAvoidingView`
   padding: 0 20px;
@@ -42,5 +41,3 @@ export const Row = styled.View`
   align-items: center;
   justify-content: space-between;
 `;
-
-export const SearchContactNavigation = styled(SearchNavigation)``;

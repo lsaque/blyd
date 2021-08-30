@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -19,7 +19,6 @@ const InputArea = styled.View`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  border-color: #8749FC;
 `;
 
 const Input = styled.TextInput`
@@ -36,19 +35,13 @@ const ButtonArea = styled.TouchableOpacity`
 `;
 
 export default ({text, icon, onPress, onChangeText, onBlur, value} : any) => {
-
-  const [isFocus, setFocus] = useState(false);
-
   return (
     <Container>
       <LabelText>{text}</LabelText>
-      <InputArea style={{
-        borderWidth: isFocus ? 1.5 : 0,
-      }}>
+      <InputArea>
         <Input
           onChangeText={onChangeText}
-          onFocus={() => setFocus(true)}
-          onBlur={() => {onBlur; setFocus(false)}}
+          onBlur={onBlur}
           value={value}
           placeholder="Informe o motivo"
           placeholderTextColor="#707070"
