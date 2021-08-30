@@ -15,12 +15,12 @@ import java.util.List;
 public class PopUpDirectionController {
 
     public List<PopUpDirectionDTO> rota1() {
-        PopUpDirectionDTO pop1 = new PopUpDirectionDTO("long-arrow-up", "Siga em frente por mais", "3 passos");
-        PopUpDirectionDTO pop2 = new PopUpDirectionDTO("long-arrow-left", "Vire a esquerda e ande por mais", "2 passos");
-        PopUpDirectionDTO pop3 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "7 passos");
-        PopUpDirectionDTO pop4 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "13 passos");
-        PopUpDirectionDTO pop5 = new PopUpDirectionDTO("long-arrow-left", "Vire a esquerda e ande por mais", "2 passos");
-        PopUpDirectionDTO pop6 = new PopUpDirectionDTO("map-check", "Rota", "finalizada");
+        PopUpDirectionDTO pop1 = new PopUpDirectionDTO("long-arrow-up","", "Siga em frente por mais", "3 passos");
+        PopUpDirectionDTO pop2 = new PopUpDirectionDTO("long-arrow-left", "", "Vire a esquerda e ande por mais", "2 passos");
+        PopUpDirectionDTO pop3 = new PopUpDirectionDTO("long-arrow-right", "", "Vire a direita e ande por mais", "7 passos");
+        PopUpDirectionDTO pop4 = new PopUpDirectionDTO("long-arrow-right", "", "Vire a direita e ande por mais", "13 passos");
+        PopUpDirectionDTO pop5 = new PopUpDirectionDTO("long-arrow-left", "","Vire a esquerda e ande por mais", "2 passos");
+        PopUpDirectionDTO pop6 = new PopUpDirectionDTO("","map-check", "Rota", "finalizada");
         List<PopUpDirectionDTO> popUps = new ArrayList<>();
         popUps.add(pop1);
         popUps.add(pop2);
@@ -32,12 +32,12 @@ public class PopUpDirectionController {
     }
 
     public List<PopUpDirectionDTO> rota2(){
-        PopUpDirectionDTO pop1 = new PopUpDirectionDTO("long-arrow-up", "Siga em frente por mais", "2 passos");
-        PopUpDirectionDTO pop2 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "23 passos");
-        PopUpDirectionDTO pop3 = new PopUpDirectionDTO("long-arrow-left", "Vire a esquerda e ande por mais", "8 passos");
-        PopUpDirectionDTO pop4 = new PopUpDirectionDTO("long-arrow-left", "Vire a esquerda e ande por mais", "11 passos");
-        PopUpDirectionDTO pop5 = new PopUpDirectionDTO("long-arrow-right", "Vire a direita e ande por mais", "2 passos");
-        PopUpDirectionDTO pop6 = new PopUpDirectionDTO("map-check", "Rota", "finalizada");
+        PopUpDirectionDTO pop1 = new PopUpDirectionDTO("long-arrow-up", "", "Siga em frente por mais", "2 passos");
+        PopUpDirectionDTO pop2 = new PopUpDirectionDTO("long-arrow-right", "", "Vire a direita e ande por mais", "23 passos");
+        PopUpDirectionDTO pop3 = new PopUpDirectionDTO("long-arrow-left", "", "Vire a esquerda e ande por mais", "8 passos");
+        PopUpDirectionDTO pop4 = new PopUpDirectionDTO("long-arrow-left", "","Vire a esquerda e ande por mais", "11 passos");
+        PopUpDirectionDTO pop5 = new PopUpDirectionDTO("long-arrow-right", "","Vire a direita e ande por mais", "2 passos");
+        PopUpDirectionDTO pop6 = new PopUpDirectionDTO("","map-check", "Rota", "finalizada");
         List<PopUpDirectionDTO> popUps = new ArrayList<>();
         popUps.add(pop1);
         popUps.add(pop2);
