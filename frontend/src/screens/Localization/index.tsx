@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Image, FlatList, LogBox } from 'react-native';
+import { Image } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { BackgroundImage } from '../../../styles';
 
@@ -12,7 +12,6 @@ import iconPage from '../../assets/Localization/iconPage.png'
 import { 
   Container,
   ImagePage,
-  Row,
   Title,
   Strong,
   Content,
@@ -22,6 +21,7 @@ import {
 import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';
 import { comodo, comodoCategorizado } from '../../types/comodo';
+import { rota } from '../../types/rota';
 
 export default function Localization({navigation}:any){
 
@@ -34,6 +34,13 @@ export default function Localization({navigation}:any){
       setComodoCategorizadoData(data);
     })
   }, []);
+
+  function handleNavigate(comodo: comodo) {
+    axios.get(`${BASE_URL}/rota/2`).then((response) =>{
+      const rota = response.data as rota;
+      navigation.navigate('LiveLocalization', {comodo: comodo, rota: rota});
+    });
+  }
 
   const categoryModalizeRef = useRef<Modalize>(null);
   const itemModalize = useRef<Modalize>(null);
@@ -100,10 +107,10 @@ export default function Localization({navigation}:any){
                 key={comodo.id}
                 text={comodo.nome} 
                 backgroundColor={{backgroundColor: '#D6FFE1'}}
-                onPress={() => navigation.navigate('LiveLocalization', {comodo: comodo})}
+                onPress={() => {handleNavigate(comodo)}}
               />
             ))}
-            
+          
           </Wrapper>
         </Content>
       </Modalize>

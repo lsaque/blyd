@@ -152,8 +152,7 @@ export default function Localization({navigation} : any){
                   </RadioComponent>
 
                </RadioButton.Group>
-
-
+               
                 <MarkAdviceButton
                   filled 
                   text="Marcar"
