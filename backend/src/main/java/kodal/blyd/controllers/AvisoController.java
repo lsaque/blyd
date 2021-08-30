@@ -5,6 +5,8 @@ import java.util.List;
 import jdk.javadoc.doclet.Reporter;
 import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.entities.Aviso;
+import kodal.blyd.entities.Ponto;
+import kodal.blyd.entities.Usuario;
 import kodal.blyd.services.PontoService;
 import kodal.blyd.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +46,24 @@ public class AvisoController {
 			@PathVariable boolean transitavel,
 			@PathVariable long idUsuario
 	){
+
 		StatusDTO status  = new StatusDTO();
 		status.setStatus(false);
-		try {
-			avisoService.marcarAviso(new Aviso(descricao, local, tempoDuracao, transitavel, usuarioService.procurarId(idUsuario), pontoService.procurarId(1)));
-			status.setStatus(true);
-			status.setMensagem("Aviso foi marcado com sucesso.");
-		} catch(Exception e){
-			status.setMensagem("O aviso não pode ser marcado.");
-		}
+
+		Usuario usuario = usuarioService.procurarId(idUsuario);
+		Ponto ponto = pontoService.procurarId(1);
+
+		if(usuario != null) {
+			if(ponto != null) {
+
+				avisoService.marcarAviso(new Aviso(descricao, local, tempoDuracao, transitavel, usuario, ponto));
+				status.setStatus(true);
+				status.setMensagem("Aviso foi marcado com sucesso.");
+
+			} else status.setMensagem("Ponto nao encontrado");
+		} else status.setMensagem("Usuario nao encontrado");
+
+
 		return ResponseEntity.ok(status);
 	}
 
