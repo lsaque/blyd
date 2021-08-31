@@ -24,5 +24,7 @@ public class AvisoService {
 	//descricao, String local, String tempoDuracao, boolean transitavel, Usuario usuario, Ponto ponto
 
 	@Transactional(readOnly = true)
-	public void marcarAviso(Aviso aviso){ repository.save(aviso); }
+	public void marcarAviso(Aviso aviso){
+		repository.saveAndFlush(aviso);
+	}
 }
