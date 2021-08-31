@@ -14,6 +14,7 @@ import Contact from './screens/Contact';
 import Advice from './screens/Advice';
 import LiveLocalization from './screens/LiveLocalization';
 import MarkAdvice from './screens/MarkAdvice';
+import SearchContact from './screens/SearchContact';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -118,6 +119,7 @@ export default function Main() {
         <Stack.Screen name="Contact" component={Contact} />
         <Stack.Screen name="Advice" component={Advice} />
         <Stack.Screen name="MarkAdvice" component={MarkAdvice} />
+        <Stack.Screen name="SearchContact" component={SearchContact} />
         
         {/* <Stack.Screen name="Setting" component={Setting} /> */}
       </Stack.Navigator> 
