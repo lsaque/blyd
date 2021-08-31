@@ -30,7 +30,6 @@ public class MarcarAvisoScript {
 
         Usuario usuario = usuarioService.procurarId(usuarioId);
         Ponto ponto = pontoService.procurarId(1);
-        Aviso aviso = new Aviso(descricao, local, tempoDuracao, transitavel, usuario, ponto);
 
         try {
 
@@ -41,14 +40,9 @@ public class MarcarAvisoScript {
                 if(ponto == null) {
                     throw new PontoNull();
                 } else {
-
-                    if(aviso == null) {
-                        throw new AvisoNull();
-                    } else {
-                        avisoService.marcarAviso(aviso);
-                        status.setMensagem("Aviso marcado");
-                        status.setStatus(true);
-                    }
+                    avisoService.marcarAviso(descricao, local, tempoDuracao, transitavel, usuarioId, 1);
+                    status.setMensagem("Aviso marcado");
+                    status.setStatus(true);
                 }
             }
         }
@@ -57,9 +51,6 @@ public class MarcarAvisoScript {
         }
         catch(PontoNull e) {
             status.setMensagem("Ponto não encontrado.");
-        }
-        catch (AvisoNull e) {
-            status.setMensagem("Aviso não setado");
         }
         catch (Exception e) {
             status.setMensagem("Erro " + e.toString());
