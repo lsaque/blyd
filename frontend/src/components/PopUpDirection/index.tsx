@@ -70,7 +70,7 @@ export default ({arrowDirection, text, distance, arrowType}: any) => {
 
           <Right>
             <Button>
-              <Ionicons name="mic" size={30} color="#4A4A4A" />
+              <Ionicons name="volume-high" size={30} color="#4A4A4A" />
             </Button>
           </Right>
 

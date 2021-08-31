@@ -21,7 +21,7 @@ import { rota } from '../../types/rota';
 
 export type myPopUpData = {
   arrowDirection: string;
-  arrowType: any;
+  arrowType: string;
   text: string;
   distance: string;
 }
@@ -35,7 +35,7 @@ export default function LiveLocalization({navigation, route} : any){
   const [ index, setIndex ] = useState<number>(-1);
   const [ popUpData, setPopUpData ] = useState<myPopUpData>({
     arrowDirection: "",
-    arrowType: "map-check",
+    arrowType: "map-clock",
     text: "Selecione uma rota para",
     distance: " começar"
   });
@@ -54,7 +54,7 @@ export default function LiveLocalization({navigation, route} : any){
     if(routeData != undefined){
       setPopUpData({
         arrowDirection: routeData.popUps[index].arrowDirection,
-        arrowType: "",
+        arrowType: routeData.popUps[index].arrowType,
         text: routeData.popUps[index].text,
         distance: ` ${routeData.popUps[index].distance}`
       });

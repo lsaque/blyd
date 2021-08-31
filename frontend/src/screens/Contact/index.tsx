@@ -54,7 +54,7 @@ export default function Localization({navigation}:any){
               badge={true}
               text="Estação de trabalho"
               backgroundColor={{backgroundColor: '#CFE9FF'}}
-              // onPress={}
+              onPress={() => navigation.navigate('SearchContact')}
             />
             <PageCard
               text="Pessoa"
