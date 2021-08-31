@@ -61,7 +61,9 @@ public class MarcarAvisoScript {
         catch (AvisoNull e) {
             status.setMensagem("Aviso não setado");
         }
+        catch (Exception e) {
+            status.setMensagem("Erro " + e.toString());
+        }
         return status;
     }
-
 }
