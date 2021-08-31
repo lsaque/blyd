@@ -29,7 +29,7 @@ public class SolicitacaoCadastroService {
 	
 	@Transactional(readOnly = true)
 	public void adicionarSolicitacaoCadastro(SolicitacaoCadastro solicitacao) {
-		repository.save(solicitacao);
+		repository.saveAndFlush(solicitacao);
 	}
 	
 }
