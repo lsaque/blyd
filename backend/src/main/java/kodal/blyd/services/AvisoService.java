@@ -29,8 +29,7 @@ public class AvisoService {
 	@Transactional(readOnly = true)
 	public List<AvisoDTO> findAll() { return repository.findAll().stream().map(aviso -> new AvisoDTO(aviso)).collect(Collectors.toList()); }
 
-	@Transactional(readOnly = true)
-	public void marcarAviso(String descricao, String local, String tempoDuracao, boolean transitavel, long pontoId, long usuarioId){
-		repository.marcarAviso(descricao, local, tempoDuracao, transitavel, pontoId, usuarioId);
+	public void marcarAviso(Aviso aviso){
+		repository.saveAndFlush(aviso);
 	}
 }
