@@ -40,8 +40,8 @@ public class MarcarAvisoScript {
                 if(ponto == null) {
                     throw new PontoNull();
                 } else {
-                    avisoService.marcarAviso(descricao, local, tempoDuracao, transitavel, usuarioId, 1);
-                    status.setMensagem("Aviso marcado");
+                    avisoService.marcarAviso(new Aviso(descricao, local, tempoDuracao, transitavel, usuario, ponto));
+                    status.setMensagem("Aviso marcado.");
                     status.setStatus(true);
                 }
             }
