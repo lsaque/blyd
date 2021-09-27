@@ -47,10 +47,10 @@ public class MarcarAvisoScript {
             }
         }
         catch(UsuarioNull e){
-            status.setMensagem("Usuario não encontrado.");
+            status.setMensagem("Usuario nao encontrado.");
         }
         catch(PontoNull e) {
-            status.setMensagem("Ponto não encontrado.");
+            status.setMensagem("Ponto nao encontrado.");
         }
         catch (Exception e) {
             status.setMensagem("Erro " + e.toString());
