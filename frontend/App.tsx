@@ -5,10 +5,11 @@ import { StatusBar } from 'expo-status-bar';
 import { Modalize } from 'react-native-modalize';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
-import Main from './src';
 import logo from './src/assets/Splash/logo.png';
 import StateInput from './src/components/StateInput';
 import Button from './src/components/Button';
+
+import { UserScreen, AdminScreen } from './src';
 
 import { 
   BoxImage,
@@ -25,7 +26,7 @@ import {
   EnterButton,
   RegisterButton
 } from './styles';
-
+import { NavigationContainer } from '@react-navigation/native';
 
 const slides = [
   {
@@ -86,9 +87,13 @@ export default function App(){
   }
 
   if(showHome) {
+
     return (
       <ThemeProvider theme={colors}>
-        <Main/>
+        <NavigationContainer>
+          {/* <UserScreen/> */}
+          <AdminScreen/>
+        </NavigationContainer>
       </ThemeProvider>
     )
   } else {

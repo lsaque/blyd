@@ -86,7 +86,7 @@ export default ({importance, text}: any) => {
         <Center>
           <Title style={{
             color: strongColor,
-          }}>Importante</Title>
+          }}>Intransitável</Title>
           <Advice numberOfLines={1}>{text}</Advice>
         </Center>
 
