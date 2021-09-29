@@ -3,9 +3,9 @@ INSERT INTO t_andar(nome, descricao) VALUES ('1 Andar', 'Escritorio de Advocacia
 INSERT INTO t_mapa(nome, descricao, link_imagem, m2, andar_id) VALUES ('Mapa 1 Andar', 'Mapa do Escritorio de Advocacia', 'https://centralofficeschapeco.com.br/images/plantas/alinc-chapeco-juncao-4-e-5.jpg', 115.96, 1);
 
 INSERT INTO t_cargo(nome) VALUES ('Diretor');
-INSERT INTO t_usuario(nome, email, celular, senha, pcd, cargo_id) VALUES ('Davi Quental', 'quentaldavi@gmail.com', '11934762698','senha1', 0, 1); 
+INSERT INTO t_usuario(nome, email, celular, senha, pcd, cargo_id) VALUES ('Davi Quental', 'quentaldavi@gmail.com', '11934762698','senha1', FALSE, 1);
 INSERT INTO t_ponto(x, y, mapa_id) VALUES (0, 0, 1); 
-INSERT INTO t_aviso(nome, descricao, transitavel, dia, mes, ano, hora, minuto, usuario_id, ponto_id, andar_id) VALUES ('Escada', 'Trocando a lampada', 1, 25, 8, 2021, 15, 20, 1, 1, 1);
+INSERT INTO t_aviso(descricao, local, tempo_duracao, transitavel, usuario_id, ponto_id) VALUES ('Troca de piso', 'Corredor principal', '30/8/2021/2/20', FALSE, 1, 1);
 
 
 INSERT INTO t_ponto(x, y, mapa_id) VALUES (41, 3, 1); 
@@ -72,4 +72,3 @@ INSERT INTO t_obstaculo(nome, descricao, ponto_inicial, ponto_final) VALUES ('Me
 INSERT INTO t_ponto(x, y, mapa_id) VALUES (21, 52, 1);
 INSERT INTO t_ponto(x, y, mapa_id) VALUES (37, 46, 1); 
 INSERT INTO t_obstaculo(nome, descricao, ponto_inicial, ponto_final) VALUES ('Sofa', 'Sofa de tres lugares', 37, 38);
-

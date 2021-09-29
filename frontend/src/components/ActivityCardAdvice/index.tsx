@@ -89,7 +89,7 @@ export default ({name, adviceName, picture, timeDuration, adviceLocal}: any) => 
           <PersonName numberOfLines={1}>{name} 
             <ComplementText> marcou</ComplementText>
           </PersonName>
-          <AdviceLocal numberOfLines={1}>{adviceName}
+          <AdviceLocal >{adviceName}
             <ComplementText> | </ComplementText>
             {adviceLocal}
           </AdviceLocal>

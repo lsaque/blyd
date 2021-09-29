@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Container = styled.View`
   margin-top: 20px;
@@ -49,23 +49,28 @@ const Button = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export default ({arrowDirection, text, distance}: any) => {
+export default ({arrowDirection, text, distance, arrowType}: any) => {
   return (
     <React.Fragment>
       <Container style={{elevation: 20}}>
         <Wrapper>
 
           <Left>
-            <FontAwesome name={arrowDirection} size={32} color="#4A4A4A" />
+            {
+              arrowDirection != "" ? 
+              <FontAwesome name={arrowDirection} size={32} color="#4A4A4A" /> 
+              :
+              <MaterialCommunityIcons name={arrowType} size={32} color="#4A4A4A" />
+            }
           </Left>
 
           <Center>
-            <TextCenter>Siga em frente por mais <Strong>4 metros ou 5 passos</Strong></TextCenter>
+            <TextCenter>{text}<Strong>{distance}</Strong></TextCenter>
           </Center>
 
           <Right>
             <Button>
-              <Ionicons name="mic" size={30} color="#4A4A4A" />
+              <Ionicons name="volume-high" size={30} color="#4A4A4A" />
             </Button>
           </Right>
 

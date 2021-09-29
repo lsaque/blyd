@@ -1,33 +1,41 @@
-import React, { useRef } from 'react';
-import { Dimensions, Image, Text, View } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { Dimensions, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { BackgroundImage } from '../../../styles';
 
 import Navigation from '../../components/Navigation';
-import PageCard from '../../components/PageCard';
 
 import Background from '../../assets/Activity/background.png'
-import iconPage from '../../assets/Contact/iconPage.png'
-
 import { 
   Container,
-  ImagePage,
   Title,
-  Strong,
   Content,
   Wrapper,
-  Row,
-  SearchContactNavigation
 } from '../../assets/Styles/PageTemplate/styles';
-import ProfileCard from '../../components/ProfileCard';
 
-import picture from '../../assets/SearchContact/picture.png';
 import ActivityNotificationNumber from '../../components/ActivityNotificationNumber';
 import ActivityCardAdvice from '../../components/ActivityCardAdvice';
+import { activityCardAdvice } from '../../types/activityCardAdvice';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/requests';
 
 export default function Activity({navigation}:any){
 
   const modalizeRef = useRef<Modalize>(null);
+
+  const [ activityCardAdviceData, setActivityCardAdviceData ] = useState<activityCardAdvice[]>();
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/activity-card-advice`).then((response) => {
+      const data = response.data as activityCardAdvice[];
+      setActivityCardAdviceData(data);
+    });
+  },[]);
+
+  // function handleTimeDuration(activityCard: activityCardAdvice){
+  //   console.log(activityCard.timeDuration);
+  //   return "1h";
+  // }
   
   return(
     <React.Fragment>
@@ -43,8 +51,8 @@ export default function Activity({navigation}:any){
           />
         <View style={{paddingTop: 35}}>
           <ActivityNotificationNumber
-            numberAdvice="4"
-            text="novos avisos."
+            numberAdvice={activityCardAdviceData?.length || 0}
+            text="novo(s) avisos."
           />
         </View>
 
@@ -62,35 +70,17 @@ export default function Activity({navigation}:any){
         <Content>
           <Wrapper>
 
-            <ActivityCardAdvice
-              name="Isaque"
-              adviceName="Limpeza"
-              adviceLocal="Corredor 2B"
-              timeDuration="1h"
-              picture={picture}
-            />
-
-            <ActivityCardAdvice
-              name="Matheus"
-              adviceName="Limpeza"
-              adviceLocal="Corredor 3C"
-              timeDuration="2h"
-            />
-
-            <ActivityCardAdvice
-              name="Davi"
-              adviceName="Limpeza"
-              adviceLocal="Corredor 2B"
-              timeDuration="8h"
-              picture={picture}
-            />
-
-            <ActivityCardAdvice
-              name="Luigi"
-              adviceName="Manutenção"
-              adviceLocal="Ala 2F"
-              timeDuration="1d"
-            />
+            {
+              activityCardAdviceData?.map((data) => (
+                <ActivityCardAdvice
+                key={data.id}
+                name={data.name}
+                adviceName={data.adviceName}
+                adviceLocal={data.adviceLocal}
+                timeDuration="1h"
+              />
+              ))
+            }
 
           </Wrapper>
         </Content>

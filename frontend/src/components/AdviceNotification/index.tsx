@@ -48,7 +48,7 @@ const SuggestedTimeText = styled.Text`
   font-size: 18px;
 `;
 
-export default ({importance}: any) => {
+export default ({importance, text}: any) => {
   
   let strongColor, lightColor, borderWidth = 1.5;
 
@@ -87,7 +87,7 @@ export default ({importance}: any) => {
           <Title style={{
             color: strongColor,
           }}>Intransitável</Title>
-          <Advice numberOfLines={1}>Limpeza - corredor 2B</Advice>
+          <Advice numberOfLines={1}>{text}</Advice>
         </Center>
 
         <Right>

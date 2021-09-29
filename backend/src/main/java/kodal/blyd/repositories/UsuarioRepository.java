@@ -14,5 +14,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	@Query("SELECT usuario.senha FROM Usuario usuario WHERE usuario.email = :email")
 	String requisitarSenha(@Param("email") String email);
+
+	@Query("SELECT usuario FROM Usuario usuario WHERE usuario.id = :id")
+	Usuario procurarId(@Param("id") long id);
 	
 }

@@ -18,6 +18,7 @@ import {
   Top,
   Bot
  } from "./styles";
+import { comodo } from "../../types/comodo";
 
 function Home({navigation} : any){
   return (
@@ -59,7 +60,7 @@ function Home({navigation} : any){
 
           <HomeCard
             text="Ir a um local específico."
-            onPress={() => navigation.navigate('Localization')}
+            onPress={() => navigation.navigate('Localization', {})}
             iconName="map-marker"
             backgroundColor={{backgroundColor: '#D6FFE1'}}
           />

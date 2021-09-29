@@ -88,7 +88,6 @@ export default function Localization({navigation} : any){
                     <RadioArea
                       style={{
                         borderWidth: isFocus ? 1.5 : 0,
-                        // borderWidth:1.5,
                       }}
                     >
                       <RadioButton.Item
@@ -104,6 +103,7 @@ export default function Localization({navigation} : any){
                         color='#8749FC'
                         label="Até 3 horas"
                         value={getDate(0,3)}
+                        onPress={() => setFocus(false)}
 
                       />
                     </RadioArea>
@@ -113,6 +113,8 @@ export default function Localization({navigation} : any){
                         color='#8749FC'
                         label="Até 1 dia"
                         value={getDate(1,0)}
+                        onPress={() => setFocus(false)}
+
                       />
                     </RadioArea>
                     <RadioArea>
@@ -121,6 +123,8 @@ export default function Localization({navigation} : any){
                         color='#8749FC'
                         label="Até 3 dias"
                         value={getDate(3,0)}
+                        onPress={() => setFocus(false)}
+
                       />
                     </RadioArea>
                   </RadioComponent>
@@ -152,8 +156,7 @@ export default function Localization({navigation} : any){
                   </RadioComponent>
 
                </RadioButton.Group>
-
-
+               
                 <MarkAdviceButton
                   filled 
                   text="Marcar"

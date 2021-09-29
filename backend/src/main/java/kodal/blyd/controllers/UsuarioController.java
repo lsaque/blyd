@@ -2,6 +2,7 @@ package kodal.blyd.controllers;
 
 import java.util.List;
 
+import kodal.blyd.dto.StatusDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodal.blyd.dto.UsuarioDTO;
-import kodal.blyd.dto.UsuarioLoginDTO;
-import kodal.blyd.dto.UsuarioSignUpDTO;
 import kodal.blyd.script.LoginScript;
 import kodal.blyd.services.UsuarioService;
 
@@ -29,23 +28,10 @@ public class UsuarioController {
 	}
 	
 	@GetMapping(value = "login/{inputEmail}/{inputSenha}")
-	public ResponseEntity<UsuarioLoginDTO> login(
+	public ResponseEntity<StatusDTO> login(
 			@PathVariable String inputEmail, 
 			@PathVariable String inputSenha)
 	{
 		return ResponseEntity.ok(new LoginScript().verificarLogin(inputEmail, inputSenha, service));
 	}
-	
-	@GetMapping(value = "signup/{nome}/{email}/{celular}/{senha}/{pcd}")
-	public ResponseEntity<UsuarioSignUpDTO> signup(
-			@PathVariable String nome, 
-			@PathVariable String email, 
-			@PathVariable String celular,
-			@PathVariable String senha,
-			@PathVariable boolean pcd)
-	{
-		UsuarioSignUpDTO signup = new UsuarioSignUpDTO();
-		return ResponseEntity.ok(signup);
-	}
-	
 }
