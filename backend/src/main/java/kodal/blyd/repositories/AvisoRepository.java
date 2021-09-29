@@ -9,4 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface AvisoRepository extends JpaRepository<Aviso, Long>{
 
+    @Query("SELECT aviso FROM Aviso aviso where aviso.id = :id")
+    Aviso procurarAviso(@Param("id") long id);
+
 }

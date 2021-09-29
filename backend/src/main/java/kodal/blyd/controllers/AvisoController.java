@@ -8,6 +8,7 @@ import kodal.blyd.entities.Aviso;
 import kodal.blyd.entities.Ponto;
 import kodal.blyd.entities.Usuario;
 import kodal.blyd.script.MarcarAvisoScript;
+import kodal.blyd.script.RemoverAvisoScript;
 import kodal.blyd.services.PontoService;
 import kodal.blyd.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,10 @@ public class AvisoController {
 
 	public List<AvisoDTO> findAllList() {
 		return avisoService.findAll();
+	}
+
+	@GetMapping(value = "/remover/{id}")
+	public ResponseEntity<StatusDTO> removerAviso(@PathVariable long id){
+		return ResponseEntity.ok(new RemoverAvisoScript(avisoService).removerAviso(id));
 	}
 }
