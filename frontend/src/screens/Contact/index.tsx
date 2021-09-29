@@ -59,7 +59,7 @@ export default function Localization({navigation}:any){
             <PageCard
               text="Pessoa"
               backgroundColor={{backgroundColor: '#CFE9FF'}}
-              // onPress={}
+              onPress={() => navigation.navigate('SearchContact')}
             />
             <PageCard
               text="Setor"

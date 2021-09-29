@@ -55,7 +55,6 @@ export default function SearchContact({navigation}:any){
         snapPoint={500}
         modalHeight={500}
         adjustToContentHeight={false}
-
         // modalHeight={550}
         // keyboardAvoidingBehavior={'height'}
         avoidKeyboardLikeIOS={false}
@@ -67,31 +66,31 @@ export default function SearchContact({navigation}:any){
         <Content>
           <Wrapper>
 
+          <ProfileCard
+              name="Davi Quintal"
+              departmant="T.I"
+            />
+
             <ProfileCard
-              name="Isaque José de Souza"
+              name="Laura Silva"
               departmant="Secretaria"
               picture={picture}
-              number="tel:11934762698"
+              number="tel:1191342789"
             />
 
             <ProfileCard
-              name="Davi Quintal"
-              departmant="Secretaria"
+              name="Isaque Souza"
+              departmant="RH"
             />
 
             <ProfileCard
-              name="Davi Quintal"
-              departmant="Secretaria"
+              name="Leandro Lord"
+              departmant="Administração"
             />
 
             <ProfileCard
-              name="Davi Quintal"
-              departmant="Secretaria"
-            />
-
-            <ProfileCard
-              name="Davi Quintal"
-              departmant="Secretaria"
+              name="Caroline A. Lu."
+              departmant="Ambulatório"
             />
 
           </Wrapper>

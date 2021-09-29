@@ -61,7 +61,7 @@ export default function Localization({navigation} : any){
         >
           <Formik
             initialValues={{ 
-              advice: '',
+              advice: 'Limpeza',
               timeDuration: '',
               isPassable: '',
             }}
@@ -159,7 +159,8 @@ export default function Localization({navigation} : any){
                   text="Marcar"
                   onPress={() => {
                     console.log(values); 
-                    handleSubmit
+                    handleSubmit;
+                    navigation.navigate('LiveLocalization');
                   }}   
                 />
               </View>

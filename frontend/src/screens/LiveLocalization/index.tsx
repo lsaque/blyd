@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { BackgroundImage } from '../../../styles';
 import { Modalize } from 'react-native-modalize';
+import { Text } from 'react-native';
 
 import Background from '../../assets/LiveLocalization/background.png'
 import Navigation from '../../components/Navigation';
@@ -64,10 +65,19 @@ export default function LiveLocalization({navigation, route} : any){
           </Row>
 
           <Row>
-            <AdviceNotification
-              importance={1}
-            />
-            {/* <AdviceNotification/> */}
+          {
+            routeData?.avisos == null ? 
+              <Text style={{textAlign:'center', fontSize:18}}>Nenhum aviso </Text> 
+              : 
+              routeData?.avisos.map((aviso: any) => (
+                <AdviceNotification
+                key={aviso}
+                importance={1}
+                // text={aviso.descricao}
+                text="Limpeza - Corredor 2EP"
+                /> 
+              ))
+          }
           </Row>
         </Content>
       </Modalize>

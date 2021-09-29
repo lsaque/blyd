@@ -1,12 +1,9 @@
-import React, { useRef } from 'react';
-import { Text } from 'react-native';
-import { Modalize } from 'react-native-modalize';
+import React from 'react';
+import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 
 const Card = styled.TouchableOpacity`
-  /* background-color: #D6FFE1; */
   height: 150px;
-  width: 165px;
   border-radius: 30px;
   justify-content: center;
   align-items: center;
@@ -34,14 +31,18 @@ const Title = styled.Text`
   text-align: center;
 `;
 
-export default ({badge, text, onPress, backgroundColor}: any) => {
 
-  let badgeComponent = (<Badge>Pessoal</Badge>);
+export default ({badge, text, onPress, backgroundColor}: any) => {
+  
+  const { width } = Dimensions.get("window");
+  let badgeComponent = <Badge>Pessoal</Badge>;
 
   return(
-    <Card onPress={onPress} style={backgroundColor}>
+    <Card onPress={ onPress } style={[backgroundColor,{
+      width: width/2.36,
+    }]}>
       <Content>
-        {badge ? badgeComponent : null}
+        { badge ? badgeComponent : null }
         <Title>{text}</Title>
       </Content>
     </Card>
