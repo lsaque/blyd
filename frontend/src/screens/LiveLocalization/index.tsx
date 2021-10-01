@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Text } from 'react-native'
 import { BackgroundImage } from '../../../styles';
 import { Modalize } from 'react-native-modalize';
-import { Text } from 'react-native';
 
 import Background from '../../assets/LiveLocalization/background.png'
 import Navigation from '../../components/Navigation';
@@ -32,7 +31,7 @@ export default function LiveLocalization({navigation, route} : any){
   const modalizeRef = useRef<Modalize>(null);
 
   const [ selectedComodo, setSelectedComodo ] = useState<comodo>();
-  const [ routeData, setRouteData] = useState<rota>();
+  const [ routeData, setRouteData ] = useState<rota>();
   const [ index, setIndex ] = useState<number>(-1);
   const [ popUpData, setPopUpData ] = useState<myPopUpData>({
     arrowDirection: "",
@@ -44,7 +43,6 @@ export default function LiveLocalization({navigation, route} : any){
   useEffect(() =>{
     try {
       const {comodo, rota} = route.params;
-      
       setSelectedComodo(comodo);
       setRouteData(rota);
       setIndex(0);

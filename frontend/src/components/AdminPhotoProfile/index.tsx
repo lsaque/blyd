@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 
 const Container = styled.TouchableOpacity`
+  width: 20%;
 `;
 
 const Photo = styled.Image`
@@ -9,7 +10,7 @@ const Photo = styled.Image`
   width: 55px;
   height: 55px;
   border-radius: 27.5px;
-  margin-right: 5%;
+  /* margin-right: 5.24%; */
   margin-bottom: 18px;
 `;
 

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
@@ -15,12 +16,15 @@ import LiveLocalization from './screens/LiveLocalization';
 import MarkAdvice from './screens/MarkAdvice';
 import SearchContact from './screens/SearchContact';
 import Admin from './screens/Admin';
+import UserList from './screens/UserList';
+import UserProfile from './screens/UserProfile';
+import UserEditProfile from './screens/UserEditProfile';
 
 const UserTab = createMaterialBottomTabNavigator();
-const UserStack = createStackNavigator();
-
 const AdminTab = createMaterialBottomTabNavigator();
+
 const AdminStack = createStackNavigator();
+const UserStack = createStackNavigator();
 
 function UserBottomTab(){
   return(
@@ -209,14 +213,21 @@ const UserScreen = () => {
       <UserStack.Screen name="Advice" component={Advice} />
       <UserStack.Screen name="MarkAdvice" component={MarkAdvice} />
       <UserStack.Screen name="SearchContact" component={SearchContact} />
+
+      {/* <UserStack.Screen name="UserProfile" component={UserProfile}/> */}
+      {/* <UserStack.Screen name="UserEditProfile" component={UserEditProfile}/> */}
     </UserStack.Navigator> 
   )
-};
+}
 
 const AdminScreen = () => {
   return (
     <AdminStack.Navigator initialRouteName="Admin" screenOptions={{ headerShown: false }} >
       <AdminStack.Screen name="Admin" component={AdminBottomTab}/>
+      <AdminStack.Screen name="UserList" component={UserList}/>
+      <AdminStack.Screen name="UserProfile" component={UserProfile}/>
+      <AdminStack.Screen name="UserEditProfile" component={UserEditProfile}/>
+
       <AdminStack.Screen name="Search" component={Search} />
       <AdminStack.Screen name="Localization" component={Localization} />
       <AdminStack.Screen name="Contact" component={Contact} />
@@ -227,4 +238,4 @@ const AdminScreen = () => {
   )
 }
 
-export {UserScreen, AdminScreen};
+export { UserScreen, AdminScreen };

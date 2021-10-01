@@ -28,7 +28,6 @@ const TitleContent = styled.View`
 const Title = styled.Text`
   font-weight: 300;
   font-size: 18px;
-  color: #4A4A4A;
 `;
 
 const Strong = styled.Text`
@@ -36,7 +35,14 @@ const Strong = styled.Text`
 `;
 
 
-export default ({onPress, title, titleStrong} : any) => {
+export default ({onPress, title, titleStrong, lightContent} : any) => {
+
+  let lightStyle = "#4A4A4A";
+
+  if(lightContent){
+    lightStyle = "#FFF";
+  }
+
   return(
     <Container>
       <Button onPress={onPress}>
@@ -44,7 +50,7 @@ export default ({onPress, title, titleStrong} : any) => {
       </Button>
 
       <TitleContent>
-        <Title>{title} <Strong>{titleStrong}</Strong> </Title>  
+        <Title style={{color: lightStyle}}>{title} <Strong>{titleStrong}</Strong> </Title>  
       </TitleContent>
 
       <Button>

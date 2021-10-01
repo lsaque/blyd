@@ -59,8 +59,6 @@ export const GridPhotos = styled.View`
 export const Credits = styled.View`
   width: 100%;
   margin: 10px 0;
-  justify-content: center;
-  align-items: center;
   height: 50px;
 `;
 

@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
-import { Modalize } from 'react-native-modalize';
-import { Button, Dimensions, Platform, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Picker } from '@react-native-community/picker';
-
-import { BackgroundImage } from '../../../styles';
-
+import { Platform, View } from 'react-native';
 import Navigation from '../../components/Navigation';
-import IconInput from '../../components/IconInput';
-
-import Background from '../../assets/MarkAdvice/background.png';
 
 import { 
   Container,
@@ -28,7 +19,6 @@ import {
 import TextInput from '../../components/TextInput';
 import { Formik } from 'formik';
 import { RadioButton } from 'react-native-paper';
-import { RadioButtonItem } from 'react-native-paper/lib/typescript/components/RadioButton/RadioButtonItem';
 
 
 function getDate(day: number, hour: number) {

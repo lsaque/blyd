@@ -39,13 +39,12 @@ export default function SearchContact({navigation}:any){
             title="Contactar"
             titleStrong="Alguém"
           />
-        <View style={{paddingTop: 35}}>
-          <SearchContactNavigation
-            text="Pesquise pelo nome"
-            onPress={() => navigation.goBack('history')}
-          />
-        </View>
-
+          <View style={{paddingTop: 35}}>
+            <SearchContactNavigation
+              text="Pesquise pelo nome"
+              onPress={() => navigation.goBack('history')}
+            />
+          </View>
         </Container>
       </BackgroundImage>
 
@@ -65,32 +64,32 @@ export default function SearchContact({navigation}:any){
       >
         <Content>
           <Wrapper>
-
-          <ProfileCard
+            
+            <ProfileCard
               name="Davi Quintal"
-              departmant="T.I"
+              department="T.I"
             />
 
             <ProfileCard
               name="Laura Silva"
-              departmant="Secretaria"
+              department="Secretaria"
               picture={picture}
               number="tel:1191342789"
             />
 
             <ProfileCard
               name="Isaque Souza"
-              departmant="RH"
+              department="RH"
             />
 
             <ProfileCard
               name="Leandro Lord"
-              departmant="Administração"
+              department="Administração"
             />
 
             <ProfileCard
               name="Caroline A. Lu."
-              departmant="Ambulatório"
+              department="Ambulatório"
             />
 
           </Wrapper>

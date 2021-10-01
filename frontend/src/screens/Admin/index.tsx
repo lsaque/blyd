@@ -47,13 +47,13 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
         height: 200,
       }}>
       
-      <AdminHeader>
-        <WelcomeContainer>
-          <HeaderTitle>Olá Admin,</HeaderTitle>
-          <Description>Muito bem-vindo a plataforma</Description>
-        </WelcomeContainer>
-        <Image source={AdminImage}/>
-      </AdminHeader>
+        <AdminHeader>
+          <WelcomeContainer>
+            <HeaderTitle>Olá Admin,</HeaderTitle>
+            <Description>Muito bem-vindo a plataforma</Description>
+          </WelcomeContainer>
+          <Image source={AdminImage}/>
+        </AdminHeader>
 
       </BackgroundImage>
 
@@ -78,7 +78,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
                 category="Usuários"
                 number={212}
                 backgroundColor="#CD7AF6"
-                onPress={() => navigation.navigate('MarkAdvice')}
+                onPress={() => navigation.navigate('UserList')}
               />
               <AdminDataNumber 
                 category="Solicitações"
@@ -118,7 +118,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
             userName="Isaque Souza"
             adviceHour="14:43"
             adviceName="Limpeza - corredor 2B"
-            adviceTimeRemaining="1d 25h"
+            adviceTimeRemaining="2h"
             adviceImportantTag={true}
           />
           <AdminLastAdvice 
@@ -126,14 +126,14 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
             userName="Isaque Souza"
             adviceHour="14:43"
             adviceName="Limpeza - corredor 2B"
-            adviceTimeRemaining="1d 25h"
+            adviceTimeRemaining="5h"
             adviceImportantTag={true}
           />
           <AdminLastAdvice 
             userPicture={Background}
             userName="Isaque Souza"
             adviceHour="14:43"
-            adviceName="Limpeza - corredor 2B"
+            adviceName="Limpeza - corredor 2B Quintas Davi fsjoi fjsiofj oisj"
             adviceTimeRemaining="1d 25h"
             adviceImportantTag={true}
           />
