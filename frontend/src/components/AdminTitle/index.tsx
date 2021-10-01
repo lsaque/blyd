@@ -11,7 +11,6 @@ const Container = styled.View`
 const Title = styled.Text`
   font-size: 16px;
   color: #707070;
-  padding: 0 20px;
   margin-bottom:24px;
 `; 
 
@@ -20,7 +19,6 @@ const SeeAll = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   height: 50%;
-  margin-right: 10px;
 `;
 
 const SeeAllText = styled.Text`

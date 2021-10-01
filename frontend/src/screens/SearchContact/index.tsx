@@ -4,24 +4,17 @@ import { Modalize } from 'react-native-modalize';
 import { BackgroundImage } from '../../../styles';
 
 import Navigation from '../../components/Navigation';
-import PageCard from '../../components/PageCard';
-
+import ProfileCard from '../../components/ProfileCard';
+import picture from '../../assets/SearchContact/picture.png';
 import Background from '../../assets/Contact/background.png'
-import iconPage from '../../assets/Contact/iconPage.png'
 
 import { 
   Container,
-  ImagePage,
   Title,
-  Strong,
   Content,
   Wrapper,
-  Row,
   SearchContactNavigation
 } from '../../assets/Styles/PageTemplate/styles';
-import ProfileCard from '../../components/ProfileCard';
-
-import picture from '../../assets/SearchContact/picture.png';
 
 export default function SearchContact({navigation}:any){
 
@@ -74,7 +67,7 @@ export default function SearchContact({navigation}:any){
               name="Laura Silva"
               department="Secretaria"
               picture={picture}
-              number="tel:1191342789"
+              number="1191342789"
             />
 
             <ProfileCard

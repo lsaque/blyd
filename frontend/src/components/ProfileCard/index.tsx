@@ -66,7 +66,7 @@ export default ({name, departmant, number, picture}: any) => {
   }
 
   return (
-    <Container onPress={() => { Linking.openURL(number) }}>
+    <Container onPress={() => { Linking.openURL("tel:" + number) }}>
       <Wrapper>
 
         <Left>
