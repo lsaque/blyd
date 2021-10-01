@@ -9,7 +9,7 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: 20px;
+  font-size: 16px;
   color: #707070;
   padding: 0 20px;
   margin-bottom:24px;
@@ -25,7 +25,7 @@ const SeeAll = styled.TouchableOpacity`
 
 const SeeAllText = styled.Text`
   color: #707070;
-  font-size: 18px;
+  font-size: 14px;
   padding-right: 10px;
   font-style: italic;
 `;
@@ -38,13 +38,13 @@ interface IAdminTitleProps{
 
 const AdminTitle: React.FC<IAdminTitleProps> = ({text, seeAll, onPress}) => {
 
-  let seeAllRender = <React.Fragment/>;
+  let seeAllRender;
 
   if(seeAll){
     seeAllRender = (
       <SeeAll>
         <SeeAllText>Ver todos</SeeAllText>
-        <SimpleLineIcons name="arrow-right" size={18} color="#707070"/>
+        <SimpleLineIcons name="arrow-right" size={14} color="#707070"/>
       </SeeAll>
     )
   }

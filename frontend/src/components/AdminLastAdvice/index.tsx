@@ -35,7 +35,7 @@ const UserPicture = styled.Image`
 
 const UserName = styled.Text`
   color: #636363;
-  font-size: 18px;
+  font-size: 16px;
   max-width: 185px;
 `;
 
@@ -55,15 +55,16 @@ const Content = styled.View`
   flex-direction: row;
   margin: 20px;
   justify-content: space-between;
-  /* border: 1px solid red; */
+  /* border: 1px solid green; */
 `;
 
 const DescriptionAdvice = styled.View`
   /* border: 1px solid red; */
+  width: 280px;
 `;
 
 const AdviceName = styled.Text`
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   /* max-width: 95%; */
   margin-bottom: 18px;
@@ -84,7 +85,7 @@ const TimeRemaining = styled.TouchableOpacity`
 
 const Time = styled.Text`
   color: #8363F6;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
   margin-left: 5px;
 `;
@@ -124,7 +125,7 @@ const AdminLastAdvice: React.FC<IAdminLastAdviceProps> = ({
           <AdviceName numberOfLines={2}>{adviceName}</AdviceName>
           <Tags>
             <TimeRemaining>
-              <MaterialCommunityIcons name="timer" size={20} color="#8363F6" />
+              <MaterialCommunityIcons name="timer" size={14} color="#8363F6" />
               <Time>{adviceTimeRemaining}</Time>
             </TimeRemaining>
             {/* <ImportantTag>{adviceImportantTag}</ImportantTag> */}
