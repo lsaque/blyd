@@ -1,11 +1,8 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Feather, MaterialCommunityIcons  } from '@expo/vector-icons';
-import { Text } from "react-native";
 
 const Container = styled.View`
-  margin: 0 20px;
-  /* height: 160px; */
   border-color: #F2F2F2;
   border-width: 4px;
   border-radius: 16px;
@@ -55,18 +52,15 @@ const Content = styled.View`
   flex-direction: row;
   margin: 20px;
   justify-content: space-between;
-  /* border: 1px solid green; */
 `;
 
 const DescriptionAdvice = styled.View`
-  /* border: 1px solid red; */
   width: 280px;
 `;
 
 const AdviceName = styled.Text`
   font-size: 18px;
   font-weight: bold;
-  /* max-width: 95%; */
   margin-bottom: 18px;
 `;
 
@@ -122,7 +116,7 @@ const AdminLastAdvice: React.FC<IAdminLastAdviceProps> = ({
 
       <Content>
         <DescriptionAdvice>
-          <AdviceName numberOfLines={2}>{adviceName}</AdviceName>
+          <AdviceName numberOfLines={2} style={{flexWrap: "wrap"}}>{adviceName}</AdviceName>
           <Tags>
             <TimeRemaining>
               <MaterialCommunityIcons name="timer" size={14} color="#8363F6" />

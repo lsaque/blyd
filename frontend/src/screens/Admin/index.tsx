@@ -1,6 +1,5 @@
 import React from "react";
 import { StatusBar, View } from "react-native";
-
 import { BackgroundImage } from "../../../styles";
 
 import Logo from "../../assets/Admin/logo.png";
@@ -28,9 +27,7 @@ import AdminButtonQuantityProfiles from "../../components/AdminButtonQuantityPro
 import AdminPhotoProfile from "../../components/AdminPhotoProfile";
 import AdminLastAdvice from "../../components/AdminLastAdvice";
 
-interface IAdminProps{
-  
-}
+interface IAdminProps{}
 
 const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
 
@@ -43,10 +40,12 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
         backgroundColor="black"
       />
 
-      <BackgroundImage source={Background} resizeMode="cover" style={{
-        height: 200,
-      }}>
-      
+      <BackgroundImage 
+        source={Background} 
+        resizeMode="cover" style={{
+          height: 200,
+        }}
+      >
         <AdminHeader>
           <WelcomeContainer>
             <HeaderTitle>Olá Admin,</HeaderTitle>
@@ -54,46 +53,47 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
           </WelcomeContainer>
           <Image source={AdminImage}/>
         </AdminHeader>
-
       </BackgroundImage>
 
       <Content>
         <DivisorCategory>
-          <View>
+          <View style={{marginHorizontal:20}}>
             <AdminTitle
               text="Dados e Atalhos"
             />
-            <ScrollView 
-              horizontal={true}
-              contentContainerStyle={{paddingLeft: 20}}
-              automaticallyAdjustContentInsets={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              <AdminDataNumber
-                category="Avisos"
-                number={400}
-                backgroundColor="#957AF6"
-              />
-              <AdminDataNumber 
-                category="Usuários"
-                number={212}
-                backgroundColor="#CD7AF6"
-                onPress={() => navigation.navigate('UserList')}
-              />
-              <AdminDataNumber 
-                category="Solicitações"
-                number={12}
-                backgroundColor="#F69C7A"
-              />
-            </ScrollView>
           </View>
+          <ScrollView 
+            horizontal={true}
+            contentContainerStyle={{paddingLeft: 20}}
+            automaticallyAdjustContentInsets={true}
+            showsHorizontalScrollIndicator={false}
+          >
+            <AdminDataNumber
+              category="Avisos"
+              number={400}
+              backgroundColor="#957AF6"
+            />
+            <AdminDataNumber 
+              category="Usuários"
+              number={212}
+              backgroundColor="#CD7AF6"
+              onPress={() => navigation.navigate('UserList')}
+            />
+            <AdminDataNumber 
+              category="Solicitações"
+              number={12}
+              backgroundColor="#F69C7A"
+            />
+          </ScrollView>
         </DivisorCategory>
 
         <DivisorCategory>
-          <AdminTitle
-            text="Usuários PCD's:"
-            seeAll={true}
-          />
+          <View style={{marginHorizontal:20}}>
+            <AdminTitle
+              text="Usuários PCD's:"
+              seeAll={true}
+            />
+          </View>
           <GridPhotos>
             <AdminPhotoProfile imageProfile={Background}/>
             <AdminPhotoProfile imageProfile={Background}/>
@@ -109,42 +109,44 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
         </DivisorCategory>
 
         <DivisorCategory>
-          <AdminTitle
-            text="Últimos Avisos:"
-            seeAll={true}
-          />
-          <AdminLastAdvice 
-            userPicture={Background}
-            userName="Isaque Souza"
-            adviceHour="14:43"
-            adviceName="Limpeza - corredor 2B"
-            adviceTimeRemaining="2h"
-            adviceImportantTag={true}
-          />
-          <AdminLastAdvice 
-            userPicture={Background}
-            userName="Isaque Souza"
-            adviceHour="14:43"
-            adviceName="Limpeza - corredor 2B"
-            adviceTimeRemaining="5h"
-            adviceImportantTag={true}
-          />
-          <AdminLastAdvice 
-            userPicture={Background}
-            userName="Isaque Souza"
-            adviceHour="14:43"
-            adviceName="Limpeza - corredor 2B Quintas Davi fsjoi fjsiofj oisj"
-            adviceTimeRemaining="1d 25h"
-            adviceImportantTag={true}
-          />
-          <AdminLastAdvice 
-            userPicture={Background}
-            userName="Isaque Souza"
-            adviceHour="14:43"
-            adviceName="Limpeza - corredor 2B"
-            adviceTimeRemaining="1d 25h"
-            adviceImportantTag={true}
-          />
+          <View style={{marginHorizontal:20}}>
+            <AdminTitle
+              text="Últimos Avisos:"
+              seeAll={true}
+            />
+            <AdminLastAdvice 
+              userPicture={Background}
+              userName="Isaque Souza"
+              adviceHour="14:43"
+              adviceName="Limpeza - corredor 2B"
+              adviceTimeRemaining="2h"
+              adviceImportantTag={true}
+            />
+            <AdminLastAdvice 
+              userPicture={Background}
+              userName="Isaque Souza"
+              adviceHour="14:43"
+              adviceName="Limpeza - corredor 2B"
+              adviceTimeRemaining="5h"
+              adviceImportantTag={true}
+            />
+            <AdminLastAdvice 
+              userPicture={Background}
+              userName="Isaque Souza"
+              adviceHour="14:43"
+              adviceName="Limpeza - corredor 2BoQuintasDavifsjoifjsiofjoisj"
+              adviceTimeRemaining="1d 25h"
+              adviceImportantTag={true}
+            />
+            <AdminLastAdvice 
+              userPicture={Background}
+              userName="Isaque Souza"
+              adviceHour="14:43"
+              adviceName="Limpeza - corredor 2B"
+              adviceTimeRemaining="1d 25h"
+              adviceImportantTag={true}
+            />
+          </View>
         </DivisorCategory>
 
         <Credits>
