@@ -1,6 +1,8 @@
-import React from "react";
-import { StatusBar, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StatusBar, View, PermissionsAndroid } from "react-native";
 import { BackgroundImage } from "../../../styles";
+import * as NetInfo from '@react-native-community/netinfo';
+import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
 
 import Logo from "../../assets/Admin/logo.png";
 
@@ -29,7 +31,158 @@ import AdminLastAdvice from "../../components/AdminLastAdvice";
 
 interface IAdminProps{}
 
+// NetInfo.fetch().then(state => {
+//   console.log("\nConnection type", state.type);
+//   console.log("Is connected?", state.isConnected);
+//   console.log("isInternetReachable", state.isInternetReachable)
+//   console.log("details", state.details)
+// });
+
+// const granted = async () =>{
+//   await PermissionsAndroid.request(
+//     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+//     {
+//       title: 'Location permission is required for WiFi connections',
+//       message:
+//         'This app needs location permission as this is required  ' +
+//         'to scan for wifi networks.',
+//       buttonNegative: 'DENY',
+//       buttonPositive: 'ALLOW',
+//     },
+//   );
+// } 
+
+// const wifiList = () => {
+//   WifiManager.reScanAndLoadWifiList().then((data) => {
+//   return console.log(data);
+// })};
+
+// const askLocationPermission = async () => {
+//   const result = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+  
+//   console.log('result', result);
+
+//   if(result) {
+//     return true;
+//   }
+
+//   const response = await PermissionsAndroid.request(
+//     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+//     {
+//       title: 'Permissão de localização é necessária para conexões WiFi',
+//       message: 'Este app precisa de permissão de localização para escanear redes WiFi',
+//       buttonNegative: 'Não',
+//       buttonPositive: 'Permitir'
+//     }
+//   )
+
+//   if(response === PermissionsAndroid.RESULTS.GRANTED) {
+//     return true;
+//   }
+
+//   return false;
+// }
+
 const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
+
+  const [ssid, setSsid] = useState('');
+
+  const initWifi = async () => {
+    try {
+      const ssid = await WifiManager.getCurrentWifiSSID();
+      setSsid(ssid);
+      console.log('Your current connected wifi SSID is ' + ssid);
+    } catch (error) {
+      setSsid('Cannot get current SSID!' + error);
+      // console.log('Cannot get current SSID!', {error});
+    }
+  }
+
+  const requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: "Permissão de localização",
+          message:
+            "Permissão de localização é necessária para conectar ou escanear WiFi's locais",
+          buttonNeutral: "Lembrar depois",
+          buttonNegative: "Não",
+          buttonPositive: "Permitir"
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        initWifi();
+        scanExample();
+      } else {
+        console.log("Location permission denied");
+      }
+    } catch (err) {
+      // console.warn(err);
+    }
+  };
+
+  const scanExample = async () => {
+    // try {
+      // const data = await WifiManager.reScanAndLoadWifiList()
+      // console.log(typeof data);
+      await WifiManager.reScanAndLoadWifiList().then((wifis) => {
+        // push(parseList(wifiStringList))
+        console.log(WifiManager.reScanAndLoadWifiList().catch());
+
+        const wifiArray = JSON.parse(wifis.toString());
+
+        console.log(wifiArray);
+      })
+    // } catch (error) {
+      // console.log(error);
+    // }
+  }
+
+  // useEffect(() => {(
+  //   async () => {
+  //     const granted = await askLocationPermission();
+  //     console.log('granted', granted);
+  //     if (granted != null) {
+  //       // scanExample();
+  //       scanTest();
+  //     } else {
+  //       alert('Negado!');
+  //     }
+  //   })()
+  // }, []);
+
+  // const scanExample = () => {
+  //   WifiManager.reScanAndLoadWifiList((wifiStringList: string) => {
+  //     let wifiArray = JSON.parse(wifiStringList);
+  //       console.log(wifiArray);
+  //     } (error: any) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
+
+  // const scanTest = () => {
+
+  //   WifiManager.reScanAndLoadWifiList()
+  //   .then((wifiList: Array<WifiManager.WifiEntry>) => {
+  //     console.log(wifiList)
+  //   })
+  //   .catch((ex: Error) => {
+  //     console.log(ex)
+  //   })
+
+    // WifiManager.reScanAndLoadWifiList((data) => {
+      // let Array = JSON.parse(data);
+    // })
+    // WifiManager.reScanAndLoadWifiList().then((data) => {
+      // let wifiArray = JSON.parse(data);
+      // return console.log(data.toString);
+
+      // useEffect(() => {
+      //   requestLocationPermission();
+      // }, []);
+
 
   return (
     <Container>

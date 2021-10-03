@@ -1,9 +1,7 @@
 import React from "react";
 import { Linking } from "react-native";
-
 import { Ionicons, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-import Background from "../../assets/UserList/background.png";
 import Navigation from "../../components/Navigation";
 import Details from "../../components/Details";
 import ProfileActionButton from "../../components/ProfileActionButton";
@@ -11,6 +9,8 @@ import ProfileMenuButton from "../../components/ProfileMenuButton";
 import ProfileAbout from "../../components/ProfileAbout";
 import AdminTitle from "../../components/AdminTitle";
 import AdminLastAdvice from "../../components/AdminLastAdvice";
+
+import Background from "../../assets/UserList/background.png";
 
 import { 
   Container,
@@ -59,7 +59,7 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
             <ProfileActionButton
               icon={<MaterialIcons name="edit" size={18} color="black" />}
               placeholder="Editar Perfil"
-              onPress={() => {navigation.navigate("UserEditProfile", {})}}
+              onPress={() => navigation.navigate("UserEditProfile", {})}
             />
 
             <ProfileMenuButton

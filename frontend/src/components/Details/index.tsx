@@ -48,15 +48,22 @@ const Email = styled.Text`
 interface IDetailsProps{
   avatar: object,
   isPCD: boolean,
-  name: String,
-  email: String
+  name?: String,
+  email?: String,
+  hideNameAndEmail?: boolean,
 }
 
 const Details: React.FC<IDetailsProps> = ({
-  avatar, isPCD, name, email
+  avatar, isPCD, name, email, hideNameAndEmail
 }: any) => {
 
   let pcdTagRender = <React.Fragment/>
+  let nameAndEmailRender = (
+    <React.Fragment>
+      <Name>{name}</Name>
+      <Email>{email}</Email>
+    </React.Fragment>
+  )
 
   if(isPCD){
     pcdTagRender = (
@@ -65,13 +72,16 @@ const Details: React.FC<IDetailsProps> = ({
       </Tag>
     )
   }
+
+  if(hideNameAndEmail){
+    nameAndEmailRender = <React.Fragment/>
+  }
   
   return (
     <Container>
       <Avatar source={avatar} resizeMode="cover"/>
       {pcdTagRender}
-      <Name>{name}</Name>
-      <Email>{email}</Email>
+      {nameAndEmailRender}
     </Container>
   )
 }
