@@ -27,6 +27,17 @@ export const TextInput = styled.TextInput`
   margin-bottom: 25px;
 `;
 
+export const PhoneArea = styled.View`
+  background-color: #F5F5F5;
+  border: 1px solid #ECECEC;
+  height: 48px;
+  border-radius: 10px;  
+  padding-left: 20px;
+  margin-bottom: 25px;
+  justify-content: center;
+  /* align-items: center; */
+`;
+
 export const PickerArea = styled.View`
   background-color: #F5F5F5;
   border: 1px solid #ECECEC;
