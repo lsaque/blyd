@@ -21,6 +21,7 @@ import {
   About,
   Divisor,
 } from "./styles";
+import MessageNoContent from "../../components/MessageNoContent";
 
 interface IUserProfileProps{}
 
@@ -101,13 +102,24 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
             text="Últimos Avisos:"
             seeAll={true}
           />
+
+          <MessageNoContent
+            type="advice"
+            text="Ainda não possui nenhum aviso atribuído"
+          />
+
           <AdminLastAdvice 
             userPicture={Background}
             userName="Isaque Souza"
             adviceHour="14:43"
             adviceName="Limpeza - corredor 2B"
             adviceTimeRemaining="2h"
-            adviceImportantTag={true}
+            isImpassable={true}
+            dueDay="04" 
+            dueMonth="Outubro" 
+            dueYear="2021"
+            dueHour="14" 
+            dueMinute="20"
           />
           <AdminLastAdvice 
             userPicture={Background}
@@ -115,7 +127,12 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
             adviceHour="14:43"
             adviceName="Limpeza - corredor 2B"
             adviceTimeRemaining="5h"
-            adviceImportantTag={true}
+            isImpassable={false}
+            dueDay="04" 
+            dueMonth="Outubro" 
+            dueYear="2021"
+            dueHour="14" 
+            dueMinute="20"
           />
           <AdminLastAdvice 
             userPicture={Background}
@@ -123,7 +140,12 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
             adviceHour="14:43"
             adviceName="Limpeza - corredor 2B Quintas Davi fsjoi fjsiofj oisj"
             adviceTimeRemaining="1d 25h"
-            adviceImportantTag={true}
+            isImpassable={false}
+            dueDay="04" 
+            dueMonth="Outubro" 
+            dueYear="2021"
+            dueHour="14" 
+            dueMinute="20"
           />
         </Divisor>
 
