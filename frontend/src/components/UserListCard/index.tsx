@@ -88,8 +88,7 @@ const UserListCard: React.FC<IUserListCardProps> = ({
 }: any ) => {
   return (
     <Container underlayColor="#ebebeb" onPress={onPress}>
-        <React.Fragment>
-
+      <React.Fragment>
         <Image>
           <PersonPicture source={picture}/>
         </Image>
@@ -100,7 +99,7 @@ const UserListCard: React.FC<IUserListCardProps> = ({
         </Details>
 
         <Department>
-          <DepartmentName>{department}</DepartmentName>
+          <DepartmentName numberOfLines={1}>{department}</DepartmentName>
         </Department>
 
         <MenuIcon>
