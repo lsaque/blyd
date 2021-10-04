@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import { Alert, Button, Platform, Text, View } from "react-native";
 import { BackgroundNavigation, BackgroundProfile, Divisor, ProfileDetails } from "../UserProfile/styles";
 import { MaterialIcons } from '@expo/vector-icons';
@@ -7,9 +7,10 @@ import { Picker } from "@react-native-community/picker";
 import { AntDesign } from '@expo/vector-icons';
 
 // @ts-ignore
-import RadioButtonRN from 'radio-buttons-react-native';
 import * as ImagePicker from 'expo-image-picker';
+import  MaskedInput  from 'react-native-masked-input'
 
+import RadioButtonRN from "../../components/_dependency/radio-buttons-react-native/RadioButtonRN";
 import ProfileActionButton from "../../components/ProfileActionButton";
 import Navigation from "../../components/Navigation";
 import Details from "../../components/Details";
@@ -21,6 +22,7 @@ import {
   EditButton,
   Label,
   TextInput,
+  PhoneArea,
   PickerArea,
   RadioArea,
   ButtonPassword,
@@ -34,17 +36,8 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
   
   let linkImage = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80";
   const [image, setImage] = useState<String>(linkImage);
-
-  const data = [
-    {
-      value: true,
-      label: "Sim",
-    },
-    {
-      value: false,
-      label: "Não",
-    },
-  ];
+  const emailRef = useRef<any>(null);
+  const celularRef = createRef<any>();
   
   useEffect(() => {(
     async () => {
@@ -57,9 +50,19 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
     })();
   }, []);
 
+  const data = [
+    {
+      value: true,
+      label: "Sim",
+    },
+    {
+      value: false,
+      label: "Não",
+    },
+  ];
   
   const pickImage = async (handleChange: any) => {
-
+    
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -86,17 +89,14 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
           titleStrong="Perfil"
         />
       </BackgroundNavigation>
-      
-      <ProfileDetails showsVerticalScrollIndicator={false}>
-        <BackgroundProfile source={Background} resizeMode="cover"/>
-        
+    
         <Formik
             initialValues={{ 
               picture: image,
               name: "Isaque José de Souza",
               email: "isaque@gmail.com",
-              phoneNumber: "11 9654185896",
-              department: 1,
+              phoneNumber: "119654185896",
+              department: 0,
               isPCD: true,
               password: "FalaFi",
             }}
@@ -106,7 +106,13 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
             }}
           >
           {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
-            <View>
+            <>
+            <ProfileDetails 
+              showsVerticalScrollIndicator={false} 
+              keyboardShouldPersistTaps="handled"
+              keyboardDismissMode="on-drag"
+            >
+              <BackgroundProfile source={Background} resizeMode="cover"/>
               <Details 
                 avatar={image && {uri: image}}
                 isPCD={true}
@@ -124,31 +130,56 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
               </Divisor>
 
               <Divisor>
-                <Label>Nome Completo</Label>
+                <Label>Nome completo</Label>
                 <TextInput
+                  keyboardType={"ascii-capable"}
                   value={values.name}
+                  autoFocus={true}
                   onChangeText={ handleChange("name") }
                   onBlur={ handleBlur("name") }
                   placeholder="Preencha com o nome completo"
+                  returnKeyType="next"
+                  onSubmitEditing={() => emailRef.current.focus()}
                 />
 
                 <Label>E-mail</Label>
                 <TextInput
+                  keyboardType="email-address"
                   value={values.email}
                   onChangeText={handleChange("email")}
                   onBlur={handleBlur("email")}
                   placeholder="exemplo@exemplo.com"
+                  returnKeyType="next"
+                  // onSubmitEditing={() => celularRef.current.focus()}
+                  ref={emailRef}
                 />
 
                 <Label>Celular</Label>
-                <TextInput
-                  value={"+55 " + values.phoneNumber}
-                  onChangeText={handleChange("phoneNumber")}
-                  onBlur={handleBlur("phoneNumber")}
-                  placeholder="+55 11 912345678"
-                />
+                <PhoneArea>
+                  <MaskedInput
+                    style={{
+                      color: "#565656"
+                    }}
+                    keyboardType="number-pad"
+                    placeholder="(00) 90000-0000"
+                    type={"cel-phone"} 
+                    options={{
+                      maskType: 'BRL',
+                      withDDD: true,
+                      dddMask: '(99) '
+                    }}
+                    onChangeText={(maskedText, rawText) => {
+                      setFieldValue("phoneNumber", rawText)
+                      handleChange("phoneNumber")
+                    }}
+                    value={values.phoneNumber}
+                    onBlur={handleBlur("phoneNumber")}
+                    returnKeyType="done"
+                    ref={celularRef}
+                  />
+                </PhoneArea>
 
-                <Label>Cargo</Label>
+                <Label>Departamento</Label>
                 <PickerArea>
                   <Picker
                     mode="dialog"
@@ -166,15 +197,15 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
                       marginLeft: 80,
                     }}
                   >
-                    <Picker.Item label="Administração" value={0} key={0}/>
+                    <Picker.Item label="Sem Departamento" value={0} key={0}/>
                     <Picker.Item label="Secretaria" value={1} key={1}/>
                     <Picker.Item label="Diretoria" value={2} key={2}/>
-                    <Picker.Item label="TI" value={3} key={3}/>
+                    <Picker.Item label="Administração" value={3} key={3}/>
                     <Picker.Item label="RH" value={4} key={4}/>
                   </Picker>
                 </PickerArea>
                 
-                <Label>Deficiente Visual?</Label>
+                <Label>Deficiente visual?</Label>
                 <RadioArea>
                   <RadioButtonRN
                     data={data}
@@ -189,34 +220,60 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
                   />
                 </RadioArea>
 
-                <Label>Senha</Label>
+                {/* <Label>Nova senha</Label>
                 <ButtonPassword
-                  // onPress={isPasswordChange}
-                >
+                  onPress={() => navigation.navigate("UserEditPassword", {})}
+                  >
                   <Placeholder>Clique para alterar</Placeholder>
                   <AntDesign name="caretright" size={10} color="#707070" />
-                </ButtonPassword>
-
+                </ButtonPassword> */}
               </Divisor>
 
               <Divisor>
-                <SubmitButton
-                  onPress={() => {
-                    console.log(values); 
-                    handleSubmit;
-                    // alert("Dados alterados com sucesso");
-                    // navigation.navigate("UserProfile");
+                <Label>Gerar nova senha</Label>
+                <TextInput
+                  secureTextEntry={false}
+                  onChangeText={handleChange("password")}
+                  onBlur={handleBlur("password")}
+                  placeholder="padrão: DOW12345"
+                  returnKeyType="next"
+                />
+
+                <Label>Administrador?</Label>
+                <RadioArea>
+                  <RadioButtonRN
+                    data={data}
+                    animationTypes={['shake']}
+                    selectedBtn={(e: any) => {
+                      // setFieldValue("isPCD", e.value)
+                      // handleChange("isPCD");
+                    }}
+                    boxDeactiveBgColor="#F5F5F5"
+                    circleSize={10}
+                    initial={2}
+                  />
+                </RadioArea>
+              </Divisor>
+            </ProfileDetails>
+
+            <Divisor>
+              <SubmitButton
+                onPress={() => {
+                  console.log(values); 
+                  handleSubmit;
+                  // alert("Dados alterados com sucesso");
+                  // navigation.navigate("UserProfile");
+                  }}
+                  style={{
+                    marginHorizontal: 20,
                   }}   
                 >
                   <Text style={{color: "#fff", fontSize: 18}}>Atualizar</Text>
                 </SubmitButton>
-
               </Divisor>
-
-            </View>
+            </>
           )}
         </Formik>
-      </ProfileDetails>
     </Container>
   )
 }

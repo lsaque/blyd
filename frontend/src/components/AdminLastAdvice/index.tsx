@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Feather, MaterialCommunityIcons  } from '@expo/vector-icons';
+import { Text } from "react-native";
 
 const Container = styled.View`
   border-color: #F2F2F2;
-  border-width: 4px;
+  border-width: 3px;
   border-radius: 16px;
   margin-bottom: 20px;
 `;
@@ -13,6 +14,8 @@ const Header = styled.View`
   background-color: #F2F2F2;
   padding: 0 20px;
   flex-direction: row;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   height: 50px;
   justify-content: space-between;
 `;
@@ -50,22 +53,24 @@ const Hour = styled.Text`
 
 const Content = styled.View`
   flex-direction: row;
-  margin: 20px;
+  margin: 15px 20px;
   justify-content: space-between;
 `;
 
 const DescriptionAdvice = styled.View`
-  width: 280px;
+  /* width: 280px; */
 `;
 
 const AdviceName = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 18px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
 `;
 
 const Tags = styled.View`
   flex-direction: row;
+  margin-top: 10px;
 `;
 
 const TimeRemaining = styled.TouchableOpacity`
@@ -84,8 +89,20 @@ const Time = styled.Text`
   margin-left: 5px;
 `;
 
-const MenuOptions = styled.TouchableOpacity`
+const ImportantTag = styled.TouchableOpacity`
+  background-color: #faeaea;
+  padding: 6px 15px;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-left: 6px;
+`;
+
+const Impassable = styled.Text`
+  color: #F66363;
+  font-size: 14px;
+  font-weight: bold;
 `;
 
 interface IAdminLastAdviceProps{
@@ -94,12 +111,38 @@ interface IAdminLastAdviceProps{
   adviceHour: String,
   adviceName: String,
   adviceTimeRemaining: String,
-  adviceImportantTag?: boolean,
+  isImpassable: boolean,
+  dueDay: String, 
+  dueMonth: String, 
+  dueYear: String, 
+  dueHour: String, 
+  dueMinute: String,
 }
 
 const AdminLastAdvice: React.FC<IAdminLastAdviceProps> = ({ 
-  userPicture, userName, adviceHour, adviceName, adviceTimeRemaining, adviceImportantTag
+  userPicture, 
+  userName, 
+  adviceHour, 
+  adviceName, 
+  adviceTimeRemaining, 
+  isImpassable, 
+  dueDay, 
+  dueMonth, 
+  dueYear, 
+  dueHour, 
+  dueMinute
 } : any) => {
+
+  let importantTagRender = <React.Fragment/>
+
+  if(isImpassable){
+    importantTagRender = (
+      <ImportantTag>
+        <Impassable>Intransitável</Impassable>
+      </ImportantTag>
+    )
+  }
+
   return (
     <Container>
 
@@ -117,17 +160,15 @@ const AdminLastAdvice: React.FC<IAdminLastAdviceProps> = ({
       <Content>
         <DescriptionAdvice>
           <AdviceName numberOfLines={2} style={{flexWrap: "wrap"}}>{adviceName}</AdviceName>
+          <Text>Vence {dueDay} de {dueMonth} de {dueYear} às {dueHour}:{dueMinute}</Text>
           <Tags>
             <TimeRemaining>
               <MaterialCommunityIcons name="timer" size={14} color="#8363F6" />
               <Time>{adviceTimeRemaining}</Time>
             </TimeRemaining>
-            {/* <ImportantTag>{adviceImportantTag}</ImportantTag> */}
+            {importantTagRender}
           </Tags>
         </DescriptionAdvice>
-        <MenuOptions>
-          <MaterialCommunityIcons name="dots-vertical" size={24} color="#707070" />
-        </MenuOptions>
       </Content>
 
     </Container>

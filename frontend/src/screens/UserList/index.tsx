@@ -65,7 +65,7 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
                 picture={Background}
                 name="Isaque Souza"
                 email="isaque@gmail.com"
-                department="RH"
+                department="Secretaria"
                 onPress={() => navigation.navigate("UserProfile", {})}
               />
             )}

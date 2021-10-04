@@ -267,37 +267,47 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               text="Últimos Avisos:"
               seeAll={true}
             />
+            
             <AdminLastAdvice 
               userPicture={Background}
-              userName="Isaque Souza"
+              userName="Leandro Master Top"
               adviceHour="14:43"
               adviceName="Limpeza - corredor 2B"
               adviceTimeRemaining="2h"
-              adviceImportantTag={true}
+              isImpassable={false} 
+              dueDay="04" 
+              dueMonth="Outubro" 
+              dueYear="2021"
+              dueHour="14" 
+              dueMinute="20"
             />
+
             <AdminLastAdvice 
               userPicture={Background}
-              userName="Isaque Souza"
+              userName="Laura Souza Silva Santos"
               adviceHour="14:43"
               adviceName="Limpeza - corredor 2B"
               adviceTimeRemaining="5h"
-              adviceImportantTag={true}
+              isImpassable={true}
+              dueDay="04" 
+              dueMonth="Outubro" 
+              dueYear="2021"
+              dueHour="14" 
+              dueMinute="20"
             />
+            
             <AdminLastAdvice 
               userPicture={Background}
-              userName="Isaque Souza"
+              userName="Isaque José de Souza"
               adviceHour="14:43"
-              adviceName="Limpeza - corredor 2BoQuintasDavifsjoifjsiofjoisj"
-              adviceTimeRemaining="1d 25h"
-              adviceImportantTag={true}
-            />
-            <AdminLastAdvice 
-              userPicture={Background}
-              userName="Isaque Souza"
-              adviceHour="14:43"
-              adviceName="Limpeza - corredor 2B"
-              adviceTimeRemaining="1d 25h"
-              adviceImportantTag={true}
+              adviceName="Limpeza - corredor 2BoQuintasDavifsjoifjsiofjoisj fsuh uisfu ihfsiuh iufshui hfsiuh uifsh uihsiu hush"
+              adviceTimeRemaining="1d"
+              isImpassable={true} 
+              dueDay="04" 
+              dueMonth="Outubro" 
+              dueYear="2021"
+              dueHour="14" 
+              dueMinute="20"
             />
           </View>
         </DivisorCategory>

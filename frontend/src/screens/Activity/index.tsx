@@ -73,12 +73,12 @@ export default function Activity({navigation}:any){
             {
               activityCardAdviceData?.map((data) => (
                 <ActivityCardAdvice
-                key={data.id}
-                name={data.name}
-                adviceName={data.adviceName}
-                adviceLocal={data.adviceLocal}
-                timeDuration="1h"
-              />
+                  key={data.id}
+                  name={data.name}
+                  adviceName={data.adviceName}
+                  adviceLocal={data.adviceLocal}
+                  timeDuration="1h"
+                />
               ))
             }
 

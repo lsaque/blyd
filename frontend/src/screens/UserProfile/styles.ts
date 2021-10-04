@@ -29,12 +29,10 @@ export const Divisor = styled.View`
   
 export const Buttons = styled.View`
   flex-direction: row;
-  /* margin: 0 20px; */
   justify-content: space-between;
   padding-bottom: 25px;
 `;
 
 export const About = styled.View`
   padding-bottom: 10px;
-  /* margin: 0 20px; */
 `;
