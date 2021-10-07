@@ -9,7 +9,7 @@ const Container = styled.View`
   justify-content: space-between;
   /* border: 1px solid red; */
   align-items: center;
-  margin: 50px 0 25px 0;
+  margin-bottom: 25px;
 `;
 
 const Title = styled.Text`
@@ -29,9 +29,10 @@ interface IAdminTitleFilterProps{
   text: string,
   filter?: boolean,
   onPress?: any,
+  marginTop?: number,
 }
 
-const AdminTitleFilter: React.FC<IAdminTitleFilterProps> = ({text, filter, onPress}) => {
+const AdminTitleFilter: React.FC<IAdminTitleFilterProps> = ({text, filter, onPress, marginTop}) => {
 
   let filterRender = <React.Fragment/>;
 
@@ -50,7 +51,7 @@ const AdminTitleFilter: React.FC<IAdminTitleFilterProps> = ({text, filter, onPre
   }
 
   return (
-    <Container>
+    <Container style={{marginTop: marginTop}}>
       <Title>{text}</Title>
       <Formik
         initialValues={{ orderBy: '' }}
