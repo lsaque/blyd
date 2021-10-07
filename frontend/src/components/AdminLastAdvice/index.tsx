@@ -5,7 +5,8 @@ import { Text } from "react-native";
 
 const Container = styled.View`
   border-color: #F2F2F2;
-  border-width: 3px;
+  background-color: #fcfcfc;
+  border-width: 2px;
   border-radius: 16px;
   margin-bottom: 20px;
 `;

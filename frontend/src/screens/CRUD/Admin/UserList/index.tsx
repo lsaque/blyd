@@ -67,6 +67,7 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
               <AdminTitleFilter 
                 text="Usuários"
                 filter={true}
+                marginTop={50}
               />
             }
 
