@@ -16,9 +16,10 @@ import LiveLocalization from './screens/LiveLocalization';
 import MarkAdvice from './screens/MarkAdvice';
 import SearchContact from './screens/SearchContact';
 import Admin from './screens/Admin';
-import UserList from './screens/UserList';
 import UserProfile from './screens/UserProfile';
-import UserEditProfile from './screens/UserEditProfile';
+import UserList from './screens/CRUD/Admin/UserList';
+import UserEditProfile from './screens/CRUD/Admin/UserEditProfile';
+import UserCreateProfile from './screens/CRUD/Admin/UserCreateProfile';
 
 const UserTab = createMaterialBottomTabNavigator();
 const AdminTab = createMaterialBottomTabNavigator();
@@ -227,6 +228,7 @@ const AdminScreen = () => {
       <AdminStack.Screen name="UserList" component={UserList}/>
       <AdminStack.Screen name="UserProfile" component={UserProfile}/>
       <AdminStack.Screen name="UserEditProfile" component={UserEditProfile}/>
+      <AdminStack.Screen name="UserCreateProfile" component={UserCreateProfile}/>
 
       <AdminStack.Screen name="Search" component={Search} />
       <AdminStack.Screen name="Localization" component={Localization} />
