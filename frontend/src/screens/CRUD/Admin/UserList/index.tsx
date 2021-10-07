@@ -1,25 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View } from "react-native";
-import { BackgroundImage } from "../../../styles";
+import { BackgroundImage } from "../../../../../styles";
 import { SwipeListView } from 'react-native-swipe-list-view';
-import { LoadingIcon } from "../Preload/styles";
 
-// import Background from "../../assets/Admin/background.png";
-import Background from "../../assets/UserList/background.png";
-import AdminTitleFilter from "../../components/AdminTitleFilter";
-import Navigation from "../../components/Navigation";
-import SearchListNavigation from "../../components/SearchListNavigation";
-import UserListCard from "../../components/UserListCard";
+import Background from "../../../../assets/Admin/background.png";
+// import Background from "../../../../assets/UserList/background.png";
+
+import AdminTitleFilter from "../../../../components/AdminTitleFilter";
+import Navigation from "../../../../components/Navigation";
+import SearchListNavigation from "../../../../components/SearchListNavigation";
+import UserListCard from "../../../../components/UserListCard";
+import TrashDelete from "../../../../components/TrashDelete";
+import FloatingAddButton from "../../../../components/FloatingAddButton";
 
 import { 
   Container,
-  ListOfUser
+  ListOfUser,
 } from "./styles";
-import TrashDelete from "../../components/TrashDelete";
 
-interface IUserListProps{
-
-}
+interface IUserListProps{}
 
 const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
 
@@ -27,6 +26,8 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
     key: `${i}`, 
     text: `item #${i}` 
   }));
+
+  console.log();
 
   return (
     <Container>
@@ -43,6 +44,7 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
           onPress={() => navigation.goBack('history')}
           title="Listar"
           titleStrong="Usuários"
+          lightContent={true}
         />
         <SearchListNavigation 
           text="Buscar por nome, id ou setor"
@@ -51,6 +53,14 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
 
       <View style={{marginBottom: 220}}>
         <ListOfUser>
+          <FloatingAddButton
+            onPress={() => navigation.navigate("UserCreateProfile")}
+            backgroundColor="#ede9f8"
+            // backgroundColor="#fff"
+            iconColor="#8363F6"
+            // iconColor="#fff"
+          />
+
           <SwipeListView
             data={listViewData}
             ListHeaderComponent={          
@@ -85,4 +95,5 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
     </Container>
   )
 }
+
 export default UserList;

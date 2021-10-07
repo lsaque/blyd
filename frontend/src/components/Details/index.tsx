@@ -47,7 +47,7 @@ const Email = styled.Text`
 
 interface IDetailsProps{
   avatar: object,
-  isPCD: boolean,
+  isPCD: boolean | undefined | null,
   name?: String,
   email?: String,
   hideNameAndEmail?: boolean,

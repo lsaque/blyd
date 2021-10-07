@@ -1,12 +1,13 @@
 import styled from "styled-components/native";
 
-export const Container = styled.View`
+export const Container = styled.
+KeyboardAvoidingView`
   height: 100%;
   background-color: #fff;
 `;
 
 export const EditButton = styled.View`
-  padding-bottom: 20px;
+  margin-bottom: 20px;
   justify-content: center;
   align-items: center;
 `;
@@ -24,7 +25,6 @@ export const TextInput = styled.TextInput`
   border-radius: 10px;
   color: #565656;
   padding-left: 20px;
-  margin-bottom: 25px;
 `;
 
 export const PhoneArea = styled.View`
@@ -33,9 +33,7 @@ export const PhoneArea = styled.View`
   height: 48px;
   border-radius: 10px;  
   padding-left: 20px;
-  margin-bottom: 25px;
   justify-content: center;
-  /* align-items: center; */
 `;
 
 export const PickerArea = styled.View`
@@ -43,9 +41,7 @@ export const PickerArea = styled.View`
   border: 1px solid #ECECEC;
   height: 48px;
   border-radius: 10px;
-  /* color: #565656; */
   padding-left: 20px;
-  margin-bottom: 25px;
 `;
 
 export const RadioArea = styled.View`
@@ -58,7 +54,6 @@ export const ButtonPassword = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid red; */
   height: 48px;
   border-radius: 10px;
   padding: 0 20px;
@@ -77,5 +72,15 @@ export const SubmitButton = styled.TouchableOpacity`
 
   justify-content: center;
   align-items: center;
-  margin-bottom: 25px;
+  margin: 10px 20px;
+  /* margin-bottom: 25px; */
 `;
+
+export const ErrorMessage = styled.Text`
+  /* position: absolute; */
+  color: #F66363;
+  /* top: 0; */
+  font-size: 13px;
+  text-align: left;
+  padding-bottom: 10px;
+`

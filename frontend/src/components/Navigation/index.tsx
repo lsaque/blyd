@@ -35,7 +35,16 @@ const Strong = styled.Text`
 `;
 
 
-export default ({onPress, title, titleStrong, lightContent} : any) => {
+interface INavigationProps{
+  onPress?: Function,
+  title: String,
+  titleStrong: String,
+  lightContent?: boolean,
+}
+
+const Navigation: React.FC<INavigationProps> = ({
+  onPress, title, titleStrong, lightContent
+} : any) => {
 
   let lightStyle = "#4A4A4A";
 
@@ -59,3 +68,5 @@ export default ({onPress, title, titleStrong, lightContent} : any) => {
     </Container>
   );
 }
+
+export default Navigation;

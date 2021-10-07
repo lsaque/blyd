@@ -14,7 +14,7 @@ import {
   Content,
   Wrapper,
   SearchContactNavigation
-} from '../../assets/Styles/PageTemplate/styles';
+} from '../../assets/Styles/PageCardTemplate/styles';
 
 export default function SearchContact({navigation}:any){
 

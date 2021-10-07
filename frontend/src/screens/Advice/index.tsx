@@ -17,7 +17,7 @@ import {
   Content,
   Wrapper,
   Row
-} from '../../assets/Styles/PageTemplate/styles';
+} from '../../assets/Styles/PageCardTemplate/styles';
 
 export default function Localization({navigation}:any){
 
