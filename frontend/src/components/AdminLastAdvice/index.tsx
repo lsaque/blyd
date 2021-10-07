@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Feather, MaterialCommunityIcons  } from '@expo/vector-icons';
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Text } from "react-native";
 
 const Container = styled.View`

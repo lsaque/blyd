@@ -16,7 +16,7 @@ import {
   Strong,
   Content,
   Wrapper,
-} from '../../assets/Styles/PageTemplate/styles';
+} from '../../assets/Styles/PageCardTemplate/styles';
 
 import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';

@@ -11,7 +11,7 @@ import {
   Title,
   Content,
   Wrapper,
-} from '../../assets/Styles/PageTemplate/styles';
+} from '../../assets/Styles/PageCardTemplate/styles';
 
 import ActivityNotificationNumber from '../../components/ActivityNotificationNumber';
 import ActivityCardAdvice from '../../components/ActivityCardAdvice';
