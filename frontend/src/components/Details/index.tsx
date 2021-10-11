@@ -22,9 +22,8 @@ const Tag = styled.View`
   justify-content: center;
   align-items: center;
   background-color: #E8E2FD;
-  width: 70px;
   border-radius: 35px;
-  height: 35px;
+  padding: 4px 16px;
 `;
 
 const Pcd = styled.Text`
@@ -51,10 +50,11 @@ interface IDetailsProps{
   name?: String,
   email?: String,
   hideNameAndEmail?: boolean,
+  markedAdvice?: boolean,
 }
 
 const Details: React.FC<IDetailsProps> = ({
-  avatar, isPCD, name, email, hideNameAndEmail
+  avatar, isPCD, name, email, hideNameAndEmail, markedAdvice
 }: any) => {
 
   let pcdTagRender = <React.Fragment/>
@@ -69,6 +69,14 @@ const Details: React.FC<IDetailsProps> = ({
     pcdTagRender = (
       <Tag>
         <Pcd>PCD</Pcd>
+      </Tag>
+    )
+  }
+
+  if(markedAdvice){
+    pcdTagRender = (
+      <Tag>
+        <Pcd>Marcou aviso</Pcd>
       </Tag>
     )
   }

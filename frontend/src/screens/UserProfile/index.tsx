@@ -49,9 +49,9 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
         <Divisor>
           <Buttons>
             <ProfileActionButton
-              isPrimary={true}
+              actionButton="action"
               icon={<Ionicons name="md-call" size={18} color="#8363F6" />}
-              placeholder="Ligação"
+              placeholder="Chamar"
               onPress={() => {
                 Linking.openURL("tel:" + "1191342789")
               }}
@@ -115,11 +115,11 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
             adviceName="Limpeza - corredor 2B"
             adviceTimeRemaining="2h"
             isImpassable={true}
-            dueDay="04" 
-            dueMonth="Outubro" 
+            dueDay="04"
+            dueMonth="Outubro"
             dueYear="2021"
-            dueHour="14" 
-            dueMinute="20"
+            dueHour="14"
+            dueMinute="20" onPress={() => {}}
           />
           <AdminLastAdvice 
             userPicture={Background}
@@ -128,11 +128,11 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
             adviceName="Limpeza - corredor 2B"
             adviceTimeRemaining="5h"
             isImpassable={false}
-            dueDay="04" 
-            dueMonth="Outubro" 
+            dueDay="04"
+            dueMonth="Outubro"
             dueYear="2021"
-            dueHour="14" 
-            dueMinute="20"
+            dueHour="14"
+            dueMinute="20" onPress={() => {}}
           />
           <AdminLastAdvice 
             userPicture={Background}
@@ -141,11 +141,11 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
             adviceName="Limpeza - corredor 2B Quintas Davi fsjoi fjsiofj oisj"
             adviceTimeRemaining="1d 25h"
             isImpassable={false}
-            dueDay="04" 
-            dueMonth="Outubro" 
+            dueDay="04"
+            dueMonth="Outubro"
             dueYear="2021"
-            dueHour="14" 
-            dueMinute="20"
+            dueHour="14"
+            dueMinute="20" onPress={() => {}}
           />
         </Divisor>
 

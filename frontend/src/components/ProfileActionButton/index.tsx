@@ -21,7 +21,7 @@ const Placeholder = styled.Text`
 `;
 
 interface IProfileActionButtonProps{
-  isPrimary?: boolean,
+  actionButton?: String | "delete" | "action"
   icon: object,
   placeholder?: String,
   onPress?: object,
@@ -29,15 +29,18 @@ interface IProfileActionButtonProps{
 }
 
 const ProfileActionButton: React.FC<IProfileActionButtonProps> = ({
-  isPrimary, icon, placeholder, onPress, number
+  icon, placeholder, onPress, actionButton
 }: any) => {
 
   let backGroundColor = "#F2F2F2";
   let textColor = "#000";
 
-  if(isPrimary){
+  if(actionButton == "action"){
     backGroundColor = "#e1dafd";
     textColor = "#8363F6";
+  } else if (actionButton == "delete"){
+    backGroundColor = "#fae5e5";
+    textColor = "#F66363";
   }
 
   return (

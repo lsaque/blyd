@@ -57,6 +57,9 @@ const UserEditProfileSchema = Yup.object().shape({
   password: Yup.string()
   .min(6, "É preciso ter pelo menos 6 caracteres")
   .required(''),
+
+  isADM: Yup.boolean()
+  .required(''),
 })
 
 
@@ -127,6 +130,7 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
             department: 0,
             isPCD: false,
             password: "FalaFi",
+            isADM: false,
           }}
           validationSchema={UserEditProfileSchema}
           onSubmit={(values: any) => {
@@ -277,8 +281,8 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
                       data={data}
                       animationTypes={['shake']}
                       selectedBtn={(e: any) => {
-                        // setFieldValue("isPCD", e.value)
-                        // handleChange("isPCD");
+                        setFieldValue("isADM", e.value)
+                        handleChange("isADM");
                       }}
                       boxDeactiveBgColor="#F5F5F5"
                       circleSize={10}
@@ -292,8 +296,8 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation }: any) =
                 onPress={() => {
                   handleSubmit;
                   console.log(values); 
-                  // alert("Dados alterados com sucesso");
-                  // navigation.navigate("UserProfile");
+                  alert("Dados alterados com sucesso");
+                  navigation.goBack()
                 }}
                 style={{
                   marginHorizontal: 20,
