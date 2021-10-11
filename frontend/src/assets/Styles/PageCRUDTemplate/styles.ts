@@ -21,10 +21,22 @@ export const Label = styled.Text`
 export const TextInput = styled.TextInput`
   background-color: #F5F5F5;
   border: 1px solid #ECECEC;
-  height: 48px;
+  min-height: 48px;
   border-radius: 10px;
   color: #565656;
   padding-left: 20px;
+`;
+
+export const TextArea = styled.View`
+  background-color: #F5F5F5;
+  border: 1px solid #ECECEC;
+  border-radius: 10px;
+  padding: 5px 20px;
+  height: 130px;
+`;
+
+export const TextAreaInput = styled.TextInput`
+  color: #565656;
 `;
 
 export const PhoneArea = styled.View`

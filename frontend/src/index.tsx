@@ -1,5 +1,4 @@
 import React from 'react';
-import { ImageBackground, View } from 'react-native';
 import { BackgroundImage } from '../styles';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -25,6 +24,9 @@ import UserEditProfile from './screens/CRUD/Admin/UserEditProfile';
 import UserCreateProfile from './screens/CRUD/Admin/UserCreateProfile';
 import Assigned from './screens/CRUD/Admin/AdviceList/Assigned'
 import Concluded from './screens/CRUD/Admin/AdviceList/Concluded'
+import AdviceProfile from './screens/AdviceProfile';
+import AdviceEditProfile from './screens/CRUD/Admin/AdviceEditProfile';
+
 import Navigation from './components/Navigation';
 
 const AdviceTab = createMaterialTopTabNavigator();
@@ -94,8 +96,6 @@ function AdminAdviceTopTab({navigation}: any) {
           }}
         />
       </AdviceTab.Navigator>
-
-
     </React.Fragment>
   );
 }
@@ -303,7 +303,9 @@ const AdminScreen = () => {
       <AdminStack.Screen name="UserEditProfile" component={UserEditProfile}/>
       <AdminStack.Screen name="UserCreateProfile" component={UserCreateProfile}/>
       <AdminStack.Screen name="AdviceList" component={AdminAdviceTopTab}/>
-
+      <AdminStack.Screen name="AdviceProfile" component={AdviceProfile}/>
+      <AdminStack.Screen name="AdviceEditProfile" component={AdviceEditProfile}/>
+      
       <AdminStack.Screen name="Search" component={Search} />
       <AdminStack.Screen name="Localization" component={Localization} />
       <AdminStack.Screen name="Contact" component={Contact} />

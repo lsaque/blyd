@@ -125,12 +125,13 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               adviceHour="14:43"
               adviceName="Limpeza - corredor 2B"
               adviceTimeRemaining="2h"
-              isImpassable={false} 
-              dueDay="04" 
-              dueMonth="Outubro" 
+              isImpassable={false}
+              dueDay="04"
+              dueMonth="Outubro"
               dueYear="2021"
-              dueHour="14" 
-              dueMinute="20"
+              dueHour="14"
+              dueMinute="20" 
+              onPress={() => navigation.navigate("AdviceProfile")}
             />
 
             <AdminLastAdvice 
@@ -140,11 +141,12 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               adviceName="Limpeza - corredor 2B"
               adviceTimeRemaining="5h"
               isImpassable={true}
-              dueDay="04" 
-              dueMonth="Outubro" 
+              dueDay="04"
+              dueMonth="Outubro"
               dueYear="2021"
-              dueHour="14" 
-              dueMinute="20"
+              dueHour="14"
+              dueMinute="20" 
+              onPress={() => navigation.navigate("AdviceProfile")}
             />
             
             <AdminLastAdvice 
@@ -153,12 +155,13 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               adviceHour="14:43"
               adviceName="Limpeza - corredor 2BoQuintasDavifsjoifjsiofjoisj fsuh uisfu ihfsiuh iufshui hfsiuh uifsh uihsiu hush"
               adviceTimeRemaining="1d"
-              isImpassable={true} 
-              dueDay="04" 
-              dueMonth="Outubro" 
+              isImpassable={true}
+              dueDay="04"
+              dueMonth="Outubro"
               dueYear="2021"
-              dueHour="14" 
-              dueMinute="20"
+              dueHour="14"
+              dueMinute="20" 
+              onPress={() => navigation.navigate("AdviceProfile")}
             />
           </View>
         </DivisorCategory>

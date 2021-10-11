@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Text } from "react-native";
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   border-color: #F2F2F2;
   background-color: #fcfcfc;
   border-width: 2px;
@@ -118,6 +118,7 @@ interface IAdminLastAdviceProps{
   dueYear: String, 
   dueHour: String, 
   dueMinute: String,
+  onPress: Function,
 }
 
 const AdminLastAdvice: React.FC<IAdminLastAdviceProps> = ({ 
@@ -131,7 +132,8 @@ const AdminLastAdvice: React.FC<IAdminLastAdviceProps> = ({
   dueMonth, 
   dueYear, 
   dueHour, 
-  dueMinute
+  dueMinute,
+  onPress
 } : any) => {
 
   let importantTagRender = <React.Fragment/>
@@ -145,7 +147,7 @@ const AdminLastAdvice: React.FC<IAdminLastAdviceProps> = ({
   }
 
   return (
-    <Container>
+    <Container onPress={onPress}>
 
       <Header>
         <Profile>

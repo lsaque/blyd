@@ -266,7 +266,7 @@ RadioButtonRN.defaultProps = {
     deactiveColor: '#e2e2e2',
     boxActiveBgColor: '#8363F630',
     boxDeactiveBgColor: '#fff',
-    textColor: '#383838',
+    textColor: '#565656',
     box: true,
 };
 
