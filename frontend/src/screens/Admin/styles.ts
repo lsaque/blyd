@@ -57,12 +57,13 @@ export const GridPhotos = styled.View`
 `;
 
 export const Credits = styled.View`
-  width: 100%;
-  margin: 10px 0;
-  height: 50px;
+  /* border-width: 1px; */
+  /* border-color: red; */
+  justify-content: center;
+  align-items: center;
+  height: 80px;
 `;
 
 export const ImageCredits = styled.Image`
   width: 20%;
-  /* height: 200px; */
 `;

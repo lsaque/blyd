@@ -37,7 +37,7 @@ const UserPicture = styled.Image`
 const UserName = styled.Text`
   color: #636363;
   font-size: 16px;
-  max-width: 185px;
+  max-width: 215px;
 `;
 
 const AdviceHour = styled.View`

@@ -18,7 +18,6 @@ import {
   Top,
   Bot
  } from "./styles";
-import { comodo } from "../../types/comodo";
 
 function Home({navigation} : any){
   return (

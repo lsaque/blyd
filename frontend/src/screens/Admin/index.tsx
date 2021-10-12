@@ -1,11 +1,22 @@
 import { ScrollView } from "react-native-gesture-handler";
-import React, { useEffect, useState } from "react";
-import { StatusBar, View, PermissionsAndroid } from "react-native";
+import React, { Component, useState } from "react";
+import { StatusBar, View, PermissionsAndroid, Text, TouchableOpacity } from "react-native";
 import { BackgroundImage } from "../../../styles";
 import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
 import * as NetInfo from '@react-native-community/netinfo';
 
+// import Accordion from 'react-native-collapsible/Accordion';
+import Collapsible  from 'react-native-collapsible';
+
 import Logo from "../../assets/Admin/logo.png";
+import AdminImage from '../../assets/Admin/admin.png';
+import Background from '../../assets/Admin/background.png';
+
+import AdminDataNumber from "../../components/AdminDataNumber";
+import AdminTitle from "../../components/AdminTitle";
+import AdminButtonQuantityProfiles from "../../components/AdminButtonQuantityProfiles";
+import AdminPhotoProfile from "../../components/AdminPhotoProfile";
+import AdminLastAdvice from "../../components/AdminLastAdvice";
 
 import { 
   Container,
@@ -21,13 +32,7 @@ import {
   ImageCredits
 } from "./styles";
 
-import AdminImage from '../../assets/Admin/admin.png';
-import Background from '../../assets/Admin/background.png';
-import AdminDataNumber from "../../components/AdminDataNumber";
-import AdminTitle from "../../components/AdminTitle";
-import AdminButtonQuantityProfiles from "../../components/AdminButtonQuantityProfiles";
-import AdminPhotoProfile from "../../components/AdminPhotoProfile";
-import AdminLastAdvice from "../../components/AdminLastAdvice";
+import UserRequestCard from "../../components/UserRequestCard";
 
 interface IAdminProps{}
 
@@ -86,7 +91,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               category="Solicitações"
               number={12}
               backgroundColor="#F69C7A"
-              onPress={() => navigation.navigate('MarkAdvice')}
+              onPress={() => navigation.navigate('RequestList')}
             />
           </ScrollView>
         </DivisorCategory>
@@ -115,6 +120,62 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
         <DivisorCategory>
           <View style={{marginHorizontal:20}}>
             <AdminTitle
+              text="Ultimas Solicitações:"
+              seeAll={true}
+            />
+          </View>
+          
+          <UserRequestCard 
+            name="Isaque José de Souza"
+            isPCD={true}
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+
+          <UserRequestCard 
+            name="Isaque José de Souza"
+            isPCD={true}
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+
+          <UserRequestCard 
+            name="Isaque José de Souza"
+            isPCD={false}
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+
+          <UserRequestCard 
+            name="Isaque José de Souza"
+            isPCD={false}
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+
+          <UserRequestCard 
+            name="Isaque José de Souza fsajh fkjsh kfjshk "
+            isPCD={true}
+
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+        </DivisorCategory>
+
+
+        <DivisorCategory>
+          <View style={{marginHorizontal:20}}>
+            <AdminTitle
               text="Últimos Avisos:"
               seeAll={true}
             />
@@ -136,7 +197,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
 
             <AdminLastAdvice 
               userPicture={Background}
-              userName="Laura Souza Silva Santos"
+              userName="Laura S"
               adviceHour="14:43"
               adviceName="Limpeza - corredor 2B"
               adviceTimeRemaining="5h"
@@ -151,7 +212,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
             
             <AdminLastAdvice 
               userPicture={Background}
-              userName="Isaque José de Souza"
+              userName="Isaque José de Souza sda sa sa sa "
               adviceHour="14:43"
               adviceName="Limpeza - corredor 2BoQuintasDavifsjoifjsiofjoisj fsuh uisfu ihfsiuh iufshui hfsiuh uifsh uihsiu hush"
               adviceTimeRemaining="1d"
