@@ -1,15 +1,25 @@
 import 'react-native-gesture-handler';
 import React, { useRef, useState } from 'react';
+import { Text } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import { Modalize } from 'react-native-modalize';
+import { NavigationContainer } from '@react-navigation/native';
+import { Formik } from "formik";
+
+import * as Yup from 'yup';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
-import logo from './src/assets/Splash/logo.png';
 import StateInput from './src/components/StateInput';
 import Button from './src/components/Button';
+import logo from './src/assets/Splash/logo.png';
 
-import { UserScreen, AdminScreen } from './src';
+import { 
+  ErrorMessage, 
+  Label, 
+  SubmitButton, 
+  TextInput 
+} from './src/assets/Styles/PageCRUDTemplate/styles';
 
 import { 
   BoxImage,
@@ -26,7 +36,12 @@ import {
   EnterButton,
   RegisterButton
 } from './styles';
-import { NavigationContainer } from '@react-navigation/native';
+
+// import { UserScreen, AdminScreen } from './src';
+import Navigation from './src/components/Navigation';
+import Login from './src/screens/Login';
+// import Main, { AdminScreen, UserScreen } from './src';
+import Main from './src';
 
 const slides = [
   {
@@ -60,14 +75,8 @@ const colors = {
   text: '#939BA6'
 }
 
-export default function App(){
-  const modalizeRef = useRef<Modalize>(null);
-
-  const onOpen = () => {
-    modalizeRef.current?.open();
-  }
-
-  const [showHome, setShowHome] = useState(true);
+export default function App({ navigation }: any){
+  const [showHome, setShowHome] = useState(false);
 
   function SplashScreen({item} : any){
     return(
@@ -87,12 +96,10 @@ export default function App(){
   }
 
   if(showHome) {
-
     return (
       <ThemeProvider theme={colors}>
         <NavigationContainer>
-          {/* <UserScreen/> */}
-          <AdminScreen/>
+          <Main/>
         </NavigationContainer>
       </ThemeProvider>
     )
@@ -100,6 +107,7 @@ export default function App(){
     return (
       <React.Fragment>
         <StatusBar style="light"/>
+        
         <AppIntroSlider
           renderItem={SplashScreen}
           data={slides}
@@ -109,49 +117,12 @@ export default function App(){
             backgroundColor: colors.primary,
             width: 30
           }}
-          renderNextButton={ () => (
-            <SplashButton>Próximo</SplashButton>
-            // <Button 
-            //   filled 
-            //   text="Próximo"
-            // />
-          )}
-          
-          renderDoneButton={ () => (
-            <SplashButton onPress={onOpen}>Acessar</SplashButton>
-          )}
+          renderNextButton={ () => <SplashButton>Próximo</SplashButton> }
+          renderDoneButton={ () => 
+          <SplashButton 
+            onPress={ () => setShowHome(true)}
+          >Acessar</SplashButton> }
         />
-
-        <Modalize
-          ref={modalizeRef}
-          snapPoint={500}
-          keyboardAvoidingBehavior={'padding'}
-          avoidKeyboardLikeIOS={true}
-        >
-          <SignWrapper>
-            <BoxContent>
-              <Title>Entrar no Blyd</Title>
-              <Description>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et </Description>
-            </BoxContent>
-
-            <Content>
-              <StateInput
-                placeholder="E-mail ou nome de usuário"
-              />
-              <StateInput
-                placeholder="Senha"
-                password={true}
-              />
-              <EnterButton
-                text="Entrar"
-                onPress={ () => setShowHome(true) }
-              />
-              <RegisterButton
-                text="Solicitar Registro"
-              />
-            </Content>
-          </SignWrapper>
-        </Modalize>
       </React.Fragment>
     );
   }
