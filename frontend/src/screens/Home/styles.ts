@@ -10,7 +10,7 @@ export const Container = styled.ScrollView`
 `;
 
 export const HomeImage = styled.ImageBackground`
-  height: 51.2%;
+  height: 52.5%;
   /* width: 100%; */
   padding: 0 20px;
   /* border-width: 1px; */

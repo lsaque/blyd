@@ -1,7 +1,6 @@
 import styled from "styled-components/native";
 
-export const Container = styled.
-KeyboardAvoidingView`
+export const Container = styled.KeyboardAvoidingView`
   height: 100%;
   background-color: #fff;
 `;
@@ -84,7 +83,8 @@ export const SubmitButton = styled.TouchableOpacity`
 
   justify-content: center;
   align-items: center;
-  margin: 10px 20px;
+  margin: 10px 0;
+  /* margin: 10px 20px; */
   /* margin-bottom: 25px; */
 `;
 
@@ -95,4 +95,4 @@ export const ErrorMessage = styled.Text`
   font-size: 13px;
   text-align: left;
   padding-bottom: 10px;
-`
+`;

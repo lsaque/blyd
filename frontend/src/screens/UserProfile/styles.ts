@@ -14,6 +14,8 @@ export const ProfileDetails = styled.ScrollView`
   margin: 0 20px;
 `;
 
+export const AdviceDetails = styled.ScrollView``;
+
 export const BackgroundProfile = styled.Image`
   height: 150px;
   border-top-left-radius: 20px;

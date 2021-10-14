@@ -57,7 +57,7 @@ const Right = styled.View`
   align-items: center;
 `;
 
-export default ({name, departmant, number, picture}: any) => {
+export default ({name, department, number, picture}: any) => {
   
   let personPicture = <Ionicons name="person" size={40} color="#B9D5E1"/>;
 
@@ -66,7 +66,9 @@ export default ({name, departmant, number, picture}: any) => {
   }
 
   return (
-    <Container onPress={() => { Linking.openURL("tel:" + number) }}>
+    <Container onPress={() => { Linking.openURL("tel:" + number) }}
+      accessibilityHint={"Deseja ligar " + name + " do departamento de " + department}
+    >
       <Wrapper>
 
         <Left>
@@ -75,7 +77,7 @@ export default ({name, departmant, number, picture}: any) => {
 
         <Center>
           <PersonName numberOfLines={1}>{name}</PersonName>
-          <Department numberOfLines={1}>{departmant}</Department>
+          <Department numberOfLines={1}>{department}</Department>
         </Center>
 
         <Right>

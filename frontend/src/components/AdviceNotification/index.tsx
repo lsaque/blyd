@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Ionicons, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
 
-
 const Card = styled.TouchableOpacity`
   border-radius: 15px;
   flex-direction: row;
@@ -18,10 +17,13 @@ const Left = styled.View`
   border-radius:10px;
   align-items: center;
   justify-content: center;
+  /* border: 1px solid red; */
 `;
 
 const Center = styled.View`
   justify-content: center;
+  /* border: 1px solid red; */
+  width: 200px;
 `;
 
 const Title = styled.Text`
@@ -86,7 +88,9 @@ export default ({importance, text}: any) => {
         <Center>
           <Title style={{
             color: strongColor,
-          }}>Intransitável</Title>
+          }}>
+            Intransitável
+          </Title>
           <Advice numberOfLines={1}>{text}</Advice>
         </Center>
 

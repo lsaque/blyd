@@ -3,10 +3,10 @@ import styled from 'styled-components/native';
 
 const Button = styled.TouchableOpacity`
   background-color: transparent;
-
   width: 100%;
   justify-content: center;
   align-items: center;
+  height: 30px;
 `;
 
 const ButtonText = styled.Text`
@@ -14,9 +14,12 @@ const ButtonText = styled.Text`
   font-size: 16px;
 `;
 
-export default ({text} : any) => {
+export default ({text, onPress, accessibilityHint} : any) => {
   return (
-    <Button>
+    <Button 
+      onPress={onPress}
+      accessibilityHint={accessibilityHint}
+    >
       <ButtonText>{text}</ButtonText>
     </Button>
   );

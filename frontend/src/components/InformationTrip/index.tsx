@@ -35,7 +35,9 @@ const ButtonText = styled.Text`
   color: #4A4A4A;
 `;
 
-export default ({destiny, onPress, distance}: any) => {
+export default ({destiny, onPress, distance, isRouteSetted}: any) => {
+
+  
   return (
     <Container>
       <Destination>
@@ -43,7 +45,7 @@ export default ({destiny, onPress, distance}: any) => {
         <Destiny numberOfLines={1}>{destiny}</Destiny>
       </Destination>
       <ButtonSetAdvice onPress={onPress}>
-        <ButtonText>Marcar Aviso</ButtonText>
+        <ButtonText>{isRouteSetted ? "Marcar Aviso" : "Selecionar rota"}</ButtonText>
       </ButtonSetAdvice>
     </Container>
   );

@@ -21,8 +21,9 @@ const Wrapper = styled.View`
 const Left = styled.View`
   align-items: center;
   width: 50px;
-  height: 100%;
+  /* height: 100%; */
   justify-content: center;
+  /* border: 1px solid red; */
 `;
 const Center = styled.View`
   height: 100%;
@@ -31,6 +32,7 @@ const Center = styled.View`
 `;
 
 const TextCenter = styled.Text`
+  /* border: 1px solid red; */
   font-size: 18px;
   width: 195px;
   color: #4A4A4A;
@@ -47,15 +49,18 @@ const Button = styled.TouchableOpacity`
   height: 100%;
   align-items: center;
   justify-content: center;
+  /* border: 1px solid red; */
 `;
 
 export default ({arrowDirection, text, distance, arrowType}: any) => {
   return (
     <React.Fragment>
-      <Container style={{elevation: 20}}>
+      <Container style={{elevation: 20}}
+        accessibilityHint={text + distance}
+      >
         <Wrapper>
 
-          <Left>
+          <Left accessible={false}>
             {
               arrowDirection != "" ? 
               <FontAwesome name={arrowDirection} size={32} color="#4A4A4A" /> 

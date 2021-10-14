@@ -31,12 +31,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={false} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={false}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         
@@ -46,12 +47,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         
@@ -61,12 +63,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         <AdminLastAdvice
@@ -75,12 +78,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         <AdminLastAdvice
@@ -89,12 +93,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         <AdminLastAdvice
@@ -103,12 +108,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         <AdminLastAdvice
@@ -117,12 +123,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         <AdminLastAdvice
@@ -131,12 +138,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         <AdminLastAdvice
@@ -145,12 +153,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         <AdminLastAdvice
@@ -159,12 +168,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         <AdminLastAdvice
@@ -173,12 +183,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
 
         <AdminLastAdvice
@@ -187,12 +198,13 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           adviceHour="14:43"
           adviceName="Limpeza - corredor 2B"
           adviceTimeRemaining="2h"
-          isImpassable={true} 
-          dueDay="04" 
-          dueMonth="Outubro" 
+          isImpassable={true}
+          dueDay="04"
+          dueMonth="Outubro"
           dueYear="2021"
-          dueHour="14" 
-          dueMinute="20"
+          dueHour="14"
+          dueMinute="20" 
+          onPress={() => {}}
         />
       </AdviceShowList>
 
