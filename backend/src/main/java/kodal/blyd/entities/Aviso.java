@@ -11,30 +11,37 @@ public class Aviso {
 	public long id;
 	
 	private String descricao, local;
-	@Column(name = "tempo_duracao")
-	private String tempoDuracao;
+	@Column(name = "tempo_inicio")
+	private String tempoInicio;
+	@Column(name = "tempo_final")
+	private String tempoFinal;
+
+	private String duracao;
+
+	@Column(name = "lista_ponto")
+	private String listaPonto;
+
 	private boolean transitavel;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
-	@OneToOne
-	@JoinColumn(name = "ponto_id")
-	private Ponto ponto;
-	
 	public Aviso() {}
-	
-	public Aviso(String descricao, String local, String tempoDuracao, boolean transitavel, Usuario usuario, Ponto ponto) {
+
+	public Aviso(String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel, Usuario usuario) {
 		this.descricao = descricao;
 		this.local = local;
-		this.tempoDuracao = tempoDuracao;
+		this.tempoInicio = tempoInicio;
+		this.tempoFinal = tempoFinal;
+		this.duracao = duracao;
+		this.listaPonto = listaPonto;
 		this.transitavel = transitavel;
 		this.usuario = usuario;
-		this.ponto = ponto;
 	}
-	public Aviso(long id, String descricao, String local, String tempoDuracao, boolean transitavel, Usuario usuario, Ponto ponto) {
-		this();
+
+	public Aviso(long id, String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel, Usuario usuario) {
+		this(descricao, local, tempoInicio, tempoFinal, duracao, listaPonto, transitavel, usuario);
 		this.id = id;
 	}
 
@@ -54,12 +61,44 @@ public class Aviso {
 		this.descricao = descricao;
 	}
 
-	public String getTempoDuracao() {
-		return tempoDuracao;
+	public String getLocal() {
+		return local;
 	}
 
-	public void setTempoDuracao(String tempoDuracao) {
-		this.tempoDuracao = tempoDuracao;
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+	public String getTempoInicio() {
+		return tempoInicio;
+	}
+
+	public void setTempoInicio(String tempoInicio) {
+		this.tempoInicio = tempoInicio;
+	}
+
+	public String getTempoFinal() {
+		return tempoFinal;
+	}
+
+	public void setTempoFinal(String tempoFinal) {
+		this.tempoFinal = tempoFinal;
+	}
+
+	public String getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(String duracao) {
+		this.duracao = duracao;
+	}
+
+	public String getListaPonto() {
+		return listaPonto;
+	}
+
+	public void setListaPonto(String listaPonto) {
+		this.listaPonto = listaPonto;
 	}
 
 	public boolean isTransitavel() {
@@ -76,21 +115,5 @@ public class Aviso {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public Ponto getPonto() {
-		return ponto;
-	}
-
-	public void setPonto(Ponto ponto) {
-		this.ponto = ponto;
-	}
-
-	public String getLocal() {
-		return local;
-	}
-
-	public void setLocal(String local) {
-		this.local = local;
 	}
 }

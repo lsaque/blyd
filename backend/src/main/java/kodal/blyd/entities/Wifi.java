@@ -17,18 +17,15 @@ public class Wifi {
 	private long id;
 	
 	private String nome, descricao;
-	
-	@OneToOne
-	@JoinColumn(name = "ponto_id")
-	private Ponto ponto;
-	
+	private String ponto;
+
 	@OneToOne
 	@JoinColumn(name = "andar_id")
 	private Andar andar;
 	
 	public Wifi() {}
 
-	public Wifi(long id, String nome, String descricao, Ponto ponto, Andar andar) {
+	public Wifi(long id, String nome, String descricao, String ponto, Andar andar) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -60,19 +57,19 @@ public class Wifi {
 		this.descricao = descricao;
 	}
 
-	public Ponto getPonto() {
-		return ponto;
-	}
-
-	public void setPonto(Ponto ponto) {
-		this.ponto = ponto;
-	}
-
 	public Andar getAndar() {
 		return andar;
 	}
 
 	public void setAndar(Andar andar) {
 		this.andar = andar;
+	}
+
+	public String getPonto() {
+		return ponto;
+	}
+
+	public void setPonto(String ponto) {
+		this.ponto = ponto;
 	}
 }

@@ -1,6 +1,10 @@
 package kodal.blyd.dto;
 
-public class PopUpDirectionDTO {
+import java.io.Serializable;
+
+public class PopUpDirectionDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String arrowDirection, arrowType, text, distance;
 
@@ -43,5 +47,10 @@ public class PopUpDirectionDTO {
 
     public void setArrowType(String arrowType) {
         this.arrowType = arrowType;
+    }
+
+    @Override
+    public String toString() {
+        return text + " " + distance + " - ArrowDirection: " + arrowDirection + " - ArrowType: " + arrowType;
     }
 }

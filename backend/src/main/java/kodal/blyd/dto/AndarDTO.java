@@ -1,7 +1,6 @@
 package kodal.blyd.dto;
 
 import java.io.Serializable;
-
 import kodal.blyd.entities.Andar;
 
 public class AndarDTO implements Serializable{

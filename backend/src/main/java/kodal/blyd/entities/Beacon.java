@@ -17,18 +17,15 @@ public class Beacon {
 	private long id;
 	
 	private String nome, descricao;
-	
-	@OneToOne
-	@JoinColumn(name = "ponto_id")
-	private Ponto ponto;
+	private String ponto;
 	
 	@OneToOne
 	@JoinColumn(name = "andar_id")
 	private Andar andar;
 	
 	public Beacon() {}
-	
-	public Beacon(long id, String nome, String descricao, Ponto ponto, Andar andar) {
+
+	public Beacon(long id, String nome, String descricao, String ponto, Andar andar) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -60,11 +57,11 @@ public class Beacon {
 		this.descricao = descricao;
 	}
 
-	public Ponto getPonto() {
+	public String getPonto() {
 		return ponto;
 	}
 
-	public void setPonto(Ponto ponto) {
+	public void setPonto(String ponto) {
 		this.ponto = ponto;
 	}
 
