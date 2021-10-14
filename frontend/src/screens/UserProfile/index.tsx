@@ -10,7 +10,8 @@ import ProfileAbout from "../../components/ProfileAbout";
 import AdminTitle from "../../components/AdminTitle";
 import AdminLastAdvice from "../../components/AdminLastAdvice";
 
-import Background from "../../assets/UserList/background.png";
+// import Background from "../../assets/UserList/background.png";
+import Background from "../../assets/Admin/background.png";
 
 import { 
   Container,

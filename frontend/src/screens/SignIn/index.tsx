@@ -63,7 +63,6 @@ const UserEditProfileSchema = Yup.object().shape({
       "Ambas as senhas precisam ser iguais"
     )})
   .required(''),
-
 })
 
 const SignIn: React.FC<ISignInProps> = ({ navigation }: any) => {

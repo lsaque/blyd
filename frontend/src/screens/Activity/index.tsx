@@ -44,8 +44,7 @@ export default function Activity({navigation}:any){
   // }
   
   return(
-    <React.Fragment>
-      <ParallaxHeader
+    <ParallaxHeader
       maxHeight={200}
       minHeight={80}
       renderOverlay={ () =>
@@ -65,8 +64,12 @@ export default function Activity({navigation}:any){
           <Title
             accessibilityHint="Título dizendo para informar o local, juntamente de um ícone do planeta"
           >Informe o <Strong>Local</Strong> 🌎</Title>
-          <Wrapper accessibilityHint={"Neste quadrado branco é possível visualizar todas as categorias de locais disponíveis no aplicativo. São ordenados apenas 2 por linha"}>
-          {
+
+          <Wrapper 
+            style={{marginTop: 40}}
+            accessibilityHint={"Neste quadrado branco é possível visualizar todas as categorias de locais disponíveis no aplicativo. São ordenados apenas 2 por linha"}
+          >
+            {
               activityCardAdviceData?.map((data) => (
                 <ActivityCardAdvice
                   key={data.id}
@@ -81,56 +84,5 @@ export default function Activity({navigation}:any){
         </Content>
       </Container>
     </ParallaxHeader>
-
-
-
-      {/* <BackgroundImage source={Background} resizeMode="cover" style={{
-        width: Dimensions.get('screen').width,
-        height: Dimensions.get('screen').height,
-      }}>
-        <Container>
-          <Navigation
-            onPress={() => navigation.goBack('history')}
-            title="Sua"
-            titleStrong="Atividade"
-          />
-        <View style={{paddingTop: 35}}>
-          <ActivityNotificationNumber
-            numberAdvice={activityCardAdviceData?.length || 0}
-            text="novo(s) avisos."
-          />
-        </View>
-
-        </Container>
-      </BackgroundImage>
-
-      <Modalize 
-        ref={modalizeRef}
-        alwaysOpen={470}
-        snapPoint={470}
-        HeaderComponent={
-          <Title>Avisos 🌠</Title>
-        }
-      >
-        <Content>
-          <Wrapper>
-
-            {
-              activityCardAdviceData?.map((data) => (
-                <ActivityCardAdvice
-                  key={data.id}
-                  name={data.name}
-                  adviceName={data.adviceName}
-                  adviceLocal={data.adviceLocal}
-                  timeDuration="1h"
-                />
-              ))
-            }
-
-          </Wrapper>
-        </Content>
-      </Modalize> */}
-
-    </React.Fragment>
   )
 }

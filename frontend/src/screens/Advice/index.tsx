@@ -79,8 +79,8 @@ export default function Localization({navigation}:any){
   const advice = [
     {
       key: 1,
-      badge: true,
-      text: "Estação de trabalho", 
+      badge: false,
+      text: "Reforma", 
     },
     {
       key: 2,
