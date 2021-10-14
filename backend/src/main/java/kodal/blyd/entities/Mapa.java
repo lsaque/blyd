@@ -13,6 +13,7 @@ public class Mapa {
 	private String nome, descricao, imagem;
 
 	@Lob
+	@Column
 	private String matriz;
 
 	@OneToOne
