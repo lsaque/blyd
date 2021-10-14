@@ -41,8 +41,10 @@ const ProfileAbout: React.FC<IProfileAboutProps> = ({
   return (
     <Container>
       <BoxImage>{icon}</BoxImage>
-      <Placeholder>{placeholder}</Placeholder>
-      <BoldAnswer>{answer}</BoldAnswer>
+      <Placeholder style={{flexWrap: "wrap", flex: 1}}>{placeholder + " "} 
+        <BoldAnswer>{answer}</BoldAnswer>
+      </Placeholder>
+      
     </Container>
   )
 }

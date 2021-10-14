@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, View, Text } from 'react-native';
 import Navigation from '../../components/Navigation';
 
+import * as Yup from 'yup';
+
+// import Background from "../../../../assets/UserList/background.png";
+import Background from "../../assets/UserList/background.png";
+
 import { 
-  Container,
+  // Container,
   // ImagePage,
   // Title,
   // Strong,
   Content,
-  RadioArea,
+  // RadioArea,
   RadioComponent,
   LabelText,
   MarkAdviceButton,
@@ -19,7 +24,11 @@ import {
 import TextInput from '../../components/TextInput';
 import { Formik } from 'formik';
 import { RadioButton } from 'react-native-paper';
-
+import Details from '../../components/Details';
+import { Container, Label, TextArea, TextAreaInput, RadioArea, SubmitButton, ErrorMessage } from '../../assets/Styles/PageCRUDTemplate/styles';
+import RadioButtonRN from '../../components/_dependency/radio-buttons-react-native/RadioButtonRN';
+import { ProfileDetails, BackgroundProfile, Divisor } from '../UserProfile/styles';
+import { BackgroundNavigation } from '../AdviceProfile/styles';
 
 function getDate(day: number, hour: number) {
     
@@ -34,135 +43,163 @@ function getDate(day: number, hour: number) {
   return `${datePerson}/${mounthPerson}/${yearPerson}/${hourPerson}/${minutePerson}`;
 }
 
-export default function Localization({navigation} : any){
+const UserEditProfileSchema = Yup.object().shape({
+  picture: Yup.string(),
 
+  adviceDescription: Yup.string()
+  .min(5, 'Aviso muito pequeno!')
+  .required('Obrigatório ter uma descrição de aviso'),
+
+  adviceTimeRemaining: Yup.number()
+  .required(''),
+
+  isImpassable: Yup.boolean()
+  .required(''),
+})
+
+
+export default function Localization({navigation} : any){
+  
   const [isFocus, setFocus] = useState(false);
+  let linkImage = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80";
+
+  const dataIsImpassable = [
+    {
+      value: true,
+      label: "Transitável",
+    },
+    {
+      value: false,
+      label: "Intransitável",
+    },
+  ];
+  
+  const dataTimeRemaining = [
+    {
+      value: 1,
+      label: "Até 1 hora",
+    },
+    {
+      value: 2,
+      label: "Até 3 horas",
+    },
+    {
+      value: 3,
+      label: "Até 1 dia",
+    },
+    {
+      value: 4,
+      label: "Até 3 dias",
+    },
+  ];
 
   return(
-    <React.Fragment>
-      <Container>
+    <Container>
+      <BackgroundNavigation>
         <Navigation
-          onPress={() => navigation.goBack('history')}
+          onPress={() => navigation.goBack("history")}
           title="Marcar"
           titleStrong="Aviso"
         />
-        <Content
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        >
-          <Formik
-            initialValues={{ 
-              advice: 'Limpeza',
-              timeDuration: '',
-              isPassable: '',
-            }}
-            onSubmit={values => {
-              console.log(values)
-              // axios()
-            }}
-          >
-            {({ handleChange, handleBlur, handleSubmit, values }) => (
-              <View>
-                <TextInput
-                  text="O que esta acontecendo?"
-                  onChangeText={handleChange('advice')}
-                  onBlur={handleBlur('advice')}
-                  value={values.advice}
-                />
+      </BackgroundNavigation>
+    
+      <Formik
+        initialValues={{ 
+          userPicture: linkImage,
+          userName: "",
+          userEmail: "",
 
-                <LabelText>Qual a duração do alerta?</LabelText>
-                <RadioButton.Group
-                  onValueChange={handleChange('timeDuration')}
-                  value={values.timeDuration}
-                >
-                  <RadioComponent>
-                    <RadioArea
-                      style={{
-                        borderWidth: isFocus ? 1.5 : 0,
-                      }}
-                    >
-                      <RadioButton.Item
-                        labelStyle={{color:'#4d4d4d'}}
-                        color='#8749FC'
-                        label="Até 1 hora"
-                        value={getDate(0,1)}
-                      />
-                    </RadioArea>
-                    <RadioArea>
-                      <RadioButton.Item
-                        labelStyle={{color:'#4d4d4d'}}
-                        color='#8749FC'
-                        label="Até 3 horas"
-                        value={getDate(0,3)}
-                        onPress={() => setFocus(false)}
+          adviceDescription: 'Limpeza',
+          adviceTimeRemaining: null,
+          isImpassable: undefined,
+        }}
+        onSubmit={values => {
+          console.log(values)
+          // axios()
+        }}
+        validationSchema={UserEditProfileSchema}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, dirty, isValid }) => (
+          <React.Fragment>
+            <ProfileDetails 
+              showsVerticalScrollIndicator={false} 
+              keyboardShouldPersistTaps="handled"
+              keyboardDismissMode="on-drag"
+            >
+              <Divisor>
+                <Label>Motivo do aviso</Label>
+                <TextArea>
+                  <TextAreaInput
+                    keyboardType={"ascii-capable"}
+                    value={values.adviceDescription}
+                    autoFocus={true}
+                    onChangeText={ handleChange("adviceDescription") }
+                    onBlur={ handleBlur("adviceDescription") }
+                    placeholder="Preencha com a descrição do aviso"
+                    returnKeyType="next"
+                    multiline={true}
+                  />
+                </TextArea>
+                <ErrorMessage>{errors.adviceDescription}</ErrorMessage>
 
-                      />
-                    </RadioArea>
-                    <RadioArea>
-                      <RadioButton.Item
-                        labelStyle={{color:'#4d4d4d'}}
-                        color='#8749FC'
-                        label="Até 1 dia"
-                        value={getDate(1,0)}
-                        onPress={() => setFocus(false)}
+                <Label>Duração de alerta</Label>
+                <RadioArea>
+                  <RadioButtonRN
+                    data={dataTimeRemaining}
+                    animationTypes={['shake']}
+                    selectedBtn={(e: any) => {
+                      setFieldValue("adviceTimeRemaining", e.value)
+                      handleChange("adviceTimeRemaining");
+                    }}
+                    boxDeactiveBgColor="#F5F5F5"
+                    circleSize={10}
+                    initial={values.adviceTimeRemaining}
+                  />
+                </RadioArea>
 
-                      />
-                    </RadioArea>
-                    <RadioArea>
-                      <RadioButton.Item
-                        labelStyle={{color:'#4d4d4d'}}
-                        color='#8749FC'
-                        label="Até 3 dias"
-                        value={getDate(3,0)}
-                        onPress={() => setFocus(false)}
+                <Label>Situação de passagem</Label>
+                <RadioArea>
+                  <RadioButtonRN
+                    data={dataIsImpassable}
+                    animationTypes={['shake']}
+                    selectedBtn={(e: any) => {
+                      setFieldValue("isImpassable", e.value)
+                      handleChange("isImpassable");
+                    }}
+                    boxDeactiveBgColor="#F5F5F5"
+                    circleSize={10}
+                    initial={values.isImpassable ? 1 : 2}
+                  />
+                </RadioArea>
 
-                      />
-                    </RadioArea>
-                  </RadioComponent>
-               </RadioButton.Group>
-               
-               <LabelText>Qual a situação da passagem?</LabelText>
-               <RadioButton.Group
-                  onValueChange={handleChange('isPassable')}
-                  value={values.isPassable}
-                >
-                  <RadioComponent>
-                    <RadioArea>
-                      <RadioButton.Item
-                        labelStyle={{color:'#4d4d4d'}}
-                        color='#8749FC'
-                        label="Transitável"
-                        value="true"
-                      />
-                    </RadioArea>
+              </Divisor>
 
-                    <RadioArea style={{marginBottom: 35}}>
-                      <RadioButton.Item
-                        labelStyle={{color:'#4d4d4d'}}
-                        color='#8749FC'
-                        label="Intransitável"
-                        value="false"
-                      />
-                    </RadioArea>
-                  </RadioComponent>
+              <SubmitButton
+                onPress={() => {
+                  handleSubmit;
+                  console.log(values); 
+                  alert("Aviso marcado com sucesso");
+                  navigation.goBack();
+                }}
+                style={{
+                  marginHorizontal: 20,
+                  marginTop: 20,
+                  opacity: !(dirty && isValid) ? 0.6 : 1,
+                }}   
+                disabled={!(dirty && isValid)}
+                accessibilityHint="Para efetuar o envio de cadastramento do aviso, é preciso que todas as informações anteriores estejam preenchidas corretamente"
+                accessibilityState={{disabled: !(dirty && isValid)}}
+              >
+                <Text style={{color: "#fff", fontSize: 18}}>Marcar Aviso</Text>
+              </SubmitButton>
+                
 
-               </RadioButton.Group>
-               
-                <MarkAdviceButton
-                  filled 
-                  text="Marcar"
-                  onPress={() => {
-                    console.log(values); 
-                    handleSubmit;
-                    navigation.navigate('LiveLocalization');
-                  }}   
-                />
-              </View>
-            )}
-          </Formik>
+            </ProfileDetails>
 
-        </Content>
-
-      </Container>
-    </React.Fragment>
+            
+          </React.Fragment>
+        )}
+      </Formik>
+    </Container>
   )
 }

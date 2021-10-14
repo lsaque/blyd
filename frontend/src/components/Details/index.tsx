@@ -22,9 +22,8 @@ const Tag = styled.View`
   justify-content: center;
   align-items: center;
   background-color: #E8E2FD;
-  width: 70px;
   border-radius: 35px;
-  height: 35px;
+  padding: 4px 16px;
 `;
 
 const Pcd = styled.Text`
@@ -47,16 +46,24 @@ const Email = styled.Text`
 
 interface IDetailsProps{
   avatar: object,
-  isPCD: boolean,
-  name: String,
-  email: String
+  isPCD: boolean | undefined | null,
+  name?: String,
+  email?: String,
+  hideNameAndEmail?: boolean,
+  markedAdvice?: boolean,
 }
 
 const Details: React.FC<IDetailsProps> = ({
-  avatar, isPCD, name, email
+  avatar, isPCD, name, email, hideNameAndEmail, markedAdvice
 }: any) => {
 
   let pcdTagRender = <React.Fragment/>
+  let nameAndEmailRender = (
+    <React.Fragment>
+      <Name>{name}</Name>
+      <Email>{email}</Email>
+    </React.Fragment>
+  )
 
   if(isPCD){
     pcdTagRender = (
@@ -65,13 +72,24 @@ const Details: React.FC<IDetailsProps> = ({
       </Tag>
     )
   }
+
+  if(markedAdvice){
+    pcdTagRender = (
+      <Tag>
+        <Pcd>Marcou aviso</Pcd>
+      </Tag>
+    )
+  }
+
+  if(hideNameAndEmail){
+    nameAndEmailRender = <React.Fragment/>
+  }
   
   return (
     <Container>
       <Avatar source={avatar} resizeMode="cover"/>
       {pcdTagRender}
-      <Name>{name}</Name>
-      <Email>{email}</Email>
+      {nameAndEmailRender}
     </Container>
   )
 }

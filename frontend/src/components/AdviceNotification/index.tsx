@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Ionicons, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
 
-
 const Card = styled.TouchableOpacity`
   border-radius: 15px;
   flex-direction: row;
@@ -18,10 +17,13 @@ const Left = styled.View`
   border-radius:10px;
   align-items: center;
   justify-content: center;
+  /* border: 1px solid red; */
 `;
 
 const Center = styled.View`
   justify-content: center;
+  /* border: 1px solid red; */
+  width: 200px;
 `;
 
 const Title = styled.Text`
@@ -48,7 +50,7 @@ const SuggestedTimeText = styled.Text`
   font-size: 18px;
 `;
 
-export default ({importance, text}: any) => {
+export default ({importance, text, onPress}: any) => {
   
   let strongColor, lightColor, borderWidth = 1.5;
 
@@ -71,34 +73,32 @@ export default ({importance, text}: any) => {
   }
 
   return (
-    <React.Fragment>
-      <Card style={{
+    <Card 
+      onPress={onPress}
+      style={{
         borderWidth: borderWidth,
         borderColor: strongColor,
         backgroundColor: lightColor
+      }}
+    >
+      <Left style={{
+        backgroundColor: strongColor,
       }}>
-        <Left style={{
-          backgroundColor: strongColor,
+        <FontAwesome5 name="exclamation" size={28} color={lightColor} />
+      </Left>
+
+      <Center>
+        <Title style={{
+          color: strongColor,
         }}>
-          <FontAwesome5 name="exclamation" size={28} color={lightColor} />
-        </Left>
+          Intransitável
+        </Title>
+        <Advice numberOfLines={1}>{text}</Advice>
+      </Center>
 
-        <Center>
-          <Title style={{
-            color: strongColor,
-          }}>Intransitável</Title>
-          <Advice numberOfLines={1}>{text}</Advice>
-        </Center>
-
-        <Right>
-          <SimpleLineIcons name="arrow-right" size={25} color={strongColor} />
-        </Right>
-      </Card>
-      
-      {/* <SuggestedTime>
-        <Ionicons name="timer-outline" size={20} color={backgroundColor} />
-        <SuggestedTimeText>tempo sugerido: 2-3 horas</SuggestedTimeText>
-      </SuggestedTime> */}
-    </React.Fragment>
+      <Right>
+        <SimpleLineIcons name="arrow-right" size={25} color={strongColor} />
+      </Right>
+    </Card>
   );
 }

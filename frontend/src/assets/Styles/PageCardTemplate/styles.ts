@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 import SearchNavigation from '../../../components/SearchNavigation';
 
-export const Container = styled.KeyboardAvoidingView`
-  padding: 0 20px;
+export const Container = styled.View`
+  background-color: #fff;
+  height: 100%;
 `;
 
 export const ImagePage = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
 `;
 
 // Modalize
@@ -24,11 +24,14 @@ export const Strong = styled.Text`
   font-weight: bold;
 `;
 
-export const Content = styled.ScrollView`
-  margin: 30px 20px 0 20px;
+export const Content = styled.View`
+  border-radius: 30px;
+  min-height: 628px;
+  background-color: #fff;
 `
 
 export const Wrapper = styled.View`
+  margin: 15px 20px;
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;

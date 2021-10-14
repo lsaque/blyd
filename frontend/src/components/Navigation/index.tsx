@@ -8,7 +8,7 @@ const Container = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;  
-  padding-top: 20px;
+  margin-top: 20px;
 `;
 
 const Button = styled.TouchableOpacity`
@@ -35,7 +35,16 @@ const Strong = styled.Text`
 `;
 
 
-export default ({onPress, title, titleStrong, lightContent} : any) => {
+interface INavigationProps{
+  onPress?: Function,
+  title: String,
+  titleStrong: String,
+  lightContent?: boolean,
+}
+
+const Navigation: React.FC<INavigationProps> = ({
+  onPress, title, titleStrong, lightContent
+} : any) => {
 
   let lightStyle = "#4A4A4A";
 
@@ -44,8 +53,13 @@ export default ({onPress, title, titleStrong, lightContent} : any) => {
   }
 
   return(
-    <Container>
-      <Button onPress={onPress}>
+    <Container 
+      accessibilityHint="Barra de navegação superior com a opção de retornar a página anterior, visualizar o título e navegar até o menu"
+    >
+      <Button 
+        onPress={onPress}
+        accessibilityHint="Clique para retornar a página anterior"
+      >
         <AntDesign name="arrowleft" size={24} color="white" />
       </Button>
 
@@ -53,9 +67,13 @@ export default ({onPress, title, titleStrong, lightContent} : any) => {
         <Title style={{color: lightStyle}}>{title} <Strong>{titleStrong}</Strong> </Title>  
       </TitleContent>
 
-      <Button>
+      <Button
+        accessibilityHint="Clique para visulizar o menu"
+      >
         <MaterialIcons name="menu" size={24} color="white" />
       </Button>
     </Container>
   );
 }
+
+export default Navigation;

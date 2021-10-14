@@ -1,10 +1,14 @@
 import React from 'react';
+import { BackgroundImage } from '../styles';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import SignIn from './screens/SignIn';
+import Login from './screens/Login';
 import Home from './screens/Home';
 import Search from './screens/Search';
 import Activity from './screens/Activity';
@@ -16,15 +20,157 @@ import LiveLocalization from './screens/LiveLocalization';
 import MarkAdvice from './screens/MarkAdvice';
 import SearchContact from './screens/SearchContact';
 import Admin from './screens/Admin';
-import UserList from './screens/UserList';
 import UserProfile from './screens/UserProfile';
-import UserEditProfile from './screens/UserEditProfile';
+import UserList from './screens/CRUD/Admin/UserList';
+import UserEditProfile from './screens/CRUD/Admin/UserEditProfile';
+import UserCreateProfile from './screens/CRUD/Admin/UserCreateProfile';
+import Assigned from './screens/CRUD/Admin/AdviceList/Assigned';
+import Concluded from './screens/CRUD/Admin/AdviceList/Concluded';
+import AdviceProfile from './screens/AdviceProfile';
+import AdviceEditProfile from './screens/CRUD/Admin/AdviceEditProfile';
+import Requested from './screens/CRUD/Admin/RequestList/Requested';
+import Answered from './screens/CRUD/Admin/RequestList/Answered';
 
+import Navigation from './components/Navigation';
+
+const AdviceTab = createMaterialTopTabNavigator();
+
+const MainTab = createMaterialBottomTabNavigator();
 const UserTab = createMaterialBottomTabNavigator();
 const AdminTab = createMaterialBottomTabNavigator();
 
 const AdminStack = createStackNavigator();
 const UserStack = createStackNavigator();
+const LoginStack = createStackNavigator();
+
+import Background from "./assets/Admin/background.png";
+import { NavigationContainer } from '@react-navigation/native';
+
+function AdminAdviceTopTab({ navigation }: any) {
+  return (
+    <React.Fragment>
+      <BackgroundImage 
+        source={ Background } 
+        resizeMode="cover" 
+        style={{
+          paddingHorizontal: 20,
+          height: 80
+        }}
+      >
+        <Navigation
+          title="Listar"
+          titleStrong="Avisos"
+          onPress={() => navigation.goBack('history')}
+          lightContent={true}
+        />
+      </BackgroundImage>
+
+      <AdviceTab.Navigator
+        initialRouteName='Assigned'
+        backBehavior='history'
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: '#fff',
+            // paddingHorizontal: 20,
+            // backgroundColor: '#f8f7f7',
+            // height: 50,
+          },
+          tabBarLabelStyle: {
+            textTransform: 'capitalize',
+            fontSize: 16,
+          },
+          tabBarIndicatorStyle: {
+            // backgroundColor: "#000",
+            backgroundColor: '#8363F6',
+          },
+          tabBarInactiveTintColor: "#a3a3a3",
+          tabBarActiveTintColor: "#8363F6",
+        }}
+        sceneContainerStyle={{
+          backgroundColor: "#fff"
+        }}
+      >
+        <AdviceTab.Screen 
+          name="Assigned" 
+          component={Assigned} 
+          options={{
+            tabBarLabel: "Atribuídos",
+          }}
+        />
+        <AdviceTab.Screen 
+          name="Concluded" 
+          component={Concluded} 
+          options={{
+            tabBarLabel: "Concluídos"
+          }}
+        />
+      </AdviceTab.Navigator>
+    </React.Fragment>
+  );
+}
+
+function AdminRequestTopTab({ navigation }: any) {
+  return (
+    <React.Fragment>
+      <BackgroundImage 
+        source={ Background } 
+        resizeMode="cover" 
+        style={{
+          paddingHorizontal: 20,
+          height: 80
+        }}
+      >
+        <Navigation
+          title="Listar"
+          titleStrong="Solicitações"
+          onPress={() => navigation.goBack('history')}
+          lightContent={true}
+        />
+      </BackgroundImage>
+
+      <AdviceTab.Navigator
+        initialRouteName='Requested'
+        backBehavior='history'
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: '#fff',
+            // paddingHorizontal: 20,
+            // backgroundColor: '#f8f7f7',
+            // height: 50,
+          },
+          tabBarLabelStyle: {
+            textTransform: 'capitalize',
+            fontSize: 16,
+          },
+          tabBarIndicatorStyle: {
+            // backgroundColor: "#000",
+            backgroundColor: '#8363F6',
+          },
+          tabBarInactiveTintColor: "#a3a3a3",
+          tabBarActiveTintColor: "#8363F6",
+        }}
+        sceneContainerStyle={{
+          backgroundColor: "#fff"
+        }}
+      >
+        <AdviceTab.Screen 
+          name="Requested" 
+          component={Requested} 
+          options={{
+            tabBarLabel: "Solicitados ",
+          }}
+        />
+        <AdviceTab.Screen 
+          name="Answered" 
+          component={Answered} 
+          options={{
+            tabBarLabel: "Respondidos"
+          }}
+        />
+      </AdviceTab.Navigator>
+    </React.Fragment>
+  );
+}
 
 function UserBottomTab(){
   return(
@@ -40,6 +186,7 @@ function UserBottomTab(){
         name="HomeTab" 
         component={ Home }
         options={{
+          tabBarAccessibilityLabel: "Página inicial",
           tabBarLabel: 'Inicio',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
@@ -55,6 +202,7 @@ function UserBottomTab(){
         name="Search" 
         component={ Search } 
         options={{
+          tabBarAccessibilityLabel: "Procurar",
           tabBarLabel: 'Procurar',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
@@ -70,6 +218,7 @@ function UserBottomTab(){
         name="LiveLocalization" 
         component={ LiveLocalization } 
         options={{
+          tabBarAccessibilityLabel: "Localização",
           tabBarLabel: 'Localização',
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons 
@@ -85,6 +234,7 @@ function UserBottomTab(){
         name="Activity" 
         component={ Activity } 
         options={{
+          tabBarAccessibilityLabel: "Atividade e notificações",
           tabBarLabel: 'Atividade',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
@@ -100,6 +250,7 @@ function UserBottomTab(){
         name="Setting" 
         component={ Setting } 
         options={{
+          tabBarAccessibilityLabel: "Configurações",
           tabBarLabel: 'Configuração',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
@@ -140,13 +291,13 @@ function AdminBottomTab(){
       />
 
       <AdminTab.Screen 
-        name="Search" 
-        component={ Search } 
+        name="UserList" 
+        component={ UserList } 
         options={{
-          tabBarLabel: 'Procurar',
+          tabBarLabel: 'Usuários',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
-              name={focused ? 'search' : 'md-search-outline'}
+              name={focused ? 'person' : 'person-outline'}
               size={24} 
               color={color} 
             />
@@ -170,14 +321,14 @@ function AdminBottomTab(){
       />
  
       <AdminTab.Screen 
-        name="Activity" 
-        component={ Activity } 
+        name="AdviceList" 
+        component={ AdminAdviceTopTab } 
         options={{
-          tabBarLabel: 'Atividade',
+          tabBarLabel: 'Avisos',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
-              name={focused ? 'heart' : 'heart-outline'}
-              size={24} 
+              name={focused ? 'alert-circle' : 'alert-circle-outline'}
+              size={25} 
               color={color} 
             />
           ),
@@ -202,6 +353,15 @@ function AdminBottomTab(){
   )
 }
 
+const LoginScreen = () => {
+  return (
+    <LoginStack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }} >
+      <LoginStack.Screen name="Login" component={Login} />
+      <LoginStack.Screen name="SignIn" component={SignIn} />
+    </LoginStack.Navigator> 
+  )
+}
+
 const UserScreen = () => {
   return (
     <UserStack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }} >
@@ -213,6 +373,7 @@ const UserScreen = () => {
       <UserStack.Screen name="Advice" component={Advice} />
       <UserStack.Screen name="MarkAdvice" component={MarkAdvice} />
       <UserStack.Screen name="SearchContact" component={SearchContact} />
+      <UserStack.Screen name="AdviceProfile" component={AdviceProfile} />
 
       {/* <UserStack.Screen name="UserProfile" component={UserProfile}/> */}
       {/* <UserStack.Screen name="UserEditProfile" component={UserEditProfile}/> */}
@@ -224,9 +385,14 @@ const AdminScreen = () => {
   return (
     <AdminStack.Navigator initialRouteName="Admin" screenOptions={{ headerShown: false }} >
       <AdminStack.Screen name="Admin" component={AdminBottomTab}/>
-      <AdminStack.Screen name="UserList" component={UserList}/>
+      {/* <AdminStack.Screen name="UserList" component={UserList}/> */}
       <AdminStack.Screen name="UserProfile" component={UserProfile}/>
       <AdminStack.Screen name="UserEditProfile" component={UserEditProfile}/>
+      <AdminStack.Screen name="UserCreateProfile" component={UserCreateProfile}/>
+      <AdminStack.Screen name="AdviceList" component={AdminAdviceTopTab}/>
+      <AdminStack.Screen name="AdviceProfile" component={AdviceProfile}/>
+      <AdminStack.Screen name="AdviceEditProfile" component={AdviceEditProfile}/>
+      <AdminStack.Screen name="RequestList" component={AdminRequestTopTab}/>
 
       <AdminStack.Screen name="Search" component={Search} />
       <AdminStack.Screen name="Localization" component={Localization} />
@@ -237,5 +403,14 @@ const AdminScreen = () => {
     </AdminStack.Navigator>
   )
 }
+const Drawer = createDrawerNavigator();
 
-export { UserScreen, AdminScreen };
+export default function Main() {
+  return (
+      <Drawer.Navigator initialRouteName="LoginScreen" screenOptions={{headerShown: false}}>
+        <Drawer.Screen name="LoginScreen" component={LoginScreen} />
+        <Drawer.Screen name="UserScreen" component={UserScreen} />
+        <Drawer.Screen name="AdminScreen" component={AdminScreen} />
+      </Drawer.Navigator>
+  );
+}

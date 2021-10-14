@@ -1,8 +1,22 @@
-import React from "react";
-import { StatusBar, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import React, { Component, useState } from "react";
+import { StatusBar, View, PermissionsAndroid, Text, TouchableOpacity } from "react-native";
 import { BackgroundImage } from "../../../styles";
+import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
+import * as NetInfo from '@react-native-community/netinfo';
+
+// import Accordion from 'react-native-collapsible/Accordion';
+import Collapsible  from 'react-native-collapsible';
 
 import Logo from "../../assets/Admin/logo.png";
+import AdminImage from '../../assets/Admin/admin.png';
+import Background from '../../assets/Admin/background.png';
+
+import AdminDataNumber from "../../components/AdminDataNumber";
+import AdminTitle from "../../components/AdminTitle";
+import AdminButtonQuantityProfiles from "../../components/AdminButtonQuantityProfiles";
+import AdminPhotoProfile from "../../components/AdminPhotoProfile";
+import AdminLastAdvice from "../../components/AdminLastAdvice";
 
 import { 
   Container,
@@ -18,14 +32,7 @@ import {
   ImageCredits
 } from "./styles";
 
-import AdminImage from '../../assets/Admin/admin.png';
-import Background from '../../assets/Admin/background.png';
-import AdminDataNumber from "../../components/AdminDataNumber";
-import { ScrollView } from "react-native-gesture-handler";
-import AdminTitle from "../../components/AdminTitle";
-import AdminButtonQuantityProfiles from "../../components/AdminButtonQuantityProfiles";
-import AdminPhotoProfile from "../../components/AdminPhotoProfile";
-import AdminLastAdvice from "../../components/AdminLastAdvice";
+import UserRequestCard from "../../components/UserRequestCard";
 
 interface IAdminProps{}
 
@@ -72,6 +79,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               category="Avisos"
               number={400}
               backgroundColor="#957AF6"
+              onPress={() => navigation.navigate('AdviceList')}
             />
             <AdminDataNumber 
               category="Usuários"
@@ -83,6 +91,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               category="Solicitações"
               number={12}
               backgroundColor="#F69C7A"
+              onPress={() => navigation.navigate('RequestList')}
             />
           </ScrollView>
         </DivisorCategory>
@@ -111,40 +120,109 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
         <DivisorCategory>
           <View style={{marginHorizontal:20}}>
             <AdminTitle
+              text="Ultimas Solicitações:"
+              seeAll={true}
+            />
+          </View>
+          
+          <UserRequestCard 
+            name="Isaque José de Souza"
+            isPCD={true}
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+
+          <UserRequestCard 
+            name="Isaque José de Souza"
+            isPCD={true}
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+
+          <UserRequestCard 
+            name="Isaque José de Souza"
+            isPCD={false}
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+
+          <UserRequestCard 
+            name="Isaque José de Souza"
+            isPCD={false}
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+
+          <UserRequestCard 
+            name="Isaque José de Souza fsajh fkjsh kfjshk "
+            isPCD={true}
+
+            email="isaque@gmail.com"
+            phoneNumber="11923456789" 
+            declineOnPress={() => {}} 
+            acceptOnPress={() => {}}
+          />
+        </DivisorCategory>
+
+
+        <DivisorCategory>
+          <View style={{marginHorizontal:20}}>
+            <AdminTitle
               text="Últimos Avisos:"
               seeAll={true}
             />
+            
             <AdminLastAdvice 
               userPicture={Background}
-              userName="Isaque Souza"
+              userName="Leandro Master Top"
               adviceHour="14:43"
               adviceName="Limpeza - corredor 2B"
               adviceTimeRemaining="2h"
-              adviceImportantTag={true}
+              isImpassable={false}
+              dueDay="04"
+              dueMonth="Outubro"
+              dueYear="2021"
+              dueHour="14"
+              dueMinute="20" 
+              onPress={() => navigation.navigate("AdviceProfile")}
             />
+
             <AdminLastAdvice 
               userPicture={Background}
-              userName="Isaque Souza"
+              userName="Laura S"
               adviceHour="14:43"
               adviceName="Limpeza - corredor 2B"
               adviceTimeRemaining="5h"
-              adviceImportantTag={true}
+              isImpassable={true}
+              dueDay="04"
+              dueMonth="Outubro"
+              dueYear="2021"
+              dueHour="14"
+              dueMinute="20" 
+              onPress={() => navigation.navigate("AdviceProfile")}
             />
+            
             <AdminLastAdvice 
               userPicture={Background}
-              userName="Isaque Souza"
+              userName="Isaque José de Souza sda sa sa sa "
               adviceHour="14:43"
-              adviceName="Limpeza - corredor 2BoQuintasDavifsjoifjsiofjoisj"
-              adviceTimeRemaining="1d 25h"
-              adviceImportantTag={true}
-            />
-            <AdminLastAdvice 
-              userPicture={Background}
-              userName="Isaque Souza"
-              adviceHour="14:43"
-              adviceName="Limpeza - corredor 2B"
-              adviceTimeRemaining="1d 25h"
-              adviceImportantTag={true}
+              adviceName="Limpeza - corredor 2BoQuintasDavifsjoifjsiofjoisj fsuh uisfu ihfsiuh iufshui hfsiuh uifsh uihsiu hush"
+              adviceTimeRemaining="1d"
+              isImpassable={true}
+              dueDay="04"
+              dueMonth="Outubro"
+              dueYear="2021"
+              dueHour="14"
+              dueMinute="20" 
+              onPress={() => navigation.navigate("AdviceProfile")}
             />
           </View>
         </DivisorCategory>

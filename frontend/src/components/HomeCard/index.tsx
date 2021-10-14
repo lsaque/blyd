@@ -23,7 +23,8 @@ const Left = styled.View`
 `;
 
 const Center = styled.View`
-  max-width: 169.2px;
+  width: 180px;
+  /* border: 1px solid red; */
   justify-content: center;
 `;
 
@@ -37,7 +38,6 @@ const Right = styled.View`
   justify-content: center;
   align-items: center;
 `;
-
 
 export default ({iconName, text, onPress, backgroundColor}: any) => {
   return (

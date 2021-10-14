@@ -14,6 +14,8 @@ export const ProfileDetails = styled.ScrollView`
   margin: 0 20px;
 `;
 
+export const AdviceDetails = styled.ScrollView``;
+
 export const BackgroundProfile = styled.Image`
   height: 150px;
   border-top-left-radius: 20px;
@@ -29,12 +31,10 @@ export const Divisor = styled.View`
   
 export const Buttons = styled.View`
   flex-direction: row;
-  /* margin: 0 20px; */
   justify-content: space-between;
   padding-bottom: 25px;
 `;
 
 export const About = styled.View`
   padding-bottom: 10px;
-  /* margin: 0 20px; */
 `;

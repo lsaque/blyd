@@ -30,17 +30,28 @@ const Title = styled.Text`
   width: 120px;
   text-align: center;
 `;
+interface IPageCardProps{
+  badge?: boolean, 
+  text: String,
+  onPress: Function,
+  backgroundColor: any,
+  accessibilityHint: String,
+  }
 
 
-export default ({badge, text, onPress, backgroundColor}: any) => {
+const PageCard: React.FC<IPageCardProps> = ({badge, text, onPress, backgroundColor, accessibilityHint}: any) => {
   
   const { width } = Dimensions.get("window");
   let badgeComponent = <Badge>Pessoal</Badge>;
 
   return(
-    <Card onPress={ onPress } style={[backgroundColor,{
-      width: width/2.36,
-    }]}>
+    <Card 
+      accessibilityHint={accessibilityHint}
+      onPress={ onPress } 
+      style={[backgroundColor,{
+        width: width/2.36,
+      }]}
+    >
       <Content>
         { badge ? badgeComponent : null }
         <Title>{text}</Title>
@@ -48,3 +59,5 @@ export default ({badge, text, onPress, backgroundColor}: any) => {
     </Card>
   )
 }
+
+export default PageCard;

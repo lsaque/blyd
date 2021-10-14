@@ -1,28 +1,34 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, Image, View, Text} from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { BackgroundImage } from '../../../styles';
 
 import Navigation from '../../components/Navigation';
+import ActivityCardAdvice from '../../components/ActivityCardAdvice';
 
 import Background from '../../assets/Activity/background.png'
+
+import ParallaxHeader from '@fabfit/react-native-parallax-header';
+
 import { 
   Container,
+  ImagePage,
   Title,
+  Strong,
   Content,
   Wrapper,
-} from '../../assets/Styles/PageTemplate/styles';
+} from '../../assets/Styles/PageCardTemplate/styles';
 
 import ActivityNotificationNumber from '../../components/ActivityNotificationNumber';
-import ActivityCardAdvice from '../../components/ActivityCardAdvice';
-import { activityCardAdvice } from '../../types/activityCardAdvice';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';
+import { activityCardAdvice } from '../../types/activityCardAdvice';
 
 export default function Activity({navigation}:any){
 
   const modalizeRef = useRef<Modalize>(null);
 
+  const uriBackground = Image.resolveAssetSource(Background).uri;
   const [ activityCardAdviceData, setActivityCardAdviceData ] = useState<activityCardAdvice[]>();
 
   useEffect(() => {
@@ -38,54 +44,45 @@ export default function Activity({navigation}:any){
   // }
   
   return(
-    <React.Fragment>
-      <BackgroundImage source={Background} resizeMode="cover" style={{
-        width: Dimensions.get('screen').width,
-        height: Dimensions.get('screen').height,
-      }}>
-        <Container>
+    <ParallaxHeader
+      maxHeight={200}
+      minHeight={80}
+      renderOverlay={ () =>
+        <View style={{ paddingHorizontal: 20 }}>
           <Navigation
             onPress={() => navigation.goBack('history')}
             title="Sua"
             titleStrong="Atividade"
-          />
-        <View style={{paddingTop: 35}}>
-          <ActivityNotificationNumber
-            numberAdvice={activityCardAdviceData?.length || 0}
-            text="novo(s) avisos."
+            lightContent={false}
           />
         </View>
-
-        </Container>
-      </BackgroundImage>
-
-      <Modalize 
-        ref={modalizeRef}
-        alwaysOpen={470}
-        snapPoint={470}
-        HeaderComponent={
-          <Title>Avisos 🌠</Title>
-        }
-      >
+      }
+      heroImage={{ uri: uriBackground }}
+    >
+      <Container>
         <Content>
-          <Wrapper>
+          <Title
+            accessibilityHint="Título dizendo para informar o local, juntamente de um ícone do planeta"
+          >Informe o <Strong>Local</Strong> 🌎</Title>
 
+          <Wrapper 
+            style={{marginTop: 40}}
+            accessibilityHint={"Neste quadrado branco é possível visualizar todas as categorias de locais disponíveis no aplicativo. São ordenados apenas 2 por linha"}
+          >
             {
               activityCardAdviceData?.map((data) => (
                 <ActivityCardAdvice
-                key={data.id}
-                name={data.name}
-                adviceName={data.adviceName}
-                adviceLocal={data.adviceLocal}
-                timeDuration="1h"
-              />
+                  key={data.id}
+                  name={data.name}
+                  adviceName={data.adviceName}
+                  adviceLocal={data.adviceLocal}
+                  timeDuration="1h"
+                />
               ))
             }
-
           </Wrapper>
         </Content>
-      </Modalize>
-
-    </React.Fragment>
+      </Container>
+    </ParallaxHeader>
   )
 }
