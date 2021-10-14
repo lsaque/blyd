@@ -3,21 +3,18 @@ package kodal.blyd.dto;
 import java.io.Serializable;
 import kodal.blyd.entities.Mapa;
 
-import javax.persistence.Column;
-
 public class MapaDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	private long id;
 	private String nome, descricao, imagem;
-	@Column(columnDefinition = "String")
 	private String matriz;
-	private AndarDTO andar;
+	private AndarSemMapaDTO andar;
 
 	public MapaDTO() {}
 
-	public MapaDTO(long id, String nome, String descricao, String imagem, String matriz, AndarDTO andar) {
+	public MapaDTO(long id, String nome, String descricao, String imagem, String matriz, AndarSemMapaDTO andar) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -32,7 +29,7 @@ public class MapaDTO implements Serializable{
 		descricao = mapa.getDescricao();
 		imagem = mapa.getImagem();
 		matriz = mapa.getMatriz();
-		andar = new AndarDTO(mapa.getAndar());
+		andar = new AndarSemMapaDTO(mapa.getAndar());
 	}
 
 	public long getId() {
@@ -75,11 +72,11 @@ public class MapaDTO implements Serializable{
 		this.matriz = matriz;
 	}
 
-	public AndarDTO getAndar() {
+	public AndarSemMapaDTO getAndar() {
 		return andar;
 	}
 
-	public void setAndar(AndarDTO andar) {
+	public void setAndar(AndarSemMapaDTO andar) {
 		this.andar = andar;
 	}
 }
