@@ -31,16 +31,50 @@ import { ProfileDetails, BackgroundProfile, Divisor } from '../UserProfile/style
 import { BackgroundNavigation } from '../AdviceProfile/styles';
 
 function getDate(day: number, hour: number) {
-    
   const date = new Date();
 
-  const datePerson = date.getDate() + day;
-  const mounthPerson = date.getMonth() + 1;
-  const yearPerson = date.getFullYear();
-  const hourPerson = (date.getHours() + hour) % 24;
-  const minutePerson = date.getMinutes();
+  let totalDay;
 
-  return `${datePerson}/${mounthPerson}/${yearPerson}/${hourPerson}/${minutePerson}`;
+  let addDay = 0;
+  let addMonth = 0;
+  let addYear = 0;
+
+  let dayTime = date.getDate();
+  let monthTime = date.getMonth() + 1;
+  let yearTime = date.getFullYear();
+  let hourTime = (date.getHours() + hour) % 24;
+  let minuteTime = date.getMinutes();
+
+  //Add manual values
+  // let dayTime = 31;
+  // let monthTime = 12;
+  // let yearTime = date.getFullYear();
+  // let hourTime = (23 + hour) % 24;
+  // let minuteTime = date.getMinutes();
+
+  if (day == 0) {
+    if (date.getHours() > hourTime) addDay = 1;
+  } else addDay = day;  
+
+  if (monthTime % 2 == 0) {
+    if (monthTime == 2) totalDay = 28;
+    else if (monthTime == 4 || monthTime == 6) totalDay = 30;
+    else totalDay = 31;
+  } else {
+    if (monthTime <= 7) totalDay = 31;
+    else totalDay = 30;
+  }
+
+  if (dayTime + addDay > totalDay) addMonth = 1;
+  if (monthTime + addMonth > 12) addYear = 1;
+
+  dayTime = (dayTime + addDay) % (totalDay + 1);
+  dayTime = dayTime == 0 ? 1 : dayTime;
+  monthTime = (monthTime + addMonth) % 13;
+  monthTime = monthTime == 0 ? 1 : monthTime;
+  yearTime += addYear;
+
+  return `${dayTime}-${monthTime}-${yearTime}-${hourTime}-${minuteTime}`;
 }
 
 const UserEditProfileSchema = Yup.object().shape({
