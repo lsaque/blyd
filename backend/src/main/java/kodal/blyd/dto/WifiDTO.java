@@ -1,21 +1,20 @@
 package kodal.blyd.dto;
 
 import java.io.Serializable;
-
 import kodal.blyd.entities.Wifi;
 
 public class WifiDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private long id;
 	private String nome, descricao;
-	private PontoDTO ponto;
+	private String ponto;
 	private AndarDTO andar;
 	
 	public WifiDTO() {}
 
-	public WifiDTO(long id, String nome, String descricao, PontoDTO ponto, AndarDTO andar) {
+	public WifiDTO(long id, String nome, String descricao, String ponto, AndarDTO andar) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -27,7 +26,7 @@ public class WifiDTO implements Serializable{
 		id = wifi.getId();
 		nome = wifi.getNome();
 		descricao = wifi.getDescricao();
-		ponto = new PontoDTO(wifi.getPonto());
+		ponto = wifi.getPonto();
 		andar = new AndarDTO(wifi.getAndar());
 	}
 
@@ -55,11 +54,11 @@ public class WifiDTO implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public PontoDTO getPonto() {
+	public String getPonto() {
 		return ponto;
 	}
 
-	public void setPonto(PontoDTO ponto) {
+	public void setPonto(String ponto) {
 		this.ponto = ponto;
 	}
 

@@ -1,8 +1,7 @@
-package kodal.blyd.script;
+package kodal.blyd.utils.commons;
 
 import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.services.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class LoginScript {
 

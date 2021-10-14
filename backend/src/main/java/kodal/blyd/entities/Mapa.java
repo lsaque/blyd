@@ -1,13 +1,6 @@
 package kodal.blyd.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "t_mapa")
@@ -17,26 +10,24 @@ public class Mapa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private String nome, descricao;
-	
-	@Column(name = "link_imagem")
-	private String linkImagem;
-	
-	private double m2;
-	
+	private String nome, descricao, imagem;
+
+	@Lob
+	private String matriz;
+
 	@OneToOne
 	@JoinColumn(name = "andar_id")
 	private Andar andar;
-	
+
 	public Mapa() {}
 
-	public Mapa(long id, String nome, String descricao, String linkImagem ,double m2, Andar andar) {
+	public Mapa(long id, String nome, String descricao, String imagem, String matriz, Andar andar) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.m2 = m2;
+		this.imagem = imagem;
+		this.matriz = matriz;
 		this.andar = andar;
-		this.linkImagem = linkImagem;
 	}
 
 	public long getId() {
@@ -63,12 +54,20 @@ public class Mapa {
 		this.descricao = descricao;
 	}
 
-	public double getM2() {
-		return m2;
+	public String getImagem() {
+		return imagem;
 	}
 
-	public void setM2(double m2) {
-		this.m2 = m2;
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
+	public String getMatriz() {
+		return matriz;
+	}
+
+	public void setMatriz(String matriz) {
+		this.matriz = matriz;
 	}
 
 	public Andar getAndar() {
@@ -77,13 +76,5 @@ public class Mapa {
 
 	public void setAndar(Andar andar) {
 		this.andar = andar;
-	}
-
-	public String getLinkImagem() {
-		return linkImagem;
-	}
-
-	public void setLinkImagem(String linkImagem) {
-		this.linkImagem = linkImagem;
 	}
 }

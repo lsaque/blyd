@@ -5,7 +5,7 @@ import java.io.Serializable;
 import kodal.blyd.entities.SolicitacaoCadastro;
 
 public class SolicitacaoCadastroDTO implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	private long id;	
