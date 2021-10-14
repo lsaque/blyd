@@ -109,7 +109,7 @@ export default function LiveLocalization({navigation, route} : any){
                 if(routeData == undefined){
                   navigation.navigate('Localization')
                 } else {
-                  navigation.navigate('MarkAdvice')
+                  navigation.navigate('Advice')
                 }
               }}
             />
@@ -122,9 +122,10 @@ export default function LiveLocalization({navigation, route} : any){
               : 
               routeData?.avisos.map((aviso: any) => (
                 <AdviceNotification
-                key={aviso}
-                importance={1}
-                text={aviso.descricao}
+                  onPress={() => navigation.navigate("AdviceProfile", {})}
+                  key={aviso}
+                  importance={1}
+                  text={aviso.descricao}
                 /> 
               ))
           }

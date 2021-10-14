@@ -291,13 +291,13 @@ function AdminBottomTab(){
       />
 
       <AdminTab.Screen 
-        name="Search" 
-        component={ Search } 
+        name="UserList" 
+        component={ UserList } 
         options={{
-          tabBarLabel: 'Procurar',
+          tabBarLabel: 'Usuários',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
-              name={focused ? 'search' : 'md-search-outline'}
+              name={focused ? 'person' : 'person-outline'}
               size={24} 
               color={color} 
             />
@@ -321,14 +321,14 @@ function AdminBottomTab(){
       />
  
       <AdminTab.Screen 
-        name="Activity" 
-        component={ Activity } 
+        name="AdviceList" 
+        component={ AdminAdviceTopTab } 
         options={{
-          tabBarLabel: 'Atividade',
+          tabBarLabel: 'Avisos',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
-              name={focused ? 'heart' : 'heart-outline'}
-              size={24} 
+              name={focused ? 'alert-circle' : 'alert-circle-outline'}
+              size={25} 
               color={color} 
             />
           ),
@@ -373,6 +373,7 @@ const UserScreen = () => {
       <UserStack.Screen name="Advice" component={Advice} />
       <UserStack.Screen name="MarkAdvice" component={MarkAdvice} />
       <UserStack.Screen name="SearchContact" component={SearchContact} />
+      <UserStack.Screen name="AdviceProfile" component={AdviceProfile} />
 
       {/* <UserStack.Screen name="UserProfile" component={UserProfile}/> */}
       {/* <UserStack.Screen name="UserEditProfile" component={UserEditProfile}/> */}
@@ -384,7 +385,7 @@ const AdminScreen = () => {
   return (
     <AdminStack.Navigator initialRouteName="Admin" screenOptions={{ headerShown: false }} >
       <AdminStack.Screen name="Admin" component={AdminBottomTab}/>
-      <AdminStack.Screen name="UserList" component={UserList}/>
+      {/* <AdminStack.Screen name="UserList" component={UserList}/> */}
       <AdminStack.Screen name="UserProfile" component={UserProfile}/>
       <AdminStack.Screen name="UserEditProfile" component={UserEditProfile}/>
       <AdminStack.Screen name="UserCreateProfile" component={UserCreateProfile}/>

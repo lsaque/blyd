@@ -7,7 +7,9 @@ import ProfileActionButton from "../../components/ProfileActionButton";
 import ProfileMenuButton from "../../components/ProfileMenuButton";
 import ProfileAbout from "../../components/ProfileAbout";
 
-import Background from "../../assets/UserList/background.png";
+// import Background from "../../assets/UserList/background.png";
+import Background from "../../assets/Admin/background.png";
+
 
 import { 
   Container,

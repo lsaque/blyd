@@ -25,7 +25,7 @@ function Home({navigation} : any){
       <StatusBar
         style='light'
         translucent={false}
-        animated={true}
+        // animated={true}
       />
 
       <Container>

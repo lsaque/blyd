@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { BackgroundNavigation, BackgroundProfile, Divisor, ProfileDetails } from "../../../UserProfile/styles";
 import { Formik } from "formik";
 
@@ -168,21 +168,23 @@ const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation }: an
                 </Divisor>
               </ProfileDetails>
 
-              <SubmitButton
-                onPress={() => {
-                  handleSubmit;
-                  console.log(values); 
-                  alert("Dados alterados com sucesso");
-                  // navigation.goBack()
-                }}
-                style={{
-                  marginHorizontal: 20,
-                  opacity: !(dirty && isValid) ? 0.6 : 1,
-                }}   
-                disabled={!(dirty && isValid)}
-              >
-                <Text style={{color: "#fff", fontSize: 18}}>Atualizar</Text>
-              </SubmitButton>
+              <View style={{marginHorizontal: 20}}>
+                <SubmitButton
+                  onPress={() => {
+                    handleSubmit;
+                    console.log(values); 
+                    alert("Dados alterados com sucesso");
+                    // navigation.goBack()
+                  }}
+                  style={{
+                    marginHorizontal: 20,
+                    opacity: !(dirty && isValid) ? 0.6 : 1,
+                  }}   
+                  disabled={!(dirty && isValid)}
+                  >
+                  <Text style={{color: "#fff", fontSize: 18}}>Atualizar</Text>
+                </SubmitButton>
+              </View>
             </React.Fragment>
           )}
         </Formik>

@@ -1,5 +1,5 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
-import { Platform, Text, Image } from "react-native";
+import { Platform, Text, Image, View } from "react-native";
 import { BackgroundNavigation, BackgroundProfile, Divisor, ProfileDetails } from "../../../UserProfile/styles";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Formik } from "formik";
@@ -14,7 +14,8 @@ import ProfileActionButton from "../../../../components/ProfileActionButton";
 import Navigation from "../../../../components/Navigation";
 import Details from "../../../../components/Details";
 
-import Background from "../../../../assets/UserList/background.png";
+import Background from "../../../../assets/Admin/background.png";
+// import Background from "../../../../assets/UserList/background.png";
 import WithoutPicture from "../../../../assets/UserList/withoutPhoto.png";
 
 import { 
@@ -292,21 +293,25 @@ const UserCreateProfile: React.FC<IUserCreateProfileProps> = ({ navigation }: an
                 </Divisor>
               </ProfileDetails>
 
-              <SubmitButton
-                onPress={() => {
-                  handleSubmit;
-                  console.log(values);
-                }}
-                style={{
-                  marginHorizontal: 20,
-                  // backgroundColor: !(dirty && isValid) ? '#ede9f8' : '#8363F6',
-                  opacity: !(dirty && isValid) ? 0.6 : 1,
-                }}
-                disabled={!(dirty && isValid)}
-              >
-                <Text style={{ color:"#fff", fontSize: 18 }
-                }>Cadastrar</Text>
-              </SubmitButton>
+              <View style={{
+                marginHorizontal: 20,
+              }}>
+                <SubmitButton
+                  onPress={() => {
+                    handleSubmit;
+                    console.log(values);
+                  }}
+                  style={{
+                    marginHorizontal: 20,
+                    // backgroundColor: !(dirty && isValid) ? '#ede9f8' : '#8363F6',
+                    opacity: !(dirty && isValid) ? 0.6 : 1,
+                  }}
+                  disabled={!(dirty && isValid)}
+                >
+                  <Text style={{ color:"#fff", fontSize: 18 }
+                  }>Cadastrar</Text>
+                </SubmitButton>
+              </View>
             </React.Fragment>
           )}
         </Formik>
