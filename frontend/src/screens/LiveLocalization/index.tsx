@@ -33,6 +33,7 @@ export default function LiveLocalization({navigation, route} : any){
   const [ selectedComodo, setSelectedComodo ] = useState<comodo>();
   const [ routeData, setRouteData ] = useState<rota>();
   const [ index, setIndex ] = useState<number>(-1);
+  // const [ isRouted, setIsRouted] = useState(false);
   const [ popUpData, setPopUpData ] = useState<myPopUpData>({
     arrowDirection: "",
     arrowType: "map-clock",
@@ -51,6 +52,7 @@ export default function LiveLocalization({navigation, route} : any){
 
   useEffect(() =>{
     if(routeData != undefined){
+      // setIsRouted(!isRouted)
       setPopUpData({
         arrowDirection: routeData.popUps[index].arrowDirection,
         arrowType: routeData.popUps[index].arrowType,
@@ -61,6 +63,7 @@ export default function LiveLocalization({navigation, route} : any){
       const timer = setTimeout(() => setIndex(index + 1),6000);
 
       if(index == routeData.popUps.length - 1) clearTimeout(timer);
+
     }
   },[index]);
 
@@ -84,16 +87,13 @@ export default function LiveLocalization({navigation, route} : any){
         ref={modalizeRef}
         // modalHeight={415}
         adjustToContentHeight={false}
-        alwaysOpen={100}
-        modalHeight={360}
-        // HeaderComponent={
-        //   <Title>Detalhes do <Strong>Trajeto</Strong> 🏆</Title>
-        // }
+        alwaysOpen={380}
+        modalHeight={380}
         FooterComponent={
           <Row>
             <Button
               filled
-              text="Cancelar"
+              text="Concluir viagem"
               backgroundColor="#F1EEEE" // onPress={() => { modalizeRef.current?.close()}}
             />
           </Row>
@@ -104,7 +104,14 @@ export default function LiveLocalization({navigation, route} : any){
             <InformationTrip
               // destiny={comodo.nome || ""}
               destiny={selectedComodo?.nome || "Sem rota"}
-              onPress={() => navigation.navigate('MarkAdvice')}
+              isRouteSetted={routeData != undefined ? true : false}
+              onPress={() => {
+                if(routeData == undefined){
+                  navigation.navigate('Localization')
+                } else {
+                  navigation.navigate('MarkAdvice')
+                }
+              }}
             />
           </Row>
 

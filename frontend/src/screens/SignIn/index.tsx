@@ -110,135 +110,144 @@ const SignIn: React.FC<ISignInProps> = ({ navigation }: any) => {
                 keyboardShouldPersistTaps="handled"
                 keyboardDismissMode="on-drag"
               >
-                {/* <BackgroundProfile source={Background} resizeMode="cover"/> */}
-                <View style={{height: 80}}/>
-                <Details 
-                  avatar={WithoutPicture}
-                  isPCD={values.isPCD}
-                  hideNameAndEmail={true}
-                />
+                <View accessibilityHint="Campo de indicação de perfil sem imagem (lembrando que só é possível inserir uma foto depois de ser aceito no aplicativo)">
+                  <View style={{height: 80}}/>
+                  <Details 
+                    avatar={WithoutPicture}
+                    isPCD={values.isPCD}
+                    hideNameAndEmail={true}
+                  />
+                </View>
+
+                <Divisor/>
 
                 <Divisor>
-                  {/* <EditButton>
-                    <ProfileActionButton
-                      icon={<MaterialIcons name="edit" size={18} color="black" />}
-                      placeholder="Mudar foto de perfil"
-                      onPress={ () => {}}                
+
+                  <View accessibilityHint="Você é um deficiente visual? Se for, clique no SIM, caso constrário, clique no NÃO">
+                    <Label>Deficiente visual?</Label>
+                    <RadioArea>
+                      <RadioButtonRN
+                        data={data}
+                        animationTypes={['shake']}
+                        selectedBtn={(e: any) => {
+                          setFieldValue("isPCD", e.value)
+                          handleChange("isPCD");
+                        }}
+                        boxDeactiveBgColor="#F5F5F5"
+                        circleSize={10}
+                        initial={values.isPCD ? 1 : 2}
+                      />
+                    </RadioArea>
+                  </View>
+
+                  <View accessibilityHint="Preencha este campo com o seu nome completo">
+                    <Label>Nome completo</Label>
+                    <TextInput
+                      keyboardType={"ascii-capable"}
+                      value={values.name}
+                      // autoFocus={true}
+                      onChangeText={ handleChange("name") }
+                      onBlur={ handleBlur("name") }
+                      placeholder="Preencha com o nome completo"
+                      returnKeyType="next"
+                      // onSubmitEditing={() => emailRef.current.focus()}
                     />
-                  </EditButton> */}
-                </Divisor>
+                    <ErrorMessage>{errors.name}</ErrorMessage>
+                  </View>
 
-                <Divisor>
-                  <Label>Deficiente visual?</Label>
-                  <RadioArea>
-                    <RadioButtonRN
-                      data={data}
-                      animationTypes={['shake']}
-                      selectedBtn={(e: any) => {
-                        setFieldValue("isPCD", e.value)
-                        handleChange("isPCD");
-                      }}
-                      boxDeactiveBgColor="#F5F5F5"
-                      circleSize={10}
-                      initial={values.isPCD ? 1 : 2}
-                    />
-                  </RadioArea>
-
-                  <Label>Nome completo</Label>
-                  <TextInput
-                    keyboardType={"ascii-capable"}
-                    value={values.name}
-                    autoFocus={true}
-                    onChangeText={ handleChange("name") }
-                    onBlur={ handleBlur("name") }
-                    placeholder="Preencha com o nome completo"
-                    returnKeyType="next"
-                    // onSubmitEditing={() => emailRef.current.focus()}
-                  />
-                  <ErrorMessage>{errors.name}</ErrorMessage>
-
-                  <Label>E-mail</Label>
-                  <TextInput
-                    keyboardType="email-address"
-                    value={values.email}
-                    onChangeText={handleChange("email")}
-                    onBlur={handleBlur("email")}
-                    placeholder="exemplo@exemplo.com"
-                    returnKeyType="next"
-                    style={{
-                      textTransform: "lowercase",
-                    }}
-                    // onSubmitEditing={() => celularRef.current.focus()}
-                    // ref={emailRef}
-                  />
-                  <ErrorMessage>{errors.email}</ErrorMessage>
-
-                  <Label>Celular</Label>
-                  <PhoneArea>
-                    <MaskedInput
+                  <View accessibilityHint="Preencha este campo com o email que gostaria de entrar no aplicativo">
+                    <Label>E-mail</Label>
+                    <TextInput
+                      keyboardType="email-address"
+                      value={values.email}
+                      onChangeText={handleChange("email")}
+                      onBlur={handleBlur("email")}
+                      placeholder="exemplo@exemplo.com"
+                      returnKeyType="next"
                       style={{
-                        color: "#565656"
+                        textTransform: "lowercase",
                       }}
-                      keyboardType="number-pad"
-                      placeholder="(00) 90000-0000"
-                      type={"cel-phone"} 
-                      options={{
-                        maskType: 'BRL',
-                        withDDD: true,
-                        dddMask: '(99) '
-                      }}
-                      onChangeText={(maskedText, rawText) => {
-                        setFieldValue("phoneNumber", rawText)
-                        handleChange("phoneNumber")
-                      }}
-                      value={values.phoneNumber}
-                      onBlur={handleBlur("phoneNumber")}
-                      returnKeyType="done"
-                      // ref={celularRef}
+                      // onSubmitEditing={() => celularRef.current.focus()}
+                      // ref={emailRef}
                     />
-                  </PhoneArea>
-                  <ErrorMessage>{errors.phoneNumber}</ErrorMessage>
-                  
+                    <ErrorMessage>{errors.email}</ErrorMessage>
+                  </View>
+
+                  <View accessibilityHint="Preencha este campo com o seu número de celular para receber ajudas futuras por ligação">
+                    <Label>Celular</Label>
+                    <PhoneArea>
+                      <MaskedInput
+                        style={{
+                          color: "#565656"
+                        }}
+                        keyboardType="number-pad"
+                        placeholder="(00) 90000-0000"
+                        type={"cel-phone"} 
+                        options={{
+                          maskType: 'BRL',
+                          withDDD: true,
+                          dddMask: '(99) '
+                        }}
+                        onChangeText={(maskedText, rawText) => {
+                          setFieldValue("phoneNumber", rawText)
+                          handleChange("phoneNumber")
+                        }}
+                        value={values.phoneNumber}
+                        onBlur={handleBlur("phoneNumber")}
+                        returnKeyType="done"
+                        // ref={celularRef}
+                      />
+                    </PhoneArea>
+                    <ErrorMessage>{errors.phoneNumber}</ErrorMessage>
+                  </View>
                 </Divisor>
 
                 <Divisor>
-                  <Label>Senha</Label>
-                  <TextInput
-                    secureTextEntry={true}
-                    onBlur={handleBlur("password")}
-                    onChangeText={handleChange("password")}
-                    placeholder=""
-                    returnKeyType="next"
-                  />
-                  <ErrorMessage>{errors.password}</ErrorMessage>
+                  <View accessibilityHint="Digite a senha que gostaria de entrar no aplicativo">
+                    <Label>Senha</Label>
+                    <TextInput
+                      secureTextEntry={true}
+                      onBlur={handleBlur("password")}
+                      onChangeText={handleChange("password")}
+                      placeholder=""
+                      returnKeyType="next"
+                    />
+                    <ErrorMessage>{errors.password}</ErrorMessage>
+                  </View>
 
-                  <Label>Confirmar senha</Label>
-                  <TextInput
-                    secureTextEntry={true}
-                    onChangeText={handleChange("passwordConfirmation")}
-                    onBlur={handleBlur("passwordConfirmation")}
-                    placeholder=""
-                    returnKeyType="next"
-                  />
-                  <ErrorMessage>{errors.passwordConfirmation}</ErrorMessage>
+
+                  <View accessibilityHint="Digite a confirmação de senha (Lembrando que obrigatoriamente ela precisa estar igual a senha anterior)">
+                    <Label>Confirmar senha</Label>
+                    <TextInput
+                      secureTextEntry={true}
+                      onChangeText={handleChange("passwordConfirmation")}
+                      onBlur={handleBlur("passwordConfirmation")}
+                      placeholder=""
+                      returnKeyType="next"
+                    />
+                    <ErrorMessage>{errors.passwordConfirmation}</ErrorMessage>
+                  </View>
                 </Divisor>
               </ProfileDetails>
 
-              <SubmitButton
-                onPress={() => {
-                  handleSubmit;
-                  console.log(values); 
-                  alert("Solicitação enviada com sucesso! \nAguarde a liberação.");
-                  navigation.goBack()
-                }}
-                style={{
-                  marginHorizontal: 20,
-                  opacity: !(dirty && isValid) ? 0.6 : 1,
-                }}   
-                disabled={!(dirty && isValid)}
-              >
-                <Text style={{color: "#fff", fontSize: 18}}>Enviar</Text>
-              </SubmitButton>
+              <View style={{marginHorizontal: 20}}>
+                <SubmitButton
+                  onPress={() => {
+                    handleSubmit;
+                    console.log(values); 
+                    alert("Solicitação enviada com sucesso! \nAguarde a liberação.");
+                    navigation.goBack()
+                  }}
+                  style={{
+                    opacity: !(dirty && isValid) ? 0.6 : 1,
+                  }}   
+                  disabled={!(dirty && isValid)}
+                  accessibilityHint="Para efetuar o envio da solicitação, é preciso que todos os dados anteriores estejam preenchidos corretamente"
+                  accessibilityState={{disabled: !(dirty && isValid)}}
+                  >
+                  <Text style={{color: "#fff", fontSize: 18}}>Enviar</Text>
+                </SubmitButton>
+              </View>
             </React.Fragment>
           )}
         </Formik>

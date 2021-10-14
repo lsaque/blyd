@@ -76,7 +76,7 @@ const colors = {
 }
 
 export default function App({ navigation }: any){
-  const [showHome, setShowHome] = useState(false);
+  const [showHome, setShowHome] = useState(true);
 
   function SplashScreen({item} : any){
     return(
@@ -86,7 +86,10 @@ export default function App({ navigation }: any){
             <LogoBlyd source={logo} resizeMode="contain"/>
             <Image resizeMode="contain" source={item.image} />
           </BoxImage>
-          <BoxContent>
+          <BoxContent 
+            accessible={true}
+            importantForAccessibility="yes"
+          >
             <Title>{item.title}</Title>
             <Description>{item.text}</Description>
           </BoxContent>
@@ -111,17 +114,20 @@ export default function App({ navigation }: any){
         <AppIntroSlider
           renderItem={SplashScreen}
           data={slides}
-          showPrevButton={true}
+          showPrevButton={false}
           showNextButton={true}
+          accessible={false}
+          dotClickEnabled={false}
           activeDotStyle={{
             backgroundColor: colors.primary,
             width: 30
           }}
           renderNextButton={ () => <SplashButton>Próximo</SplashButton> }
           renderDoneButton={ () => 
-          <SplashButton 
-            onPress={ () => setShowHome(true)}
-          >Acessar</SplashButton> }
+            <SplashButton 
+              onPress={ () => setShowHome(true)}
+            >Acessar</SplashButton> 
+          }
         />
       </React.Fragment>
     );

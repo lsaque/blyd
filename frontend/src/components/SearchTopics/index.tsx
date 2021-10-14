@@ -21,9 +21,13 @@ const ListTag = styled.Text`
 export default ({title} : any) => {
   return(
     <Container>
-      <Title>{title}</Title>
+      <Title
+        accessible={false}
+      >{title}</Title>
 
-      <ListTag>
+      <ListTag
+        accessibilityHint={"Neste campo será possível encontrar e clicar para ir em " + title}
+      >
         <TagButton title="Banheiro A2D"/>
         <TagButton title="Administração A2" />
         <TagButton title="Refeitório A2V"/>

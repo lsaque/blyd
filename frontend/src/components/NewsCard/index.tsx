@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { Image } from 'react-native';
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   /* display: flex; */
   /* justify-content: center; */
   /* align-items: center; */
@@ -37,7 +37,7 @@ const InformationText = styled.Text`
   /* word-wrap: break-word; */
 `;
 
-const Button = styled.TouchableOpacity`
+const Button = styled.View`
   justify-content: space-between;
   flex-direction: row;
   margin-top: 10px;
@@ -62,12 +62,16 @@ const ImageInformation = styled.Image`
 
 export default ({image, text, onPress}:any) => {
   return (
-    <Container>
+    <Container 
+      accessible={true}
+      accessibilityHint={text}
+      onPress={onPress}
+    >
       <Wrapper>
 
         <Information>
           <InformationText>{text}</InformationText>
-          <Button onPress={onPress}>
+          <Button>
             <TextButton>Encontre</TextButton>
             <Feather name="arrow-right" size={20} color="#FFF" />
           </Button>

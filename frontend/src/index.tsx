@@ -186,6 +186,7 @@ function UserBottomTab(){
         name="HomeTab" 
         component={ Home }
         options={{
+          tabBarAccessibilityLabel: "Página inicial",
           tabBarLabel: 'Inicio',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
@@ -201,6 +202,7 @@ function UserBottomTab(){
         name="Search" 
         component={ Search } 
         options={{
+          tabBarAccessibilityLabel: "Procurar",
           tabBarLabel: 'Procurar',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
@@ -216,6 +218,7 @@ function UserBottomTab(){
         name="LiveLocalization" 
         component={ LiveLocalization } 
         options={{
+          tabBarAccessibilityLabel: "Localização",
           tabBarLabel: 'Localização',
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons 
@@ -231,6 +234,7 @@ function UserBottomTab(){
         name="Activity" 
         component={ Activity } 
         options={{
+          tabBarAccessibilityLabel: "Atividade e notificações",
           tabBarLabel: 'Atividade',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
@@ -246,6 +250,7 @@ function UserBottomTab(){
         name="Setting" 
         component={ Setting } 
         options={{
+          tabBarAccessibilityLabel: "Configurações",
           tabBarLabel: 'Configuração',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 

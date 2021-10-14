@@ -76,9 +76,9 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
 
       <Formik
         initialValues={{ 
-          email: "",
-          password: "",
-          isADM: false
+          email: "isaque@gmail.com",
+          password: "salve123",
+          isADM: false,
         }}
         validationSchema={UserEditProfileSchema}
         onSubmit={(values: any) => {
@@ -89,41 +89,55 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
         {({ handleChange, handleBlur, handleSubmit, values, errors, dirty, isValid }) => (
           <SignWrapper>
 
-            <BoxContent style={{marginTop: 20}}>
+            <BoxContent 
+              style={{marginTop: 20}}
+              accessible={true}
+            >
               <Title>Entrar no Blyd</Title>
               <Description>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et </Description>
             </BoxContent>
 
             <Content>
-              <Label>E-mail de usuário</Label>
-              <TextInput
-                value={values.email}
-                autoFocus={true}
-                onChangeText={ handleChange("email") }
-                onBlur={ handleBlur("email") }
-                placeholder="E-mail de entrada"
-                returnKeyType="next"
-                onSubmitEditing={() => password.current.focus()}
-              />
-              <ErrorMessage>{errors.email}</ErrorMessage>
+              <View 
+                accessible={true}
+                accessibilityHint="Neste campo é necessário que você informe o seu email de entrada"
+              >
+                <Label>E-mail de usuário</Label>
+                <TextInput
+                  value={values.email}
+                  autoFocus={true}
+                  onChangeText={ handleChange("email") }
+                  onBlur={ handleBlur("email") }
+                  placeholder=""
+                  returnKeyType="next"
+                  onSubmitEditing={() => password.current.focus()}
+                  // accessibilityHint="Caixa de texto para informar o seu email de login"
+                  />
+                <ErrorMessage>{errors.email}</ErrorMessage>
+              </View>
 
-              <Label>Senha</Label>
-              <TextInput
-                value={values.password}
-                onChangeText={ handleChange("password") }
-                onBlur={ handleBlur("password") }
-                secureTextEntry={true}
-                placeholder=""
-                returnKeyType="done"
-                ref={password}
-                onSubmitEditing={() => {
-                  handleSubmit;
-                  console.log(values)
-                  validation(values, dirty, isValid, handleSubmit)
-                  // setShowHome(true);
-                }}
-              />
-              <ErrorMessage>{errors.password}</ErrorMessage>
+              <View 
+                accessible={true}
+                accessibilityHint="Neste campo é necessário que você insira a sua senha de entrada"
+              >
+                <Label>Senha</Label>
+                <TextInput
+                  value={values.password}
+                  onChangeText={ handleChange("password") }
+                  onBlur={ handleBlur("password") }
+                  secureTextEntry={true}
+                  placeholder=""
+                  returnKeyType="done"
+                  ref={password}
+                  onSubmitEditing={() => {
+                    handleSubmit;
+                    console.log(values)
+                    validation(values, dirty, isValid, handleSubmit)
+                    // setShowHome(true);
+                  }}
+                />
+                <ErrorMessage>{errors.password}</ErrorMessage>
+              </View>
 
               <SubmitButton
                 onPress={() => {
@@ -131,16 +145,16 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
                   console.log(values);
                   validation(values, dirty, isValid, handleSubmit)
                 }}
-                style={{
-                  margin: 0,
-                }}   
                 ref={enterButton}
+                accessibilityHint="Botão para entrar no aplicativo com os dados informados"
               >
                 <Text style={{color: "#fff", fontSize: 18}}>Entrar</Text>
               </SubmitButton>
 
               <RegisterButton
                 text="Solicitar Registro"
+                accessible={true}
+                accessibilityHint="Caso não tenha um cadastro, é possível solicitar um cadastro clicando neste botão"
                 onPress={() => navigation.navigate('UserScreen', {screen: "SignIn"})}
               />
 

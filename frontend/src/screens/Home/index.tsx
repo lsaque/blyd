@@ -37,7 +37,7 @@ function Home({navigation} : any){
           </Top>
 
           <Bot>
-            <WelcomeText>Bem-vindo, {"\n"}Isaque!</WelcomeText>
+            <WelcomeText accessibilityHint="Bem-vindo">Bem-vindo, {"\n"}Isaque!</WelcomeText>
 
             <IconButtonText
               text="Deseja ir para onde?"
@@ -55,7 +55,11 @@ function Home({navigation} : any){
         </HomeImage>
 
         <Content>
-          <PageTitle>Funções disponíveis</PageTitle>
+          <PageTitle
+            accessibilityHint="Veja abaixo todas as principais funções do aplicativo"
+          >
+            Funções disponíveis
+          </PageTitle>
 
           <HomeCard
             text="Ir a um local específico."

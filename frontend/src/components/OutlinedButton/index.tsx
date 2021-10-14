@@ -6,6 +6,7 @@ const Button = styled.TouchableOpacity`
   width: 100%;
   justify-content: center;
   align-items: center;
+  height: 30px;
 `;
 
 const ButtonText = styled.Text`
@@ -13,9 +14,12 @@ const ButtonText = styled.Text`
   font-size: 16px;
 `;
 
-export default ({text, onPress} : any) => {
+export default ({text, onPress, accessibilityHint} : any) => {
   return (
-    <Button onPress={onPress}>
+    <Button 
+      onPress={onPress}
+      accessibilityHint={accessibilityHint}
+    >
       <ButtonText>{text}</ButtonText>
     </Button>
   );
