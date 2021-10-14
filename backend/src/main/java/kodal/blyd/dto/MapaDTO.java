@@ -3,6 +3,8 @@ package kodal.blyd.dto;
 import java.io.Serializable;
 import kodal.blyd.entities.Mapa;
 
+import javax.persistence.Lob;
+
 public class MapaDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

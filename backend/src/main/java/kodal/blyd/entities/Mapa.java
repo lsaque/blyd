@@ -1,5 +1,7 @@
 package kodal.blyd.entities;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +15,7 @@ public class Mapa {
 	private String nome, descricao, imagem;
 
 	@Lob
-	@Column
+	@Type(type = "org.hibernate.type.TextType")
 	private String matriz;
 
 	@OneToOne
