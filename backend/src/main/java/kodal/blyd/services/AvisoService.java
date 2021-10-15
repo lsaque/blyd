@@ -31,8 +31,7 @@ public class AvisoService {
 	public Aviso procurarAviso(long id){
 		return repository.procurarAviso(id);
 	}
-
-	@Transactional
+	
 	public void marcarAviso(Aviso aviso){
 		repository.save(aviso);
 	}
