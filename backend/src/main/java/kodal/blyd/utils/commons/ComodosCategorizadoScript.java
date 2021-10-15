@@ -1,4 +1,4 @@
-package kodal.blyd.script;
+package kodal.blyd.utils.commons;
 
 import kodal.blyd.dto.ComodoDTO;
 import kodal.blyd.dto.ComodoCategorizadoDTO;

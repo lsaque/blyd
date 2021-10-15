@@ -1,37 +1,37 @@
 package kodal.blyd.dto;
 
 import java.io.Serializable;
-
 import kodal.blyd.entities.Mapa;
+
+import javax.persistence.Lob;
 
 public class MapaDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	private long id;
-	private String nome, descricao;
-	private String linkImagem;
-	private double m2;
-	private AndarDTO andar;
-	
+	private String nome, descricao, imagem;
+	private String matriz;
+	private AndarSemMapaDTO andar;
+
 	public MapaDTO() {}
 
-	public MapaDTO(long id, String nome, String descricao, String linkImagem, double m2, AndarDTO andar) {
+	public MapaDTO(long id, String nome, String descricao, String imagem, String matriz, AndarSemMapaDTO andar) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.linkImagem = linkImagem;
-		this.m2 = m2;
+		this.imagem = imagem;
+		this.matriz = matriz;
 		this.andar = andar;
 	}
-	
+
 	public MapaDTO(Mapa mapa) {
 		id = mapa.getId();
 		nome = mapa.getNome();
 		descricao = mapa.getDescricao();
-		linkImagem = mapa.getLinkImagem();
-		m2 = mapa.getM2();
-		andar = new AndarDTO(mapa.getAndar());
+		imagem = mapa.getImagem();
+		matriz = mapa.getMatriz();
+		andar = new AndarSemMapaDTO(mapa.getAndar());
 	}
 
 	public long getId() {
@@ -58,27 +58,27 @@ public class MapaDTO implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public String getLinkImagem() {
-		return linkImagem;
+	public String getImagem() {
+		return imagem;
 	}
 
-	public void setLinkImagem(String linkImagem) {
-		this.linkImagem = linkImagem;
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
-	public double getM2() {
-		return m2;
+	public String getMatriz() {
+		return matriz;
 	}
 
-	public void setM2(double m2) {
-		this.m2 = m2;
+	public void setMatriz(String matriz) {
+		this.matriz = matriz;
 	}
 
-	public AndarDTO getAndar() {
+	public AndarSemMapaDTO getAndar() {
 		return andar;
 	}
 
-	public void setAndar(AndarDTO andar) {
+	public void setAndar(AndarSemMapaDTO andar) {
 		this.andar = andar;
 	}
 }

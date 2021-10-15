@@ -8,7 +8,8 @@ import ProfileMenuButton from "../../components/ProfileMenuButton";
 import ProfileAbout from "../../components/ProfileAbout";
 
 // import Background from "../../assets/UserList/background.png";
-import Background from "../../assets/Admin/background.png";
+import BackgroundAdmin from "../../assets/Admin/background.png";
+import BackgroundUser from '../../assets/Activity/background.png'
 
 
 import { 
@@ -35,10 +36,11 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation }: any) => {
       </BackgroundNavigation>
       
       <ProfileDetails showsVerticalScrollIndicator={false}>
-        <BackgroundProfile source={Background} resizeMode="cover"/>
+        {/* Alterar */}
+        <BackgroundProfile source={BackgroundUser} resizeMode="cover"/>
 
         <Details 
-          avatar={Background}
+          avatar={BackgroundUser}
           isPCD={false}
           markedAdvice={true}
           name="Isaque José de Souza"

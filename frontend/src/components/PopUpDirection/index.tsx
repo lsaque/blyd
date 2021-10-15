@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 
 const Container = styled.View`
   margin-top: 20px;
@@ -66,9 +66,9 @@ export default ({arrowDirection, text, distance, arrowType}: any) => {
           >
             {
               arrowDirection != "" ? 
-              <FontAwesome name={arrowDirection} size={32} color="#4A4A4A" /> 
+              <Feather name={arrowDirection} size={32} color="#4A4A4A" /> 
               :
-              <MaterialCommunityIcons name={arrowType} size={32} color="#4A4A4A" />
+              <MaterialIcons name={arrowType} size={32} color="#4A4A4A" />
             }
           </Left>
 

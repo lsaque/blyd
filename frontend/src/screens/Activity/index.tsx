@@ -3,6 +3,8 @@ import { Dimensions, Image, View, Text} from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { BackgroundImage } from '../../../styles';
 
+import {setAdviceHour, setDueDate } from '../../utils/commons/generateDate';
+
 import Navigation from '../../components/Navigation';
 import ActivityCardAdvice from '../../components/ActivityCardAdvice';
 
@@ -23,18 +25,20 @@ import ActivityNotificationNumber from '../../components/ActivityNotificationNum
 import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';
 import { activityCardAdvice } from '../../types/activityCardAdvice';
+import { aviso } from '../../types/aviso';
+import AdminLastAdvice from '../../components/AdminLastAdvice';
 
 export default function Activity({navigation}:any){
 
   const modalizeRef = useRef<Modalize>(null);
 
   const uriBackground = Image.resolveAssetSource(Background).uri;
-  const [ activityCardAdviceData, setActivityCardAdviceData ] = useState<activityCardAdvice[]>();
+  const [ adviceList, setAdviceList ] = useState<aviso[]>();
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/activity-card-advice`).then((response) => {
-      const data = response.data as activityCardAdvice[];
-      setActivityCardAdviceData(data);
+    axios.get(`${BASE_URL}/avisos`).then((response) => {
+      const data = response.data as aviso[];
+      setAdviceList(data);
     });
   },[]);
 
@@ -60,27 +64,55 @@ export default function Activity({navigation}:any){
       heroImage={{ uri: uriBackground }}
     >
       <Container>
-        <Content>
-          <Title
-            accessibilityHint="Título dizendo para informar o local, juntamente de um ícone do planeta"
-          >Informe o <Strong>Local</Strong> 🌎</Title>
+        <Content style={{marginHorizontal: 20}}
+            accessibilityHint={"Neste quadrado branco é possível visualizar todas as categorias de locais disponíveis no aplicativo. São ordenados apenas 2 por linha"}
+          >
+            <Title
+              style={{marginBottom: 30}}
+              accessibilityHint="Título dizendo para informar o local, juntamente de um ícone do planeta"
+            >Visualizar <Strong>Notificações</Strong> 🔮</Title>
+              {
+                adviceList?.map(advice => {
 
+                  const dueDate = setDueDate(advice.tempoFinal);
+
+                  return(
+                    <AdminLastAdvice
+                      key={advice.id}
+                      userPicture={Background}
+                      userName={advice.usuario.nome}
+                      adviceHour={setAdviceHour(advice.tempoInicio)}
+                      adviceName={`${advice.descricao} - ${advice.local}`}
+                      adviceTimeRemaining={advice.duracao}
+                      isImpassable={advice.transitavel}
+                      dueDay={dueDate[0]}
+                      dueMonth={dueDate[1]}
+                      dueYear={dueDate[2]}
+                      dueHour={dueDate[3]}
+                      dueMinute={dueDate[4]}
+                      onPress={() => navigation.navigate("AdviceProfile")}
+                  /> 
+                  );
+                })
+              }
+{/* 
           <Wrapper 
             style={{marginTop: 40}}
             accessibilityHint={"Neste quadrado branco é possível visualizar todas as categorias de locais disponíveis no aplicativo. São ordenados apenas 2 por linha"}
-          >
-            {
+          > */}
+            {/* {
               activityCardAdviceData?.map((data) => (
                 <ActivityCardAdvice
                   key={data.id}
-                  name={data.name}
-                  adviceName={data.adviceName}
-                  adviceLocal={data.adviceLocal}
-                  timeDuration="1h"
+                  name={data.usuario.nome}
+                  adviceName={data.descricao}
+                  adviceLocal={data.local}
+                  timeDuration={data.duracao}
                 />
               ))
-            }
-          </Wrapper>
+            } */}
+            
+          {/* </Wrapper> */}
         </Content>
       </Container>
     </ParallaxHeader>

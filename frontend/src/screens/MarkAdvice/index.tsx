@@ -30,6 +30,18 @@ import RadioButtonRN from '../../components/_dependency/radio-buttons-react-nati
 import { ProfileDetails, BackgroundProfile, Divisor } from '../UserProfile/styles';
 import { BackgroundNavigation } from '../AdviceProfile/styles';
 
+function setHourRemaining(type: number) {
+  if(type == 1) return 1;
+  else if(type == 2) return 3;
+  else return 0;
+}
+
+function setDayRemaining(type: number) {
+  if(type == 3) return 1;
+  else if(type == 4) return 3;
+  else return 0;
+}
+
 function getDate(day: number, hour: number) {
   const date = new Date();
 
@@ -148,8 +160,10 @@ export default function Localization({navigation} : any){
           isImpassable: undefined,
         }}
         onSubmit={values => {
-          console.log(values)
-          // axios()
+          console.log(values.adviceTimeRemaining);
+          
+          // const date = getDate(setDayRemaining(parseInt(values.adviceTimeRemaining)), setHourRemaining(values.adviceTimeRemaining));
+
         }}
         validationSchema={UserEditProfileSchema}
       >
@@ -211,9 +225,9 @@ export default function Localization({navigation} : any){
               <SubmitButton
                 onPress={() => {
                   handleSubmit;
-                  console.log(values); 
-                  alert("Aviso marcado com sucesso");
-                  navigation.goBack();
+                  // console.log(values); 
+                  // alert("Aviso marcado com sucesso");
+                  // navigation.goBack();
                 }}
                 style={{
                   marginHorizontal: 20,

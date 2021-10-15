@@ -11,7 +11,6 @@ export type comodo = {
   id: number;
   nome: string;
   tipo: string;
-  pontoInicial: ponto;
-  pontoFinal: ponto;
+  pontoEntrada: ponto;
   andar: andar;
 };
