@@ -22,7 +22,7 @@ public class GerarPopUpDirectionScript {
 
                 listaPopUps.add(new PopUpDirectionDTO(r.getNameArrow(), "", text, distance));
             }
-            listaPopUps.add(new PopUpDirectionDTO("","map-check", "Você chegou ao seu destino", "com sucesso"));
+            listaPopUps.add(new PopUpDirectionDTO("","check-circle", "Você chegou ao seu destino", "com sucesso"));
         } else listaPopUps.add(new PopUpDirectionDTO("", "wrong-location", "Não foi possível traçar uma", "rota ao destino"));
         return listaPopUps;
     }
