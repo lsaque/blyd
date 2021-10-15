@@ -30,6 +30,7 @@ export default ({text, filled, onPress, backgroundColor} : any) => {
       style={{
         backgroundColor: bgColor
       }}
+      accessibilityHint={"Clique para " + text}
     >
       <ButtonText 
         style={{

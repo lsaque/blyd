@@ -60,7 +60,10 @@ export default ({arrowDirection, text, distance, arrowType}: any) => {
       >
         <Wrapper>
 
-          <Left accessible={false}>
+          <Left 
+            accessible={false}
+            importantForAccessibility="no-hide-descendants"
+          >
             {
               arrowDirection != "" ? 
               <FontAwesome name={arrowDirection} size={32} color="#4A4A4A" /> 
@@ -73,7 +76,10 @@ export default ({arrowDirection, text, distance, arrowType}: any) => {
             <TextCenter>{text}<Strong>{distance}</Strong></TextCenter>
           </Center>
 
-          <Right>
+          <Right
+            accessible={false}
+            importantForAccessibility="no-hide-descendants"
+          >
             <Button>
               <Ionicons name="volume-high" size={30} color="#4A4A4A" />
             </Button>
