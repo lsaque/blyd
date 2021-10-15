@@ -1,4 +1,5 @@
 export type solicitacaoCadastro = {
+  id: number;
   nome: string;
   email: string;
   senha: string;
@@ -6,7 +7,3 @@ export type solicitacaoCadastro = {
   pcd: boolean;
 };
 
-export type solicitacaoCadastroAdicionar = {
-  status: boolean;
-  mensagem: string;
-};

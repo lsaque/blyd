@@ -23,7 +23,8 @@ import {
 import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';
 import { comodo, comodoCategorizado } from '../../types/comodo';
-import { rota } from '../../types/rota';
+import { popUpDirection } from '../../types/popUpDirection';
+// import { rota } from '../../types/rota';
 
 export default function Localization({navigation}:any){
 
@@ -40,8 +41,9 @@ export default function Localization({navigation}:any){
   }, []);
 
   function handleNavigate(comodo: comodo) {
-    axios.get(`${BASE_URL}/rota/2`).then((response) =>{
-      const rota = response.data as rota;
+    const splittedComodo = comodo.pontoEntrada.split(",");
+    axios.get(`${BASE_URL}/rota/astar/1/${splittedComodo[0]}/${splittedComodo[1]}`).then((response) =>{
+      const rota = response.data as popUpDirection[];
       navigation.navigate('LiveLocalization', {comodo: comodo, rota: rota});
     });
   }
