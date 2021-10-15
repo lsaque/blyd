@@ -3,7 +3,9 @@ package kodal.blyd.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import kodal.blyd.dto.AvisoSemUsuarioDTO;
 import kodal.blyd.dto.StatusDTO;
+import kodal.blyd.dto.UsuarioDTO;
 import kodal.blyd.entities.Aviso;
 import kodal.blyd.utils.commons.RemoverAvisoScript;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,7 @@ public class AvisoService {
 
 	@Transactional(readOnly = true)
 	public List<AvisoDTO> findAll() {
-
-		List<Aviso> lista = repository.findAll();
-		List<Aviso> novaLista = new RemoverAvisoScript(this).gerarNovaLista(lista);
-
-		return novaLista.stream().map(aviso -> new AvisoDTO(aviso)).collect(Collectors.toList());
+		return repository.findAll().stream().map(aviso -> new AvisoDTO(aviso)).collect(Collectors.toList());
 	}
 
 	@Transactional
@@ -34,10 +32,12 @@ public class AvisoService {
 		return repository.procurarAviso(id);
 	}
 
+	@Transactional
 	public void marcarAviso(Aviso aviso){
-		repository.saveAndFlush(aviso);
+		repository.save(aviso);
 	}
 
+	@Transactional
 	public void removerAviso(Aviso aviso) {
 		repository.delete(aviso);
 	}

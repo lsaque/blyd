@@ -2,7 +2,9 @@ package kodal.blyd.controllers;
 
 import java.util.List;
 
+import kodal.blyd.dto.AvisoSemUsuarioDTO;
 import kodal.blyd.dto.StatusDTO;
+import kodal.blyd.entities.Aviso;
 import kodal.blyd.utils.commons.MarcarAvisoScript;
 import kodal.blyd.utils.commons.RemoverAvisoScript;
 import kodal.blyd.services.UsuarioService;
@@ -31,7 +33,9 @@ public class AvisoController {
 	@GetMapping
 	public ResponseEntity<List<AvisoDTO>> findAll() {
 		List<AvisoDTO> listaAvisoDTO = avisoService.findAll();
-		return ResponseEntity.ok(listaAvisoDTO);
+		List<AvisoDTO> novaLista = new RemoverAvisoScript(avisoService).gerarNovaLista(listaAvisoDTO);
+
+		return ResponseEntity.ok(novaLista);
 	}
 
 	@GetMapping(value = "/marcar/{descricao}/{local}/{tempoInicio}/{tempoFinal}/{duracao}/{listaPonto}/{transitavel}/{idUsuario}")
