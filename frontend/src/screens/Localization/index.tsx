@@ -42,6 +42,8 @@ export default function Localization({navigation}:any){
 
   function handleNavigate(comodo: comodo) {
     const splittedComodo = comodo.pontoEntrada.split(",");
+    // console.log(`${splittedComodo[0]}/${splittedComodo[1]}`);
+    
     axios.get(`${BASE_URL}/rota/astar/1/${splittedComodo[0]}/${splittedComodo[1]}`).then((response) =>{
       const rota = response.data as popUpDirection[];
       navigation.navigate('LiveLocalization', {comodo: comodo, rota: rota});

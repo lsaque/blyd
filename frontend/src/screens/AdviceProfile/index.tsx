@@ -21,10 +21,25 @@ import {
   About,
   Divisor,
 } from "./styles";
+import { useState } from "hoist-non-react-statics/node_modules/@types/react";
+import { aviso } from "../../types/aviso";
+import { usuario } from "../../types/usuario";
+import { setAdviceHour, setDueDate } from "../../utils/commons/generateDate";
+import axios from "axios";
+import { BASE_URL } from "../../utils/requests";
+import { status } from "../../types/status";
 
 interface IAdviceProfileProps{}
 
-const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation }: any) => {
+const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any) => {
+
+  const { advice } = route.params;
+  const adviceData = advice as aviso;
+  const userData = adviceData.usuario as usuario;
+
+  const adviceHour = setAdviceHour(adviceData.tempoFinal);
+  const adviceDate = setDueDate(adviceData.tempoFinal);
+
   return (
     <Container>
       <BackgroundNavigation>
@@ -41,10 +56,10 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation }: any) => {
 
         <Details 
           avatar={BackgroundUser}
-          isPCD={false}
+          isPCD={userData.pcd}
           markedAdvice={true}
-          name="Isaque José de Souza"
-          email="isaque@gmail.com"
+          name={userData.nome}
+          email={userData.email}
         />
 
         <Divisor>
@@ -53,13 +68,18 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation }: any) => {
               actionButton="delete"
               icon={<Ionicons name="ios-trash-outline" size={18} color="#F66363" />}
               placeholder="Apagar"
-              onPress={() => {}}
+              onPress={() => {
+                axios.get(`${BASE_URL}/avisos/remover/${adviceData.id}`).then((response) => {
+                  const data = response.data as status;
+                  console.log(data.status);
+                });
+              }}
             />
 
             <ProfileActionButton
               icon={<MaterialIcons name="edit" size={18} color="black" />}
               placeholder="Editar Aviso"
-              onPress={() => navigation.navigate("AdviceEditProfile", {})}
+              onPress={() => navigation.navigate("AdviceEditProfile", {advice:advice})}
             />
 
             <ProfileMenuButton
@@ -73,19 +93,19 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation }: any) => {
 
             <ProfileAbout
               placeholder="Acontecimento:"
-              answer={"Limpeza no corredor 3AC"}
+              answer={`${adviceData.descricao} - ${adviceData.local}`}
               icon={<FontAwesome name="exclamation" size={20} color="#797979" />}
             />
 
             <ProfileAbout
               placeholder="Duração de:"
-              answer={"3 horas"}
+              answer={adviceData.duracao}
               icon={<Entypo name="time-slot" size={18} color="#797979" />}
             />
 
             <ProfileAbout
               placeholder="Vence em:"
-              answer={"{25}" + " de " + "{Setembro}" + " às " + "{23}" + ":" + "{59}"}
+              answer={`${adviceDate[0]} de ${adviceDate[1]} de ${adviceDate[2]} às ${adviceHour}`}
               icon={<Entypo name="calendar" size={18} color="#797979" />}
             />
 

@@ -90,7 +90,7 @@ export default function Activity({navigation}:any){
                       dueYear={dueDate[2]}
                       dueHour={dueDate[3]}
                       dueMinute={dueDate[4]}
-                      onPress={() => navigation.navigate("AdviceProfile")}
+                      onPress={() => navigation.navigate("AdviceProfile", {advice : advice})}
                   /> 
                   );
                 })
