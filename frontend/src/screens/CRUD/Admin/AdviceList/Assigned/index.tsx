@@ -9,12 +9,14 @@ import {
   Container,
   AdviceShowList
 } from "./styles";
+import { aviso } from "../../../../../types/aviso";
 
 interface IAdviceListProps{ }
 
-const AdviceList: React.FC<IAdviceListProps> = ({
+const AdviceList: React.FC<IAdviceListProps> = ({} : any) => {
 
-}: any) => {
+  // const { advice } = route.params;
+  // const adviceData = advice as aviso;
 
   return (
     <Container showsVerticalScrollIndicator={false}>
@@ -41,7 +43,7 @@ const AdviceList: React.FC<IAdviceListProps> = ({
         />
 
         
-        <AdminLastAdvice
+        {/* <AdminLastAdvice
           userPicture={Background}
           userName="Leandro Master Top"
           adviceHour="14:43"
@@ -205,7 +207,7 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           dueHour="14"
           dueMinute="20" 
           onPress={() => {}}
-        />
+        /> */}
       </AdviceShowList>
 
       

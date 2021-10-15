@@ -9,6 +9,8 @@ import RadioButtonRN from "../../../../components/_dependency/radio-buttons-reac
 import Navigation from "../../../../components/Navigation";
 import Details from "../../../../components/Details";
 
+import {setHourRemaining, setDayRemaining, getFinalDate, getTimeDuration} from '../../../../utils/commons/generateDate';
+
 import Background from "../../../../assets/UserList/background.png";
 
 import { 
@@ -18,8 +20,14 @@ import {
   TextAreaInput,
   RadioArea,
   SubmitButton,
-  ErrorMessage
+  ErrorMessage,
+  PickerArea
 } from "../../../../assets/Styles/PageCRUDTemplate/styles";
+import { Picker } from "@react-native-community/picker";
+import axios from "axios";
+import { BASE_URL } from "../../../../utils/requests";
+import { status } from "../../../../types/status";
+import { aviso } from "../../../../types/aviso";
 
 interface IAdviceEditProfileProps{}
 
@@ -38,9 +46,11 @@ const UserEditProfileSchema = Yup.object().shape({
 })
 
 
-const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation }: any) => {
+const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation, route }: any) => {
   
   let linkImage = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80";
+  const { advice } = route.params;
+  const adviceData = advice as aviso;
 
   const dataIsImpassable = [
     {
@@ -88,14 +98,23 @@ const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation }: an
             userName: "Isaque José de Souza",
             userEmail: "isaque@gmail.com",
             
-            adviceDescription: "Limpeza - corredor 2B",
+            adviceDescription: `${adviceData.descricao} - ${adviceData.local}`,
             adviceTimeRemaining: 3,
+            localAdvice: "",
             isImpassable: true,
           }}
           validationSchema={UserEditProfileSchema}
-          onSubmit={(values: any) => {
-            // console.log(values)
-            // axios()
+          onSubmit={values => {
+            const hour = setHourRemaining(values.adviceTimeRemaining);
+            const day = setDayRemaining(values.adviceTimeRemaining);
+            const dateFinal = getFinalDate(day, hour);
+            const timeDuration = getTimeDuration(day, hour);
+
+            // @GetMapping(value = "/atualizar/{id}/{descricao}/{local}/{duracao}/{tempoFinal}/{transitavel}")
+            axios.get(`${BASE_URL}/avisos/atualizar/${adviceData.id}/${values.adviceDescription}/${values.localAdvice}/${timeDuration}/${dateFinal}/${values.isImpassable}`).then((response) => {
+              const data = response.data as status;
+              console.log(data.status);
+            });
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, dirty, isValid }) => (
@@ -108,10 +127,10 @@ const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation }: an
                 <BackgroundProfile source={Background} resizeMode="cover"/>
                 <Details 
                   avatar={{uri: values.userPicture}}
-                  isPCD={false}
+                  isPCD={adviceData.usuario.pcd}
                   markedAdvice={true}
-                  name={values.userName}
-                  email={values.userEmail}
+                  name={adviceData.usuario.nome}
+                  email={adviceData.usuario.email}
                 />
                 
                 <Divisor/>
@@ -134,6 +153,35 @@ const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation }: an
                     />
                   </TextArea>
                   <ErrorMessage>{errors.adviceDescription}</ErrorMessage>
+
+
+                  <Label>Local de Aviso</Label>
+                    <PickerArea>
+                      <Picker
+                        mode="dialog"
+                        // prompt="Selecione uma opção:"
+                        selectedValue={values.localAdvice}
+                        onValueChange={(itemValue, itemIndex) => {
+                          setFieldValue("localAdvice", itemValue)
+                          handleChange("localAdvice");
+                        }}
+                        style={{
+                          borderWidth: 1,
+                          color: "#565656"
+                        }}
+                        itemStyle={{
+                          marginLeft: 80,
+                        }}
+                      >
+                        <Picker.Item label="Recepção" value={"Recepção"} key={0}/>
+                        <Picker.Item label="Hall Recepção" value={"Hall Recepção"} key={1}/>
+                        <Picker.Item label="HelpDesk Recepção" value={"HelpDesk Recepção"} key={2}/>
+                        <Picker.Item label="Corredor Inferior" value={"Corredor Inferior"} key={3}/>
+                        <Picker.Item label="Corredor Superior" value={"Corredor Superior"} key={4}/>
+                        <Picker.Item label="Sala de Reunião" value={"Sala de Reunião"} key={5}/>
+                      </Picker>
+                    </PickerArea>
+                    <ErrorMessage>{errors.localAdvice}</ErrorMessage>
 
                   <Label>Duração de alerta</Label>
                   <RadioArea>
@@ -171,9 +219,7 @@ const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation }: an
               <View style={{marginHorizontal: 20}}>
                 <SubmitButton
                   onPress={() => {
-                    handleSubmit;
-                    console.log(values); 
-                    alert("Dados alterados com sucesso");
+                    handleSubmit();
                     // navigation.goBack()
                   }}
                   style={{
