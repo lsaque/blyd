@@ -30,8 +30,20 @@ import RadioButtonRN from '../../components/_dependency/radio-buttons-react-nati
 import { ProfileDetails, BackgroundProfile, Divisor } from '../UserProfile/styles';
 import { BackgroundNavigation } from '../AdviceProfile/styles';
 
+function setHourRemaining(type: number) {
+  if(type == 1) return 1;
+  else if(type == 2) return 3;
+  else return 0;
+}
+
+function setDayRemaining(type: number) {
+  if(type == 3) return 1;
+  else if(type == 4) return 3;
+  else return 0;
+}
+
 function getDate(day: number, hour: number) {
-    
+
   const date = new Date();
 
   const datePerson = date.getDate() + day;
@@ -41,6 +53,48 @@ function getDate(day: number, hour: number) {
   const minutePerson = date.getMinutes();
 
   return `${datePerson}/${mounthPerson}/${yearPerson}/${hourPerson}/${minutePerson}`;
+  let totalDay;
+
+  let addDay = 0;
+  let addMonth = 0;
+  let addYear = 0;
+
+  let dayTime = date.getDate();
+  let monthTime = date.getMonth() + 1;
+  let yearTime = date.getFullYear();
+  let hourTime = (date.getHours() + hour) % 24;
+  let minuteTime = date.getMinutes();
+
+  //Add manual values
+  // let dayTime = 31;
+  // let monthTime = 12;
+  // let yearTime = date.getFullYear();
+  // let hourTime = (23 + hour) % 24;
+  // let minuteTime = date.getMinutes();
+
+  if (day == 0) {
+    if (date.getHours() > hourTime) addDay = 1;
+  } else addDay = day;  
+
+  if (monthTime % 2 == 0) {
+    if (monthTime == 2) totalDay = 28;
+    else if (monthTime == 4 || monthTime == 6) totalDay = 30;
+    else totalDay = 31;
+  } else {
+    if (monthTime <= 7) totalDay = 31;
+    else totalDay = 30;
+  }
+
+  if (dayTime + addDay > totalDay) addMonth = 1;
+  if (monthTime + addMonth > 12) addYear = 1;
+
+  dayTime = (dayTime + addDay) % (totalDay + 1);
+  dayTime = dayTime == 0 ? 1 : dayTime;
+  monthTime = (monthTime + addMonth) % 13;
+  monthTime = monthTime == 0 ? 1 : monthTime;
+  yearTime += addYear;
+
+  return `${dayTime}-${monthTime}-${yearTime}-${hourTime}-${minuteTime}`;
 }
 
 const UserEditProfileSchema = Yup.object().shape({
@@ -114,8 +168,10 @@ export default function Localization({navigation} : any){
           isImpassable: undefined,
         }}
         onSubmit={values => {
-          console.log(values)
-          // axios()
+          console.log(values.adviceTimeRemaining);
+          
+          // const date = getDate(setDayRemaining(parseInt(values.adviceTimeRemaining)), setHourRemaining(values.adviceTimeRemaining));
+
         }}
         validationSchema={UserEditProfileSchema}
       >
@@ -177,9 +233,9 @@ export default function Localization({navigation} : any){
               <SubmitButton
                 onPress={() => {
                   handleSubmit;
-                  console.log(values); 
-                  alert("Aviso marcado com sucesso");
-                  navigation.goBack();
+                  // console.log(values); 
+                  // alert("Aviso marcado com sucesso");
+                  // navigation.goBack();
                 }}
                 style={{
                   marginHorizontal: 20,

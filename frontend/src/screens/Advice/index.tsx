@@ -10,6 +10,8 @@ import iconPage from '../../assets/Advice/iconPage.png';
 
 import ParallaxHeader from '@fabfit/react-native-parallax-header';
 
+import {setHourRemaining, setDayRemaining, getFinalDate, getNowDate, getTimeDuration} from '../../utils/commons/generateDate';
+
 import { 
   // Container,
   ImagePage,
@@ -22,10 +24,14 @@ import {
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { Container, Label, TextArea, TextAreaInput, RadioArea, ErrorMessage, SubmitButton } from '../../assets/Styles/PageCRUDTemplate/styles';
+import { Container, Label, TextArea, TextAreaInput, RadioArea, ErrorMessage, SubmitButton, PickerArea } from '../../assets/Styles/PageCRUDTemplate/styles';
 import RadioButtonRN from '../../components/_dependency/radio-buttons-react-native/RadioButtonRN';
 // import { RadioArea } from '../MarkAdvice/styles';
 import { BackgroundNavigation, ProfileDetails, Divisor, AdviceDetails } from '../UserProfile/styles';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/requests';
+import { status } from '../../types/status';
+import { Picker } from '@react-native-community/picker';
 
 const AdviceSchema = Yup.object().shape({
 
@@ -156,12 +162,23 @@ export default function Localization({navigation}:any){
                   <Formik
                     initialValues={{ 
                       adviceDescription: descriptionAdvice,
-                      adviceTimeRemaining: null,
+                      adviceTimeRemaining: 0,
                       isImpassable: true,
+                      localAdvice: "",
                     }}
                     onSubmit={values => {
-                      console.log(values)
-                      // axios()
+                      const hour = setHourRemaining(values.adviceTimeRemaining);
+                      const day = setDayRemaining(values.adviceTimeRemaining);
+                      const dateFinal = getFinalDate(day, hour);
+                      const dateNow = getNowDate();
+                      const timeDuration = getTimeDuration(day, hour);
+                      
+                      axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/${values.localAdvice}/${dateNow}/${dateFinal}/${timeDuration}/0,0/${values.isImpassable}/1`).then((response) => {
+                        const data = response.data as status;
+                        console.log(data.status);
+                      });
+                      // console.log(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/${values.localAdvice}/${dateNow}/${dateFinal}/${timeDuration}/0,0/${values.isImpassable}/1`);
+                    
                     }}
                     validationSchema={AdviceSchema}
                   >
@@ -189,6 +206,36 @@ export default function Localization({navigation}:any){
                               <ErrorMessage>{errors.adviceDescription}</ErrorMessage>
                             </View>
 
+                            <View accessibilityHint="Este é um campo inválido para usuários, apenas administradores e desenvolvedores tem acesso">
+                            <Label>Local de Aviso</Label>
+                              <PickerArea>
+                                <Picker
+                                  mode="dialog"
+                                  // prompt="Selecione uma opção:"
+                                  selectedValue={values.localAdvice}
+                                  onValueChange={(itemValue, itemIndex) => {
+                                    setFieldValue("localAdvice", itemValue)
+                                    handleChange("localAdvice");
+                                  }}
+                                  style={{
+                                    borderWidth: 1,
+                                    color: "#565656"
+                                  }}
+                                  itemStyle={{
+                                    marginLeft: 80,
+                                  }}
+                                >
+                                  <Picker.Item label="Recepção" value={"Recepção"} key={0}/>
+                                  <Picker.Item label="Hall Recepção" value={"Hall Recepção"} key={1}/>
+                                  <Picker.Item label="HelpDesk Recepção" value={"HelpDesk Recepção"} key={2}/>
+                                  <Picker.Item label="Corredor Inferior" value={"Corredor Inferior"} key={3}/>
+                                  <Picker.Item label="Corredor Superior" value={"Corredor Superior"} key={4}/>
+                                  <Picker.Item label="Sala de Reunião" value={"Sala de Reunião"} key={5}/>
+                                </Picker>
+                              </PickerArea>
+                              <ErrorMessage>{errors.localAdvice}</ErrorMessage>
+                            </View>
+                
                             <View accessibilityHint="Clique para informar o prazo de validade do aviso">
                               <Label>Qual a duração de alerta?</Label>
                               <RadioArea>
@@ -228,9 +275,9 @@ export default function Localization({navigation}:any){
 
                         <SubmitButton
                           onPress={() => {
-                            handleSubmit;
-                            console.log(values); 
-                            alert("Aviso marcado com sucesso");
+                            handleSubmit();
+                            // console.log(values); 
+                            // alert("Aviso marcado com sucesso");
                             navigation.goBack();
                           }}
                           style={{

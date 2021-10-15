@@ -17,7 +17,10 @@ import {
 } from './styles';
 
 import { comodo } from '../../types/comodo';
-import { rota } from '../../types/rota';
+import { popUpDirection } from '../../types/popUpDirection';
+import { aviso } from '../../types/aviso';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/requests';
 
 export type myPopUpData = {
   arrowDirection: string;
@@ -31,17 +34,22 @@ export default function LiveLocalization({navigation, route} : any){
   const modalizeRef = useRef<Modalize>(null);
 
   const [ selectedComodo, setSelectedComodo ] = useState<comodo>();
-  const [ routeData, setRouteData ] = useState<rota>();
+  const [ routeData, setRouteData ] = useState<popUpDirection[]>();
+  const [ avisoData, setAvisoData ] = useState<aviso[]>();
   const [ index, setIndex ] = useState<number>(-1);
-  // const [ isRouted, setIsRouted] = useState(false);
   const [ popUpData, setPopUpData ] = useState<myPopUpData>({
     arrowDirection: "",
-    arrowType: "map-clock",
+    arrowType: "add-location-alt",
     text: "Selecione uma rota para",
     distance: " começar"
   });
 
   useEffect(() =>{
+    axios.get(`${BASE_URL}/avisos`).then((response) =>{
+      const aviso = response.data as aviso[];
+      setAvisoData(aviso);
+    });
+
     try {
       const {comodo, rota} = route.params;
       setSelectedComodo(comodo);
@@ -52,17 +60,16 @@ export default function LiveLocalization({navigation, route} : any){
 
   useEffect(() =>{
     if(routeData != undefined){
-      // setIsRouted(!isRouted)
       setPopUpData({
-        arrowDirection: routeData.popUps[index].arrowDirection,
-        arrowType: routeData.popUps[index].arrowType,
-        text: routeData.popUps[index].text,
-        distance: ` ${routeData.popUps[index].distance}`
+        arrowDirection: routeData[index].arrowDirection,
+        arrowType: routeData[index].arrowType,
+        text: routeData[index].text,
+        distance: ` ${routeData[index].distance}`
       });
 
       const timer = setTimeout(() => setIndex(index + 1),6000);
 
-      if(index == routeData.popUps.length - 1) clearTimeout(timer);
+      if(index == routeData.length - 1) clearTimeout(timer);
 
     }
   },[index]);
@@ -117,10 +124,10 @@ export default function LiveLocalization({navigation, route} : any){
 
           <Row>
           {
-            routeData?.avisos == null ?
+            avisoData == null ?
               <Text style={{textAlign:'center', fontSize:18}}>Nenhum aviso </Text> 
               : 
-              routeData?.avisos.map((aviso: any) => (
+              avisoData.map((aviso: any) => (
                 <AdviceNotification
                   onPress={() => navigation.navigate("AdviceProfile", {})}
                   key={aviso}
