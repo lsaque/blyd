@@ -27,6 +27,7 @@ import { BASE_URL } from '../../utils/requests';
 import { activityCardAdvice } from '../../types/activityCardAdvice';
 import { aviso } from '../../types/aviso';
 import AdminLastAdvice from '../../components/AdminLastAdvice';
+import { setNewAdviceList } from '../../utils/commons/generateNewAdviceList';
 
 export default function Activity({navigation}:any){
 
@@ -34,13 +35,17 @@ export default function Activity({navigation}:any){
 
   const uriBackground = Image.resolveAssetSource(Background).uri;
   const [ adviceList, setAdviceList ] = useState<aviso[]>();
+  const [ index, setIndex ] = useState<number>(-1);
 
   useEffect(() => {
     axios.get(`${BASE_URL}/avisos`).then((response) => {
       const data = response.data as aviso[];
-      setAdviceList(data);
+      const newData = setNewAdviceList(data) as aviso[];
+      setAdviceList(newData);
     });
-  },[]);
+   setTimeout(() => setIndex(index + 1),3000);
+
+  },[index]);
 
   // function handleTimeDuration(activityCard: activityCardAdvice){
   //   console.log(activityCard.timeDuration);

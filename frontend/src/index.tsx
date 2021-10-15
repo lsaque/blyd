@@ -389,7 +389,7 @@ const AdminScreen = () => {
       <AdminStack.Screen name="UserProfile" component={UserProfile}/>
       <AdminStack.Screen name="UserEditProfile" component={UserEditProfile}/>
       <AdminStack.Screen name="UserCreateProfile" component={UserCreateProfile}/>
-      <AdminStack.Screen name="AdviceList" component={AdminAdviceTopTab}/>
+      <AdminStack.Screen name="AdviceList" component={AdminAdviceTopTab} />
       <AdminStack.Screen name="AdviceProfile" component={AdviceProfile}/>
       <AdminStack.Screen name="AdviceEditProfile" component={AdviceEditProfile}/>
       <AdminStack.Screen name="RequestList" component={AdminRequestTopTab}/>

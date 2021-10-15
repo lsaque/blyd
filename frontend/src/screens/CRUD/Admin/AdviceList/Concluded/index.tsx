@@ -12,12 +12,24 @@ import {
   AdviceShowList
 } from "./styles";
 import ConcludedAdvice from "../../../../../components/ConcludedAdvice";
+import { aviso } from "../../../../../types/aviso";
+import { setDueDate } from "../../../../../utils/commons/generateDate";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../../../../utils/requests";
 
 interface IAdviceListProps{ }
 
-const AdviceList: React.FC<IAdviceListProps> = ({
+const AdviceList: React.FC<IAdviceListProps> = ({navigation, route}: any) => {
 
-}: any) => {
+  const  [ avisosData, setAvisosData ] = useState<aviso[]>();
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/avisos`).then((response) => {
+      const data = response.data as aviso[];
+      setAvisosData(data);
+    });
+  },[])
 
   return (
     <Container showsVerticalScrollIndicator={false}>
@@ -28,16 +40,27 @@ const AdviceList: React.FC<IAdviceListProps> = ({
       />
 
       <AdviceShowList>
-        <ConcludedAdvice
-          userPicture={Background}
-          userName="Leandro Master Top"
-          adviceName="Limpeza - corredor 2B"
-          dueDay="04"
-          dueMonth="Outubro"
-          dueYear="2021" onPress={() => {}}
-        />
+        {
+          avisosData?.map(advice => {
+          const dueDate = setDueDate(advice.tempoFinal);
 
-        <ConcludedAdvice
+            return (
+              <ConcludedAdvice
+              key={advice.id}
+              userPicture={Background}
+              userName={advice.usuario.nome}
+              adviceName={`${advice.descricao} - ${advice.local}`}
+              dueDay={dueDate[0]}
+              dueMonth={dueDate[1]}
+              dueYear={dueDate[2]} 
+              onPress={() => {}}
+            />
+            );
+          })
+        }
+
+
+        {/* <ConcludedAdvice
           userPicture={Background}
           userName="Leandro Master Top"
           adviceName="Limpeza - corredor 2B SOIJ FIOSJ OIFJSAOI JFOISAJ OIFJASOIJF OISAJIO JFSAIOJ OIFJS OFJSO JO"
@@ -98,7 +121,7 @@ const AdviceList: React.FC<IAdviceListProps> = ({
           dueDay="04"
           dueMonth="Outubro"
           dueYear="2021" onPress={() => {}}
-        />
+        /> */}
         
       </AdviceShowList>
 

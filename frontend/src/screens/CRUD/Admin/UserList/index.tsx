@@ -17,17 +17,15 @@ import {
   Container,
   ListOfUser,
 } from "./styles";
+import { usuario } from "../../../../types/usuario";
 
 interface IUserListProps{}
 
-const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
+const UserList: React.FC<IUserListProps> = ({ navigation, route }: any) => {
 
-  const listViewData = Array(20).fill("").map((_, i) => ({ 
-    key: `${i}`, 
-    text: `item #${i}` 
-  }));
 
-  console.log();
+  const { usuariosData } = route.params;
+  const usersData = usuariosData as usuario[];
 
   return (
     <Container>
@@ -62,7 +60,7 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
           />
 
           <SwipeListView
-            data={listViewData}
+            data={usersData}
             ListHeaderComponent={          
               <AdminTitleFilter 
                 text="Usuários"
@@ -73,10 +71,11 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
 
             renderItem={ (data) => (
               <UserListCard
+                key={data.item.id}
                 picture={Background}
-                name="Isaque Souza"
-                email="isaque@gmail.com"
-                department="Secretaria"
+                name={data.item.nome}
+                email={data.item.email}
+                department={data.item.setor.nome}
                 onPress={() => navigation.navigate("UserProfile", {})}
               />
             )}
