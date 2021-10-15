@@ -43,16 +43,8 @@ function setDayRemaining(type: number) {
 }
 
 function getDate(day: number, hour: number) {
-
   const date = new Date();
 
-  const datePerson = date.getDate() + day;
-  const mounthPerson = date.getMonth() + 1;
-  const yearPerson = date.getFullYear();
-  const hourPerson = (date.getHours() + hour) % 24;
-  const minutePerson = date.getMinutes();
-
-  return `${datePerson}/${mounthPerson}/${yearPerson}/${hourPerson}/${minutePerson}`;
   let totalDay;
 
   let addDay = 0;
