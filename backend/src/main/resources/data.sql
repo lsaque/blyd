@@ -7,6 +7,10 @@ INSERT INTO t_usuario(nome, email, senha, celular, foto, total_chamadas, total_a
 
 INSERT INTO t_aviso(descricao, local, tempo_inicio, tempo_final, duracao, lista_ponto, transitavel, usuario_id) VALUES ('Troca de piso', 'Corredor principal', '6-10-2021-15-13', '20-10-2021-16-13', '1h', '20,13!20,14!20,15', FALSE, 1);
 
+INSERT INTO t_aviso(descricao, local, tempo_inicio, tempo_final, duracao, lista_ponto, transitavel, usuario_id) VALUES ('Manutenção', 'Corredor Superior', '15-10-2021-4-16', '15-10-2021-7-16', '3h', '20,13!20,14!20,15', FALSE, 1);
+
+INSERT INTO t_aviso(descricao, local, tempo_inicio, tempo_final, duracao, lista_ponto, transitavel, usuario_id) VALUES ('Troca de piso', 'Corredor principal', '15-10-2021-4-24', '15-10-2021-5-24', '1h', '20,13!20,14!20,15', FALSE, 1);
+
 INSERT INTO t_comodo(nome, tipo, ponto_entrada, andar_id) VALUES ('Principal', 'Elevador', '13,21', 1);
 
 INSERT INTO t_comodo(nome, tipo, ponto_entrada, andar_id) VALUES ('Principal', 'Recepção','10,12', 1);

@@ -1,5 +1,6 @@
 package kodal.blyd.utils.commons;
 
+import kodal.blyd.dto.AvisoDTO;
 import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.entities.Aviso;
 import kodal.blyd.exceptions.AvisoNull;
@@ -7,6 +8,7 @@ import kodal.blyd.services.AvisoService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class RemoverAvisoScript {
@@ -17,26 +19,33 @@ public class RemoverAvisoScript {
         this.service = service;
     }
 
-    public RemoverAvisoScript() {}
+    public List<AvisoDTO> gerarNovaLista(List<AvisoDTO> avisos) {
 
-    public List<Aviso> gerarNovaLista(List<Aviso> avisos) {
-
-        List<Aviso> novaLista = new ArrayList<>();
+        List<AvisoDTO> novaLista = new ArrayList<>();
 
         if(!avisos.isEmpty()) {
             Calendar data1 = Calendar.getInstance();
-            Calendar data2 = Calendar.getInstance();
+            int day1 = data1.get(Calendar.DATE);
+            int month1 = data1.get(Calendar.MONTH) + 1;
+            int year1 = data1.get(Calendar.YEAR);
+            int hour1 = data1.get(Calendar.HOUR);
+            int minute1 = data1.get(Calendar.MINUTE);
 
-            for (Aviso aviso : avisos) {
+            int sum1 = (day1 * 1440) + (month1 * 43800) + year1 + (hour1 * 60) + minute1;
+
+            for (AvisoDTO aviso : avisos) {
                 String[] splittedData;
-                splittedData = aviso.getTempoFinal().split("-");
-                data2.set(Calendar.DATE, Integer.parseInt(splittedData[0]));
-                data2.set(Calendar.MONTH, Integer.parseInt(splittedData[1]) - 1);
-                data2.set(Calendar.YEAR, Integer.parseInt(splittedData[2]));
-                data2.set(Calendar.HOUR, Integer.parseInt(splittedData[3]));
-                data2.set(Calendar.MINUTE, Integer.parseInt(splittedData[4]));
 
-                if(data1.getTimeInMillis() > data2.getTimeInMillis()) System.out.println(removerAviso(aviso).getMensagem());
+                splittedData = aviso.getTempoFinal().split("-");
+                int day2 = Integer.parseInt(splittedData[0]);
+                int month2 = Integer.parseInt(splittedData[1]);
+                int year2 = Integer.parseInt(splittedData[2]);
+                int hour2 = Integer.parseInt(splittedData[3]);
+                int minute2 = Integer.parseInt(splittedData[4]);
+
+                int sum2 = (day2 * 1440) + (month2 * 43800) + year2 + (hour2 * 60) + minute2;
+
+                if(sum1 >= sum2) System.out.println(removerAviso(aviso.getId()).getMensagem());
                 else novaLista.add(aviso);
             }
         }
