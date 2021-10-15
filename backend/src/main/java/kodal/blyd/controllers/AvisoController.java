@@ -33,9 +33,7 @@ public class AvisoController {
 	@GetMapping
 	public ResponseEntity<List<AvisoDTO>> findAll() {
 		List<AvisoDTO> listaAvisoDTO = avisoService.findAll();
-		List<AvisoDTO> novaLista = new RemoverAvisoScript(avisoService).gerarNovaLista(listaAvisoDTO);
-
-		return ResponseEntity.ok(novaLista);
+		return ResponseEntity.ok(listaAvisoDTO);
 	}
 
 	@GetMapping(value = "/marcar/{descricao}/{local}/{tempoInicio}/{tempoFinal}/{duracao}/{listaPonto}/{transitavel}/{idUsuario}")
