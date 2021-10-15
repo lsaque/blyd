@@ -173,7 +173,7 @@ export default function Localization({navigation}:any){
                       const dateNow = getNowDate();
                       const timeDuration = getTimeDuration(day, hour);
                       
-                      axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/${values.localAdvice}/${dateNow}/${dateFinal}/${timeDuration}/0,0/${values.isImpassable}/1`).then((response) => {
+                      axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/${values.localAdvice}/${dateNow}/${dateFinal}/${timeDuration}/7,25!8,25/${values.isImpassable}/1`).then((response) => {
                         const data = response.data as status;
                         console.log(data.status);
                       });
@@ -277,7 +277,7 @@ export default function Localization({navigation}:any){
                           onPress={() => {
                             handleSubmit();
                             // console.log(values); 
-                            // alert("Aviso marcado com sucesso");
+                            alert("Aviso marcado com sucesso");
                             navigation.goBack();
                           }}
                           style={{

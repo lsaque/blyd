@@ -127,10 +127,10 @@ export default function LiveLocalization({navigation, route} : any){
             avisoData == null ?
               <Text style={{textAlign:'center', fontSize:18}}>Nenhum aviso </Text> 
               : 
-              avisoData.map((aviso: any) => (
+              avisoData.map(aviso => (
                 <AdviceNotification
                   onPress={() => navigation.navigate("AdviceProfile", {})}
-                  key={aviso}
+                  key={aviso.id}
                   importance={1}
                   text={aviso.descricao}
                 /> 

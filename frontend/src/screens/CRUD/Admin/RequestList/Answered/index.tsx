@@ -12,12 +12,25 @@ import {
   AdviceShowList
 } from "./styles";
 import ConcludedAdvice from "../../../../../components/ConcludedAdvice";
+import axios from "axios";
+import { BASE_URL } from "../../../../../utils/requests";
+import { solicitacaoCadastro } from "../../../../../types/solicitacaoCadastro";
+import { useEffect, useState } from "react";
 
 interface IRequestListProps{ }
 
 const RequestList: React.FC<IRequestListProps> = ({
 
 }: any) => {
+
+  const [ solicitacaoData, setSolicitacaoData ] = useState<solicitacaoCadastro[]>();
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/solicitacoes-cadastro`).then((response) => {
+      const data = response.data as solicitacaoCadastro[];
+      setSolicitacaoData(data);
+    });
+  },[])
 
   return (
     <Container showsVerticalScrollIndicator={false}>
@@ -28,15 +41,20 @@ const RequestList: React.FC<IRequestListProps> = ({
       />
 
       <AdviceShowList>
+        {
+          solicitacaoData?.map(solicitacao => (
+            <ConcludedAdvice
+              key={solicitacao.id}
+              userPicture={Background}
+              userName={solicitacao.nome}
+              adviceName={solicitacao.email}
+              dueDay="04"
+              dueMonth="Outubro"
+              dueYear="2021" onPress={() => {}}
+          />
+          ))
+        }
 
-        <ConcludedAdvice
-          userPicture={Background}
-          userName="Leandro Master Top"
-          adviceName="Limpeza - corredor 2B SOIJ FIOSJ OIFJSAOI JFOISAJ OIFJASOIJF OISAJIO JFSAIOJ OIFJS OFJSO JO"
-          dueDay="04"
-          dueMonth="Outubro"
-          dueYear="2021" onPress={() => {}}
-        />
         
       </AdviceShowList>
 

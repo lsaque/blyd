@@ -71,7 +71,8 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any
               onPress={() => {
                 axios.get(`${BASE_URL}/avisos/remover/${adviceData.id}`).then((response) => {
                   const data = response.data as status;
-                  console.log(data.status);
+                  alert("Aviso removido com sucesso!");
+                  navigation.goBack();
                 });
               }}
             />

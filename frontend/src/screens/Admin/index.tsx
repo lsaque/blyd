@@ -115,13 +115,13 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               category="Avisos"
               number={avisosData?.length || 0}
               backgroundColor="#957AF6"
-              onPress={() => navigation.navigate('AdviceList')}
+              onPress={() => navigation.navigate('AdviceList', {avisosData : avisosData})}
             />
             <AdminDataNumber 
               category="Usuários"
               number={usuariosData?.length || 0}
               backgroundColor="#CD7AF6"
-              onPress={() => navigation.navigate('UserList')}
+              onPress={() => navigation.navigate('UserList', {usuariosData: usuariosData})}
             />
             <AdminDataNumber 
               category="Solicitações"
