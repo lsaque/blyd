@@ -23,7 +23,6 @@ public class AndarController {
 	@GetMapping
 	public ResponseEntity<List<AndarDTO>> findAll() {
 		List<AndarDTO> listaAndarDTO = service.findAll();
-		System.out.println("Entrou");
 		return ResponseEntity.ok(listaAndarDTO);
 	}
 }

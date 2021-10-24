@@ -8,6 +8,9 @@ import kodal.blyd.dto.UsuarioSemSetorDTO;
 import kodal.blyd.entities.Setor;
 import kodal.blyd.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,28 +25,42 @@ public class UsuarioService {
 
 	@Autowired
 	private SetorService setorService;
-	
+
+	@Cacheable("usuarios")
 	@Transactional(readOnly = true)
 	public List<UsuarioDTO> findAll() {
 		return repository.findAll().stream().map(usuario -> new UsuarioDTO(usuario)).collect(Collectors.toList());
 	}
-	
+
+	@Cacheable(value = "usuarioEmail", key="#email")
 	@Transactional(readOnly = true)
 	public Boolean procurarEmail(String email) { return repository.procurarEmail(email); }
-	
+
+	@Cacheable(value = "usuarioSenha", key = "#email")
 	@Transactional(readOnly = true)
 	public String requisitarSenha(String email) {
 		return repository.requisitarSenha(email);
 	}
 
+	@Cacheable(value = "usuario", key = "#id")
 	@Transactional(readOnly = true)
 	public Usuario procurarId(long id) { return repository.procurarId(id); }
 
+	@Cacheable("usuariosSemSetor")
 	@Transactional(readOnly = true)
 	public List<UsuarioSemSetorDTO> findAllBySetorId(Long id){
 		return repository.findAllBySetorId(id).stream().map(usuario -> new UsuarioSemSetorDTO(usuario)).collect(Collectors.toList());
 	}
 
+	@Caching(evict = {
+			@CacheEvict(value = "usuarios", allEntries = true),
+			@CacheEvict(value = "usuariosSemSetor", allEntries = true),
+			@CacheEvict(value = "usuarioEmail", allEntries = true),
+			@CacheEvict(value = "usuarioSenha", allEntries = true),
+			@CacheEvict(value = "usuario", key = "#id"),
+			@CacheEvict(value = "setores", allEntries = true),
+			@CacheEvict(value = "avisos", allEntries = true)
+	})
 	@Transactional
 	public StatusDTO atualizarUsuario(long id, String nome, String email,String senha, String celular, String foto, boolean pcd, boolean admin, long idSetor) {
 		Usuario usuario = procurarId(id);
@@ -73,6 +90,14 @@ public class UsuarioService {
 		return status;
 	}
 
+	@Caching(evict = {
+			@CacheEvict(value = "usuarios", allEntries = true),
+			@CacheEvict(value = "usuariosSemSetor", allEntries = true),
+			@CacheEvict(value = "usuarioEmail", allEntries = true),
+			@CacheEvict(value = "usuarioSenha", allEntries = true),
+			@CacheEvict(value = "usuario", key = "#usuario.id"),
+			@CacheEvict(value = "setores", allEntries = true)
+	})
 	@Transactional
 	public StatusDTO adicionarUsuario(Usuario usuario) {
 		StatusDTO status = new StatusDTO();

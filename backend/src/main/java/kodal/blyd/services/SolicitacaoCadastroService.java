@@ -9,6 +9,9 @@ import kodal.blyd.entities.Aviso;
 import kodal.blyd.entities.Setor;
 import kodal.blyd.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,21 +30,28 @@ public class SolicitacaoCadastroService {
 
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
+	@Cacheable("solicitacoes")
 	@Transactional(readOnly = true)
 	public List<SolicitacaoCadastroDTO> findAll(){
 		return repository.findAll().stream().map(solicitacao -> new SolicitacaoCadastroDTO(solicitacao)).collect(Collectors.toList());
 	}
-	
+
+	@Cacheable(value = "solicitacaoEmail", key = "#email")
 	@Transactional(readOnly = true)
 	public Boolean procurarEmail(String email) {
 		return repository.procurarEmail(email);
 	}
 
+	@Caching(evict = @CacheEvict(value = "solicitacoes", allEntries = true))
 	public void adicionarSolicitacaoCadastro(SolicitacaoCadastro solicitacao) {
 		repository.save(solicitacao);
 	}
 
+	@Caching(evict = {
+			@CacheEvict(value = "solicitacoes", allEntries = true),
+			@CacheEvict(value = "solicitacaoEmail", allEntries = true)
+	})
 	public StatusDTO aceitarSolitacaoCadastro(long idSolicitacao, String foto, boolean pcd, boolean admin, long idSetor) {
 		StatusDTO status = new StatusDTO();
 		SolicitacaoCadastro solicitacaoCadastro = repository.findById(idSolicitacao);
