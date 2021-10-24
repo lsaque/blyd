@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,7 @@ public class ComodoService {
 	@Autowired
 	private ComodoRepository repository;
 	
-	
+	@Cacheable("comodos")
 	@Transactional(readOnly = true)
 	public List<ComodoDTO> findAll() {
 		return repository.findAll().stream().map(comodo -> new ComodoDTO(comodo)).collect(Collectors.toList());

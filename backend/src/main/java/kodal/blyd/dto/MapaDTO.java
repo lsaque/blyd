@@ -81,4 +81,5 @@ public class MapaDTO implements Serializable{
 	public void setAndar(AndarSemMapaDTO andar) {
 		this.andar = andar;
 	}
+
 }

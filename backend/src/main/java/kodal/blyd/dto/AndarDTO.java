@@ -10,7 +10,7 @@ public class AndarDTO implements Serializable{
 
 	private long id;
 	private String nome, descricao;
-	private MapaDTO mapa;
+	private MapaSemAndarDTO mapa;
 	
 	public AndarDTO() {}
 
@@ -18,14 +18,14 @@ public class AndarDTO implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.mapa = new MapaDTO(mapa);
+		this.mapa = new MapaSemAndarDTO(mapa);
 	}
 	
 	public AndarDTO(Andar andar) {
 		id = andar.getId();
 		nome = andar.getNome();
 		descricao = andar.getDescricao();
-		mapa = new MapaDTO(andar.getMapa());
+		mapa = new MapaSemAndarDTO(andar.getMapa());
 	}
 
 	public long getId() {
@@ -52,11 +52,11 @@ public class AndarDTO implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public MapaDTO getMapa() {
+	public MapaSemAndarDTO getMapa() {
 		return mapa;
 	}
 
-	public void setMapa(MapaDTO mapa) {
+	public void setMapa(MapaSemAndarDTO mapa) {
 		this.mapa = mapa;
 	}
 }

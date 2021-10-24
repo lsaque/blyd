@@ -55,6 +55,20 @@ public class AvisoController {
 		return ResponseEntity.ok(new RemoverAvisoScript(avisoService).removerAviso(id));
 	}
 
+	@GetMapping(value = "/procurar/{id}")
+	public ResponseEntity<StatusDTO> procurarAviso(@PathVariable long id) {
+		StatusDTO status = new StatusDTO();
+		Aviso aviso = avisoService.procurarAviso(id);
+		if(aviso == null) {
+			status.setStatus(false);
+			status.setMensagem("Aviso não encontrado");
+		} else {
+			status.setStatus(true);
+			status.setMensagem("Aviso encontrado com sucesso!");
+		}
+		return ResponseEntity.ok(status);
+	}
+
 	@GetMapping(value = "/atualizar/{id}/{descricao}/{local}/{duracao}/{tempoFinal}/{transitavel}")
 	public ResponseEntity<StatusDTO> atualizarAviso(
 			@PathVariable long id,
