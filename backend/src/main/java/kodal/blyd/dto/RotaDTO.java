@@ -1,8 +1,11 @@
 package kodal.blyd.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RotaDTO {
+public class RotaDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private List<PopUpDirectionDTO> popUps;
     private List<AvisoDTO> avisos;

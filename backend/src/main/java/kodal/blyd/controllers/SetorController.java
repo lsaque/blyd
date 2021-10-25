@@ -2,7 +2,9 @@ package kodal.blyd.controllers;
 
 import java.util.List;
 
+import kodal.blyd.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +19,12 @@ public class SetorController {
 
 	@Autowired
 	private SetorService service;
+
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@GetMapping
-	public ResponseEntity<List<SetorDTO>> findall() {
-		List<SetorDTO> listaSetorDTO = service.findAll();
-		return ResponseEntity.ok(listaSetorDTO);
+	public ResponseEntity<List<SetorDTO>> findAll() {
+		return ResponseEntity.ok(service.findAll());
 	}
-	
 }

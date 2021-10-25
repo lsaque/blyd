@@ -1,4 +1,4 @@
-package kodal.blyd.script;
+package kodal.blyd.utils.commons;
 
 import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.entities.SolicitacaoCadastro;
@@ -7,8 +7,6 @@ import kodal.blyd.services.UsuarioService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping(value = "teste")
 public class SolicitacaoCadastroScript {
 
     private UsuarioService usuarioService;

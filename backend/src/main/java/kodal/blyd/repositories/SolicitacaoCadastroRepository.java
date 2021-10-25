@@ -10,5 +10,7 @@ public interface SolicitacaoCadastroRepository extends JpaRepository<Solicitacao
 
 	@Query("SELECT CASE WHEN (count(solicitacao) > 0) THEN true ELSE false END FROM SolicitacaoCadastro solicitacao WHERE solicitacao.email = :email")
 	Boolean procurarEmail(@Param("email") String email);
+
+	SolicitacaoCadastro findById(@Param("id") long id);
 	
 }

@@ -1,21 +1,20 @@
 package kodal.blyd.dto;
 
 import java.io.Serializable;
-
 import kodal.blyd.entities.Beacon;
 
 public class BeaconDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	
+
 	private long id;
 	private String nome, descricao;
-	private PontoDTO ponto;
+	private String ponto;
 	private AndarDTO andar;
 	
 	public BeaconDTO() {}
 
-	public BeaconDTO(long id, String nome, String descricao, PontoDTO ponto, AndarDTO andar) {
+	public BeaconDTO(long id, String nome, String descricao, String ponto, AndarDTO andar) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -27,7 +26,7 @@ public class BeaconDTO implements Serializable{
 		id = beacon.getId();
 		nome = beacon.getNome();
 		descricao = beacon.getDescricao();
-		ponto = new PontoDTO(beacon.getPonto());
+		ponto = beacon.getPonto();
 		andar = new AndarDTO(beacon.getAndar());
 	}
 
@@ -55,11 +54,11 @@ public class BeaconDTO implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public PontoDTO getPonto() {
+	public String getPonto() {
 		return ponto;
 	}
 
-	public void setPonto(PontoDTO ponto) {
+	public void setPonto(String ponto) {
 		this.ponto = ponto;
 	}
 
@@ -70,5 +69,4 @@ public class BeaconDTO implements Serializable{
 	public void setAndar(AndarDTO andar) {
 		this.andar = andar;
 	}
-
 }

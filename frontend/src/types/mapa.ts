@@ -1,9 +1,10 @@
 import { andar } from "./andar";
 
 export type mapa = {
+  id: number;
   nome: string;
   descricao: string;
-  linkImagem: string;
-  m2: number;
+  imagem: string;
+  matriz: string;
   andar: andar;
 };

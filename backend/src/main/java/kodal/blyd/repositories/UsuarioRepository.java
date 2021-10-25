@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import kodal.blyd.entities.Usuario;
 
+import java.util.List;
+
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	@Query("SELECT CASE WHEN (count(usuario) > 0) THEN true ELSE false END FROM Usuario usuario WHERE usuario.email = :email")
@@ -17,5 +19,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
 	@Query("SELECT usuario FROM Usuario usuario WHERE usuario.id = :id")
 	Usuario procurarId(@Param("id") long id);
+
+	List<Usuario> findAllBySetorId(Long id);
 	
 }

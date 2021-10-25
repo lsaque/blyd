@@ -1,9 +1,12 @@
 import { ScrollView } from "react-native-gesture-handler";
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { StatusBar, View, PermissionsAndroid, Text, TouchableOpacity } from "react-native";
 import { BackgroundImage } from "../../../styles";
 import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
 import * as NetInfo from '@react-native-community/netinfo';
+
+import {setAdviceHour, setDueDate } from '../../utils/commons/generateDate';
+
 
 // import Accordion from 'react-native-collapsible/Accordion';
 import Collapsible  from 'react-native-collapsible';
@@ -33,10 +36,43 @@ import {
 } from "./styles";
 
 import UserRequestCard from "../../components/UserRequestCard";
+import { usuario } from "../../types/usuario";
+import { aviso } from "../../types/aviso";
+import { solicitacaoCadastro } from "../../types/solicitacaoCadastro";
+import axios from "axios";
+import { BASE_URL } from "../../utils/requests";
 
 interface IAdminProps{}
 
 const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
+
+  const [ usuariosData, setUsuariosData ] = useState<usuario[]>();
+  const [ avisosData, setAvisosData ] = useState<aviso[]>();
+  const [ solicitacoesData, setSolicitacoesData ] = useState<solicitacaoCadastro[]>();
+
+  useEffect(() => {
+
+    //Usuarios
+    axios.get(`${BASE_URL}/usuarios`).then((response) => {
+      const data = response.data as usuario[];
+      setUsuariosData(data);
+    });
+
+    //Avisos
+    axios.get(`${BASE_URL}/avisos`).then((response) => {
+      const data = response.data as aviso[];
+      setAvisosData(data);
+    });
+
+    //Solicitacoes
+    axios.get(`${BASE_URL}/solicitacoes-cadastro`).then((response) => {
+      const data = response.data as solicitacaoCadastro[];
+      setSolicitacoesData(data);
+    });
+
+
+  },[]);
+
 
   return (
     <Container>
@@ -77,19 +113,19 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
           >
             <AdminDataNumber
               category="Avisos"
-              number={400}
+              number={avisosData?.length || 0}
               backgroundColor="#957AF6"
               onPress={() => navigation.navigate('AdviceList')}
             />
             <AdminDataNumber 
               category="Usuários"
-              number={212}
+              number={usuariosData?.length || 0}
               backgroundColor="#CD7AF6"
               onPress={() => navigation.navigate('UserList')}
             />
             <AdminDataNumber 
               category="Solicitações"
-              number={12}
+              number={solicitacoesData?.length || 0}
               backgroundColor="#F69C7A"
               onPress={() => navigation.navigate('RequestList')}
             />
@@ -104,6 +140,13 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
             />
           </View>
           <GridPhotos>
+
+            {
+              usuariosData?.map(usuario => {
+                if(usuario.pcd) return <AdminPhotoProfile key={usuario.id} imageProfile={Background}/>
+              })
+            }
+            {/* <AdminPhotoProfile imageProfile={Background}/>
             <AdminPhotoProfile imageProfile={Background}/>
             <AdminPhotoProfile imageProfile={Background}/>
             <AdminPhotoProfile imageProfile={Background}/>
@@ -111,9 +154,8 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
             <AdminPhotoProfile imageProfile={Background}/>
             <AdminPhotoProfile imageProfile={Background}/>
             <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/>
-            <AdminButtonQuantityProfiles number={86}/>
+            <AdminPhotoProfile imageProfile={Background}/> */}
+            {/* <AdminButtonQuantityProfiles number={86}/> */}
           </GridPhotos>
         </DivisorCategory>
 
@@ -125,16 +167,23 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
             />
           </View>
           
-          <UserRequestCard 
-            name="Isaque José de Souza"
-            isPCD={true}
-            email="isaque@gmail.com"
-            phoneNumber="11923456789" 
-            declineOnPress={() => {}} 
-            acceptOnPress={() => {}}
-          />
+          {
+            solicitacoesData?.map(solicitacao => (
+              <UserRequestCard 
+              key={solicitacao.id}
+              name={solicitacao.nome}
+              isPCD={solicitacao.pcd}
+              email={solicitacao.email}
+              phoneNumber={solicitacao.celular} 
+              declineOnPress={() => {}} 
+              acceptOnPress={() => {}}
+            />
+            ))
+          }
 
-          <UserRequestCard 
+
+
+          {/* <UserRequestCard 
             name="Isaque José de Souza"
             isPCD={true}
             email="isaque@gmail.com"
@@ -169,7 +218,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
             phoneNumber="11923456789" 
             declineOnPress={() => {}} 
             acceptOnPress={() => {}}
-          />
+          /> */}
         </DivisorCategory>
 
 
@@ -180,7 +229,31 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               seeAll={true}
             />
             
-            <AdminLastAdvice 
+            {
+              avisosData?.map(advice => {
+
+                const dueDate = setDueDate(advice.tempoFinal);
+
+                return(
+                  <AdminLastAdvice
+                    key={advice.id}
+                    userPicture={Background}
+                    userName={advice.usuario.nome}
+                    adviceHour={setAdviceHour(advice.tempoInicio)}
+                    adviceName={`${advice.descricao} - ${advice.local}`}
+                    adviceTimeRemaining={advice.duracao}
+                    isImpassable={advice.transitavel}
+                    dueDay={dueDate[0]}
+                    dueMonth={dueDate[1]}
+                    dueYear={dueDate[2]}
+                    dueHour={dueDate[3]}
+                    dueMinute={dueDate[4]}
+                    onPress={() => navigation.navigate("AdviceProfile")}
+                /> 
+                );
+              })
+            }
+            {/* <AdminLastAdvice 
               userPicture={Background}
               userName="Leandro Master Top"
               adviceHour="14:43"
@@ -193,9 +266,9 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               dueHour="14"
               dueMinute="20" 
               onPress={() => navigation.navigate("AdviceProfile")}
-            />
+            /> */}
 
-            <AdminLastAdvice 
+            {/* <AdminLastAdvice 
               userPicture={Background}
               userName="Laura S"
               adviceHour="14:43"
@@ -223,7 +296,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               dueHour="14"
               dueMinute="20" 
               onPress={() => navigation.navigate("AdviceProfile")}
-            />
+            /> */}
           </View>
         </DivisorCategory>
 

@@ -1,12 +1,20 @@
-import { cargo } from "./cargo";
+import { aviso } from "./aviso";
+import { setor } from "./setor";
 
 export type usuario = {
+  id: number;
   nome: string;
   email: string;
-  celular: string;
   senha: string;
+  celular: string;
+  foto: string;
+  totalChamadas: number;
+  totalAvisos: number;
+  totalRotas: number;
   pcd: boolean;
-  cargo: cargo;
+  admin: boolean;
+  setor: setor;
+  avisos: aviso[];
 };
 
 export type usuarioLogin = {

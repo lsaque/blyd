@@ -3,6 +3,8 @@ package kodal.blyd.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ public class AndarController {
 	@GetMapping
 	public ResponseEntity<List<AndarDTO>> findAll() {
 		List<AndarDTO> listaAndarDTO = service.findAll();
+		System.out.println("Entrou");
 		return ResponseEntity.ok(listaAndarDTO);
 	}
-
 }

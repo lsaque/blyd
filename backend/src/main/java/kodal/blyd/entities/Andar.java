@@ -1,10 +1,6 @@
 package kodal.blyd.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "t_andar")
@@ -15,12 +11,16 @@ public class Andar {
 	private long id;
 	private String nome, descricao;
 
+	@OneToOne(mappedBy = "andar")
+	private Mapa mapa;
+
 	public Andar() {}
 	
-	public Andar(long id, String nome, String descricao) {
+	public Andar(long id, String nome, String descricao, Mapa mapa) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
+		this.mapa = mapa;
 	}
 
 	public long getId() {
@@ -45,5 +45,13 @@ public class Andar {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Mapa getMapa() {
+		return mapa;
+	}
+
+	public void setMapa(Mapa mapa) {
+		this.mapa = mapa;
 	}
 }
