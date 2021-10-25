@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text } from "react-native";
 
 import AdminLastAdvice from "../../../../../components/AdminLastAdvice";
@@ -15,22 +15,20 @@ import ConcludedAdvice from "../../../../../components/ConcludedAdvice";
 import axios from "axios";
 import { BASE_URL } from "../../../../../utils/requests";
 import { solicitacaoCadastro } from "../../../../../types/solicitacaoCadastro";
-import { useEffect, useState } from "react";
+import ApiContext from "../../../../../contexts/ApiContext";
 
 interface IRequestListProps{ }
 
-const RequestList: React.FC<IRequestListProps> = ({
+const RequestList: React.FC<IRequestListProps> = ({ }: any) => {
 
-}: any) => {
+  const [ solicitacaoData, setSolicitacaoData ] = useState<solicitacaoCadastro[]>(useContext(ApiContext).state.solicitacoes);
 
-  const [ solicitacaoData, setSolicitacaoData ] = useState<solicitacaoCadastro[]>();
-
-  useEffect(() => {
-    axios.get(`${BASE_URL}/solicitacoes-cadastro`).then((response) => {
-      const data = response.data as solicitacaoCadastro[];
-      setSolicitacaoData(data);
-    });
-  },[])
+  // useEffect(() => {
+  //   axios.get(`${BASE_URL}/solicitacoes-cadastro`).then((response) => {
+  //     const data = response.data as solicitacaoCadastro[];
+  //     setSolicitacaoData(data);
+  //   });
+  // },[])
 
   return (
     <Container showsVerticalScrollIndicator={false}>

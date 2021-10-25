@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { Dimensions, Image, View, Text} from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { BackgroundImage } from '../../../styles';
@@ -19,10 +19,13 @@ import {
   Wrapper,
   SearchContactNavigation,
 } from '../../assets/Styles/PageCardTemplate/styles';
+import { apiData } from '../../types/apiData';
+import ApiContext from '../../contexts/ApiContext';
 
 export default function SearchContact({navigation}:any){
 
   const uriBackground = Image.resolveAssetSource(Background).uri;
+  const [ apiData, setApiData ] = useState<apiData>(useContext(ApiContext).state);
   const modalizeRef = useRef<Modalize>(null);
   
   return(
@@ -52,33 +55,17 @@ export default function SearchContact({navigation}:any){
         <Content>
           {/* <Title>Informe o <Strong>Contato</Strong> 👨‍🦯</Title> */}
           <Wrapper>
-            <ProfileCard
-              name="Davi Quintal"
-              department="T.I"
-            />
-
-            <ProfileCard
-              name="Laura Silva dos santos souza nunes pereira ximenes"
-              department="Secretaria"
-              picture={picture}
-              number="1191342789"
-            />
-
-            <ProfileCard
-              name="Isaque Souza"
-              department="RH"
-            />
-
-            <ProfileCard
-              name="Leandro Lord"
-              department="Administração"
-            />
-
-            <ProfileCard
-              name="Caroline A. Lu."
-              department="Ambulatório"
-            />
-
+            {
+              apiData.usuarios.map(usuario => (
+                <ProfileCard
+                  key={usuario.id}
+                  name={usuario.nome}
+                  department={usuario.setor.nome}
+                  picture={picture}
+                  number={usuario.celular}
+              />
+              ))
+            }
           </Wrapper>
         </Content>
       </Container>

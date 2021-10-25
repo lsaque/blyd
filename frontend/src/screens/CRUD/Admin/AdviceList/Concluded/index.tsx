@@ -1,7 +1,4 @@
-import React from "react";
-import { Text } from "react-native";
-
-import AdminLastAdvice from "../../../../../components/AdminLastAdvice";
+import React, { useState, useEffect, useContext} from "react";
 import AdminTitleFilter from "../../../../../components/AdminTitleFilter";
 
 import Background from "../../../../../assets/Admin/background.png"
@@ -14,22 +11,22 @@ import {
 import ConcludedAdvice from "../../../../../components/ConcludedAdvice";
 import { aviso } from "../../../../../types/aviso";
 import { setDueDate } from "../../../../../utils/commons/generateDate";
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../../../../utils/requests";
+import ApiContext from "../../../../../contexts/ApiContext";
 
 interface IAdviceListProps{ }
 
-const AdviceList: React.FC<IAdviceListProps> = ({navigation, route}: any) => {
+const AdviceList: React.FC<IAdviceListProps> = ({ navigation }: any) => {
 
-  const  [ avisosData, setAvisosData ] = useState<aviso[]>();
+  const  [ avisosData, setAvisosData ] = useState<aviso[]>(useContext(ApiContext).state.avisos);
 
-  useEffect(() => {
-    axios.get(`${BASE_URL}/avisos`).then((response) => {
-      const data = response.data as aviso[];
-      setAvisosData(data);
-    });
-  },[])
+  // useEffect(() => {
+  //   axios.get(`${BASE_URL}/avisos`).then((response) => {
+  //     const data = response.data as aviso[];
+  //     setAvisosData(data);
+  //   });
+  // },[])
 
   return (
     <Container showsVerticalScrollIndicator={false}>

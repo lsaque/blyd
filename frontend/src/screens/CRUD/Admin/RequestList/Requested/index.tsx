@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import AdminLastAdvice from "../../../../../components/AdminLastAdvice";
 import AdminTitleFilter from "../../../../../components/AdminTitleFilter";
@@ -10,23 +10,21 @@ import {
   Container,
   AdviceShowList
 } from "./styles";
-import { useEffect, useState } from "react";
 import { solicitacaoCadastro } from "../../../../../types/solicitacaoCadastro";
-import axios from "axios";
-import { BASE_URL } from "../../../../../utils/requests";
+import ApiContext from "../../../../../contexts/ApiContext";
 
 interface IRequestListProps{ }
 
 const RequestList: React.FC<IRequestListProps> = ({}: any) => {
 
-  const [ solicitacaoData, setSolicitacaoData ] = useState<solicitacaoCadastro[]>();
+  const [ solicitacaoData, setSolicitacaoData ] = useState<solicitacaoCadastro[]>(useContext(ApiContext).state.solicitacoes);
 
-  useEffect(() => {
-    axios.get(`${BASE_URL}/solicitacoes-cadastro`).then((response) => {
-      const data = response.data as solicitacaoCadastro[];
-      setSolicitacaoData(data);
-    });
-  },[])
+  // useEffect(() => {
+  //   axios.get(`${BASE_URL}/solicitacoes-cadastro`).then((response) => {
+  //     const data = response.data as solicitacaoCadastro[];
+  //     setSolicitacaoData(data);
+  //   });
+  // },[])
 
   return (
     <Container showsVerticalScrollIndicator={false}>

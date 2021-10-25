@@ -1,11 +1,12 @@
 import 'react-native-gesture-handler';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Text } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import { Modalize } from 'react-native-modalize';
 import { NavigationContainer } from '@react-navigation/native';
 import { Formik } from "formik";
+import Preload from "./src/screens/Preload";
 
 import * as Yup from 'yup';
 import AppIntroSlider from 'react-native-app-intro-slider';
@@ -42,6 +43,9 @@ import Navigation from './src/components/Navigation';
 import Login from './src/screens/Login';
 // import Main, { AdminScreen, UserScreen } from './src';
 import Main from './src';
+import ApiContext, { ApiProvider } from './src/contexts/ApiContext';
+import { getApiData } from './src/data/GetDataApi';
+import { Component } from 'hoist-non-react-statics/node_modules/@types/react';
 
 const slides = [
   {
@@ -78,7 +82,19 @@ const colors = {
 export default function App({ navigation }: any){
   const [showHome, setShowHome] = useState(true);
 
-  function SplashScreen({item} : any){
+  const { state, setState } = useContext(ApiContext);
+
+  const [ isLoaded, setIsLoaded ] = useState<boolean>(false);
+
+  useEffect(() => {
+    getApiData(state).then(data => {
+      setState(data)
+      console.log(state.usuarios[0].nome)
+      setIsLoaded(true);
+    });
+  },[]);
+
+  function SplashScreen({ item } : any){
     return(
       <BackgroundImage source={item.bgImage} resizeMode="cover">
         <Wrapper>
@@ -98,38 +114,45 @@ export default function App({ navigation }: any){
     );
   }
 
-  if(showHome) {
-    return (
-      <ThemeProvider theme={colors}>
-        <NavigationContainer>
-          <Main/>
-        </NavigationContainer>
-      </ThemeProvider>
-    )
+  if(!isLoaded) {
+    return <Preload />
   } else {
-    return (
-      <React.Fragment>
-        <StatusBar style="light"/>
-        
-        <AppIntroSlider
-          renderItem={SplashScreen}
-          data={slides}
-          showPrevButton={false}
-          showNextButton={true}
-          accessible={false}
-          dotClickEnabled={false}
-          activeDotStyle={{
-            backgroundColor: colors.primary,
-            width: 30
-          }}
-          renderNextButton={ () => <SplashButton>Próximo</SplashButton> }
-          renderDoneButton={ () => 
-            <SplashButton 
-              onPress={ () => setShowHome(true)}
-            >Acessar</SplashButton> 
-          }
-        />
-      </React.Fragment>
-    );
+    if(showHome) {
+      return (
+        <ApiProvider>
+          <ThemeProvider theme={colors}>
+              <NavigationContainer>
+                <Main />
+              </NavigationContainer>
+          </ThemeProvider>
+        </ ApiProvider>
+      )
+    } else {
+      return (
+        <>
+          <StatusBar style="light"/>
+          
+          <AppIntroSlider
+            renderItem={SplashScreen}
+            data={slides}
+            showPrevButton={false}
+            showNextButton={true}
+            accessible={false}
+            dotClickEnabled={false}
+            activeDotStyle={{
+              backgroundColor: colors.primary,
+              width: 30
+            }}
+            renderNextButton={ () => <SplashButton>Próximo</SplashButton> }
+            renderDoneButton={ () => 
+              <SplashButton 
+                onPress={ () => setShowHome(true)}
+              >Acessar</SplashButton> 
+            }
+          />
+        </>
+      );
+    }
   }
+
 }

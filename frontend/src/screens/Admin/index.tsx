@@ -1,5 +1,5 @@
 import { ScrollView } from "react-native-gesture-handler";
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useContext } from "react";
 import { StatusBar, View, PermissionsAndroid, Text, TouchableOpacity } from "react-native";
 import { BackgroundImage } from "../../../styles";
 import WifiManager, { WifiEntry } from "react-native-wifi-reborn";
@@ -41,38 +41,40 @@ import { aviso } from "../../types/aviso";
 import { solicitacaoCadastro } from "../../types/solicitacaoCadastro";
 import axios from "axios";
 import { BASE_URL } from "../../utils/requests";
+import ApiContext from "../../contexts/ApiContext";
 
 interface IAdminProps{}
 
 const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
 
-  const [ usuariosData, setUsuariosData ] = useState<usuario[]>();
-  const [ avisosData, setAvisosData ] = useState<aviso[]>();
-  const [ solicitacoesData, setSolicitacoesData ] = useState<solicitacaoCadastro[]>();
+  const { state } = useContext(ApiContext);
 
-  useEffect(() => {
+  const [ usuariosData, setUsuariosData ] = useState<usuario[]>(state.usuarios);
+  const [ avisosData, setAvisosData ] = useState<aviso[]>(state.avisos);
+  const [ solicitacoesData, setSolicitacoesData ] = useState<solicitacaoCadastro[]>(state.solicitacoes);
 
-    //Usuarios
-    axios.get(`${BASE_URL}/usuarios`).then((response) => {
-      const data = response.data as usuario[];
-      setUsuariosData(data);
-    });
+  // useEffect(() => {
 
-    //Avisos
-    axios.get(`${BASE_URL}/avisos`).then((response) => {
-      const data = response.data as aviso[];
-      setAvisosData(data);
-    });
+  //   //Usuarios
+  //   axios.get(`${BASE_URL}/usuarios`).then((response) => {
+  //     const data = response.data as usuario[];
+  //     setUsuariosData(data);
+  //   });
 
-    //Solicitacoes
-    axios.get(`${BASE_URL}/solicitacoes-cadastro`).then((response) => {
-      const data = response.data as solicitacaoCadastro[];
-      setSolicitacoesData(data);
-    });
+  //   //Avisos
+  //   axios.get(`${BASE_URL}/avisos`).then((response) => {
+  //     const data = response.data as aviso[];
+  //     setAvisosData(data);
+  //   });
+
+  //   //Solicitacoes
+  //   axios.get(`${BASE_URL}/solicitacoes-cadastro`).then((response) => {
+  //     const data = response.data as solicitacaoCadastro[];
+  //     setSolicitacoesData(data);
+  //   });
 
 
-  },[]);
-
+  // },[]);
 
   return (
     <Container>
@@ -115,13 +117,13 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               category="Avisos"
               number={avisosData?.length || 0}
               backgroundColor="#957AF6"
-              onPress={() => navigation.navigate('AdviceList', {avisosData : avisosData})}
+              onPress={() => navigation.navigate('AdviceList')}
             />
             <AdminDataNumber 
               category="Usuários"
               number={usuariosData?.length || 0}
               backgroundColor="#CD7AF6"
-              onPress={() => navigation.navigate('UserList', {usuariosData: usuariosData})}
+              onPress={() => navigation.navigate('UserList')}
             />
             <AdminDataNumber 
               category="Solicitações"
@@ -140,22 +142,11 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
             />
           </View>
           <GridPhotos>
-
             {
               usuariosData?.map(usuario => {
                 if(usuario.pcd) return <AdminPhotoProfile key={usuario.id} imageProfile={Background}/>
               })
             }
-            {/* <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/>
-            <AdminPhotoProfile imageProfile={Background}/> */}
-            {/* <AdminButtonQuantityProfiles number={86}/> */}
           </GridPhotos>
         </DivisorCategory>
 

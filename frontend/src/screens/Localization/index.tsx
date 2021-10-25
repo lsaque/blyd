@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Dimensions, Image, View, Text} from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { BackgroundImage } from '../../../styles';
@@ -24,27 +24,21 @@ import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';
 import { comodo, comodoCategorizado } from '../../types/comodo';
 import { popUpDirection } from '../../types/popUpDirection';
+import { apiData } from '../../types/apiData';
+import ApiContext from '../../contexts/ApiContext';
 // import { rota } from '../../types/rota';
 
 export default function Localization({navigation}:any){
 
   const uriBackground = Image.resolveAssetSource(Background).uri;
-  const [ comodoCategorizadoData, setComodoCategorizadoData ] = useState<comodoCategorizado[]>();
+  const [ apiData, setApiData ] = useState<apiData>(useContext(ApiContext).state);
   const [ selectedComodo, setSelectedComodo ] = useState<comodo[]>();
   const [ showSelectedComodo, setShowSelectedComodo] = useState(true);
-  
-  useEffect(() => {
-    axios.get(`${BASE_URL}/comodos/categorizados`).then((response) => {
-      const data = response.data as comodoCategorizado[];
-      setComodoCategorizadoData(data);
-    })
-  }, []);
 
   function handleNavigate(comodo: comodo) {
-    const splittedComodo = comodo.pontoEntrada.split(",");
-    // console.log(`${splittedComodo[0]}/${splittedComodo[1]}`);
-    
-    axios.get(`${BASE_URL}/rota/astar/1/${splittedComodo[0]}/${splittedComodo[1]}`).then((response) =>{
+    const splittedCoord = comodo.pontoEntrada.split(",");
+  
+    axios.get(`${BASE_URL}/rota/astar/1/${splittedCoord[0]}/${splittedCoord[1]}`).then((response) =>{
       const rota = response.data as popUpDirection[];
       navigation.navigate('LiveLocalization', {comodo: comodo, rota: rota});
     });
@@ -79,7 +73,7 @@ export default function Localization({navigation}:any){
           >Informe o <Strong>Local</Strong> 🌎</Title>
           <Wrapper accessibilityHint={"Neste quadrado branco é possível visualizar todas as categorias de locais disponíveis no aplicativo. São ordenados apenas 2 por linha"}>
             {showSelectedComodo ? 
-              comodoCategorizadoData?.map(comodo => (
+              apiData.comodosCategorizados?.map(comodo => (
                 <PageCard
                   key={comodo.id}
                   text={comodo.tipo}

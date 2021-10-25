@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useContext } from 'react';
 import { BackgroundImage } from '../styles';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -45,6 +45,9 @@ const LoginStack = createStackNavigator();
 
 import Background from "./assets/Admin/background.png";
 import { NavigationContainer } from '@react-navigation/native';
+import { getApiData } from './data/GetDataApi';
+import { apiData } from './types/apiData';
+import ApiContext from './contexts/ApiContext';
 
 function AdminAdviceTopTab({ navigation }: any) {
   return (
@@ -374,6 +377,7 @@ const UserScreen = () => {
       <UserStack.Screen name="MarkAdvice" component={MarkAdvice} />
       <UserStack.Screen name="SearchContact" component={SearchContact} />
       <UserStack.Screen name="AdviceProfile" component={AdviceProfile} />
+      <UserStack.Screen name="AdviceEditProfile" component={AdviceEditProfile}/>
 
       {/* <UserStack.Screen name="UserProfile" component={UserProfile}/> */}
       {/* <UserStack.Screen name="UserEditProfile" component={UserEditProfile}/> */}
@@ -405,12 +409,13 @@ const AdminScreen = () => {
 }
 const Drawer = createDrawerNavigator();
 
+
 export default function Main() {
   return (
-      <Drawer.Navigator initialRouteName="LoginScreen" screenOptions={{headerShown: false}}>
-        <Drawer.Screen name="LoginScreen" component={LoginScreen} />
-        <Drawer.Screen name="UserScreen" component={UserScreen} />
-        <Drawer.Screen name="AdminScreen" component={AdminScreen} />
-      </Drawer.Navigator>
+    <Drawer.Navigator initialRouteName="LoginScreen" screenOptions={{headerShown: false}}>
+      <Drawer.Screen name="LoginScreen" component={LoginScreen} />
+      <Drawer.Screen name="UserScreen" component={UserScreen} />
+      <Drawer.Screen name="AdminScreen" component={AdminScreen} />
+    </Drawer.Navigator>
   );
 }
