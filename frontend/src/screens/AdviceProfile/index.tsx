@@ -70,7 +70,7 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any
               placeholder="Apagar"
               onPress={() => {
                 axios.get(`${BASE_URL}/avisos/remover/${adviceData.id}`).then((response) => {
-                  const data = response.data as status;
+                  // const data = response.data as status;
                   alert("Aviso removido com sucesso!");
                   navigation.goBack();
                 });
@@ -80,7 +80,7 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any
             <ProfileActionButton
               icon={<MaterialIcons name="edit" size={18} color="black" />}
               placeholder="Editar Aviso"
-              onPress={() => navigation.navigate("AdviceEditProfile", {advice:advice})}
+              onPress={() => navigation.navigate("AdviceEditProfile", {advice : advice})}
             />
 
             <ProfileMenuButton

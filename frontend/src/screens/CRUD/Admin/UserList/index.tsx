@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View } from "react-native";
 import { BackgroundImage } from "../../../../../styles";
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -18,14 +18,15 @@ import {
   ListOfUser,
 } from "./styles";
 import { usuario } from "../../../../types/usuario";
+import { apiData } from "../../../../types/apiData";
+import ApiContext from "../../../../contexts/ApiContext";
 
 interface IUserListProps{}
 
-const UserList: React.FC<IUserListProps> = ({ navigation, route }: any) => {
+const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
 
 
-  const { usuariosData } = route.params;
-  const usersData = usuariosData as usuario[];
+  const [ apiData, setApiData ] = useState<apiData>(useContext(ApiContext).state);
 
   return (
     <Container>
@@ -60,7 +61,8 @@ const UserList: React.FC<IUserListProps> = ({ navigation, route }: any) => {
           />
 
           <SwipeListView
-            data={usersData}
+            data={apiData.usuarios}
+            keyExtractor={(item, index) => item.id.toString()}
             ListHeaderComponent={          
               <AdminTitleFilter 
                 text="Usuários"
@@ -71,7 +73,6 @@ const UserList: React.FC<IUserListProps> = ({ navigation, route }: any) => {
 
             renderItem={ (data) => (
               <UserListCard
-                key={data.item.id}
                 picture={Background}
                 name={data.item.nome}
                 email={data.item.email}

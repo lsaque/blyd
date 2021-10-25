@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import AdminLastAdvice from "../../../../../components/AdminLastAdvice";
 import AdminTitleFilter from "../../../../../components/AdminTitleFilter";
@@ -11,22 +11,22 @@ import {
 } from "./styles";
 import { aviso } from "../../../../../types/aviso";
 import { setAdviceHour, setDueDate } from "../../../../../utils/commons/generateDate";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../../../../utils/requests";
+import ApiContext from "../../../../../contexts/ApiContext";
 
 interface IAdviceListProps{ }
 
 const AdviceList: React.FC<IAdviceListProps> = ({navigation, route} : any) => {
 
-  const  [ avisosData, setAvisosData ] = useState<aviso[]>();
+  const  [ avisosData, setAvisosData ] = useState<aviso[]>(useContext(ApiContext).state.avisos);
 
-  useEffect(() => {
-    axios.get(`${BASE_URL}/avisos`).then((response) => {
-      const data = response.data as aviso[];
-      setAvisosData(data);
-    });
-  },[])
+  // useEffect(() => {
+  //   axios.get(`${BASE_URL}/avisos`).then((response) => {
+  //     const data = response.data as aviso[];
+  //     setAvisosData(data);
+  //   });
+  // },[])
 
   return (
     <Container showsVerticalScrollIndicator={false}>

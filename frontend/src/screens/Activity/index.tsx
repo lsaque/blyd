@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Dimensions, Image, View, Text} from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { BackgroundImage } from '../../../styles';
@@ -21,37 +21,35 @@ import {
   Wrapper,
 } from '../../assets/Styles/PageCardTemplate/styles';
 
-import ActivityNotificationNumber from '../../components/ActivityNotificationNumber';
-import axios from 'axios';
-import { BASE_URL } from '../../utils/requests';
-import { activityCardAdvice } from '../../types/activityCardAdvice';
-import { aviso } from '../../types/aviso';
 import AdminLastAdvice from '../../components/AdminLastAdvice';
 import { setNewAdviceList } from '../../utils/commons/generateNewAdviceList';
+import { apiData } from '../../types/apiData';
+import ApiContext from '../../contexts/ApiContext';
+import { useFocusEffect } from '@react-navigation/native';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/requests';
+import { aviso } from '../../types/aviso';
 
-export default function Activity({navigation}:any){
+export default function Activity({ navigation }:any){
 
   const modalizeRef = useRef<Modalize>(null);
-
   const uriBackground = Image.resolveAssetSource(Background).uri;
-  const [ adviceList, setAdviceList ] = useState<aviso[]>();
-  const [ index, setIndex ] = useState<number>(-1);
-
-  useEffect(() => {
-    axios.get(`${BASE_URL}/avisos`).then((response) => {
-      const data = response.data as aviso[];
-      const newData = setNewAdviceList(data) as aviso[];
-      setAdviceList(newData);
-    });
-   setTimeout(() => setIndex(index + 1),3000);
-
-  },[index]);
-
-  // function handleTimeDuration(activityCard: activityCardAdvice){
-  //   console.log(activityCard.timeDuration);
-  //   return "1h";
-  // }
+  const [ apiData, setApiData ] = useState<aviso[]>(useContext(ApiContext).state.avisos);
   
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const interval = setInterval(() => {
+        axios.get(`${BASE_URL}/avisos`).then(response => {
+          const avisos = response.data;
+          setApiData(avisos);
+        })
+        console.log("Entrou no intervalo");
+      }, 2000);
+      return () => clearInterval(interval);
+    },[])
+  );
+
   return(
     <ParallaxHeader
       maxHeight={200}
@@ -77,7 +75,7 @@ export default function Activity({navigation}:any){
               accessibilityHint="Título dizendo para informar o local, juntamente de um ícone do planeta"
             >Visualizar <Strong>Notificações</Strong> 🔮</Title>
               {
-                adviceList?.map(advice => {
+                apiData?.map(advice => {
 
                   const dueDate = setDueDate(advice.tempoFinal);
 
@@ -100,7 +98,7 @@ export default function Activity({navigation}:any){
                   );
                 })
               }
-{/* 
+  {/* 
           <Wrapper 
             style={{marginTop: 40}}
             accessibilityHint={"Neste quadrado branco é possível visualizar todas as categorias de locais disponíveis no aplicativo. São ordenados apenas 2 por linha"}
