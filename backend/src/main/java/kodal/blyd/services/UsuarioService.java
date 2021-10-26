@@ -66,7 +66,7 @@ public class UsuarioService {
 	@Transactional
 	public StatusDTO atualizarUsuario(long id, String nome, String email,String senha, String celular, String foto, boolean pcd, boolean admin, long idSetor) {
 		Usuario usuario = procurarId(id);
-		Setor setor = setorService.procurarId(id);
+		Setor setor = setorService.procurarId(idSetor);
 		StatusDTO status = new StatusDTO();
 
 		status.setStatus(false);
