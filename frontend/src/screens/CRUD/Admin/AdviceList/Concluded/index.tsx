@@ -14,6 +14,7 @@ import { setDueDate } from "../../../../../utils/commons/generateDate";
 import axios from "axios";
 import { BASE_URL } from "../../../../../utils/requests";
 import ApiContext from "../../../../../contexts/ApiContext";
+import { useFocusEffect } from "@react-navigation/core";
 
 interface IAdviceListProps{ }
 
@@ -21,12 +22,19 @@ const AdviceList: React.FC<IAdviceListProps> = ({ navigation }: any) => {
 
   const  [ avisosData, setAvisosData ] = useState<aviso[]>(useContext(ApiContext).state.avisos);
 
-  // useEffect(() => {
-  //   axios.get(`${BASE_URL}/avisos`).then((response) => {
-  //     const data = response.data as aviso[];
-  //     setAvisosData(data);
-  //   });
-  // },[])
+  useFocusEffect(
+    React.useCallback(() => {
+      function setData() {
+        axios.get(`${BASE_URL}/avisos`).then(response => {
+          setAvisosData(response.data as aviso[]);
+        })
+      }
+      
+      setData()
+      const interval = setInterval(() => setData(), 2000);
+      return () => clearInterval(interval);
+    },[])
+  );
 
   return (
     <Container showsVerticalScrollIndicator={false}>

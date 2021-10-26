@@ -16,6 +16,7 @@ import axios from "axios";
 import { BASE_URL } from "../../../../../utils/requests";
 import { solicitacaoCadastro } from "../../../../../types/solicitacaoCadastro";
 import ApiContext from "../../../../../contexts/ApiContext";
+import { useFocusEffect } from "@react-navigation/core";
 
 interface IRequestListProps{ }
 
@@ -23,12 +24,19 @@ const RequestList: React.FC<IRequestListProps> = ({ }: any) => {
 
   const [ solicitacaoData, setSolicitacaoData ] = useState<solicitacaoCadastro[]>(useContext(ApiContext).state.solicitacoes);
 
-  // useEffect(() => {
-  //   axios.get(`${BASE_URL}/solicitacoes-cadastro`).then((response) => {
-  //     const data = response.data as solicitacaoCadastro[];
-  //     setSolicitacaoData(data);
-  //   });
-  // },[])
+  useFocusEffect(
+    React.useCallback(() => {
+      function setData() {
+        axios.get(`${BASE_URL}/solicitacoes-cadastro`).then(response => {
+          setSolicitacaoData(response.data as solicitacaoCadastro[]);
+        })
+      }
+      
+      setData();
+      const interval = setInterval(() => setData(), 2000);
+      return () => clearInterval(interval);
+    },[])
+  );
 
   return (
     <Container showsVerticalScrollIndicator={false}>

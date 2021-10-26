@@ -22,8 +22,6 @@ import {
 } from '../../assets/Styles/PageCardTemplate/styles';
 
 import AdminLastAdvice from '../../components/AdminLastAdvice';
-import { setNewAdviceList } from '../../utils/commons/generateNewAdviceList';
-import { apiData } from '../../types/apiData';
 import ApiContext from '../../contexts/ApiContext';
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
@@ -37,15 +35,27 @@ export default function Activity({ navigation }:any){
   const [ apiData, setApiData ] = useState<aviso[]>(useContext(ApiContext).state.avisos);
   
 
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     const interval = setInterval(() => {
+  //       axios.get(`${BASE_URL}/avisos`).then(response => {
+  //         setApiData(response.data as aviso[]);
+  //       })
+  //     }, 2000);
+  //     return () => clearInterval(interval);
+  //   },[])
+  // );
+
   useFocusEffect(
     React.useCallback(() => {
-      const interval = setInterval(() => {
+      function setData() {
         axios.get(`${BASE_URL}/avisos`).then(response => {
-          const avisos = response.data;
-          setApiData(avisos);
+          setApiData(response.data as aviso[]);
         })
-        console.log("Entrou no intervalo");
-      }, 2000);
+      }
+
+      setData();
+      const interval = setInterval(() => setData(), 2500);
       return () => clearInterval(interval);
     },[])
   );
