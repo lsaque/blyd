@@ -170,14 +170,14 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
           {
             solicitacoesData?.map(solicitacao => (
               <UserRequestCard 
-              key={solicitacao.id}
-              name={solicitacao.nome}
-              isPCD={solicitacao.pcd}
-              email={solicitacao.email}
-              phoneNumber={solicitacao.celular} 
-              declineOnPress={() => {}} 
-              acceptOnPress={() => {}}
-            />
+                key={solicitacao.id}
+                name={solicitacao.nome}
+                isPCD={solicitacao.pcd}
+                email={solicitacao.email}
+                phoneNumber={solicitacao.celular}
+                declineOnPress={() => console.log("decline")} 
+                acceptOnPress={() => console.log("accept")}
+              />
             ))
           }
 
