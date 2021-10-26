@@ -1,7 +1,7 @@
 package kodal.blyd.controllers;
 
 import kodal.blyd.dto.PopUpDirectionDTO;
-import kodal.blyd.utils.commons.GerarRotaScript;
+import kodal.blyd.utils.scripts.GerarRotaScript;
 import kodal.blyd.services.AvisoService;
 import kodal.blyd.services.MapaService;
 import org.springframework.beans.factory.annotation.Autowired;

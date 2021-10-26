@@ -2,15 +2,12 @@ package kodal.blyd.controllers;
 
 import java.util.List;
 
-import kodal.blyd.dto.AvisoSemUsuarioDTO;
 import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.entities.Aviso;
-import kodal.blyd.utils.commons.MarcarAvisoScript;
-import kodal.blyd.utils.commons.RemoverAvisoScript;
+import kodal.blyd.utils.scripts.MarcarAvisoScript;
+import kodal.blyd.utils.scripts.RemoverAvisoScript;
 import kodal.blyd.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,4 +1,4 @@
-package kodal.blyd.utils.commons;
+package kodal.blyd.utils.scripts;
 
 public class StringParaArrayScript {
 

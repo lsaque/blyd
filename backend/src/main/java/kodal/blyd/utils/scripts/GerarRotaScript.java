@@ -1,4 +1,4 @@
-package kodal.blyd.utils.commons;
+package kodal.blyd.utils.scripts;
 
 import kodal.blyd.utils.astar.AStar;
 import kodal.blyd.utils.astar.MapInfo;
