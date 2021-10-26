@@ -4,14 +4,14 @@ public class LoginDTO {
 
     private boolean status;
     private String mensagem;
-    private UsuarioDTO usuarioDTO;
+    private UsuarioDTO usuario;
 
     public LoginDTO() {}
 
     public LoginDTO(boolean status, String mensagem, UsuarioDTO usuarioDTO) {
         this.status = status;
         this.mensagem = mensagem;
-        this.usuarioDTO = usuarioDTO;
+        this.usuario = usuarioDTO;
     }
 
     public boolean isStatus() {
@@ -30,11 +30,11 @@ public class LoginDTO {
         this.mensagem = mensagem;
     }
 
-    public UsuarioDTO getUsuarioDTO() {
-        return usuarioDTO;
+    public UsuarioDTO getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
-        this.usuarioDTO = usuarioDTO;
+    public void setUsuario(UsuarioDTO usuarioDTO) {
+        this.usuario = usuarioDTO;
     }
 }
