@@ -37,7 +37,6 @@ public class SolicitacaoCadastroService {
 		return repository.findAll().stream().map(solicitacao -> new SolicitacaoCadastroDTO(solicitacao)).collect(Collectors.toList());
 	}
 
-	@Cacheable(value = "solicitacaoEmail", key = "#email")
 	@Transactional(readOnly = true)
 	public Boolean procurarEmail(String email) {
 		return repository.procurarEmail(email);
@@ -48,10 +47,7 @@ public class SolicitacaoCadastroService {
 		repository.save(solicitacao);
 	}
 
-	@Caching(evict = {
-			@CacheEvict(value = "solicitacoes", allEntries = true),
-			@CacheEvict(value = "solicitacaoEmail", allEntries = true)
-	})
+	@Caching(evict = @CacheEvict(value = "solicitacoes", allEntries = true))
 	public StatusDTO aceitarSolitacaoCadastro(long idSolicitacao, String foto, boolean pcd, boolean admin, long idSetor) {
 		StatusDTO status = new StatusDTO();
 		SolicitacaoCadastro solicitacaoCadastro = repository.findById(idSolicitacao);
@@ -90,10 +86,7 @@ public class SolicitacaoCadastroService {
 		return status;
 	}
 
-	@Caching(evict = {
-			@CacheEvict(value = "solicitacoes", allEntries = true),
-			@CacheEvict(value = "solicitacaoEmail", allEntries = true)
-	})
+	@Caching(evict = @CacheEvict(value = "solicitacoes", allEntries = true))
 	public StatusDTO recusarSolicitacaoCadastro(long idSolicitacao) {
 		StatusDTO status = new StatusDTO();
 		SolicitacaoCadastro solicitacaoCadastro = repository.findById(idSolicitacao);
