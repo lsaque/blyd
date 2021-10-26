@@ -23,17 +23,23 @@ import {
   Divisor,
 } from "./styles";
 import MessageNoContent from "../../components/MessageNoContent";
+import { usuario } from "../../types/usuario";
+import { setAdviceHour, setDueDate } from "../../utils/commons/generateDate";
 
 interface IUserProfileProps{}
 
-const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
+const UserProfile: React.FC<IUserProfileProps> = ({ navigation, route }: any) => {
+
+  const { user } = route.params;
+  const userData = user as usuario;
+
   return (
     <Container>
       <BackgroundNavigation>
         <Navigation
           onPress={() => navigation.goBack('history')}
           title="Perfil:"
-          titleStrong="Isaque"
+          titleStrong={userData.nome.split(" ")[0]}
         />
       </BackgroundNavigation>
       
@@ -43,8 +49,8 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
         <Details 
           avatar={Background}
           isPCD={true}
-          name="Isaque José de Souza"
-          email="isaque@gmail.com"
+          name={userData.nome}
+          email={userData.email}
         />
 
         <Divisor>
@@ -74,25 +80,25 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
           <About>
             <ProfileAbout
               placeholder="Encontra-se em:"
-              answer={"Secretaria"}
+              answer={userData.setor.nome}
               icon={<MaterialIcons name="edit" size={18} color="#797979" />}
             />
 
             <ProfileAbout
               placeholder="Chamadas realizadas:"
-              answer={10}
+              answer={userData.totalChamadas}
               icon={<MaterialCommunityIcons name="phone" size={18} color="#797979" />}
             />
 
             <ProfileAbout
               placeholder="Avisos marcados:"
-              answer={102}
+              answer={userData.totalAvisos}
               icon={<MaterialCommunityIcons name="pin" size={18} color="#797979" />}
             />
 
             <ProfileAbout
               placeholder="Rotas traçadas:"
-              answer={302}
+              answer={userData.totalRotas}
               icon={<MaterialCommunityIcons name="map-marker" size={18} color="#797979" />}
             />
           </About>
@@ -104,12 +110,37 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
             seeAll={true}
           />
 
-          <MessageNoContent
-            type="advice"
-            text="Ainda não possui nenhum aviso atribuído"
-          />
-
-          <AdminLastAdvice 
+          {
+            userData.avisos.length == 0 ?
+              <MessageNoContent
+                type="advice"
+                text="Ainda não possui nenhum aviso atribuído"
+              />
+              :
+              userData.avisos.map(advice => {
+    
+                const dueDate = setDueDate(advice.tempoFinal);
+    
+                return(
+                  <AdminLastAdvice
+                    key={advice.id}
+                    userPicture={Background}
+                    userName={userData.nome}
+                    adviceHour={setAdviceHour(advice.tempoInicio)}
+                    adviceName={`${advice.descricao} - ${advice.local}`}
+                    adviceTimeRemaining={advice.duracao}
+                    isImpassable={advice.transitavel}
+                    dueDay={dueDate[0]}
+                    dueMonth={dueDate[1]}
+                    dueYear={dueDate[2]}
+                    dueHour={dueDate[3]}
+                    dueMinute={dueDate[4]}
+                    onPress={() => navigation.navigate("AdviceProfile", {advice : advice})}
+                /> 
+                );
+              })
+          }
+          {/* <AdminLastAdvice 
             userPicture={Background}
             userName="Isaque Souza"
             adviceHour="14:43"
@@ -121,33 +152,7 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation }: any) => {
             dueYear="2021"
             dueHour="14"
             dueMinute="20" onPress={() => {}}
-          />
-          <AdminLastAdvice 
-            userPicture={Background}
-            userName="Isaque Souza"
-            adviceHour="14:43"
-            adviceName="Limpeza - corredor 2B"
-            adviceTimeRemaining="5h"
-            isImpassable={false}
-            dueDay="04"
-            dueMonth="Outubro"
-            dueYear="2021"
-            dueHour="14"
-            dueMinute="20" onPress={() => {}}
-          />
-          <AdminLastAdvice 
-            userPicture={Background}
-            userName="Isaque Souza"
-            adviceHour="14:43"
-            adviceName="Limpeza - corredor 2B Quintas Davi fsjoi fjsiofj oisj"
-            adviceTimeRemaining="1d 25h"
-            isImpassable={false}
-            dueDay="04"
-            dueMonth="Outubro"
-            dueYear="2021"
-            dueHour="14"
-            dueMinute="20" onPress={() => {}}
-          />
+          /> */}
         </Divisor>
 
       </ProfileDetails>

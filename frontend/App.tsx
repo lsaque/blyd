@@ -89,7 +89,6 @@ export default function App({ navigation }: any){
   useEffect(() => {
     getApiData(state).then(data => {
       setState(data)
-      console.log(state.usuarios[0].nome)
       setIsLoaded(true);
     });
   },[]);

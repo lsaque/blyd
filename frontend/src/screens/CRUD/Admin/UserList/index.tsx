@@ -20,13 +20,30 @@ import {
 import { usuario } from "../../../../types/usuario";
 import { apiData } from "../../../../types/apiData";
 import ApiContext from "../../../../contexts/ApiContext";
+import { useFocusEffect } from "@react-navigation/core";
+import axios from "axios";
+import { BASE_URL } from "../../../../utils/requests";
 
 interface IUserListProps{}
 
 const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
 
 
-  const [ apiData, setApiData ] = useState<apiData>(useContext(ApiContext).state);
+  const [ usuariosData, setUsuariosData ] = useState<usuario[]>(useContext(ApiContext).state.usuarios);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      function setData() {
+        axios.get(`${BASE_URL}/usuarios`).then(response => {
+          setUsuariosData(response.data as usuario[]);
+        })
+      }
+
+      setData();
+      const interval = setInterval(() => setData(), 2000);
+      return () => clearInterval(interval);
+    },[])
+  );
 
   return (
     <Container>
@@ -61,7 +78,7 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
           />
 
           <SwipeListView
-            data={apiData.usuarios}
+            data={usuariosData}
             keyExtractor={(item, index) => item.id.toString()}
             ListHeaderComponent={          
               <AdminTitleFilter 
@@ -71,13 +88,13 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
               />
             }
 
-            renderItem={ (data) => (
+            renderItem={ (userData) => (
               <UserListCard
                 picture={Background}
-                name={data.item.nome}
-                email={data.item.email}
-                department={data.item.setor.nome}
-                onPress={() => navigation.navigate("UserProfile", {})}
+                name={userData.item.nome}
+                email={userData.item.email}
+                department={userData.item.setor.nome}
+                onPress={() => navigation.navigate("UserProfile", { user : userData.item })}
               />
             )}
             

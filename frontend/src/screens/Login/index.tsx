@@ -1,5 +1,5 @@
 // import { StatusBar } from 'expo-status-bar';
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { Formik } from 'formik';
 import { Image, Platform, Text, View, Dimensions } from 'react-native';
 
@@ -28,6 +28,11 @@ import {
 
 import Background from '../../assets/Login/background.png';
 import Navigation from '../../components/Navigation';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/requests';
+import { status } from '../../types/status';
+import ApiContext from '../../contexts/ApiContext';
+import { usuario } from '../../types/usuario';
 
 // import { AdminScreen, UserScreen } from '../..';
 
@@ -50,8 +55,18 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
 
   const password = useRef<any>(null);
   const enterButton = useRef<any>(null);
-  // let enterScreenRender = <UserScreen/>
 
+  const users = useContext(ApiContext).state.usuarios as usuario[];
+
+  function findUser(email : string) {
+    users.forEach(user => {
+      if(user.email === email) {
+        console.log("Entrou aqui KRL1");
+        return;
+      }
+    })
+    // return "nenhum";
+  }
 
   const validation = (values: any, dirty: any, isValid: any, handlesubmit: any) => {
     if((values.email && values.password != null) && dirty && isValid){
@@ -82,8 +97,11 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
         }}
         validationSchema={UserEditProfileSchema}
         onSubmit={(values: any) => {
-          // console.log(values)
-          // axios()
+          // axios.get(`${BASE_URL}/usuarios/login/${values.email}/${values.password}`).then(response => {
+          //   const data = response.data as status;
+          //   console.log(data.status);
+          // });
+          console.log(findUser(values.email as string));
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, dirty, isValid }) => (
@@ -141,8 +159,7 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
 
               <SubmitButton
                 onPress={() => {
-                  handleSubmit;
-                  console.log(values);
+                  handleSubmit();
                   validation(values, dirty, isValid, handleSubmit)
                 }}
                 ref={enterButton}

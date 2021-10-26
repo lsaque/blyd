@@ -11,6 +11,7 @@ const DEFAULT_VALUE = {
     andares: [],
     avisos: [],
     comodos: [],
+    comodosCategorizados: [],
     mapas: [],
     setores: [],
     solicitacoes: [],
