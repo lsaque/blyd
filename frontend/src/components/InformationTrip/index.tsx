@@ -39,12 +39,17 @@ export default ({destiny, onPress, distance, isRouteSetted}: any) => {
 
   
   return (
-    <Container>
+    <Container 
+      accessibilityHint={"Destino do trajeto" + destiny}
+    >
       <Destination>
         <Title>Destino:</Title>
         <Destiny numberOfLines={1}>{destiny}</Destiny>
       </Destination>
-      <ButtonSetAdvice onPress={onPress}>
+      <ButtonSetAdvice 
+        onPress={onPress}
+        accessibilityHint={"Clique para " + (isRouteSetted ? "Marcar Aviso" : "Selecionar rota")}
+      >
         <ButtonText>{isRouteSetted ? "Marcar Aviso" : "Selecionar rota"}</ButtonText>
       </ButtonSetAdvice>
     </Container>

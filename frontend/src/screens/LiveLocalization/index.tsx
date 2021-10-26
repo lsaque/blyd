@@ -124,8 +124,14 @@ export default function LiveLocalization({navigation, route} : any){
 
           <Row>
           {
-            avisoData == null ?
-              <Text style={{textAlign:'center', fontSize:18}}>Nenhum aviso </Text> 
+            routeData?.avisos == null ?
+              <Text 
+                style={{
+                  textAlign:'center', 
+                  fontSize:18
+                }}
+                accessibilityHint="Nenhum aviso marcado neste trajeto"
+              >Nenhum aviso </Text> 
               : 
               avisoData.map(aviso => (
                 <AdviceNotification
