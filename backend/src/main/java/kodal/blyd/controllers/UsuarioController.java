@@ -2,6 +2,7 @@ package kodal.blyd.controllers;
 
 import java.util.List;
 
+import kodal.blyd.dto.LoginDTO;
 import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.services.SetorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class UsuarioController {
 //	}
 
 	@GetMapping(value = "/login/{inputEmail}/{inputSenha}")
-	public ResponseEntity<StatusDTO> login(
+	public ResponseEntity<LoginDTO> login(
 			@PathVariable String inputEmail, 
 			@PathVariable String inputSenha)
 	{

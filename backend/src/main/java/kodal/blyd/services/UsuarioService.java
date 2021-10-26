@@ -36,10 +36,12 @@ public class UsuarioService {
 	@Transactional(readOnly = true)
 	public Boolean procurarEmail(String email) { return repository.procurarEmail(email); }
 
-	@Cacheable(value = "usuarioSenha", key = "#email")
+	@Cacheable(value = "usuarioLogin", key = "{#email, #senha}")
 	@Transactional(readOnly = true)
-	public String requisitarSenha(String email) {
-		return repository.requisitarSenha(email);
+	public UsuarioDTO verificarLogin(String email, String senha) {
+		Usuario usuario = repository.verificarLogin(email, senha);
+		if(usuario == null) return null;
+		else return new UsuarioDTO(usuario);
 	}
 
 	@Cacheable(value = "usuario", key = "#id")
@@ -56,7 +58,7 @@ public class UsuarioService {
 			@CacheEvict(value = "usuarios", allEntries = true),
 			@CacheEvict(value = "usuariosSemSetor", allEntries = true),
 			@CacheEvict(value = "usuarioEmail", allEntries = true),
-			@CacheEvict(value = "usuarioSenha", allEntries = true),
+			@CacheEvict(value = "usuarioLogin", allEntries = true),
 			@CacheEvict(value = "usuario", key = "#id"),
 			@CacheEvict(value = "setores", allEntries = true),
 			@CacheEvict(value = "avisos", allEntries = true)
@@ -94,7 +96,7 @@ public class UsuarioService {
 			@CacheEvict(value = "usuarios", allEntries = true),
 			@CacheEvict(value = "usuariosSemSetor", allEntries = true),
 			@CacheEvict(value = "usuarioEmail", allEntries = true),
-			@CacheEvict(value = "usuarioSenha", allEntries = true),
+			@CacheEvict(value = "usuarioLogin", allEntries = true),
 			@CacheEvict(value = "usuario", key = "#usuario.id"),
 			@CacheEvict(value = "setores", allEntries = true)
 	})

@@ -1,24 +1,30 @@
 package kodal.blyd.utils.commons;
 
+import kodal.blyd.dto.LoginDTO;
 import kodal.blyd.dto.StatusDTO;
+import kodal.blyd.dto.UsuarioDTO;
 import kodal.blyd.services.UsuarioService;
 
 public class LoginScript {
 
-	public StatusDTO verificarLogin(String inputEmail, String inputSenha, UsuarioService service) {
+	public LoginDTO verificarLogin(String inputEmail, String inputSenha, UsuarioService service) {
 
-		StatusDTO status = new StatusDTO();
-		status.setStatus(false);
+		LoginDTO login = new LoginDTO();
+		login.setStatus(false);
 		
 		if(verificarEmail(inputEmail, service)) {
+
+			UsuarioDTO usuario = service.verificarLogin(inputEmail, inputSenha);
+			System.out.println("Usuario: " + usuario);
 			
-			if(service.requisitarSenha(inputEmail).equals(inputSenha)) {
-				status.setStatus(true);
-				status.setMensagem("Logado com sucesso!");
-			} else status.setMensagem("Senha inválida!");
+			if(usuario != null) {
+				login.setStatus(true);
+				login.setMensagem("Logado com sucesso!");
+				login.setUsuarioDTO(usuario);
+			} else login.setMensagem("Senha inválida!");
 			
-		} else status.setMensagem("Email inválido!");
-		return status;
+		} else login.setMensagem("Email inválido!");
+		return login;
 	}
 	
 	
