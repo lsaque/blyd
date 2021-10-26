@@ -1,4 +1,4 @@
-package kodal.blyd.utils.commons;
+package kodal.blyd.utils.scripts;
 
 import kodal.blyd.utils.astar.Route;
 import kodal.blyd.dto.PopUpDirectionDTO;

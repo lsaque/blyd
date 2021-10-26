@@ -32,7 +32,6 @@ public class UsuarioService {
 		return repository.findAll().stream().map(usuario -> new UsuarioDTO(usuario)).collect(Collectors.toList());
 	}
 
-	@Cacheable(value = "usuarioEmail", key="#email")
 	@Transactional(readOnly = true)
 	public Boolean procurarEmail(String email) { return repository.procurarEmail(email); }
 
@@ -57,7 +56,6 @@ public class UsuarioService {
 	@Caching(evict = {
 			@CacheEvict(value = "usuarios", allEntries = true),
 			@CacheEvict(value = "usuariosSemSetor", allEntries = true),
-			@CacheEvict(value = "usuarioEmail", allEntries = true),
 			@CacheEvict(value = "usuarioLogin", allEntries = true),
 			@CacheEvict(value = "usuario", key = "#id"),
 			@CacheEvict(value = "setores", allEntries = true),
@@ -96,7 +94,6 @@ public class UsuarioService {
 	@Caching(evict = {
 			@CacheEvict(value = "usuarios", allEntries = true),
 			@CacheEvict(value = "usuariosSemSetor", allEntries = true),
-			@CacheEvict(value = "usuarioEmail", allEntries = true),
 			@CacheEvict(value = "usuarioLogin", allEntries = true),
 			@CacheEvict(value = "usuario", key = "#usuario.id"),
 			@CacheEvict(value = "setores", allEntries = true)

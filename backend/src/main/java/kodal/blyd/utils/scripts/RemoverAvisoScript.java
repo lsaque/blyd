@@ -1,4 +1,4 @@
-package kodal.blyd.utils.commons;
+package kodal.blyd.utils.scripts;
 
 import kodal.blyd.dto.AvisoDTO;
 import kodal.blyd.dto.StatusDTO;
@@ -8,7 +8,6 @@ import kodal.blyd.services.AvisoService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class RemoverAvisoScript {
