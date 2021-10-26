@@ -72,22 +72,23 @@ public class UsuarioService {
 		status.setStatus(false);
 
 		if(setor == null) status.setMensagem("Erro: setor não encontrado.");
+		else {
+			usuario.setNome(nome);
+			usuario.setEmail(email);
+			usuario.setSenha(senha);
+			usuario.setCelular(celular);
+			usuario.setFoto(foto);
+			usuario.setPcd(pcd);
+			usuario.setAdmin(admin);
+			usuario.setSetor(setor);
 
-		usuario.setNome(nome);
-		usuario.setEmail(email);
-		usuario.setSenha(senha);
-		usuario.setCelular(celular);
-		usuario.setFoto(foto);
-		usuario.setPcd(pcd);
-		usuario.setAdmin(admin);
-		usuario.setSetor(setor);
-
-		try{
-			repository.save(usuario);
-			status.setMensagem("Usuario atualizado com sucesso.");
-			status.setStatus(true);
-		}catch (Exception e) {
-			status.setMensagem("Erro: " + e);
+			try{
+				repository.save(usuario);
+				status.setMensagem("Usuario atualizado com sucesso.");
+				status.setStatus(true);
+			}catch (Exception e) {
+				status.setMensagem("Erro: " + e);
+			}
 		}
 		return status;
 	}
