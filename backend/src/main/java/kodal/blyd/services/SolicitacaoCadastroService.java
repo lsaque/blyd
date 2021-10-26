@@ -59,11 +59,11 @@ public class SolicitacaoCadastroService {
 
 		status.setStatus(false);
 		if(solicitacaoCadastro == null) {
-			status.setMensagem("Erro: solicitação não encontrada.");
+			status.setMensagem("Solicitação selecionada não encontrada!");
 			return status;
 		}
 		if(setor == null) {
-			status.setMensagem("Erro: setor não encontrado.");
+			status.setMensagem("Solicitação selecionada não aceita! Setor inexistente!");
 			return status;
 		}
 
@@ -81,11 +81,34 @@ public class SolicitacaoCadastroService {
 
 		try {
 			repository.delete(solicitacaoCadastro);
-			status.setMensagem("Sucesso: solicitação removida.");
-			status.setMensagem(usuarioService.adicionarUsuario(usuario).getMensagem());
+			status.setMensagem("Solicitação selecionada foi aceita!");
+			usuarioService.adicionarUsuario(usuario);
 			status.setStatus(true);
 		} catch (Exception e) {
-			status.setMensagem("Erro: " + e);
+			status.setMensagem("Solicitação selecionada não foi aceita!");
+		}
+		return status;
+	}
+
+	@Caching(evict = {
+			@CacheEvict(value = "solicitacoes", allEntries = true),
+			@CacheEvict(value = "solicitacaoEmail", allEntries = true)
+	})
+	public StatusDTO recusarSolicitacaoCadastro(long idSolicitacao) {
+		StatusDTO status = new StatusDTO();
+		SolicitacaoCadastro solicitacaoCadastro = repository.findById(idSolicitacao);
+
+		status.setStatus(false);
+
+		if(solicitacaoCadastro == null) status.setMensagem("Solicitação selecionada não foi recusada! Solicitação inexistente!");
+		else {
+			try {
+				repository.delete(solicitacaoCadastro);
+				status.setMensagem("Solicitação selecionada foi recusada!");
+				status.setStatus(true);
+			} catch (Exception e) {
+				status.setMensagem("Solicitação selecionada não foi recusada!");
+			}
 		}
 		return status;
 	}

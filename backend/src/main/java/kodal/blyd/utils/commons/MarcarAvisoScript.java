@@ -30,15 +30,15 @@ public class MarcarAvisoScript {
                 throw new UsuarioNull();
             } else {
                 avisoService.marcarAviso(new Aviso(descricao, local, tempoInicio, tempoFinal, duracao, listaPonto, transitavel, usuario));
-                status.setMensagem("Aviso marcado.");
+                status.setMensagem("Aviso informado foi criado!");
                 status.setStatus(true);
             }
         }
         catch(UsuarioNull e){
-            status.setMensagem("Usuario nao encontrado.");
+            status.setMensagem("Aviso informado foi não foi criado! Usuário inexistente!");
         }
         catch (Exception e) {
-            status.setMensagem("Erro " + e.toString());
+            status.setMensagem("Aviso informado não foi criado!");
         }
         return status;
     }

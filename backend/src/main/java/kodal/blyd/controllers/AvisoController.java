@@ -61,10 +61,10 @@ public class AvisoController {
 		Aviso aviso = avisoService.procurarAviso(id);
 		if(aviso == null) {
 			status.setStatus(false);
-			status.setMensagem("Aviso não encontrado");
+			status.setMensagem("Aviso informado não foi encontrado!");
 		} else {
 			status.setStatus(true);
-			status.setMensagem("Aviso encontrado com sucesso!");
+			status.setMensagem("Aviso informado foi encontrado!");
 		}
 		return ResponseEntity.ok(status);
 	}

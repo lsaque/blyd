@@ -23,11 +23,11 @@ public class SolicitacaoCadastroScript {
         if(!usuarioService.procurarEmail(email)) {
             if(!solicitacaoService.procurarEmail(email)) {
                 status.setStatus(true);
-                status.setMensagem("Sua solicitação de cadastro foi enviada para o adminstrador!");
+                status.setMensagem("Solicitação informada foi cadastrada!");
                 solicitacaoService.adicionarSolicitacaoCadastro(new SolicitacaoCadastro(nome, email, senha, celular, pcd));
-            }  else status.setMensagem("Uma solitação nesse email já foi solicitada! Aguarde o adminstrador!");
+            }  else status.setMensagem("Solicitação informada não foi cadastrada! Email existente!");
 
-        } else status.setMensagem("Já existe um usuário com o email inserido, tente outro!");
+        } else status.setMensagem("Solicitação informada não foi cadastrada! Email existente!\"");
         return status;
     }
 }

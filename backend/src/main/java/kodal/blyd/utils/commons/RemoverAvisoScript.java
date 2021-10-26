@@ -60,8 +60,8 @@ public class RemoverAvisoScript {
         try {
             service.removerAviso(aviso);
             status.setStatus(true);
-            status.setMensagem("Aviso removido com sucesso.");
-        } catch(Exception e) {status.setMensagem("Não foi possível remover o aviso.");}
+            status.setMensagem("Aviso selecionado foi removido!");
+        } catch(Exception e) {status.setMensagem("Aviso selecionado não foi removido!");}
         return status;
     }
 
@@ -76,13 +76,13 @@ public class RemoverAvisoScript {
             else {
                 service.removerAviso(aviso);
                 status.setStatus(true);
-                status.setMensagem("Aviso removido com sucesso.");
+                status.setMensagem("Aviso selecionado foi removido!");
             }
         }catch (AvisoNull e) {
-            status.setMensagem("O aviso nao pode ser removido, pois seus ID e inexistente.");
+            status.setMensagem("Aviso selecionado não foi removido! ID inexistente!");
         }
         catch(Exception e) {
-            status.setMensagem("Erro: " + e.toString());
+            status.setMensagem("Aviso selecionado não foi removido!");
         }
         return status;
     }
