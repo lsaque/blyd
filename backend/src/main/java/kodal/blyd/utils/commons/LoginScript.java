@@ -20,7 +20,7 @@ public class LoginScript {
 			if(usuario != null) {
 				login.setStatus(true);
 				login.setMensagem("Logado com sucesso!");
-				login.setUsuarioDTO(usuario);
+				login.setUsuario(usuario);
 			} else login.setMensagem("Senha inválida!");
 			
 		} else login.setMensagem("Email inválido!");
