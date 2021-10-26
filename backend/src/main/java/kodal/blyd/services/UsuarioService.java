@@ -71,7 +71,7 @@ public class UsuarioService {
 
 		status.setStatus(false);
 
-		if(setor == null) status.setMensagem("Erro: setor não encontrado.");
+		if(setor == null) status.setMensagem("Usuario selecionado não foi atualizado! Setor inexistente!");
 		else {
 			usuario.setNome(nome);
 			usuario.setEmail(email);
@@ -84,10 +84,10 @@ public class UsuarioService {
 
 			try{
 				repository.save(usuario);
-				status.setMensagem("Usuario atualizado com sucesso.");
+				status.setMensagem("Usuario selecionado foi atualizado!");
 				status.setStatus(true);
 			}catch (Exception e) {
-				status.setMensagem("Erro: " + e);
+				status.setMensagem("Usuario selecionado não foi atualizado!");
 			}
 		}
 		return status;
@@ -108,10 +108,10 @@ public class UsuarioService {
 		try {
 			repository.save(usuario);
 			status.setStatus(true);
-			status.setMensagem("Sucesso: usuário adicionado.");
+			status.setMensagem("Usuário selecionado foi adicionada!");
 		}catch (Exception e) {
 			status.setStatus(false);
-			status.setMensagem("Erro: " + e);
+			status.setMensagem("Usuário selecionado não foi adicionada!");
 		}
 		return status;
 	}

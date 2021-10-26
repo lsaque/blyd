@@ -64,4 +64,9 @@ public class SolicitacaoCadastroController {
 		return ResponseEntity.ok(solicitacaoService.aceitarSolitacaoCadastro(idSolicitacao, foto, pcd, admin, idSetor));
 	}
 
+	@GetMapping(value = "/recusar/{idSolicitacao}")
+	public ResponseEntity<StatusDTO> recusarSolicitacaoCadastro(@PathVariable long idSolicitacao) {
+		return ResponseEntity.ok(solicitacaoService.recusarSolicitacaoCadastro(idSolicitacao));
+	}
+
 }
