@@ -52,8 +52,7 @@ const RequestList: React.FC<IRequestListProps> = ({}: any) => {
             isPCD={solicitacao.pcd}
             email={solicitacao.email}
             phoneNumber={solicitacao.celular}
-            declineOnPress={() => {}} 
-            acceptOnPress={() => {}}
+            idRequest={solicitacao.id}
         />
         ))
       }

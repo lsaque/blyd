@@ -37,7 +37,6 @@ public class SolicitacaoCadastroService {
 		return repository.findAll().stream().map(solicitacao -> new SolicitacaoCadastroDTO(solicitacao)).collect(Collectors.toList());
 	}
 
-	@Cacheable(value = "solicitacaoEmail", key = "#email")
 	@Transactional(readOnly = true)
 	public Boolean procurarEmail(String email) {
 		return repository.procurarEmail(email);
@@ -48,10 +47,7 @@ public class SolicitacaoCadastroService {
 		repository.save(solicitacao);
 	}
 
-	@Caching(evict = {
-			@CacheEvict(value = "solicitacoes", allEntries = true),
-			@CacheEvict(value = "solicitacaoEmail", allEntries = true)
-	})
+	@Caching(evict = @CacheEvict(value = "solicitacoes", allEntries = true))
 	public StatusDTO aceitarSolitacaoCadastro(long idSolicitacao, String foto, boolean pcd, boolean admin, long idSetor) {
 		StatusDTO status = new StatusDTO();
 		SolicitacaoCadastro solicitacaoCadastro = repository.findById(idSolicitacao);
@@ -59,11 +55,11 @@ public class SolicitacaoCadastroService {
 
 		status.setStatus(false);
 		if(solicitacaoCadastro == null) {
-			status.setMensagem("Erro: solicitação não encontrada.");
+			status.setMensagem("Solicitação selecionada não encontrada!");
 			return status;
 		}
 		if(setor == null) {
-			status.setMensagem("Erro: setor não encontrado.");
+			status.setMensagem("Solicitação selecionada não aceita! Setor inexistente!");
 			return status;
 		}
 
@@ -81,11 +77,31 @@ public class SolicitacaoCadastroService {
 
 		try {
 			repository.delete(solicitacaoCadastro);
-			status.setMensagem("Sucesso: solicitação removida.");
-			status.setMensagem(usuarioService.adicionarUsuario(usuario).getMensagem());
+			status.setMensagem("Solicitação selecionada foi aceita!");
+			usuarioService.adicionarUsuario(usuario);
 			status.setStatus(true);
 		} catch (Exception e) {
-			status.setMensagem("Erro: " + e);
+			status.setMensagem("Solicitação selecionada não foi aceita!");
+		}
+		return status;
+	}
+
+	@Caching(evict = @CacheEvict(value = "solicitacoes", allEntries = true))
+	public StatusDTO recusarSolicitacaoCadastro(long idSolicitacao) {
+		StatusDTO status = new StatusDTO();
+		SolicitacaoCadastro solicitacaoCadastro = repository.findById(idSolicitacao);
+
+		status.setStatus(false);
+
+		if(solicitacaoCadastro == null) status.setMensagem("Solicitação selecionada não foi recusada! Solicitação inexistente!");
+		else {
+			try {
+				repository.delete(solicitacaoCadastro);
+				status.setMensagem("Solicitação selecionada foi recusada!");
+				status.setStatus(true);
+			} catch (Exception e) {
+				status.setMensagem("Solicitação selecionada não foi recusada!");
+			}
 		}
 		return status;
 	}

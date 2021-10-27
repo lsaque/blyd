@@ -33,6 +33,8 @@ import { BASE_URL } from '../../utils/requests';
 import { status } from '../../types/status';
 import ApiContext from '../../contexts/ApiContext';
 import { usuario } from '../../types/usuario';
+import { login } from '../../types/login';
+import { showAlert } from '../../utils/commons/showAlert';
 
 // import { AdminScreen, UserScreen } from '../..';
 
@@ -56,27 +58,29 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
   const password = useRef<any>(null);
   const enterButton = useRef<any>(null);
 
-  const users = useContext(ApiContext).state.usuarios as usuario[];
-
-  function findUser(email : string) {
-    users.forEach(user => {
-      if(user.email === email) {
-        console.log("Entrou aqui KRL1");
-        return;
-      }
-    })
-    // return "nenhum";
-  }
+  const { state, setState } = useContext(ApiContext);
 
   const validation = (values: any, dirty: any, isValid: any, handlesubmit: any) => {
     if((values.email && values.password != null) && dirty && isValid){
-      handlesubmit;
-      console.log(values)
-      if (values.isADM) {
-        navigation.navigate('AdminScreen')
-      } else 
-        navigation.navigate('UserScreen')
-    } else alert("É necessário um e-mail e senha válidos para continuar")
+      axios.get(`${BASE_URL}/usuarios/login/${values.email}/${values.password}`).then(response => {
+        const data = response.data as login;
+        
+        if(data.status) {
+          state.usuarioLogin = data.usuario;
+
+          if(data.usuario.admin) navigation.navigate('AdminScreen')
+          else navigation.navigate('UserScreen')
+          
+        } else showAlert(data.status, data.mensagem);
+      });
+
+      // handlesubmit;
+      // console.log(values)
+      // if (values.isADM) {
+      //   navigation.navigate('AdminScreen')
+      // } else 
+      //   navigation.navigate('UserScreen')
+    } else showAlert(false, "É necessário um e-mail e senha válidos para continuar")
   }
 
   return (
@@ -97,11 +101,7 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
         }}
         validationSchema={UserEditProfileSchema}
         onSubmit={(values: any) => {
-          // axios.get(`${BASE_URL}/usuarios/login/${values.email}/${values.password}`).then(response => {
-          //   const data = response.data as status;
-          //   console.log(data.status);
-          // });
-          console.log(findUser(values.email as string));
+          //Falar com isaque
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, dirty, isValid }) => (
@@ -149,7 +149,7 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
                   ref={password}
                   onSubmitEditing={() => {
                     handleSubmit;
-                    console.log(values)
+                    // console.log(values)
                     validation(values, dirty, isValid, handleSubmit)
                     // setShowHome(true);
                   }}

@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useContext } from "react";
+import { Alert, Text, View } from "react-native";
 import { BackgroundNavigation, BackgroundProfile, Divisor, ProfileDetails } from "../../../UserProfile/styles";
 import { Formik } from "formik";
 
@@ -28,6 +28,8 @@ import axios from "axios";
 import { BASE_URL } from "../../../../utils/requests";
 import { status } from "../../../../types/status";
 import { aviso } from "../../../../types/aviso";
+import ApiContext from "../../../../contexts/ApiContext";
+import { showAlert } from "../../../../utils/commons/showAlert";
 
 interface IAdviceEditProfileProps{}
 
@@ -98,7 +100,7 @@ const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation, rout
             userName: "Isaque José de Souza",
             userEmail: "isaque@gmail.com",
             
-            adviceDescription: `${adviceData.descricao} - ${adviceData.local}`,
+            adviceDescription: `${adviceData.descricao}`,
             adviceTimeRemaining: 3,
             localAdvice: "",
             isImpassable: true,
@@ -113,8 +115,10 @@ const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation, rout
             // @GetMapping(value = "/atualizar/{id}/{descricao}/{local}/{duracao}/{tempoFinal}/{transitavel}")
             axios.get(`${BASE_URL}/avisos/atualizar/${adviceData.id}/${values.adviceDescription}/${values.localAdvice}/${timeDuration}/${dateFinal}/${values.isImpassable}`).then((response) => {
               const data = response.data as status;
-              console.log(data.status);
+              showAlert(data.status, data.mensagem);
+              navigation.navigate('AdviceList');
             });
+            // console.log(`${adviceData.id}/${values.adviceDescription}/${values.localAdvice}/${timeDuration}/${dateFinal}/${values.isImpassable}`);
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, dirty, isValid }) => (

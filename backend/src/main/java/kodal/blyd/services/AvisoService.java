@@ -3,11 +3,8 @@ package kodal.blyd.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kodal.blyd.dto.AvisoSemUsuarioDTO;
 import kodal.blyd.dto.StatusDTO;
-import kodal.blyd.dto.UsuarioDTO;
 import kodal.blyd.entities.Aviso;
-import kodal.blyd.utils.commons.RemoverAvisoScript;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -61,8 +58,6 @@ public class AvisoService {
 			@CacheEvict(value = "aviso", key = "#id")
 	})
 	public StatusDTO atualizarAviso(long id, String descricao, String local, String duracao, String tempoFinal, boolean transitavel) {
-		System.out.println("Entrou no cache evict avisos e aviso atualizar");
-
 		StatusDTO status = new StatusDTO();
 		Aviso aviso = repository.procurarAviso(id);
 		System.out.println(descricao + local + duracao + tempoFinal + transitavel);
@@ -75,10 +70,10 @@ public class AvisoService {
 		try {
 			repository.save(aviso);
 			status.setStatus(true);
-			status.setMensagem("Aviso atualizado com sucesso!");
+			status.setMensagem("Aviso selecionado foi atualizado!");
 		}catch (Exception e) {
 			status.setStatus(false);
-			status.setMensagem("Erro: "+ e);
+			status.setMensagem("Aviso selecionado não foi atualizado!");
 		}
 		return status;
 	}

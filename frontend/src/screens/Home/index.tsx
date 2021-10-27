@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useContext } from "react";
 import { Ionicons } from '@expo/vector-icons';
 
 import Background from '../../assets/Home/background.png';
@@ -18,8 +18,12 @@ import {
   Top,
   Bot
  } from "./styles";
+import ApiContext from "../../contexts/ApiContext";
 
 function Home({navigation} : any){
+
+  const { state } = useContext(ApiContext);
+
   return (
     <React.Fragment>
       <StatusBar
@@ -37,7 +41,7 @@ function Home({navigation} : any){
           </Top>
 
           <Bot>
-            <WelcomeText accessibilityHint="Bem-vindo">Bem-vindo, {"\n"}Isaque!</WelcomeText>
+            <WelcomeText accessibilityHint="Bem-vindo">Bem-vindo, {"\n"}{state.usuarioLogin?.nome.split(" ")[0]}!</WelcomeText>
 
             <IconButtonText
               text="Deseja ir para onde?"

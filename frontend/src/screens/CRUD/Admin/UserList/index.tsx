@@ -103,6 +103,7 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
             renderHiddenItem={(data) => (
               <TrashDelete
                 onPress={() => {
+                  //Falar isaque
                   alert("Apagar item: " + data.index)
                 }}
               />

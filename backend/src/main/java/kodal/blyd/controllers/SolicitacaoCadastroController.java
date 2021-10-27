@@ -4,10 +4,8 @@ import java.util.List;
 
 import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.repositories.SolicitacaoCadastroRepository;
-import kodal.blyd.utils.commons.SolicitacaoCadastroScript;
+import kodal.blyd.utils.scripts.SolicitacaoCadastroScript;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,6 +60,11 @@ public class SolicitacaoCadastroController {
 	) {
 		System.out.println("Aceitar");
 		return ResponseEntity.ok(solicitacaoService.aceitarSolitacaoCadastro(idSolicitacao, foto, pcd, admin, idSetor));
+	}
+
+	@GetMapping(value = "/recusar/{idSolicitacao}")
+	public ResponseEntity<StatusDTO> recusarSolicitacaoCadastro(@PathVariable long idSolicitacao) {
+		return ResponseEntity.ok(solicitacaoService.recusarSolicitacaoCadastro(idSolicitacao));
 	}
 
 }

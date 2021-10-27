@@ -31,6 +31,10 @@ interface ISignInProps{}
 
 import Background from '../../assets/Admin/background.png';
 import WithoutPicture from "../../assets/UserList/withoutPhoto.png";
+import axios from 'axios';
+import { BASE_URL } from '../../utils/requests';
+import { status } from '../../types/status';
+import { showAlert } from '../../utils/commons/showAlert';
 
 const UserEditProfileSchema = Yup.object().shape({
   picture: Yup.string(),
@@ -99,6 +103,12 @@ const SignIn: React.FC<ISignInProps> = ({ navigation }: any) => {
           validationSchema={UserEditProfileSchema}
           onSubmit={(values: any) => {
             // console.log(values)
+            // /adicionar/{nome}/{email}/{senha}/{celular}/{pcd}
+            axios.get(`${BASE_URL}/solicitacoes-cadastro/adicionar/${values.name}/${values.email}/${values.password}/${values.phoneNumber}/${values.isPCD}`).then(response => {
+              const data = response.data as status;
+              showAlert(data.status, data.mensagem);
+              if(data.status) navigation.goBack();
+            })
             // axios()
           }}
         >
@@ -232,10 +242,7 @@ const SignIn: React.FC<ISignInProps> = ({ navigation }: any) => {
               <View style={{marginHorizontal: 20}}>
                 <SubmitButton
                   onPress={() => {
-                    handleSubmit;
-                    console.log(values); 
-                    alert("Solicitação enviada com sucesso! \nAguarde a liberação.");
-                    navigation.goBack()
+                    handleSubmit();
                   }}
                   style={{
                     opacity: !(dirty && isValid) ? 0.6 : 1,

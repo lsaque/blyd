@@ -32,7 +32,6 @@ public class UsuarioService {
 		return repository.findAll().stream().map(usuario -> new UsuarioDTO(usuario)).collect(Collectors.toList());
 	}
 
-	@Cacheable(value = "usuarioEmail", key="#email")
 	@Transactional(readOnly = true)
 	public Boolean procurarEmail(String email) { return repository.procurarEmail(email); }
 
@@ -57,7 +56,6 @@ public class UsuarioService {
 	@Caching(evict = {
 			@CacheEvict(value = "usuarios", allEntries = true),
 			@CacheEvict(value = "usuariosSemSetor", allEntries = true),
-			@CacheEvict(value = "usuarioEmail", allEntries = true),
 			@CacheEvict(value = "usuarioLogin", allEntries = true),
 			@CacheEvict(value = "usuario", key = "#id"),
 			@CacheEvict(value = "setores", allEntries = true),
@@ -66,28 +64,29 @@ public class UsuarioService {
 	@Transactional
 	public StatusDTO atualizarUsuario(long id, String nome, String email,String senha, String celular, String foto, boolean pcd, boolean admin, long idSetor) {
 		Usuario usuario = procurarId(id);
-		Setor setor = setorService.procurarId(id);
+		Setor setor = setorService.procurarId(idSetor);
 		StatusDTO status = new StatusDTO();
 
 		status.setStatus(false);
 
-		if(setor == null) status.setMensagem("Erro: setor não encontrado.");
+		if(setor == null) status.setMensagem("Usuario selecionado não foi atualizado! Setor inexistente!");
+		else {
+			usuario.setNome(nome);
+			usuario.setEmail(email);
+			usuario.setSenha(senha);
+			usuario.setCelular(celular);
+			usuario.setFoto(foto);
+			usuario.setPcd(pcd);
+			usuario.setAdmin(admin);
+			usuario.setSetor(setor);
 
-		usuario.setNome(nome);
-		usuario.setEmail(email);
-		usuario.setSenha(senha);
-		usuario.setCelular(celular);
-		usuario.setFoto(foto);
-		usuario.setPcd(pcd);
-		usuario.setAdmin(admin);
-		usuario.setSetor(setor);
-
-		try{
-			repository.save(usuario);
-			status.setMensagem("Usuario atualizado com sucesso.");
-			status.setStatus(true);
-		}catch (Exception e) {
-			status.setMensagem("Erro: " + e);
+			try{
+				repository.save(usuario);
+				status.setMensagem("Usuario selecionado foi atualizado!");
+				status.setStatus(true);
+			}catch (Exception e) {
+				status.setMensagem("Usuario selecionado não foi atualizado!");
+			}
 		}
 		return status;
 	}
@@ -95,7 +94,6 @@ public class UsuarioService {
 	@Caching(evict = {
 			@CacheEvict(value = "usuarios", allEntries = true),
 			@CacheEvict(value = "usuariosSemSetor", allEntries = true),
-			@CacheEvict(value = "usuarioEmail", allEntries = true),
 			@CacheEvict(value = "usuarioLogin", allEntries = true),
 			@CacheEvict(value = "usuario", key = "#usuario.id"),
 			@CacheEvict(value = "setores", allEntries = true)
@@ -107,10 +105,10 @@ public class UsuarioService {
 		try {
 			repository.save(usuario);
 			status.setStatus(true);
-			status.setMensagem("Sucesso: usuário adicionado.");
+			status.setMensagem("Usuário selecionado foi adicionada!");
 		}catch (Exception e) {
 			status.setStatus(false);
-			status.setMensagem("Erro: " + e);
+			status.setMensagem("Usuário selecionado não foi adicionada!");
 		}
 		return status;
 	}
