@@ -265,30 +265,30 @@ const Forms: React.FC  = () => {
           }
 
           if(values.advicesLocal !== ""){
-            console.log(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/Corredor Superior/${dateNow}/${dateFinal}/${timeDuration}/${values.advicesLocal}/${values.isImpassable}/1`);
+          //  console.log(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/Corredor Superior/${dateNow}/${dateFinal}/${timeDuration}/${values.advicesLocal}/${values.isImpassable}/1`);
           
-          // axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/Corredor Superior/${dateNow}/${dateFinal}/${timeDuration}/${values.advicesLocal}/${values.isImpassable}/1`).then((response) => {
-          //   const data = response.data as status;
-          //   if(data.status){
-          //     SuccessAlert.fire({
-          //       title: <SwalTitle>Aviso marcado 🔥</SwalTitle>,
-          //       html: <SwalDescription>Agradecemos por fazer parte deste lindo movimento.</SwalDescription>,
-          //       icon: 'success',
-          //       iconColor: '#8363F6',
-          //       confirmButtonColor: '#8363F6',
-          //       confirmButtonText: 'Sair',
-          //     })
-          //   } else {
-          //     ErrorAlert.fire({
-          //       title: <SwalTitle style={{color: '#F66363'}}>Aviso não marcado</SwalTitle>,
-          //       html: <SwalDescription>Não foi possível realizar a criação deste aviso, favor verificar.</SwalDescription>,
-          //       icon: 'error',
-          //       iconColor: '#F66363',
-          //       confirmButtonColor: '#F66363',
-          //       confirmButtonText: 'Verificar',
-          //     })
-          //   }
-          // });
+            axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/Corredor Superior/${dateNow}/${dateFinal}/${timeDuration}/${values.advicesLocal}/${values.isImpassable}/1`).then((response) => {
+              const data = response.data as status;
+              if(data.status){
+                SuccessAlert.fire({
+                  title: <SwalTitle>Aviso marcado 🔥</SwalTitle>,
+                  html: <SwalDescription>Agradecemos por fazer parte deste lindo movimento.</SwalDescription>,
+                  icon: 'success',
+                  iconColor: '#8363F6',
+                  confirmButtonColor: '#8363F6',
+                  confirmButtonText: 'Sair',
+                })
+              } else {
+                ErrorAlert.fire({
+                  title: <SwalTitle style={{color: '#F66363'}}>Aviso não marcado</SwalTitle>,
+                  html: <SwalDescription>Não foi possível realizar a criação deste aviso, favor verificar.</SwalDescription>,
+                  icon: 'error',
+                  iconColor: '#F66363',
+                  confirmButtonColor: '#F66363',
+                  confirmButtonText: 'Verificar',
+                })
+              }
+            });
           
           } else {
             ErrorAlert.fire({
