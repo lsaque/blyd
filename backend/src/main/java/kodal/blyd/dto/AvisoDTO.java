@@ -12,12 +12,12 @@ public class AvisoDTO implements Serializable{
 
 	private String descricao, local, tempoInicio, tempoFinal, duracao;
 	private String listaPonto;
-	private boolean transitavel;
+	private boolean transitavel, status;
 	private UsuarioSemAvisoDTO usuario;
 	
 	public AvisoDTO() {}
 
-	public AvisoDTO(long id, String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel, UsuarioSemAvisoDTO usuario) {
+	public AvisoDTO(long id, String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel, boolean status, UsuarioSemAvisoDTO usuario) {
 		this.id = id;
 		this.descricao = descricao;
 		this.local = local;
@@ -26,6 +26,7 @@ public class AvisoDTO implements Serializable{
 		this.duracao = duracao;
 		this.listaPonto = listaPonto;
 		this.transitavel = transitavel;
+		this.status = status;
 		this.usuario = usuario;
 	}
 
@@ -38,6 +39,7 @@ public class AvisoDTO implements Serializable{
 		duracao = aviso.getDuracao();
 		listaPonto = aviso.getListaPonto();
 		transitavel = aviso.isTransitavel();
+		status = aviso.isStatus();
 		usuario = new UsuarioSemAvisoDTO(aviso.getUsuario());
 	}
 
@@ -111,5 +113,13 @@ public class AvisoDTO implements Serializable{
 
 	public void setUsuario(UsuarioSemAvisoDTO usuario) {
 		this.usuario = usuario;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

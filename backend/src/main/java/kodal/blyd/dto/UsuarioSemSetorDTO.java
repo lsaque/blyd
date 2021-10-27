@@ -12,12 +12,12 @@ public class UsuarioSemSetorDTO {
     private long id;
     private String nome, email, senha, celular, foto;
     private long totalChamadas, totalAvisos, totalRotas;
-    private Boolean pcd, admin;
+    private Boolean pcd, admin, status;
     private List<AvisoSemUsuarioDTO> avisos;
 
     public UsuarioSemSetorDTO() {}
 
-    public UsuarioSemSetorDTO(long id, String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, List<AvisoSemUsuarioDTO> avisos) {
+    public UsuarioSemSetorDTO(long id, String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, Boolean status, List<AvisoSemUsuarioDTO> avisos) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -29,6 +29,7 @@ public class UsuarioSemSetorDTO {
         this.totalRotas = totalRotas;
         this.pcd = pcd;
         this.admin = admin;
+        this.status = status;
         this.avisos = avisos;
     }
 
@@ -44,6 +45,7 @@ public class UsuarioSemSetorDTO {
         totalRotas = usuario.getTotalRotas();
         pcd = usuario.isPcd();
         admin = usuario.isAdmin();
+        status = usuario.isStatus();
         avisos = usuario.getAvisos().stream().map(a -> new AvisoSemUsuarioDTO(a)).collect(Collectors.toList());
     }
 
@@ -141,5 +143,13 @@ public class UsuarioSemSetorDTO {
 
     public void setAvisos(List<AvisoSemUsuarioDTO> avisos) {
         this.avisos = avisos;
+    }
+
+    public Boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

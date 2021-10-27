@@ -7,11 +7,11 @@ public class AvisoSemUsuarioDTO {
     private long id;
     private String descricao, local, tempoInicio, tempoFinal, duracao;
     private String listaPonto;
-    private boolean transitavel;
+    private boolean transitavel, status;
 
     public AvisoSemUsuarioDTO() {}
 
-    public AvisoSemUsuarioDTO(long id, String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel) {
+    public AvisoSemUsuarioDTO(long id, String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel, boolean status) {
         this.id = id;
         this.descricao = descricao;
         this.local = local;
@@ -20,7 +20,7 @@ public class AvisoSemUsuarioDTO {
         this.duracao = duracao;
         this.listaPonto = listaPonto;
         this.transitavel = transitavel;
-
+        this.status = status;
     }
 
     public AvisoSemUsuarioDTO(Aviso aviso) {
@@ -32,6 +32,7 @@ public class AvisoSemUsuarioDTO {
         duracao = aviso.getDuracao();
         listaPonto = aviso.getListaPonto();
         transitavel = aviso.isTransitavel();
+        status = aviso.isStatus();
     }
 
     public long getId() {
@@ -96,5 +97,13 @@ public class AvisoSemUsuarioDTO {
 
     public void setTransitavel(boolean transitavel) {
         this.transitavel = transitavel;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

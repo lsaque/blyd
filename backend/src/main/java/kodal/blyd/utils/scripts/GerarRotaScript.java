@@ -1,5 +1,7 @@
 package kodal.blyd.utils.scripts;
 
+import kodal.blyd.entities.Usuario;
+import kodal.blyd.services.UsuarioService;
 import kodal.blyd.utils.astar.AStar;
 import kodal.blyd.utils.astar.MapInfo;
 import kodal.blyd.utils.astar.Node;
@@ -23,7 +25,7 @@ public class GerarRotaScript {
         this.avisoService = avisoService;
     }
 
-    public List<PopUpDirectionDTO> gerarRota(long idMapa, int xFim, int yFim) {
+    public List<PopUpDirectionDTO> gerarRota(long idMapa, int xFim, int yFim, Usuario usuario, UsuarioService usuarioService) {
 
         int[][] mapa = getMap(mapaService, idMapa);
 
@@ -48,35 +50,48 @@ public class GerarRotaScript {
         MapInfo info = new MapInfo(mapa,mapa[0].length, mapa.length,new Node(13, 21), new Node(xFim, yFim));
 
         AStar as = new AStar();
-        List<Route> routeList = new ArrayList<>();
+        List<Route> routeList;
+        boolean addUser = false;
 
         // Iniciar A*
         as.start(info, false);
+        List<PopUpDirectionDTO> popUpDirectionDTOList = new ArrayList<>();
 
         if(!as.path.isEmpty()) {
             List<Node> finalPath = setFinalPath(as.path);
 
             printPath(finalPath);
             printMap(mapa);
-            routeList = setRouteList(finalPath);
 
             Route lastRoute = new Route();
 
             // Setar os atributos da rota
-            for (Route r: routeList) {
-                setTotalMoveRoute(r);
-                if(r.getTotalMove() == 1 && routeList.indexOf(r) != 0) setTypeDirectionRoute(r, lastRoute);
-                else setTypeDirectionRoute(r);
-                if (routeList.indexOf(r) == 0) {
-                    r.setDirection("frente");
-                    r.setNameArrow("arrow-up");
+            if(finalPath.size() != 1) {
+                routeList = setRouteList(finalPath);
+
+                for (Route r: routeList) {
+                    setTotalMoveRoute(r);
+                    if(r.getTotalMove() == 1 && routeList.indexOf(r) != 0) setTypeDirectionRoute(r, lastRoute);
+                    else setTypeDirectionRoute(r);
+                    if (routeList.indexOf(r) == 0) {
+                        r.setDirection("frente");
+                        r.setNameArrow("arrow-up");
+                    }
+                    else setDirectionRoute(r, lastRoute);
+                    lastRoute = r;
                 }
-                else setDirectionRoute(r, lastRoute);
-                lastRoute = r;
+                popUpDirectionDTOList = getPopUp(routeList);
+                addUser = true;
+            } else {
+                popUpDirectionDTOList.add(new PopUpDirectionDTO("arrow-up", "", "Siga em frente por mais", "1 passo"));
+                popUpDirectionDTOList.add(new PopUpDirectionDTO("","check-circle", "Você chegou ao seu destino", "com sucesso"));
+                addUser = true;
             }
-//            printRouteList(routeList);
+        } else popUpDirectionDTOList.add(new PopUpDirectionDTO("", "wrong-location", "Não foi possível traçar uma", "rota"));
+
+        if(addUser) {
+            usuarioService.adicionarRota(usuario.getId());
         }
-        List<PopUpDirectionDTO> popUpDirectionDTOList = getPopUp(routeList);
 
         return popUpDirectionDTOList;
     }

@@ -7,10 +7,10 @@ public class UsuarioSemAvisoDTO {
     private long id;
     private String nome, email, senha, celular, foto;
     private long totalChamadas, totalAvisos, totalRotas;
-    private Boolean pcd, admin;
+    private Boolean pcd, admin, status;
     private SetorSemUsuarioDTO setor;
 
-    public UsuarioSemAvisoDTO(long id, String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, SetorSemUsuarioDTO setor) {
+    public UsuarioSemAvisoDTO(long id, String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, Boolean status, SetorSemUsuarioDTO setor) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -22,6 +22,7 @@ public class UsuarioSemAvisoDTO {
         this.totalRotas = totalRotas;
         this.pcd = pcd;
         this.admin = admin;
+        this.status = status;
         this.setor = setor;
     }
 
@@ -37,6 +38,7 @@ public class UsuarioSemAvisoDTO {
         totalRotas = usuario.getTotalRotas();
         pcd = usuario.isPcd();
         admin = usuario.isAdmin();
+        status = usuario.isStatus();
         setor = new SetorSemUsuarioDTO(usuario.getSetor());
     }
 
@@ -134,5 +136,13 @@ public class UsuarioSemAvisoDTO {
 
     public void setSetor(SetorSemUsuarioDTO setor) {
         this.setor = setor;
+    }
+
+    public Boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

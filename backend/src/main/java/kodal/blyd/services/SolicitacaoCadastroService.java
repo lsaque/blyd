@@ -70,7 +70,7 @@ public class SolicitacaoCadastroService {
 				solicitacaoCadastro.getCelular(),
 				foto,
 				0, 0, 0,
-				pcd, admin,
+				pcd, admin, true,
 				setor,
 				new ArrayList<Aviso>()
 		);
@@ -86,6 +86,7 @@ public class SolicitacaoCadastroService {
 		return status;
 	}
 
+	@Transactional
 	@Caching(evict = @CacheEvict(value = "solicitacoes", allEntries = true))
 	public StatusDTO recusarSolicitacaoCadastro(long idSolicitacao) {
 		StatusDTO status = new StatusDTO();
@@ -93,10 +94,11 @@ public class SolicitacaoCadastroService {
 
 		status.setStatus(false);
 
-		if(solicitacaoCadastro == null) status.setMensagem("Solicitação selecionada não foi recusada! Solicitação inexistente!");
+		if(solicitacaoCadastro == null) status.setMensagem("Solicitação selecionada não foi recusada! ID inexistente!");
 		else {
 			try {
-				repository.delete(solicitacaoCadastro);
+				solicitacaoCadastro.setStatus(false);
+				repository.save(solicitacaoCadastro);
 				status.setMensagem("Solicitação selecionada foi recusada!");
 				status.setStatus(true);
 			} catch (Exception e) {
