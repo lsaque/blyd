@@ -55,20 +55,19 @@ public class UsuarioController {
 		return ResponseEntity.ok(new LoginScript().verificarLogin(inputEmail, inputSenha, service));
 	}
 
-	@GetMapping(value = "/atualizar/{id}/{nome}/{email}/{senha}/{celular}/{foto}/{pcd}/{admin}/{status}/{setorId}")
+	@GetMapping(value = "/atualizar/{id}/{nome}/{email}/{senha}/{celular}/{pcd}/{admin}/{status}/{setorId}")
 	public ResponseEntity<StatusDTO> atualizarUsuario(
 			@PathVariable long id,
 			@PathVariable String nome,
 			@PathVariable String email,
 			@PathVariable String senha,
 			@PathVariable String celular,
-			@PathVariable String foto,
 			@PathVariable boolean pcd,
 			@PathVariable boolean admin,
 			@PathVariable boolean status,
 			@PathVariable long setorId
 	){
-		return ResponseEntity.ok(service.atualizarUsuario(id, nome, email, senha, celular, foto, pcd, admin, status, setorId));
+		return ResponseEntity.ok(service.atualizarUsuario(id, nome, email, senha, celular, pcd, admin, status, setorId));
 	}
 
 	@GetMapping(value = "/desativar/{id}")
@@ -85,5 +84,4 @@ public class UsuarioController {
 	public ResponseEntity<StatusDTO> adicionarChamada(@PathVariable long id) {
 		return ResponseEntity.ok(service.adicionarChamada(id));
 	}
-
 }
