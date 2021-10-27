@@ -51,22 +51,22 @@ const slides = [
   {
     key: '1',
     title: "Bem-vindo",
-    text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et ",
+    text: "Aqui você pode se locomover, marcar avisos, ligar para parceiros e mais.",
     bgImage: require('./src/assets/Splash/background1.png'),
     image: require('./src/assets/Splash/splash.png'),
   },
   {
     key: '2',
-    title: "Bem-vindo",
-    text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et ",
+    title: "Acessibilidade modo ON",
+    text: "Esse é um ambiente feito pra você, acesse todas as funcionalidades de maneira, fácil, ágil e interativa.",
     bgImage: require('./src/assets/Splash/background2.png/'),
     image: require('./src/assets/Splash/splash.png'),
 
   },
   {
     key: '3',
-    title: "Bem-vindo",
-    text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et ",
+    title: "Aproveite",
+    text: "Obrigado por utilizar o nosso APP, estamos em constante desenvolvimento, para assim contribuir ainda mais com a indepedência de pessoas PCD!",
     bgImage: require('./src/assets/Splash/background3.png'),
     image: require('./src/assets/Splash/splash.png'),
   },
@@ -80,7 +80,7 @@ const colors = {
 }
 
 export default function App({ navigation }: any){
-  const [showHome, setShowHome] = useState(true);
+  const [showHome, setShowHome] = useState(false);
 
   const { state, setState } = useContext(ApiContext);
 

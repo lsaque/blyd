@@ -5,5 +5,6 @@ export type solicitacaoCadastro = {
   senha: string;
   celular: string;
   pcd: boolean;
+  status: boolean;
 };
 

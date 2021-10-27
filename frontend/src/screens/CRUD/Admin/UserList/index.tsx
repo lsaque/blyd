@@ -88,15 +88,19 @@ const UserList: React.FC<IUserListProps> = ({ navigation }: any) => {
               />
             }
 
-            renderItem={ (userData) => (
-              <UserListCard
-                picture={Background}
-                name={userData.item.nome}
-                email={userData.item.email}
-                department={userData.item.setor.nome}
-                onPress={() => navigation.navigate("UserProfile", { user : userData.item })}
-              />
-            )}
+            renderItem={ (userData) => {
+              return userData.item.status ?                
+                <UserListCard
+                  picture={userData.item.foto}
+                  name={userData.item.nome}
+                  email={userData.item.email}
+                  department={userData.item.setor.nome}
+                  isADM={userData.item.admin}
+                  onPress={() => navigation.navigate("UserProfile", { user : userData.item })}
+                />
+                :
+                <View />
+            }}
             
             rightOpenValue={-75}
 

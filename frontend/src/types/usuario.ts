@@ -13,6 +13,7 @@ export type usuario = {
   totalRotas: number;
   pcd: boolean;
   admin: boolean;
+  status: boolean;
   setor: setor;
   avisos: aviso[];
 };

@@ -148,7 +148,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
           <GridPhotos>
             {
               usuariosData?.map(usuario => {
-                if(usuario.pcd) return <AdminPhotoProfile key={usuario.id} imageProfile={Background}/>
+                if(usuario.pcd && usuario.status) return <AdminPhotoProfile key={usuario.id} imageProfile={usuario.foto}/>
               })
             }
           </GridPhotos>
@@ -163,16 +163,18 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
           </View>
           
           {
-            solicitacoesData?.map(solicitacao => (
-              <UserRequestCard 
-                key={solicitacao.id}
-                name={solicitacao.nome}
-                isPCD={solicitacao.pcd}
-                email={solicitacao.email}
-                phoneNumber={solicitacao.celular}
-                idRequest={solicitacao.id}
-              />
-            ))
+            solicitacoesData?.map(solicitacao => {
+              if(solicitacao.status){
+                return (
+                  <UserRequestCard 
+                    key={solicitacao.id}
+                    name={solicitacao.nome}
+                    isPCD={solicitacao.pcd}
+                    email={solicitacao.email}
+                    phoneNumber={solicitacao.celular}
+                    idRequest={solicitacao.id}
+                  />)
+              }})
           }
 
 
@@ -227,24 +229,25 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
               avisosData?.map(advice => {
 
                 const dueDate = setDueDate(advice.tempoFinal);
-
-                return(
-                  <AdminLastAdvice
-                    key={advice.id}
-                    userPicture={Background}
-                    userName={advice.usuario.nome}
-                    adviceHour={setAdviceHour(advice.tempoInicio)}
-                    adviceName={`${advice.descricao} - ${advice.local}`}
-                    adviceTimeRemaining={advice.duracao}
-                    isImpassable={advice.transitavel}
-                    dueDay={dueDate[0]}
-                    dueMonth={dueDate[1]}
-                    dueYear={dueDate[2]}
-                    dueHour={dueDate[3]}
-                    dueMinute={dueDate[4]}
-                    onPress={() => navigation.navigate("AdviceProfile", {advice : advice})}
-                /> 
-                );
+                if(advice.status) {
+                  return(
+                    <AdminLastAdvice
+                      key={advice.id}
+                      userPicture={advice.usuario.foto}
+                      userName={advice.usuario.nome}
+                      adviceHour={setAdviceHour(advice.tempoInicio)}
+                      adviceName={`${advice.descricao} - ${advice.local}`}
+                      adviceTimeRemaining={advice.duracao}
+                      isImpassable={advice.transitavel}
+                      dueDay={dueDate[0]}
+                      dueMonth={dueDate[1]}
+                      dueYear={dueDate[2]}
+                      dueHour={dueDate[3]}
+                      dueMinute={dueDate[4]}
+                      onPress={() => navigation.navigate("AdviceProfile", {advice : advice})}
+                  /> 
+                  );
+                }
               })
             }
             {/* <AdminLastAdvice 

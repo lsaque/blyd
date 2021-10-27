@@ -96,7 +96,7 @@ const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation, rout
     
         <Formik
           initialValues={{ 
-            userPicture: linkImage,
+            userPicture: "https://i.ibb.co/z6QY6m0/without-Photo.png",
             userName: "Isaque José de Souza",
             userEmail: "isaque@gmail.com",
             
@@ -130,7 +130,7 @@ const AdviceEditProfile: React.FC<IAdviceEditProfileProps> = ({ navigation, rout
               >
                 <BackgroundProfile source={Background} resizeMode="cover"/>
                 <Details 
-                  avatar={{uri: values.userPicture}}
+                  avatar={{uri: adviceData.usuario.foto == "sem foto" ? values.userPicture : adviceData.usuario.foto}}
                   isPCD={adviceData.usuario.pcd}
                   markedAdvice={true}
                   name={adviceData.usuario.nome}

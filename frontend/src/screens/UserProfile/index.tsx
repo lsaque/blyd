@@ -80,7 +80,7 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation, route }: any) =>
           <About>
             <ProfileAbout
               placeholder="Encontra-se em:"
-              answer={userData.setor.nome}
+              answer={userData.setor.descricao}
               icon={<MaterialIcons name="edit" size={18} color="#797979" />}
             />
 

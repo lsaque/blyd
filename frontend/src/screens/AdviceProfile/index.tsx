@@ -40,6 +40,7 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any
 
   const adviceHour = setAdviceHour(adviceData.tempoFinal);
   const adviceDate = setDueDate(adviceData.tempoFinal);
+  const imageURL = "https://i.ibb.co/z6QY6m0/without-Photo.png";
 
   return (
     <Container>
@@ -56,7 +57,7 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any
         <BackgroundProfile source={BackgroundUser} resizeMode="cover"/>
 
         <Details 
-          avatar={BackgroundUser}
+          avatar={{uri: userData.foto === "sem foto" ? imageURL : userData.foto}}
           isPCD={userData.pcd}
           markedAdvice={true}
           name={userData.nome}
@@ -70,7 +71,7 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any
               icon={<Ionicons name="ios-trash-outline" size={18} color="#F66363" />}
               placeholder="Apagar"
               onPress={() => {
-                axios.get(`${BASE_URL}/avisos/remover/${adviceData.id}`).then((response) => {
+                axios.get(`${BASE_URL}/avisos/desativar/${adviceData.id}`).then((response) => {
                   const data = response.data as status;
                   showAlert(data.status, data.mensagem);
                   navigation.goBack();

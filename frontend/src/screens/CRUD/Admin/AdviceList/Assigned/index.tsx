@@ -52,24 +52,25 @@ const AdviceList: React.FC<IAdviceListProps> = ({navigation, route} : any) => {
           avisosData?.map(advice => {
 
             const dueDate = setDueDate(advice.tempoFinal);
-
-            return(
-              <AdminLastAdvice
-                key={advice.id}
-                userPicture={Background}
-                userName={advice.usuario.nome}
-                adviceHour={setAdviceHour(advice.tempoInicio)}
-                adviceName={`${advice.descricao} - ${advice.local}`}
-                adviceTimeRemaining={advice.duracao}
-                isImpassable={advice.transitavel}
-                dueDay={dueDate[0]}
-                dueMonth={dueDate[1]}
-                dueYear={dueDate[2]}
-                dueHour={dueDate[3]}
-                dueMinute={dueDate[4]}
-                onPress={() => navigation.navigate("AdviceProfile", {advice : advice})}
-            /> 
-            );
+            if(advice.status) {
+              return(
+                <AdminLastAdvice
+                  key={advice.id}
+                  userPicture={advice.usuario.foto}
+                  userName={advice.usuario.nome}
+                  adviceHour={setAdviceHour(advice.tempoInicio)}
+                  adviceName={`${advice.descricao} - ${advice.local}`}
+                  adviceTimeRemaining={advice.duracao}
+                  isImpassable={advice.transitavel}
+                  dueDay={dueDate[0]}
+                  dueMonth={dueDate[1]}
+                  dueYear={dueDate[2]}
+                  dueHour={dueDate[3]}
+                  dueMinute={dueDate[4]}
+                  onPress={() => navigation.navigate("AdviceProfile", {advice : advice})}
+              /> 
+              );
+            }
           })
         }
         

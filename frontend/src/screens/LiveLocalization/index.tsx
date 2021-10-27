@@ -125,7 +125,7 @@ export default function LiveLocalization({navigation, route} : any){
 
           <Row>
           {
-            avisoData == null ?
+            avisoData == null || selectedComodo == null ?
               <Text 
                 style={{
                   textAlign:'center', 
@@ -136,7 +136,7 @@ export default function LiveLocalization({navigation, route} : any){
               : 
               avisoData.map(aviso => (
                 <AdviceNotification
-                  onPress={() => navigation.navigate("AdviceProfile", {})}
+                  onPress={() => navigation.navigate("AdviceProfile", {advice : aviso})}
                   key={aviso.id}
                   importance={1}
                   text={aviso.descricao}

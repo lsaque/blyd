@@ -60,10 +60,8 @@ const Right = styled.View`
 export default ({name, department, number, picture}: any) => {
   
   let personPicture = <Ionicons name="person" size={40} color="#B9D5E1"/>;
+  const imageURL = "https://i.ibb.co/z6QY6m0/without-Photo.png";
 
-  if(picture != null){
-    personPicture = <PersonPicture source={picture}/>;
-  }
 
   return (
     <Container onPress={() => { Linking.openURL("tel:" + number) }}
@@ -72,7 +70,7 @@ export default ({name, department, number, picture}: any) => {
       <Wrapper>
 
         <Left>
-          {personPicture}
+          <PersonPicture source={{ uri: picture === "sem foto" ? imageURL: picture}}/>
         </Left>
 
         <Center>
