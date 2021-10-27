@@ -45,7 +45,7 @@ const Email = styled.Text`
 `;
 
 interface IDetailsProps{
-  avatar: object,
+  avatar: string,
   isPCD: boolean | undefined | null,
   name?: String,
   email?: String,
@@ -56,6 +56,8 @@ interface IDetailsProps{
 const Details: React.FC<IDetailsProps> = ({
   avatar, isPCD, name, email, hideNameAndEmail, markedAdvice
 }: any) => {
+
+  const imageURL = "https://i.ibb.co/z6QY6m0/without-Photo.png";
 
   let pcdTagRender = <React.Fragment/>
   let nameAndEmailRender = (
@@ -87,7 +89,7 @@ const Details: React.FC<IDetailsProps> = ({
   
   return (
     <Container>
-      <Avatar source={avatar} resizeMode="cover"/>
+      <Avatar source={{ uri: avatar === "sem foto" ? imageURL: avatar}} resizeMode="cover"/>
       {pcdTagRender}
       {nameAndEmailRender}
     </Container>

@@ -134,14 +134,19 @@ export default function LiveLocalization({navigation, route} : any){
                 accessibilityHint="Nenhum aviso marcado neste trajeto"
               >Nenhum aviso </Text> 
               : 
-              avisoData.map(aviso => (
-                <AdviceNotification
-                  onPress={() => navigation.navigate("AdviceProfile", {advice : aviso})}
-                  key={aviso.id}
-                  importance={1}
-                  text={aviso.descricao}
-                /> 
-              ))
+              avisoData.map(aviso => {
+
+                if(aviso.status) {
+                  return (
+                    <AdviceNotification
+                      onPress={() => navigation.navigate("AdviceProfile", {advice : aviso})}
+                      key={aviso.id}
+                      importance={1}
+                      text={aviso.descricao}
+                    /> 
+                  )
+                }
+            })
           }
           </Row>
         </Content>
