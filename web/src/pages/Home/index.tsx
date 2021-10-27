@@ -1,7 +1,9 @@
-/* eslint-disable no-empty-pattern */
-import React from "react";
+import React, { useState } from "react";
+import Lightbox from "react-image-lightbox";
 
 import GlobalStyles from '../../assets/styles/GlobalStyles';
+import FullScreenMap from '../../assets/image-map.png';
+import Forms from "../../components/Forms";
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { ReactComponent as FullScreenIcon } from '../../assets/fullscreen-icon.svg';
@@ -12,35 +14,46 @@ import {
   PlanImage,
   FullScreenButton,
   Wrapper,
-  // Text
 } from "./styles";
-import Forms from "../../components/Forms";
 
-interface IHomeProps{
+const Home: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const openModal = () => setIsOpen(true);  
 
-}
-
-const Home: React.FC<IHomeProps> = ({}) => {
   return (
-    <Container>
-      <Wrapper>
-
-        <Header>
-          <Logo height={45} width={100}/>
-        </Header>
-
-        <PlanImage onClick={() => {alert("salve")}}>
-          <FullScreenButton>
-            <FullScreenIcon height={23}/>
-          </FullScreenButton>
-        </PlanImage>
-
-        <Forms/>
-        
-      </Wrapper>
+    <React.Fragment>
 
       <GlobalStyles/>
-    </Container>
+
+      <Container>
+        <Wrapper>
+          
+          <Header>
+            <Logo height={45} width={100}/>
+          </Header>
+
+          <PlanImage onClick={openModal}>
+            <FullScreenButton>
+              <FullScreenIcon height={23}/>
+            </FullScreenButton>
+          </PlanImage>
+
+          {isOpen && (
+            <Lightbox
+              mainSrc={FullScreenMap}
+              enableZoom={true}
+              imageTitle={"Visualização da planta (Apenas representativo)"}
+              imagePadding={20}
+              onCloseRequest={() => setIsOpen(false)}
+            />
+          )}
+
+          <Forms/>
+
+        </Wrapper>
+      </Container>
+    </React.Fragment>
   )
 }
+
 export default Home;
