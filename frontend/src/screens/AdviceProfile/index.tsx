@@ -35,12 +35,14 @@ interface IAdviceProfileProps{}
 const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any) => {
 
   const { advice } = route.params;
+
   const adviceData = advice as aviso;
+  console.log(adviceData.usuario.foto);
+  
   const userData = adviceData.usuario as usuario;
 
   const adviceHour = setAdviceHour(adviceData.tempoFinal);
   const adviceDate = setDueDate(adviceData.tempoFinal);
-  const imageURL = "https://i.ibb.co/z6QY6m0/without-Photo.png";
 
   return (
     <Container>
@@ -53,11 +55,11 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any
       </BackgroundNavigation>
       
       <ProfileDetails showsVerticalScrollIndicator={false}>
-        {/* Alterar */}
+
         <BackgroundProfile source={BackgroundUser} resizeMode="cover"/>
 
         <Details 
-          avatar={{uri: userData.foto === "sem foto" ? imageURL : userData.foto}}
+          avatar={userData.foto}
           isPCD={userData.pcd}
           markedAdvice={true}
           name={userData.nome}

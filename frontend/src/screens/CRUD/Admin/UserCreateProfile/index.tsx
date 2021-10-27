@@ -79,7 +79,7 @@ const UserCreateProfileSchema = Yup.object().shape({
 const UserCreateProfile: React.FC<IUserCreateProfileProps> = ({ navigation }: any) => {
   
   const avatarWithoutPhoto = Image.resolveAssetSource(WithoutPicture).uri;
-  const [image, setImage] = useState<String>(avatarWithoutPhoto);
+  const [image, setImage] = useState<string>(avatarWithoutPhoto);
   const emailRef = useRef<any>(null);
   const celularRef = createRef<any>();
 
@@ -168,7 +168,7 @@ const UserCreateProfile: React.FC<IUserCreateProfileProps> = ({ navigation }: an
               >
                 <BackgroundProfile source={Background} resizeMode="cover"/>
                 <Details 
-                  avatar={image && {uri: image}}
+                  avatar={image}
                   isPCD={values.isPCD}
                   hideNameAndEmail={true}
                 />

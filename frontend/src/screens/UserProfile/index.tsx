@@ -47,7 +47,7 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation, route }: any) =>
         <BackgroundProfile source={Background} resizeMode="cover"/>
 
         <Details 
-          avatar={Background}
+          avatar={userData.foto}
           isPCD={true}
           name={userData.nome}
           email={userData.email}
@@ -124,7 +124,7 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation, route }: any) =>
                 return(
                   <AdminLastAdvice
                     key={advice.id}
-                    userPicture={Background}
+                    userPicture={userData.foto}
                     userName={userData.nome}
                     adviceHour={setAdviceHour(advice.tempoInicio)}
                     adviceName={`${advice.descricao} - ${advice.local}`}

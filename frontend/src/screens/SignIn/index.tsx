@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { Formik } from 'formik';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Picker } from "@react-native-community/picker";
+
 
 import * as Yup from 'yup';
 import  MaskedInput  from 'react-native-masked-input'
@@ -80,6 +81,9 @@ const SignIn: React.FC<ISignInProps> = ({ navigation }: any) => {
       label: "Não",
     },
   ];
+
+  const avatarWithoutPhoto = Image.resolveAssetSource(WithoutPicture).uri;
+
   
   return (
     <Container>
@@ -122,7 +126,7 @@ const SignIn: React.FC<ISignInProps> = ({ navigation }: any) => {
                 <View accessibilityHint="Campo de indicação de perfil sem imagem (lembrando que só é possível inserir uma foto depois de ser aceito no aplicativo)">
                   <View style={{height: 80}}/>
                   <Details 
-                    avatar={WithoutPicture}
+                    avatar={avatarWithoutPhoto}
                     isPCD={values.isPCD}
                     hideNameAndEmail={true}
                   />

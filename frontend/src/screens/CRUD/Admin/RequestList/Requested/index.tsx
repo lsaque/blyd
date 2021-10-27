@@ -45,16 +45,20 @@ const RequestList: React.FC<IRequestListProps> = ({}: any) => {
       />
 
       {
-        solicitacaoData?.map(solicitacao => (
-          <UserRequestCard 
-            key={solicitacao.id}
-            name={solicitacao.nome}
-            isPCD={solicitacao.pcd}
-            email={solicitacao.email}
-            phoneNumber={solicitacao.celular}
-            idRequest={solicitacao.id}
-        />
-        ))
+        solicitacaoData?.map(solicitacao => {
+          if(solicitacao.status){
+            return (
+              <UserRequestCard 
+                key={solicitacao.id}
+                name={solicitacao.nome}
+                isPCD={solicitacao.pcd}
+                email={solicitacao.email}
+                phoneNumber={solicitacao.celular}
+                idRequest={solicitacao.id}
+            />
+            )
+          }
+      })
       }
 {/* 
       <UserRequestCard 
