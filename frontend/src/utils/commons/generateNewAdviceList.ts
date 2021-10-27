@@ -12,13 +12,12 @@ export function setNewAdviceList(list : aviso[]){
   list.forEach(advice => {
     const splitted = advice.tempoFinal.split("-");
     const date2 = new Date(parseInt(splitted[2]), parseInt(splitted[1]) - 1, parseInt(splitted[0]), parseInt(splitted[3]), parseInt(splitted[4]));
-    if(date2.getTime() > date1.getTime()) newAdviceList.push(advice);
-    else {
-      axios.get(`${BASE_URL}/avisos/remover/${advice.id}`).then((response) => {
+    if(date2.getTime() < date1.getTime() && advice.status){
+      axios.get(`${BASE_URL}/avisos/desativar/${advice.id}`).then((response) => {
         const data = response.data as status;
-        console.log(data.status);
       });
     }
+    newAdviceList.push(advice);
   });
   return newAdviceList;
 }

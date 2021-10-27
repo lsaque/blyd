@@ -107,7 +107,7 @@ const Impassable = styled.Text`
 `;
 
 interface IAdminLastAdviceProps{
-  userPicture: Object,
+  userPicture: String,
   userName: String,
   adviceHour: String,
   adviceName: String,
@@ -146,12 +146,15 @@ const AdminLastAdvice: React.FC<IAdminLastAdviceProps> = ({
     )
   }
 
+  const imageURL = "https://i.ibb.co/z6QY6m0/without-Photo.png";
+  
+
   return (
     <Container onPress={onPress}>
 
       <Header>
         <Profile>
-          <UserPicture source={userPicture}/>
+          <UserPicture source={{ uri: userPicture === "sem foto" ? imageURL: userPicture}}/>
           <UserName numberOfLines={1}>{userName}</UserName>
         </Profile>
         <AdviceHour>

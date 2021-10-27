@@ -75,22 +75,40 @@ const MenuIcon = styled.View`
   justify-content: center;
 `;
 
+const AdmDepartment = styled.Text`
+  color: #ECECEC;
+  background-color: #8363F6;
+  padding: 3px 12px;
+  border-radius: 20px;
+`;
+
 interface IUserListCardProps{
   name: String,
   department: String,
   email: String,
-  picture: Object,
+  picture: String,
   onPress: Object,
+  isADM: boolean,
 }
 
 const UserListCard: React.FC<IUserListCardProps> = ({ 
-  navigation, name, department, picture, email, onPress
+  navigation, name, department, picture, email, onPress, isADM
 }: any ) => {
+
+  const imageURL = "https://i.ibb.co/z6QY6m0/without-Photo.png";
+
+  let departmentRender = <DepartmentName numberOfLines={1}>{department}</DepartmentName>;
+  if(isADM) { 
+    departmentRender = (
+      <AdmDepartment numberOfLines={1}>ADMIN</AdmDepartment>
+    )
+  }
+
   return (
     <Container underlayColor="#ebebeb" onPress={onPress}>
       <React.Fragment>
         <Image>
-          <PersonPicture source={picture}/>
+          <PersonPicture source={{ uri: picture === "sem foto" ? imageURL: picture}}/>
         </Image>
 
         <Details>
@@ -99,7 +117,7 @@ const UserListCard: React.FC<IUserListCardProps> = ({
         </Details>
 
         <Department>
-          <DepartmentName numberOfLines={1}>{department}</DepartmentName>
+          {departmentRender}
         </Department>
 
         <MenuIcon>

@@ -76,32 +76,29 @@ const ImportantTag = styled.TouchableOpacity`
 `;
 
 const Impassable = styled.Text`
-  color: #F66363;
   /* color: #faeaea; */
   font-size: 14px;
   /* font-weight: bold; */
 `;
 
-interface IConcludedAdviceProps{
+interface IConcludedRequestProps{
   userPicture: String,
   userName: String,
-  adviceName: String,
-  dueDay: String, 
-  dueMonth: String, 
-  dueYear: String, 
+  userEmail: String,
+  status: boolean,
+  isPCD: boolean,
   onPress: Function,
 }
 
-const ConcludedAdvice: React.FC<IConcludedAdviceProps> = ({ 
+const ConcludedRequest: React.FC<IConcludedRequestProps> = ({ 
   userPicture, 
   userName, 
-  adviceName, 
-  dueDay, 
-  dueMonth, 
-  dueYear, 
+  userEmail,
+  status,
+  isPCD,
   onPress
 } : any) => {
-  
+
   const imageURL = "https://i.ibb.co/z6QY6m0/without-Photo.png";
 
   return (
@@ -114,19 +111,23 @@ const ConcludedAdvice: React.FC<IConcludedAdviceProps> = ({
         </Profile>
         <AdviceHour>
           <ImportantTag>
-            <Impassable>Vencido</Impassable>
+            <Impassable 
+              style={{
+                color: status ? "#57952d" : "#F66363"
+              }}
+            >{status ? "Aceito" : "Recusado"}</Impassable>
           </ImportantTag>
         </AdviceHour>
       </Header>
 
       <Content>
         <DescriptionAdvice>
-          <AdviceName numberOfLines={2} style={{flexWrap: "wrap"}}>{adviceName}</AdviceName>
-          <Text>Venceu {dueDay} de {dueMonth} de {dueYear}</Text>
+          <AdviceName numberOfLines={2} style={{flexWrap: "wrap"}}>{userEmail}</AdviceName>
+          <Text>{ isPCD ? "Usuário PCD" : "Usuário não PCD"}</Text>
         </DescriptionAdvice>
       </Content>
 
     </Container>
   )
 }
-export default ConcludedAdvice;
+export default ConcludedRequest;

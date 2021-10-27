@@ -31,14 +31,14 @@ import ApiContext from '../../contexts/ApiContext';
 export default function Localization({navigation}:any){
 
   const uriBackground = Image.resolveAssetSource(Background).uri;
-  const [ apiData, setApiData ] = useState<apiData>(useContext(ApiContext).state);
+  const [ apiData ] = useState<apiData>(useContext(ApiContext).state);
   const [ selectedComodo, setSelectedComodo ] = useState<comodo[]>();
   const [ showSelectedComodo, setShowSelectedComodo] = useState(true);
 
   function handleNavigate(comodo: comodo) {
     const splittedCoord = comodo.pontoEntrada.split(",");
   
-    axios.get(`${BASE_URL}/rota/astar/1/${splittedCoord[0]}/${splittedCoord[1]}`).then((response) =>{
+    axios.get(`${BASE_URL}/rota/astar/1/${splittedCoord[0]}/${splittedCoord[1]}/${apiData.usuarioLogin?.id}`).then((response) =>{
       const rota = response.data as popUpDirection[];
       navigation.navigate('LiveLocalization', {comodo: comodo, rota: rota});
     });

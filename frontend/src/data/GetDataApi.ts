@@ -72,7 +72,10 @@ export async function getSolicitacoes() : Promise<solicitacaoCadastro[]> {
 export async function getUsuarios() : Promise<usuario[]> {
   let data = [] as usuario[];
   await axios.get(`${BASE_URL}/usuarios`).then(response => {
-    data = response.data as usuario[];
+    const oldData = response.data as usuario[];
+    oldData.forEach(usuario => {
+      if(usuario.status) data.push(usuario);
+    });
   });
   return data;
 }

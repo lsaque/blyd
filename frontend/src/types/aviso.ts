@@ -1,5 +1,4 @@
 import { andar } from "./andar";
-import { ponto } from "./ponto";
 import { usuario } from "./usuario";
 
 export type aviso = {
@@ -11,5 +10,6 @@ export type aviso = {
   duracao: string;
   listaPonto: string;
   transitavel: boolean;
+  status: boolean;
   usuario: usuario;
 };

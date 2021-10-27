@@ -148,11 +148,12 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation, route }:
           onSubmit={(values: any) => {
             // /atualizar/{id}/{nome}/{email}/{senha}/{celular}/{foto}/{pcd}/{admin}/{setorId}
             // console.log(`${user.id}/${values.name}/${values.email}/${values.password}/${values.phoneNumber}/sem foto/${values.isPCD}/${values.isADM}/${values.department}`);
+            // console.log(values.picture);
             
-            axios.get(`${BASE_URL}/usuarios/atualizar/${user.id}/${values.name}/${values.email}/${values.password}/${values.phoneNumber}/sem foto/${values.isPCD}/${values.isADM}/${values.department}`).then(response => {
+            axios.get(`${BASE_URL}/usuarios/atualizar/${user.id}/${values.name}/${values.email}/${values.password}/${values.phoneNumber}/${values.isPCD}/${values.isADM}/${user.status}/${values.department}`).then(response => {
               const data = response.data as status;
               showAlert(data.status, data.mensagem);
-              navigation.navigate('UserList');
+              if(data.status) navigation.navigate('UserList');
             })
           }}
         >
@@ -258,7 +259,7 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation, route }:
                       // prompt="Selecione uma opção:"
                       selectedValue={values.department}
                       onValueChange={(itemValue, itemIndex) => {
-                        setFieldValue("department", itemIndex)
+                        setFieldValue("department", itemValue)
                         handleChange("department");
                       }}
                       style={{
@@ -269,9 +270,7 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation, route }:
                         marginLeft: 80,
                       }}
                     >
-                      {
-                        state.setores.map(setor => <Picker.Item label={setor.nome} value={setor.id} key={setor.id}/>)
-                      }
+                      {state.setores.map(setor => <Picker.Item label={setor.nome} value={setor.id} key={setor.id}/>)}
                     </Picker>
                   </PickerArea>
                   <ErrorMessage>{errors.department}</ErrorMessage>

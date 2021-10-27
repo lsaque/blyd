@@ -27,6 +27,8 @@ export default function SearchContact({navigation}:any){
   const uriBackground = Image.resolveAssetSource(Background).uri;
   const [ apiData, setApiData ] = useState<apiData>(useContext(ApiContext).state);
   const modalizeRef = useRef<Modalize>(null);
+  const imageURL = "https://i.ibb.co/z6QY6m0/without-Photo.png";
+
   
   return(
     <React.Fragment>
@@ -61,7 +63,7 @@ export default function SearchContact({navigation}:any){
                   key={usuario.id}
                   name={usuario.nome}
                   department={usuario.setor.nome}
-                  picture={picture}
+                  picture={usuario.foto}
                   number={usuario.celular}
               />
               ))

@@ -15,13 +15,16 @@ const Photo = styled.Image`
 `;
 
 interface IAdminPhotoProfileProps{
-  imageProfile: object,
+  imageProfile: string,
 }
 
 const AdminPhotoProfile: React.FC<IAdminPhotoProfileProps> = ({ imageProfile }: any) => {
+
+  const imageURL = "https://i.ibb.co/z6QY6m0/without-Photo.png";
+
   return (
     <Container>
-       <Photo source={imageProfile}/>
+       <Photo source={{ uri: imageProfile === "sem foto" ? imageURL: imageProfile}}/>
     </Container>
   )
 }

@@ -17,6 +17,7 @@ import { BASE_URL } from "../../../../../utils/requests";
 import { solicitacaoCadastro } from "../../../../../types/solicitacaoCadastro";
 import ApiContext from "../../../../../contexts/ApiContext";
 import { useFocusEffect } from "@react-navigation/core";
+import ConcludedRequest from "../../../../../components/ConcludedRequest";
 
 interface IRequestListProps{ }
 
@@ -49,14 +50,14 @@ const RequestList: React.FC<IRequestListProps> = ({ }: any) => {
       <AdviceShowList>
         {
           solicitacaoData?.map(solicitacao => (
-            <ConcludedAdvice
+            <ConcludedRequest
               key={solicitacao.id}
-              userPicture={Background}
+              userPicture={"sem foto"}
               userName={solicitacao.nome}
-              adviceName={solicitacao.email}
-              dueDay="04"
-              dueMonth="Outubro"
-              dueYear="2021" onPress={() => {}}
+              userEmail={solicitacao.email}
+              status={solicitacao.status}
+              isPCD={solicitacao.pcd}
+              onPress={() => {}}
           />
           ))
         }
