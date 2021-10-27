@@ -15,6 +15,7 @@ import axios from "axios";
 import { BASE_URL } from "../../../../../utils/requests";
 import ApiContext from "../../../../../contexts/ApiContext";
 import { useFocusEffect } from "@react-navigation/core";
+import { setNewAdviceList } from "../../../../../utils/commons/generateNewAdviceList";
 
 interface IAdviceListProps{ }
 
@@ -26,7 +27,8 @@ const AdviceList: React.FC<IAdviceListProps> = ({navigation, route} : any) => {
     React.useCallback(() => {
       function setData() {
         axios.get(`${BASE_URL}/avisos`).then(response => {
-          setAvisosData(response.data as aviso[]);
+          const oldData = response.data as aviso[];
+          setAvisosData(setNewAdviceList(oldData));
         })
       }
       

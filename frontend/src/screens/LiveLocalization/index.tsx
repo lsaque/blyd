@@ -21,6 +21,7 @@ import { popUpDirection } from '../../types/popUpDirection';
 import { aviso } from '../../types/aviso';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';
+import { setNewAdviceList } from '../../utils/commons/generateNewAdviceList';
 
 export type myPopUpData = {
   arrowDirection: string;
@@ -46,8 +47,8 @@ export default function LiveLocalization({navigation, route} : any){
 
   useEffect(() =>{
     axios.get(`${BASE_URL}/avisos`).then((response) =>{
-      const aviso = response.data as aviso[];
-      setAvisoData(aviso);
+      const oldData = response.data as aviso[];
+      setAvisoData(setNewAdviceList(oldData));
     });
 
     try {

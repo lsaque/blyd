@@ -27,6 +27,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';
 import { aviso } from '../../types/aviso';
+import { setNewAdviceList } from '../../utils/commons/generateNewAdviceList';
 
 export default function Activity({ navigation }:any){
 
@@ -50,7 +51,8 @@ export default function Activity({ navigation }:any){
     React.useCallback(() => {
       function setData() {
         axios.get(`${BASE_URL}/avisos`).then(response => {
-          setApiData(response.data as aviso[]);
+          const oldData = response.data as aviso[];
+          setApiData(setNewAdviceList(oldData));
         })
       }
 
