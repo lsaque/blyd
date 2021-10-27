@@ -70,24 +70,34 @@ public class UsuarioService {
 		status.setStatus(false);
 
 		if(setor == null) status.setMensagem("Usuario selecionado não foi atualizado! Setor inexistente!");
+		else if(usuario == null) status.setMensagem("Usuario selecionado não foi atualizado! ID inexistente!");
 		else {
-			usuario.setNome(nome);
-			usuario.setEmail(email);
-			usuario.setSenha(senha);
-			usuario.setCelular(celular);
-			usuario.setFoto(foto);
-			usuario.setPcd(pcd);
-			usuario.setAdmin(admin);
-			usuario.setSetor(setor);
 
-			try{
-				repository.save(usuario);
-				status.setMensagem("Usuario selecionado foi atualizado!");
-				status.setStatus(true);
-			}catch (Exception e) {
-				status.setMensagem("Usuario selecionado não foi atualizado!");
+			boolean add = false;
+
+			if(usuario.getEmail().equalsIgnoreCase(email)) add = true;
+			else if(!procurarEmail(email)) add = true;
+			else status.setMensagem("Usuario selecionado não foi atualizado! Email já existente!");
+
+			if(add) {
+				usuario.setNome(nome);
+				usuario.setEmail(email);
+				usuario.setSenha(senha);
+				usuario.setCelular(celular);
+				usuario.setFoto(foto);
+				usuario.setPcd(pcd);
+				usuario.setAdmin(admin);
+				usuario.setSetor(setor);
+				try{
+					repository.save(usuario);
+					status.setMensagem("Usuario selecionado foi atualizado!");
+					status.setStatus(true);
+				}catch (Exception e) {
+					status.setMensagem("Usuario selecionado não foi atualizado!");
+				}
 			}
 		}
+
 		return status;
 	}
 
