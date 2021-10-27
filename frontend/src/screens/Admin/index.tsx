@@ -95,7 +95,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
       >
         <AdminHeader>
           <WelcomeContainer>
-            <HeaderTitle>Olá Admin,</HeaderTitle>
+            <HeaderTitle>Olá {state.usuarioLogin?.nome.split(" ")[0]},</HeaderTitle>
             <Description>Muito bem-vindo a plataforma</Description>
           </WelcomeContainer>
           <Image source={AdminImage}/>
@@ -168,8 +168,7 @@ const Admin: React.FC<IAdminProps> = ({ navigation }: any) => {
                 isPCD={solicitacao.pcd}
                 email={solicitacao.email}
                 phoneNumber={solicitacao.celular}
-                declineOnPress={() => console.log("decline")} 
-                acceptOnPress={() => console.log("accept")}
+                idRequest={solicitacao.id}
               />
             ))
           }

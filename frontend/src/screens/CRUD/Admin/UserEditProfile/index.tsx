@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { createRef, useEffect, useRef, useState, useContext } from "react";
 import { Platform, Text, View } from "react-native";
 import { BackgroundNavigation, BackgroundProfile, Divisor, ProfileDetails } from "../../../UserProfile/styles";
 import { MaterialIcons } from '@expo/vector-icons';
@@ -31,6 +31,11 @@ import {
   ErrorMessage
 } from "../../../../assets/Styles/PageCRUDTemplate/styles";
 import { usuario } from "../../../../types/usuario";
+import ApiContext from "../../../../contexts/ApiContext";
+import axios from "axios";
+import { BASE_URL } from "../../../../utils/requests";
+import { status } from "../../../../types/status";
+import { showAlert } from "../../../../utils/commons/showAlert";
 
 interface IUserEditProfileProps{}
 
@@ -72,14 +77,17 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation, route }:
   const emailRef = useRef<any>(null);
   const celularRef = createRef<any>();
 
-  // const { usuarioData } = route.params as usuario;
+  const { userData } = route.params;
+  const user = userData as usuario;
+
+  const { state } = useContext(ApiContext);
   
   useEffect(() => {(
     async () => {
       if (Platform.OS !== 'web') {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
-          alert('Desculpe, precisamos da permissão do gerenciamento de arquivos para funcionar!');
+          showAlert(false, 'Desculpe, precisamos da permissão do gerenciamento de arquivos para funcionar!');
         }
       }
     })();
@@ -128,19 +136,24 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation, route }:
         <Formik
           initialValues={{ 
             picture: image,
-            name: "Isaque José de Souza",
-            email: "isaque@gmail.com",
-            phoneNumber: "119654185896",
-            department: 0,
-            isPCD: false,
-            password: "FalaFi",
-            isADM: false,
+            name: user.nome,
+            email: user.email,
+            phoneNumber: user.celular,
+            department: user.setor.id,
+            isPCD: user.pcd,
+            password: user.senha,
+            isADM: user.admin,
           }}
           validationSchema={UserEditProfileSchema}
           onSubmit={(values: any) => {
             // /atualizar/{id}/{nome}/{email}/{senha}/{celular}/{foto}/{pcd}/{admin}/{setorId}
-            // console.log(values)
-            // axios()
+            // console.log(`${user.id}/${values.name}/${values.email}/${values.password}/${values.phoneNumber}/sem foto/${values.isPCD}/${values.isADM}/${values.department}`);
+            
+            axios.get(`${BASE_URL}/usuarios/atualizar/${user.id}/${values.name}/${values.email}/${values.password}/${values.phoneNumber}/sem foto/${values.isPCD}/${values.isADM}/${values.department}`).then(response => {
+              const data = response.data as status;
+              showAlert(data.status, data.mensagem);
+              navigation.navigate('UserList');
+            })
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, dirty, isValid }) => (
@@ -256,11 +269,9 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation, route }:
                         marginLeft: 80,
                       }}
                     >
-                      <Picker.Item label="Sem Departamento" value={0} key={0}/>
-                      <Picker.Item label="Secretaria" value={1} key={1}/>
-                      <Picker.Item label="Diretoria" value={2} key={2}/>
-                      <Picker.Item label="Administração" value={3} key={3}/>
-                      <Picker.Item label="RH" value={4} key={4}/>
+                      {
+                        state.setores.map(setor => <Picker.Item label={setor.nome} value={setor.id} key={setor.id}/>)
+                      }
                     </Picker>
                   </PickerArea>
                   <ErrorMessage>{errors.department}</ErrorMessage>
@@ -302,10 +313,7 @@ const UserEditProfile: React.FC<IUserEditProfileProps> = ({ navigation, route }:
               }}>
                 <SubmitButton
                   onPress={() => {
-                    handleSubmit;
-                    console.log(values); 
-                    alert("Dados alterados com sucesso");
-                    navigation.goBack()
+                    handleSubmit();
                   }}
                   style={{
                     opacity: !(dirty && isValid) ? 0.6 : 1,

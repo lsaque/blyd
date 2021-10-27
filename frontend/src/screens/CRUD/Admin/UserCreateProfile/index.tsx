@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { createRef, useEffect, useRef, useState, useContext } from "react";
 import { Platform, Text, Image, View } from "react-native";
 import { BackgroundNavigation, BackgroundProfile, Divisor, ProfileDetails } from "../../../UserProfile/styles";
 import { MaterialIcons } from '@expo/vector-icons';
@@ -31,6 +31,11 @@ import {
   SubmitButton,
   ErrorMessage
 } from "../../../../assets/Styles/PageCRUDTemplate/styles";
+import { showAlert } from "../../../../utils/commons/showAlert";
+import ApiContext from "../../../../contexts/ApiContext";
+import axios from "axios";
+import { BASE_URL } from "../../../../utils/requests";
+import { status } from "../../../../types/status";
 
 interface IUserCreateProfileProps{}
 
@@ -78,12 +83,14 @@ const UserCreateProfile: React.FC<IUserCreateProfileProps> = ({ navigation }: an
   const emailRef = useRef<any>(null);
   const celularRef = createRef<any>();
 
+  const { state } = useContext(ApiContext);
+
   useEffect(() => {(
     async () => {
       if (Platform.OS !== 'web') {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
-          alert('Desculpe, precisamos da permissão do gerenciamento de arquivos para funcionar!');
+          showAlert(false, 'Desculpe, precisamos da permissão do gerenciamento de arquivos para funcionar!');
         }
       }
     })();
@@ -142,8 +149,13 @@ const UserCreateProfile: React.FC<IUserCreateProfileProps> = ({ navigation }: an
           }}
           validationSchema={UserCreateProfileSchema}
           onSubmit={(values: any) => {
-            // console.log(values)
-            // axios()
+
+            // axios.get(`${BASE_URL}/usuarios/criar/${values.name}/${values.email}/${values.password}/${values.phoneNumber}/sem foto/${values.isPCD}/${values.isADM}/${values.department}`)
+            // .then(response => {
+            //   const data = response.data as status;
+            //   showAlert(data.status, data.mensagem);
+            //   if(data.status) navigation.goBack();
+            // })
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched, isSubmitting, dirty, isValid}) => (
@@ -260,11 +272,9 @@ const UserCreateProfile: React.FC<IUserCreateProfileProps> = ({ navigation }: an
                         marginLeft: 80,
                       }}
                     >
-                      <Picker.Item label="Sem Departamento" value={0} key={0}/>
-                      <Picker.Item label="Secretaria" value={1} key={1}/>
-                      <Picker.Item label="Diretoria" value={2} key={2}/>
-                      <Picker.Item label="Administração" value={3} key={3}/>
-                      <Picker.Item label="RH" value={4} key={4}/>
+                      {
+                        state.setores.map(setor => <Picker.Item label={setor.nome} value={setor.id} key={setor.id}/>)
+                      }
                     </Picker>
                   </PickerArea>
                   <ErrorMessage>{errors.department}</ErrorMessage>

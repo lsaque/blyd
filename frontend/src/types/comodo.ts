@@ -1,5 +1,4 @@
 import { andar } from "./andar";
-import { ponto } from "./ponto";
 
 export type comodoCategorizado = {
   id: number;
@@ -11,6 +10,6 @@ export type comodo = {
   id: number;
   nome: string;
   tipo: string;
-  pontoEntrada: ponto;
+  pontoEntrada: string;
   andar: andar;
 };

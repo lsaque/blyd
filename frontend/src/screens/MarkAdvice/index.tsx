@@ -226,7 +226,7 @@ export default function Localization({navigation} : any){
                 onPress={() => {
                   handleSubmit;
                   // console.log(values); 
-                  // alert("Aviso marcado com sucesso");
+    
                   // navigation.goBack();
                 }}
                 style={{

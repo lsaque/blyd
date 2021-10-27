@@ -63,7 +63,7 @@ function AdminAdviceTopTab({ navigation }: any) {
         <Navigation
           title="Listar"
           titleStrong="Avisos"
-          onPress={() => navigation.goBack('history')}
+          onPress={() => navigation.navigate('AdminHomeTab')}
           lightContent={true}
         />
       </BackgroundImage>

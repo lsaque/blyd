@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Picker } from '@react-native-community/picker';
 import { Formik } from 'formik';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -18,6 +18,12 @@ import {
   RadioArea, 
   TextInput 
 } from '../../assets/Styles/PageCRUDTemplate/styles';
+import ApiContext from '../../contexts/ApiContext';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/requests';
+import { status } from '../../types/status';
+import Navigation from '../Navigation';
+import { showAlert } from '../../utils/commons/showAlert';
 
 const Container = styled.TouchableHighlight`
   height: 60px;
@@ -122,13 +128,13 @@ export const ButtonText = styled.Text`
   font-size: 15px;
 `;
 
+//{idSolicitacao}/{foto}/{pcd}/{admin}/{idSetor}
 interface IUserRequestCardProps{
+  idRequest: number;
   name: String,
   isPCD: boolean,
   email: String,
   phoneNumber: String,
-  declineOnPress?: Function,
-  acceptOnPress?: Function,
 }
 
 const data = [
@@ -143,7 +149,7 @@ const data = [
 ];
 
 const UserRequestCard: React.FC<IUserRequestCardProps> = ({ 
-  name, isPCD, email, phoneNumber, declineOnPress, acceptOnPress
+  name, isPCD, email, phoneNumber, idRequest
 }: any ) => {
   
   let pcdTagRender = <React.Fragment/>
@@ -152,11 +158,14 @@ const UserRequestCard: React.FC<IUserRequestCardProps> = ({
 
   const toggleExpanded = () => setCollapsed(!collapsed);
 
+  const { state } = useContext(ApiContext);
+
   if(isPCD){ pcdTagRender = <Pcd>PCD</Pcd> }
 
   return (
     <Formik
       initialValues={{ 
+        idRequest: idRequest,
         name: name,
         email: email,
         phoneNumber: phoneNumber,
@@ -165,10 +174,9 @@ const UserRequestCard: React.FC<IUserRequestCardProps> = ({
         department: 0,
         password: "",
         isADM: false,
-        // picture: image,
+        picture: "sem foto",
       }}
       onSubmit={(values: any) => {
-        console.log(values)
         // axios()
       }}
     >
@@ -252,10 +260,8 @@ const UserRequestCard: React.FC<IUserRequestCardProps> = ({
                       }}
                     >
                       <Picker.Item label="Sem Departamento" value={0} key={0}/>
-                      <Picker.Item label="Secretaria" value={1} key={1}/>
-                      <Picker.Item label="Diretoria" value={2} key={2}/>
-                      <Picker.Item label="Administração" value={3} key={3}/>
-                      <Picker.Item label="RH" value={4} key={4}/>
+                      {state.setores.map(setor => <Picker.Item label={setor.nome} value={setor.id} key={setor.id}/>)}
+                  
                     </Picker>
                   </PickerArea>
 
@@ -300,7 +306,17 @@ const UserRequestCard: React.FC<IUserRequestCardProps> = ({
 
               <Buttons>
                 <Decline 
-                  onPress={() => isAccepted ? setIsAccepted(!isAccepted) : declineOnPress()}
+                  onPress={() => {
+                    if(isAccepted) {
+                      setIsAccepted(!isAccepted)
+                    } else {
+                      //RECUSAR
+                      axios.get(`${BASE_URL}/solicitacoes-cadastro/recusar/${values.idRequest}`).then(response => {
+                        const data = response.data as status;
+                        showAlert(data.status, data.mensagem);
+                      })
+                    }
+                  }}
                   style={{
                     backgroundColor:"#f3f3f3",
                     // backgroundColor: isAccepted ? "#f3f3f3": "#FFE4E4",
@@ -324,7 +340,13 @@ const UserRequestCard: React.FC<IUserRequestCardProps> = ({
                   onPress={() => {
                     if(isAccepted) {
                       handleSubmit()
-                      acceptOnPress()
+                      //ACEITAR
+                      //{idSolicitacao}/{foto}/{pcd}/{admin}/{idSetor}
+                      // console.log(`Olha aqui! ${values.idRequest}/${values.picture}/${values.isPCD}/${values.isADM}/${values.department}`);
+                      axios.get(`${BASE_URL}/solicitacoes-cadastro/aceitar/${values.idRequest}/${values.picture}/${values.isPCD}/${values.isADM}/${values.department}`).then(response => {
+                        const data = response.data as status;
+                        showAlert(data.status, data.mensagem);
+                      });
                     } else {
                       setIsAccepted(true);
                     }
