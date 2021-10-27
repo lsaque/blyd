@@ -63,7 +63,7 @@ public class UsuarioService {
 			@CacheEvict(value = "avisos", allEntries = true)
 	})
 	@Transactional
-	public StatusDTO atualizarUsuario(long id, String nome, String email,String senha, String celular, String foto, boolean pcd, boolean admin, boolean statusUser, long idSetor) {
+	public StatusDTO atualizarUsuario(long id, String nome, String email,String senha, String celular, boolean pcd, boolean admin, boolean statusUser, long idSetor) {
 		Usuario usuario = procurarId(id);
 		Setor setor = setorService.procurarId(idSetor);
 		StatusDTO status = new StatusDTO();
@@ -85,7 +85,6 @@ public class UsuarioService {
 				usuario.setEmail(email);
 				usuario.setSenha(senha);
 				usuario.setCelular(celular);
-				usuario.setFoto(foto);
 				usuario.setPcd(pcd);
 				usuario.setAdmin(admin);
 				usuario.setStatus(statusUser);
