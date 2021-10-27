@@ -95,8 +95,8 @@ const Login: React.FC<ILoginProps> = ({ navigation }: any) => {
 
       <Formik
         initialValues={{ 
-          email: "isaque@gmail.com",
-          password: "salve123",
+          email: "isaque@user.com",
+          password: "",
           isADM: false,
         }}
         validationSchema={UserEditProfileSchema}

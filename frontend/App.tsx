@@ -120,9 +120,9 @@ export default function App({ navigation }: any){
       return (
         <ApiProvider>
           <ThemeProvider theme={colors}>
-              <NavigationContainer>
-                <Main />
-              </NavigationContainer>
+            <NavigationContainer>
+              <Main />
+            </NavigationContainer>
           </ThemeProvider>
         </ ApiProvider>
       )

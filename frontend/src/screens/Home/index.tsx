@@ -41,7 +41,7 @@ function Home({navigation} : any){
           </Top>
 
           <Bot>
-            <WelcomeText accessibilityHint="Bem-vindo">Bem-vindo, {"\n"}{state.usuarioLogin?.nome.split(" ")[0]}!</WelcomeText>
+            <WelcomeText accessibilityHint={"Bem-vindo " + state.usuarioLogin?.nome.split(" ")[0]}>Bem-vindo, {"\n"}{state.usuarioLogin?.nome.split(" ")[0]}!</WelcomeText>
 
             <IconButtonText
               text="Deseja ir para onde?"
