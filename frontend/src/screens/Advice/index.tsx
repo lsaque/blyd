@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Image, Text, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
@@ -32,6 +32,8 @@ import axios from 'axios';
 import { BASE_URL } from '../../utils/requests';
 import { status } from '../../types/status';
 import { Picker } from '@react-native-community/picker';
+import { showAlert } from '../../utils/commons/showAlert';
+import ApiContext from '../../contexts/ApiContext';
 
 const AdviceSchema = Yup.object().shape({
 
@@ -51,6 +53,8 @@ export default function Localization({navigation}:any){
   const uriBackground = Image.resolveAssetSource(Background).uri;
   const [ showMarkAdvice, setShowMarkAdvice] = useState(true);
   const [ descriptionAdvice, setDescriptionAdvice] = useState("");
+
+  const { state } = useContext(ApiContext);
 
   const dataIsImpassable = [
     {
@@ -164,7 +168,7 @@ export default function Localization({navigation}:any){
                       adviceDescription: descriptionAdvice,
                       adviceTimeRemaining: 0,
                       isImpassable: true,
-                      localAdvice: "",
+                      localAdvice: "Sem local",
                     }}
                     onSubmit={values => {
                       const hour = setHourRemaining(values.adviceTimeRemaining);
@@ -173,9 +177,11 @@ export default function Localization({navigation}:any){
                       const dateNow = getNowDate();
                       const timeDuration = getTimeDuration(day, hour);
                       
-                      axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/${values.localAdvice}/${dateNow}/${dateFinal}/${timeDuration}/7,25!8,25/${values.isImpassable}/1`).then((response) => {
+                      axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/${values.localAdvice}/${dateNow}/${dateFinal}/${timeDuration}/7,25!8,25/${values.isImpassable}/${state.usuarioLogin?.id}`).
+                      then((response) => {
                         const data = response.data as status;
-                        console.log(data.status);
+                        showAlert(data.status, data.mensagem);
+                        if(data.status) navigation.goBack();
                       });
                       // console.log(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/${values.localAdvice}/${dateNow}/${dateFinal}/${timeDuration}/0,0/${values.isImpassable}/1`);
                     
@@ -276,9 +282,6 @@ export default function Localization({navigation}:any){
                         <SubmitButton
                           onPress={() => {
                             handleSubmit();
-                            // console.log(values); 
-                            alert("Aviso marcado com sucesso");
-                            navigation.goBack();
                           }}
                           style={{
                             marginHorizontal: 20,

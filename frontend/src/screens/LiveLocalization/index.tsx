@@ -124,7 +124,7 @@ export default function LiveLocalization({navigation, route} : any){
 
           <Row>
           {
-            routeData?.avisos == null ?
+            avisoData == null ?
               <Text 
                 style={{
                   textAlign:'center', 

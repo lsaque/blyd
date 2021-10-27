@@ -87,6 +87,7 @@ export async function getApiData(apiData : apiData | null) : Promise<apiData> {
   data.setores =  await getSetores();
   data.solicitacoes =  await getSolicitacoes();
   data.usuarios =  await getUsuarios();
+  data.usuarioLogin = data.usuarios[0];
   
   return data;
 }

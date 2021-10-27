@@ -67,7 +67,7 @@ const UserProfile: React.FC<IUserProfileProps> = ({ navigation, route }: any) =>
             <ProfileActionButton
               icon={<MaterialIcons name="edit" size={18} color="black" />}
               placeholder="Editar Perfil"
-              onPress={() => navigation.navigate("UserEditProfile", {})}
+              onPress={() => navigation.navigate("UserEditProfile", {userData : userData})}
             />
 
             <ProfileMenuButton

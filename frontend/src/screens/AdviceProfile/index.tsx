@@ -28,6 +28,7 @@ import { setAdviceHour, setDueDate } from "../../utils/commons/generateDate";
 import axios from "axios";
 import { BASE_URL } from "../../utils/requests";
 import { status } from "../../types/status";
+import { showAlert } from "../../utils/commons/showAlert";
 
 interface IAdviceProfileProps{}
 
@@ -70,8 +71,8 @@ const AdviceProfile: React.FC<IAdviceProfileProps> = ({ navigation, route }: any
               placeholder="Apagar"
               onPress={() => {
                 axios.get(`${BASE_URL}/avisos/remover/${adviceData.id}`).then((response) => {
-                  // const data = response.data as status;
-                  alert("Aviso removido com sucesso!");
+                  const data = response.data as status;
+                  showAlert(data.status, data.mensagem);
                   navigation.goBack();
                 });
               }}
