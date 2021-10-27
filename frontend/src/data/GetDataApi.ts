@@ -7,6 +7,7 @@ import { mapa } from "../types/mapa";
 import { setor } from "../types/setor";
 import { solicitacaoCadastro } from "../types/solicitacaoCadastro";
 import { usuario } from "../types/usuario";
+import { setNewAdviceList } from "../utils/commons/generateNewAdviceList";
 import { BASE_URL } from "../utils/requests";
 
 export async function getAndares() : Promise<andar[]> {
@@ -21,7 +22,8 @@ export async function getAvisos() : Promise<aviso[]> {
   let data = [] as aviso[];
   
   await axios.get(`${BASE_URL}/avisos`).then(response => {
-    data = response.data as aviso[];
+    const oldData = response.data as aviso[];
+    data = setNewAdviceList(oldData);
   });
   return data;
 }
