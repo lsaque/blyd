@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
-import { Formik, Field, FieldArray, useFormikContext, FormikHelpers,  } from 'formik';
+import { Formik, Field, FieldArray, useFormikContext, FormikHelpers } from 'formik';
 import { RadioButton, RadioGroup } from "../_dependency/react-radio-buttons/index";
-import { FaBeer, FaRegTrashAlt, FaTrashAlt,  } from 'react-icons/fa';
-
-import * as Yup from 'yup';
-
+import { FaBeer, FaRegTrashAlt, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
+import axios from "axios";
+import * as Yup from 'yup';
 
 import { 
   Container,
@@ -29,7 +27,14 @@ import {
   SwalTitle,
   SwalDescription
 } from "./styles";
-import { setInterval } from "timers";
+
+import { 
+  setHourRemaining,
+  setDayRemaining,
+  getFinalDate,
+  getNowDate,
+  getTimeDuration,
+} from "../../utils/getData";
 
 interface IFormsProps{}
 
@@ -57,50 +62,20 @@ const FormsSchema = Yup.object({
   .required('(obrigatório)'),
 })
 
+type status = {
+  status: boolean;
+  mensagem: string,
+}
+
 // eslint-disable-next-line no-empty-pattern
 const Forms: React.FC<IFormsProps> = ({}) => {
 
   const [impassable, setIsImpassable] = useState<boolean>();
   const [timeRemaining, setTimeRemaining] = useState<number>();
   const [disableButton, setDisabledButton] = useState<boolean>(false);
-  // const arrayBoolean = [] as boolean[];
-
   const SuccessAlert = withReactContent(Swal)
   const ErrorAlert = withReactContent(Swal)
-  
-  // SuccessAlert.fire({
-  //   title: <p>Hello World</p>,
-  //   footer: 'Copyright 2018',
-  //   didOpen: () => {
-  //     // `MySwal` is a subclass of `Swal`
-  //     //   with all the same instance & static methods
-  //     SuccessAlert.clickConfirm()
-  //   }
-  // }).then(() => {
-  //   return SuccessAlert.fire(<p>Shorthand works too</p>)
-  // })
 
-
-  // arrayBoolean.push(true);
-  // arrayBoolean.push(false);
-  // arrayBoolean.push(true);
-  // arrayBoolean.push(false);
-  // arrayBoolean.push(true);
-  // console.log(arrayBoolean)
-
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setCount(prevCount => prevCount + 1);
-  //   }, 1000);
-  // }, []);
-  // console.log(count);
-
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     // handleClick
-  //   }, 1000);
-  // }, []);
-  
   const handleClick = (values: { internalFunc: any[] }) => {
     // console.log("verificando...")
     const arrayTeste: any[] = [];
@@ -249,7 +224,7 @@ const Forms: React.FC<IFormsProps> = ({}) => {
     {key: 22, value: 22, label: "W"},
   ];
 
-  interface Values {
+  interface values {
     adviceDescription: string,
     adviceTimeRemaining: number,
     isImpassable: boolean,
@@ -258,15 +233,17 @@ const Forms: React.FC<IFormsProps> = ({}) => {
     internalFunc: string[], 
   }  
 
+  const BASE_URL = "https://blyd-app.herokuapp.com";
+
   return (
     <Container>
       <Formik
         initialValues={{
           adviceDescription: 'opaaaaaaaaa',
-          // adviceDescription: '',
           adviceTimeRemaining: 1,
-          // adviceTimeRemaining: undefined, 
           isImpassable: true,
+          // adviceDescription: '',
+          // adviceTimeRemaining: undefined || 0, 
           // isImpassable: impassable, 
           
           userId: 1,
@@ -275,8 +252,47 @@ const Forms: React.FC<IFormsProps> = ({}) => {
         }}
         validationSchema={FormsSchema}
         onSubmit={values => {
-          console.log(values)
-          // axios()
+
+          values.internalFunc.forEach((element) => {
+            const coord = Object.values(element);
+            
+            if(coord[0] !== '100' && coord[1] !== '100'){
+              if(values.internalFunc.indexOf(element) === values.internalFunc.length - 1) values.advicesLocal +=`${coord[0]},${coord[1]}`;
+              else values.advicesLocal += `${coord[0]},${coord[1]}!`;
+            }
+          })
+
+          // console.log(values)
+          const hour = setHourRemaining(values.adviceTimeRemaining);
+          const day = setDayRemaining(values.adviceTimeRemaining);
+          const dateFinal = getFinalDate(day, hour);
+          const dateNow = getNowDate();
+          const timeDuration = getTimeDuration(day, hour);
+
+          console.log(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/Corredor Superior/${dateNow}/${dateFinal}/${timeDuration}/${values.advicesLocal}/${values.isImpassable}/1`);
+
+          // axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/Corredor Superior/${dateNow}/${dateFinal}/${timeDuration}/${values.advicesLocal}/${values.isImpassable}/1`).then((response) => {
+          //   const data = response.data as status;
+          //   if(data.status){
+          //     SuccessAlert.fire({
+          //       title: <SwalTitle>Aviso marcado 🔥</SwalTitle>,
+          //       html: <SwalDescription>Agradecemos por fazer parte deste lindo movimento.</SwalDescription>,
+          //       icon: 'success',
+          //       iconColor: '#8363F6',
+          //       confirmButtonColor: '#8363F6',
+          //       confirmButtonText: 'Sair',
+          //     })
+          //   } else {
+          //     ErrorAlert.fire({
+          //       title: <SwalTitle style={{color: '#F66363'}}>Aviso não marcado</SwalTitle>,
+          //       html: <SwalDescription>Não foi possível realizar a criação deste aviso, favor verificar.</SwalDescription>,
+          //       icon: 'error',
+          //       iconColor: '#F66363',
+          //       confirmButtonColor: '#F66363',
+          //       confirmButtonText: 'Verificar',
+          //     })
+          //   }
+          // });
         }}
       >
         {({
@@ -292,17 +308,7 @@ const Forms: React.FC<IFormsProps> = ({}) => {
           handleReset,
           submitForm
         }) => (
-          <Content 
-            onSubmit={handleSubmit} 
-            // onChangeCapture={() => handleClick(values)}
-            // onBlurCapture={() => handleClick(values)}
-            
-            onChange={() => {
-              // handleClick(values);
-              // console.log("entrou")
-              // console.log(Math.floor(Math.random() * 1000) + 1)
-            }}
-          >
+          <Content onSubmit={handleSubmit}>
             <Divisor/>
 
             <ContentBlock>
@@ -466,38 +472,15 @@ const Forms: React.FC<IFormsProps> = ({}) => {
 
             <SubmitButton 
               type="submit" 
-              // onSubmit={() => handleSubmit}
               onClick={() => {
-                values.internalFunc.forEach((element) => {
-                  const coord = Object.values(element);
+                // values.internalFunc.forEach((element) => {
+                //   const coord = Object.values(element);
                   
-                  if(coord[0] !== '100' && coord[1] !== '100'){
-                    if(values.internalFunc.indexOf(element) === values.internalFunc.length - 1) values.advicesLocal +=`${coord[0]},${coord[1]}`;
-                    else values.advicesLocal += `${coord[0]},${coord[1]}!`;
-                    // setDisabledButton(true)
-                    // handleReset();
-                    SuccessAlert.fire({
-                      title: <SwalTitle>Aviso marcado 🔥</SwalTitle>,
-                      html: <SwalDescription>Agradecemos por fazer parte deste lindo movimento.</SwalDescription>,
-                      icon: 'success',
-                      iconColor: '#8363F6',
-                      confirmButtonColor: '#8363F6',
-                      confirmButtonText: 'Sair',
-                    })
-                    // submitForm();
-                  } else {
-                    ErrorAlert.fire({
-                      title: <SwalTitle style={{color: '#F66363'}}>Ponto não definido</SwalTitle>,
-                      html: <SwalDescription>O local de aviso precisa ter pontos válidos.</SwalDescription>,
-                      icon: 'error',
-                      iconColor: '#F66363',
-                      confirmButtonColor: '#F66363',
-                      confirmButtonText: 'Verificar',
-                    })
-                  }
-                })
-
-
+                //   if(coord[0] !== '100' && coord[1] !== '100'){
+                //     if(values.internalFunc.indexOf(element) === values.internalFunc.length - 1) values.advicesLocal +=`${coord[0]},${coord[1]}`;
+                //     else values.advicesLocal += `${coord[0]},${coord[1]}!`;
+                //   }
+                // })
               }}
               disabled={!(dirty && isValid)}
               style={{
