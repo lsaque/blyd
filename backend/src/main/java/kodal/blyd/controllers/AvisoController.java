@@ -5,7 +5,6 @@ import java.util.List;
 import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.entities.Aviso;
 import kodal.blyd.utils.scripts.MarcarAvisoScript;
-import kodal.blyd.utils.scripts.RemoverAvisoScript;
 import kodal.blyd.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,9 +46,9 @@ public class AvisoController {
 		return ResponseEntity.ok(new MarcarAvisoScript(usuarioService, avisoService).marcarAviso(descricao, local, tempoInicio, tempoFinal, listaPonto, duracao, transitavel, idUsuario));
 	}
 
-	@GetMapping(value = "/remover/{id}")
-	public ResponseEntity<StatusDTO> removerAviso(@PathVariable long id){
-		return ResponseEntity.ok(new RemoverAvisoScript(avisoService).removerAviso(id));
+	@GetMapping(value = "/desativar/{id}")
+	public ResponseEntity<StatusDTO> desativarAviso(@PathVariable long id){
+		return ResponseEntity.ok(avisoService.desativarAviso(id));
 	}
 
 	@GetMapping(value = "/procurar/{id}")

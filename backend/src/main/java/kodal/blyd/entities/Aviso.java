@@ -21,7 +21,7 @@ public class Aviso {
 	@Column(name = "lista_ponto")
 	private String listaPonto;
 
-	private boolean transitavel;
+	private boolean transitavel, status;
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
@@ -29,7 +29,7 @@ public class Aviso {
 	
 	public Aviso() {}
 
-	public Aviso(String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel, Usuario usuario) {
+	public Aviso(String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel, boolean status, Usuario usuario) {
 		this.descricao = descricao;
 		this.local = local;
 		this.tempoInicio = tempoInicio;
@@ -37,11 +37,12 @@ public class Aviso {
 		this.duracao = duracao;
 		this.listaPonto = listaPonto;
 		this.transitavel = transitavel;
+		this.status = status;
 		this.usuario = usuario;
 	}
 
-	public Aviso(long id, String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel, Usuario usuario) {
-		this(descricao, local, tempoInicio, tempoFinal, duracao, listaPonto, transitavel, usuario);
+	public Aviso(long id, String descricao, String local, String tempoInicio, String tempoFinal, String duracao, String listaPonto, boolean transitavel, boolean status, Usuario usuario) {
+		this(descricao, local, tempoInicio, tempoFinal, duracao, listaPonto, transitavel, status, usuario);
 		this.id = id;
 	}
 
@@ -115,5 +116,13 @@ public class Aviso {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

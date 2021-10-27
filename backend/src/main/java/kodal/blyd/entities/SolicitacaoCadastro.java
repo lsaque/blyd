@@ -15,20 +15,21 @@ public class SolicitacaoCadastro {
 	private long id;
 	
 	private String nome, email, senha, celular;
-	private boolean pcd;
+	private boolean pcd, status;
 	
 	public SolicitacaoCadastro() {}
 	
-	public SolicitacaoCadastro(String nome, String email, String senha, String celular, boolean pcd) {
+	public SolicitacaoCadastro(String nome, String email, String senha, String celular, boolean pcd, boolean status) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.celular = celular;
 		this.pcd = pcd;
+		this.status = status;
 	}
 	
-	public SolicitacaoCadastro(long id, String nome, String email, String senha, String celular, boolean pcd) {
-		this();
+	public SolicitacaoCadastro(long id, String nome, String email, String senha, String celular, boolean pcd, boolean status) {
+		this(nome, email, senha, celular, pcd, status);
 		this.id = id;
 	}
 
@@ -78,5 +79,13 @@ public class SolicitacaoCadastro {
 
 	public void setPcd(boolean pcd) {
 		this.pcd = pcd;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

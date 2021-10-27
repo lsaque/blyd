@@ -25,13 +25,16 @@ public class MarcarAvisoScript {
         Usuario usuario = usuarioService.procurarId(usuarioId);
 
         try {
-
             if(usuario == null) {
                 throw new UsuarioNull();
             } else {
-                avisoService.marcarAviso(new Aviso(descricao, local, tempoInicio, tempoFinal, duracao, listaPonto, transitavel, usuario));
-                status.setMensagem("Aviso informado foi criado!");
-                status.setStatus(true);
+                StatusDTO statusUsuario = usuarioService.adicionarAviso(usuarioId);
+                if(statusUsuario.isStatus()) {
+                    usuario = usuarioService.procurarId(usuarioId);
+                    avisoService.marcarAviso(new Aviso(descricao, local, tempoInicio, tempoFinal, duracao, listaPonto, transitavel, true, usuario));
+                    status.setMensagem("Aviso informado foi criado!");
+                    status.setStatus(true);
+                } else status.setMensagem(statusUsuario.getMensagem());
             }
         }
         catch(UsuarioNull e){

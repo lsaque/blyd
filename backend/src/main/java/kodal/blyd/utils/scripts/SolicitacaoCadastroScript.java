@@ -22,7 +22,7 @@ public class SolicitacaoCadastroScript {
             if(!solicitacaoService.procurarEmail(email)) {
                 status.setStatus(true);
                 status.setMensagem("Solicitação informada foi cadastrada!");
-                solicitacaoService.adicionarSolicitacaoCadastro(new SolicitacaoCadastro(nome, email, senha, celular, pcd));
+                solicitacaoService.adicionarSolicitacaoCadastro(new SolicitacaoCadastro(nome, email, senha, celular, pcd, true));
             }  else status.setMensagem("Solicitação informada não foi cadastrada! Email existente!");
 
         } else status.setMensagem("Solicitação informada não foi cadastrada! Email existente!\"");

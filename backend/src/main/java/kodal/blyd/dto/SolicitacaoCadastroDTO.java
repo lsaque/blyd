@@ -10,17 +10,18 @@ public class SolicitacaoCadastroDTO implements Serializable{
 	
 	private long id;	
 	private String nome, email, senha, celular;
-	private boolean pcd;
+	private boolean pcd, status;
 	
 	public SolicitacaoCadastroDTO() {}
 	
-	public SolicitacaoCadastroDTO(long id, String nome, String email, String senha, String celular, boolean pcd) {
+	public SolicitacaoCadastroDTO(long id, String nome, String email, String senha, String celular, boolean pcd, boolean status) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.celular = celular;
 		this.pcd = pcd;
+		this.status = status;
 	}
 	
 	public SolicitacaoCadastroDTO(SolicitacaoCadastro solicitacao) {
@@ -30,6 +31,7 @@ public class SolicitacaoCadastroDTO implements Serializable{
 		senha  = solicitacao.getSenha();
 		celular = solicitacao.getCelular();
 		pcd = solicitacao.isPcd();
+		status = solicitacao.isStatus();
 	}
 
 	public long getId() {
@@ -78,5 +80,13 @@ public class SolicitacaoCadastroDTO implements Serializable{
 
 	public void setPcd(boolean pcd) {
 		this.pcd = pcd;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

@@ -16,13 +16,13 @@ public class UsuarioDTO implements Serializable{
 	private long id;
 	private String nome, email, senha, celular, foto;
 	private long totalChamadas, totalAvisos, totalRotas;
-	private Boolean pcd, admin;
+	private Boolean pcd, admin, status;
 	private SetorSemUsuarioDTO setor;
 	private List<AvisoSemUsuarioDTO> avisos;
 	
 	public UsuarioDTO() {}
 
-	public UsuarioDTO(long id, String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, Setor setor, List<Aviso> avisos) {
+	public UsuarioDTO(long id, String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, Boolean status, Setor setor, List<Aviso> avisos) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -34,6 +34,7 @@ public class UsuarioDTO implements Serializable{
 		this.totalRotas = totalRotas;
 		this.pcd = pcd;
 		this.admin = admin;
+		this.status = status;
 		this.setor = new SetorSemUsuarioDTO(setor);
 		this.avisos = avisos.stream().map(aviso -> new AvisoSemUsuarioDTO(aviso)).collect(Collectors.toList());
 	}
@@ -50,6 +51,7 @@ public class UsuarioDTO implements Serializable{
 		totalRotas = usuario.getTotalRotas();
 		pcd = usuario.isPcd();
 		admin = usuario.isAdmin();
+		status = usuario.isStatus();
 		setor = new SetorSemUsuarioDTO(usuario.getSetor());
 		this.avisos = usuario.getAvisos().stream().map(aviso -> new AvisoSemUsuarioDTO(aviso)).collect(Collectors.toList());
 	}
@@ -156,6 +158,14 @@ public class UsuarioDTO implements Serializable{
 
 	public void setAvisos(List<AvisoSemUsuarioDTO> avisos) {
 		this.avisos = avisos;
+	}
+
+	public Boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 }
 

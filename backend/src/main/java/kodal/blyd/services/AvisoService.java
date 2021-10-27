@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import kodal.blyd.dto.StatusDTO;
 import kodal.blyd.entities.Aviso;
+import kodal.blyd.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -36,20 +37,10 @@ public class AvisoService {
 		return repository.procurarAviso(id);
 	}
 
+	@Transactional
 	@Caching(evict = @CacheEvict(value = "avisos", allEntries = true))
 	public void marcarAviso(Aviso aviso){
-		System.out.println("Entrou no cache evict avisos");
 		repository.saveAndFlush(aviso);
-	}
-
-	@Transactional
-	@Caching(evict = {
-			@CacheEvict(value = "avisos", allEntries = true),
-			@CacheEvict(value = "aviso", key = "#aviso.id")
-	})
-	public void removerAviso(Aviso aviso) {
-		System.out.println("Entrou no cache evict avisos e aviso remover");
-		repository.delete(aviso);
 	}
 
 	@Transactional
@@ -74,6 +65,33 @@ public class AvisoService {
 		}catch (Exception e) {
 			status.setStatus(false);
 			status.setMensagem("Aviso selecionado não foi atualizado!");
+		}
+		return status;
+	}
+
+	@Transactional
+	@Caching(evict = {
+			@CacheEvict(value = "avisos", allEntries = true),
+			@CacheEvict(value = "aviso", key = "#id")
+	})
+	public StatusDTO desativarAviso(long id) {
+		StatusDTO status = new StatusDTO();
+		Aviso aviso = procurarAviso(id);
+
+		status.setStatus(false);
+
+		if(aviso == null) status.setMensagem("Aviso selecionado não foi desativado! ID inexistente!");
+		else {
+
+			try {
+				aviso.setStatus(false);
+				repository.save(aviso);
+				status.setStatus(true);
+				status.setMensagem("Aviso selecionado foi desativado!");
+			} catch (Exception e) {
+				status.setMensagem("Aviso selecionado não foi desativado!");
+			}
+
 		}
 		return status;
 	}

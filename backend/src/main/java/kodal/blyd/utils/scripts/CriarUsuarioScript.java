@@ -28,7 +28,7 @@ public class CriarUsuarioScript {
         else {
             if(usuarioService.procurarEmail(email)) status.setMensagem("Usuário informado não foi criado! Email existente!");
             else {
-                Usuario usuario = new Usuario(nome, email, senha, celular, foto, 0, 0, 0, pcd, admin, setor, new ArrayList<Aviso>(){});
+                Usuario usuario = new Usuario(nome, email, senha, celular, foto, 0, 0, 0, pcd, admin, true, setor, new ArrayList<Aviso>(){});
                 if(usuarioService.adicionarUsuario(usuario).isStatus()) {
                     status.setStatus(true);
                     status.setMensagem("Usuário informado foi criado!");

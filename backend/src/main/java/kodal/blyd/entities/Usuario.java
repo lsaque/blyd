@@ -22,7 +22,7 @@ public class Usuario {
 	@Column(name = "total_rotas")
 	private long totalRotas;
 
-	private Boolean pcd, admin;
+	private Boolean pcd, admin, status;
 
 	@ManyToOne
 	@JoinColumn(name = "setor_id")
@@ -33,7 +33,7 @@ public class Usuario {
 
 	public Usuario() {}
 
-	public Usuario(String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, Setor setor ,List<Aviso> avisos) {
+	public Usuario(String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, Boolean status, Setor setor ,List<Aviso> avisos) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
@@ -44,12 +44,13 @@ public class Usuario {
 		this.totalRotas = totalRotas;
 		this.pcd = pcd;
 		this.admin = admin;
+		this.status = status;
 		this.setor = setor;
 		this.avisos = avisos;
 	}
 
-	public Usuario(long id, String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, Setor setor ,List<Aviso> avisos) {
-		this(nome, email, senha, celular, foto, totalChamadas, totalAvisos, totalRotas, pcd, admin, setor, avisos);
+	public Usuario(long id, String nome, String email, String senha, String celular, String foto, long totalChamadas, long totalAvisos, long totalRotas, Boolean pcd, Boolean admin, Boolean status, Setor setor ,List<Aviso> avisos) {
+		this(nome, email, senha, celular, foto, totalChamadas, totalAvisos, totalRotas, pcd, admin, status, setor, avisos);
 		this.id = id;
 	}
 
@@ -155,5 +156,13 @@ public class Usuario {
 
 	public void setAvisos(List<Aviso> avisos) {
 		this.avisos = avisos;
+	}
+
+	public Boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 }
