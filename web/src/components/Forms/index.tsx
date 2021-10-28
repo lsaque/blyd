@@ -267,7 +267,7 @@ const Forms: React.FC  = () => {
           if(values.advicesLocal !== ""){
           //  console.log(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/Corredor Superior/${dateNow}/${dateFinal}/${timeDuration}/${values.advicesLocal}/${values.isImpassable}/1`);
           
-            axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/Corredor Superior/${dateNow}/${dateFinal}/${timeDuration}/${values.advicesLocal}/${values.isImpassable}/1`).then((response) => {
+            axios.get(`${BASE_URL}/avisos/marcar/${values.adviceDescription}/Corredor Superior/${dateNow}/${dateFinal}/${timeDuration}/${values.advicesLocal}/${values.isImpassable}/24`).then((response) => {
               const data = response.data as status;
               if(data.status){
                 SuccessAlert.fire({
